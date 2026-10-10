@@ -1,0 +1,3720 @@
+{
+ "brief": "A",
+ "case_id": "PUB-05",
+ "rep": 2,
+ "pass": true,
+ "failed_reasons": [],
+ "tools": [
+  "verify_identity",
+  "verify_identity",
+  "get_account",
+  "close_call"
+ ],
+ "call_id": "d52ce78d-5168-4b71-8d3e-364e6e786466",
+ "messages": [
+  {
+   "role": "system",
+   "message": "{\"event\":\"node_enter\",\"node\":\"call\"}",
+   "messageId": "msg_1_1791632103301",
+   "secondsFromStart": 0.0023131370544433594,
+   "nodeId": "call"
+  },
+  {
+   "role": "assistant",
+   "message": "Hello, I am a digital assistant calling from Freya Bank, and this call is recorded. Am I speaking with Mr Novak?",
+   "messageId": "msg_2_1791632104176",
+   "secondsFromStart": 0.029619932174682617,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 0,
+    "totalTurnCount": 0,
+    "nodeTotalTurnCounts": {},
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269702+00:00"
+     },
+     "call.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269704+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "user",
+   "message": "Yes, this is Tomas Novak speaking.",
+   "messageId": "msg_3_1791632105539",
+   "secondsFromStart": 2.2366199493408203,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 0,
+    "totalTurnCount": 0,
+    "nodeTotalTurnCounts": {},
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269702+00:00"
+     },
+     "call.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269704+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":2.2,\"variable_table\":{\"call.current_turns\":1,\"call.total_turns\":1,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\"}}",
+   "messageId": "msg_4_1791632105546",
+   "secondsFromStart": 2.247605562210083,
+   "nodeId": "call"
+  },
+  {
+   "role": "assistant",
+   "message": "To verify your identity, could you please tell me your date of birth?",
+   "messageId": "msg_5_1791632105792",
+   "secondsFromStart": 2.260619878768921,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 1,
+    "totalTurnCount": 1,
+    "nodeTotalTurnCounts": {
+     "call": 1
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 1,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:05.544177+00:00"
+     },
+     "call.total_turns": {
+      "value": 1,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:05.544181+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "user",
+   "message": "Nine September nineteen ninety.",
+   "messageId": "msg_6_1791632106688",
+   "secondsFromStart": 3.385619878768921,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 1,
+    "totalTurnCount": 1,
+    "nodeTotalTurnCounts": {
+     "call": 1
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 1,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:05.544177+00:00"
+     },
+     "call.total_turns": {
+      "value": 1,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:05.544181+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":2.0,\"variable_table\":{\"call.current_turns\":2,\"call.total_turns\":2,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\"}}",
+   "messageId": "msg_7_1791632106695",
+   "secondsFromStart": 3.3965494632720947,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_start\",\"function\":\"verify_identity\",\"args\":{\"url\":\"https://freya-bank-mock.freyavoice.workers.dev/v1/verify_identity\",\"method\":\"POST\",\"headers\":{\"Content-Type\":\"application/json\"},\"body\":{\"field\":\"date_of_birth\",\"answer\":\"1990-09-09\",\"customer_id\":\"c_6632b97e-db0\"}}}",
+   "messageId": "msg_8_1791632107078",
+   "secondsFromStart": 3.778658390045166,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete\",\"function\":\"verify_identity\",\"result\":{\"status\":\"success\",\"data\":{\"ok\":true,\"verified\":true,\"wrong_answers_left\":3,\"all_verified\":false},\"message\":\"Successfully executed POST request\",\"status_code\":200,\"header\":{\"Date\":\"Sat, 10 Oct 2026 11:35:07 GMT\",\"Content-Type\":\"application/json\",\"Transfer-Encoding\":\"chunked\",\"Connection\":\"keep-alive\",\"Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=2SFP8yuXTsIj4CBOFT40IIZtI36dgIhyLmOfTQZstLw6YiHSkyBBrVAl753Y0fBpK9BYiI5Mlu2xZTeIwaFi5I%2FrvA525UhCpsDELf4Jx0lv8tBauPNbPayABwqo6rRiYDMKh17%2B5ooF61w9W0rfIbSRlxbdWT9sYw%3D%3D\\\"}]}\",\"Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"Content-Encoding\":\"gzip\",\"Server\":\"cloudflare\",\"CF-RAY\":\"a48551dd5c04d34e-FRA\",\"alt-svc\":\"h3=\\\":443\\\"; ma=86400\"}}}",
+   "messageId": "msg_9_1791632107193",
+   "secondsFromStart": 3.894035577774048,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":1.4,\"variable_table\":{\"call.current_turns\":2,\"call.total_turns\":2,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\",\"verify_identity_args.answer\":\"1990-09-09\",\"verify_identity_args.field\":\"date_of_birth\",\"verify_identity_response.status\":\"success\",\"verify_identity_response.data.ok\":\"true\",\"verify_identity_response.data.verified\":\"true\",\"verify_identity_response.data.wrong_answers_left\":3,\"verify_identity_response.data.all_verified\":\"false\",\"verify_identity_response.message\":\"Successfully executed POST request\",\"verify_identity_response.status_code\":200,\"verify_identity_response.header.Date\":\"Sat, 10 Oct 2026 11:35:07 GMT\",\"verify_identity_response.header.Content-Type\":\"application/json\",\"verify_identity_response.header.Transfer-Encoding\":\"chunked\",\"verify_identity_response.header.Connection\":\"keep-alive\",\"verify_identity_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=2SFP8yuXTsIj4CBOFT40IIZtI36dgIhyLmOfTQZstLw6YiHSkyBBrVAl753Y0fBpK9BYiI5Mlu2xZTeIwaFi5I%2FrvA525UhCpsDELf4Jx0lv8tBauPNbPayABwqo6rRiYDMKh17%2B5ooF61w9W0rfIbSRlxbdWT9sYw%3D%3D\\\"}]}\",\"verify_identity_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"verify_identity_response.header.Content-Encoding\":\"gzip\",\"verify_identity_response.header.Server\":\"cloudflare\",\"verify_identity_response.header.CF-RAY\":\"a48551dd5c04d34e-FRA\",\"verify_identity_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"verify_identity_status_code\":200,\"verify_identity_success_count\":1}}",
+   "messageId": "msg_10_1791632107197",
+   "secondsFromStart": 3.8977551460266113,
+   "nodeId": "call"
+  },
+  {
+   "role": "assistant",
+   "message": "Thank you. Could you now tell me the last four digits of the phone number we have on file for you?",
+   "messageId": "msg_11_1791632107538",
+   "secondsFromStart": 3.9076199531555176,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 2,
+    "totalTurnCount": 2,
+    "nodeTotalTurnCounts": {
+     "call": 2
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 2,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:06.693263+00:00"
+     },
+     "call.total_turns": {
+      "value": 2,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:06.693266+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     },
+     "verify_identity_args.answer": {
+      "value": "1990-09-09",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194954+00:00"
+     },
+     "verify_identity_args.field": {
+      "value": "date_of_birth",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194956+00:00"
+     },
+     "verify_identity_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194981+00:00"
+     },
+     "verify_identity_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194983+00:00"
+     },
+     "verify_identity_response.data.verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194984+00:00"
+     },
+     "verify_identity_response.data.wrong_answers_left": {
+      "value": 3,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194985+00:00"
+     },
+     "verify_identity_response.data.all_verified": {
+      "value": "false",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194987+00:00"
+     },
+     "verify_identity_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194988+00:00"
+     },
+     "verify_identity_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194989+00:00"
+     },
+     "verify_identity_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:07 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194990+00:00"
+     },
+     "verify_identity_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194991+00:00"
+     },
+     "verify_identity_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194993+00:00"
+     },
+     "verify_identity_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194994+00:00"
+     },
+     "verify_identity_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=2SFP8yuXTsIj4CBOFT40IIZtI36dgIhyLmOfTQZstLw6YiHSkyBBrVAl753Y0fBpK9BYiI5Mlu2xZTeIwaFi5I%2FrvA525UhCpsDELf4Jx0lv8tBauPNbPayABwqo6rRiYDMKh17%2B5ooF61w9W0rfIbSRlxbdWT9sYw%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194995+00:00"
+     },
+     "verify_identity_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194996+00:00"
+     },
+     "verify_identity_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194997+00:00"
+     },
+     "verify_identity_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194998+00:00"
+     },
+     "verify_identity_response.header.CF-RAY": {
+      "value": "a48551dd5c04d34e-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.195000+00:00"
+     },
+     "verify_identity_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.195001+00:00"
+     },
+     "verify_identity_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:07.195003+00:00"
+     },
+     "verify_identity_success_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:07.195007+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "user",
+   "message": "Eight eight four six.",
+   "messageId": "msg_12_1791632109383",
+   "secondsFromStart": 6.080620050430298,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 2,
+    "totalTurnCount": 2,
+    "nodeTotalTurnCounts": {
+     "call": 2
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 2,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:06.693263+00:00"
+     },
+     "call.total_turns": {
+      "value": 2,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:06.693266+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     },
+     "verify_identity_args.answer": {
+      "value": "1990-09-09",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194954+00:00"
+     },
+     "verify_identity_args.field": {
+      "value": "date_of_birth",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194956+00:00"
+     },
+     "verify_identity_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194981+00:00"
+     },
+     "verify_identity_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194983+00:00"
+     },
+     "verify_identity_response.data.verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194984+00:00"
+     },
+     "verify_identity_response.data.wrong_answers_left": {
+      "value": 3,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194985+00:00"
+     },
+     "verify_identity_response.data.all_verified": {
+      "value": "false",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194987+00:00"
+     },
+     "verify_identity_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194988+00:00"
+     },
+     "verify_identity_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194989+00:00"
+     },
+     "verify_identity_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:07 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194990+00:00"
+     },
+     "verify_identity_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194991+00:00"
+     },
+     "verify_identity_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194993+00:00"
+     },
+     "verify_identity_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194994+00:00"
+     },
+     "verify_identity_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=2SFP8yuXTsIj4CBOFT40IIZtI36dgIhyLmOfTQZstLw6YiHSkyBBrVAl753Y0fBpK9BYiI5Mlu2xZTeIwaFi5I%2FrvA525UhCpsDELf4Jx0lv8tBauPNbPayABwqo6rRiYDMKh17%2B5ooF61w9W0rfIbSRlxbdWT9sYw%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194995+00:00"
+     },
+     "verify_identity_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194996+00:00"
+     },
+     "verify_identity_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194997+00:00"
+     },
+     "verify_identity_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.194998+00:00"
+     },
+     "verify_identity_response.header.CF-RAY": {
+      "value": "a48551dd5c04d34e-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.195000+00:00"
+     },
+     "verify_identity_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:07.195001+00:00"
+     },
+     "verify_identity_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:07.195003+00:00"
+     },
+     "verify_identity_success_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:07.195007+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":2.6,\"variable_table\":{\"call.current_turns\":3,\"call.total_turns\":3,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\",\"verify_identity_args.answer\":\"1990-09-09\",\"verify_identity_args.field\":\"date_of_birth\",\"verify_identity_response.status\":\"success\",\"verify_identity_response.data.ok\":\"true\",\"verify_identity_response.data.verified\":\"true\",\"verify_identity_response.data.wrong_answers_left\":3,\"verify_identity_response.data.all_verified\":\"false\",\"verify_identity_response.message\":\"Successfully executed POST request\",\"verify_identity_response.status_code\":200,\"verify_identity_response.header.Date\":\"Sat, 10 Oct 2026 11:35:07 GMT\",\"verify_identity_response.header.Content-Type\":\"application/json\",\"verify_identity_response.header.Transfer-Encoding\":\"chunked\",\"verify_identity_response.header.Connection\":\"keep-alive\",\"verify_identity_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=2SFP8yuXTsIj4CBOFT40IIZtI36dgIhyLmOfTQZstLw6YiHSkyBBrVAl753Y0fBpK9BYiI5Mlu2xZTeIwaFi5I%2FrvA525UhCpsDELf4Jx0lv8tBauPNbPayABwqo6rRiYDMKh17%2B5ooF61w9W0rfIbSRlxbdWT9sYw%3D%3D\\\"}]}\",\"verify_identity_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"verify_identity_response.header.Content-Encoding\":\"gzip\",\"verify_identity_response.header.Server\":\"cloudflare\",\"verify_identity_response.header.CF-RAY\":\"a48551dd5c04d34e-FRA\",\"verify_identity_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"verify_identity_status_code\":200,\"verify_identity_success_count\":1}}",
+   "messageId": "msg_13_1791632109391",
+   "secondsFromStart": 6.0918426513671875,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_start\",\"function\":\"verify_identity\",\"args\":{\"url\":\"https://freya-bank-mock.freyavoice.workers.dev/v1/verify_identity\",\"method\":\"POST\",\"headers\":{\"Content-Type\":\"application/json\"},\"body\":{\"field\":\"phone_last4\",\"answer\":\"8846\",\"customer_id\":\"c_6632b97e-db0\"}}}",
+   "messageId": "msg_14_1791632109701",
+   "secondsFromStart": 6.402327060699463,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete\",\"function\":\"verify_identity\",\"result\":{\"status\":\"success\",\"data\":{\"ok\":true,\"verified\":true,\"wrong_answers_left\":3,\"all_verified\":true},\"message\":\"Successfully executed POST request\",\"status_code\":200,\"header\":{\"Date\":\"Sat, 10 Oct 2026 11:35:09 GMT\",\"Content-Type\":\"application/json\",\"Transfer-Encoding\":\"chunked\",\"Connection\":\"keep-alive\",\"Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\\\"}]}\",\"Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"Content-Encoding\":\"gzip\",\"Server\":\"cloudflare\",\"CF-RAY\":\"a48551edb966dbc1-FRA\",\"alt-svc\":\"h3=\\\":443\\\"; ma=86400\"}}}",
+   "messageId": "msg_15_1791632109811",
+   "secondsFromStart": 6.511918783187866,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":1.6,\"variable_table\":{\"call.current_turns\":3,\"call.total_turns\":3,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\",\"verify_identity_args.answer\":\"8846\",\"verify_identity_args.field\":\"phone_last4\",\"verify_identity_response.status\":\"success\",\"verify_identity_response.data.ok\":\"true\",\"verify_identity_response.data.verified\":\"true\",\"verify_identity_response.data.wrong_answers_left\":3,\"verify_identity_response.data.all_verified\":\"true\",\"verify_identity_response.message\":\"Successfully executed POST request\",\"verify_identity_response.status_code\":200,\"verify_identity_response.header.Date\":\"Sat, 10 Oct 2026 11:35:09 GMT\",\"verify_identity_response.header.Content-Type\":\"application/json\",\"verify_identity_response.header.Transfer-Encoding\":\"chunked\",\"verify_identity_response.header.Connection\":\"keep-alive\",\"verify_identity_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\\\"}]}\",\"verify_identity_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"verify_identity_response.header.Content-Encoding\":\"gzip\",\"verify_identity_response.header.Server\":\"cloudflare\",\"verify_identity_response.header.CF-RAY\":\"a48551edb966dbc1-FRA\",\"verify_identity_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"verify_identity_status_code\":200,\"verify_identity_success_count\":2}}",
+   "messageId": "msg_16_1791632109815",
+   "secondsFromStart": 6.516067266464233,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_start\",\"function\":\"get_account\",\"args\":{\"url\":\"https://freya-bank-mock.freyavoice.workers.dev/v1/get_account\",\"method\":\"POST\",\"headers\":{\"Content-Type\":\"application/json\"},\"body\":{\"customer_id\":\"c_6632b97e-db0\"}}}",
+   "messageId": "msg_17_1791632110054",
+   "secondsFromStart": 6.754652500152588,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete\",\"function\":\"get_account\",\"result\":{\"status\":\"success\",\"data\":{\"ok\":true,\"products\":[{\"product_id\":\"p1\",\"type\":\"personal_loan\",\"past_due\":780,\"days_late\":21,\"instalment_amount\":260}]},\"message\":\"Successfully executed POST request\",\"status_code\":200,\"header\":{\"Date\":\"Sat, 10 Oct 2026 11:35:10 GMT\",\"Content-Type\":\"application/json\",\"Transfer-Encoding\":\"chunked\",\"Connection\":\"keep-alive\",\"Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\\\"}]}\",\"Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"Content-Encoding\":\"gzip\",\"Server\":\"cloudflare\",\"CF-RAY\":\"a48551eff9aedc79-FRA\",\"alt-svc\":\"h3=\\\":443\\\"; ma=86400\"}}}",
+   "messageId": "msg_18_1791632110158",
+   "secondsFromStart": 6.858881950378418,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":1.9,\"variable_table\":{\"call.current_turns\":3,\"call.total_turns\":3,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\",\"verify_identity_args.answer\":\"8846\",\"verify_identity_args.field\":\"phone_last4\",\"verify_identity_response.status\":\"success\",\"verify_identity_response.data.ok\":\"true\",\"verify_identity_response.data.verified\":\"true\",\"verify_identity_response.data.wrong_answers_left\":3,\"verify_identity_response.data.all_verified\":\"true\",\"verify_identity_response.message\":\"Successfully executed POST request\",\"verify_identity_response.status_code\":200,\"verify_identity_response.header.Date\":\"Sat, 10 Oct 2026 11:35:09 GMT\",\"verify_identity_response.header.Content-Type\":\"application/json\",\"verify_identity_response.header.Transfer-Encoding\":\"chunked\",\"verify_identity_response.header.Connection\":\"keep-alive\",\"verify_identity_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\\\"}]}\",\"verify_identity_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"verify_identity_response.header.Content-Encoding\":\"gzip\",\"verify_identity_response.header.Server\":\"cloudflare\",\"verify_identity_response.header.CF-RAY\":\"a48551edb966dbc1-FRA\",\"verify_identity_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"verify_identity_status_code\":200,\"verify_identity_success_count\":2,\"get_account_response.status\":\"success\",\"get_account_response.data.ok\":\"true\",\"get_account_response.data.products.0.product_id\":\"p1\",\"get_account_response.data.products.0.type\":\"personal_loan\",\"get_account_response.data.products.0.past_due\":780,\"get_account_response.data.products.0.days_late\":21,\"get_account_response.data.products.0.instalment_amount\":260,\"get_account_response.message\":\"Successfully executed POST request\",\"get_account_response.status_code\":200,\"get_account_response.header.Date\":\"Sat, 10 Oct 2026 11:35:10 GMT\",\"get_account_response.header.Content-Type\":\"application/json\",\"get_account_response.header.Transfer-Encoding\":\"chunked\",\"get_account_response.header.Connection\":\"keep-alive\",\"get_account_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\\\"}]}\",\"get_account_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"get_account_response.header.Content-Encoding\":\"gzip\",\"get_account_response.header.Server\":\"cloudflare\",\"get_account_response.header.CF-RAY\":\"a48551eff9aedc79-FRA\",\"get_account_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"get_account_status_code\":200,\"get_account_success_count\":1}}",
+   "messageId": "msg_19_1791632110162",
+   "secondsFromStart": 6.863199710845947,
+   "nodeId": "call"
+  },
+  {
+   "role": "assistant",
+   "message": "I am calling from the collections team about a late payment on your personal loan. You are 21 days late with a past-due amount of 780.\n Can you make this payment today?",
+   "messageId": "msg_20_1791632110829",
+   "secondsFromStart": 6.874619960784912,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 3,
+    "totalTurnCount": 3,
+    "nodeTotalTurnCounts": {
+     "call": 3
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 3,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.387994+00:00"
+     },
+     "call.total_turns": {
+      "value": 3,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.387998+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     },
+     "verify_identity_args.answer": {
+      "value": "8846",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812984+00:00"
+     },
+     "verify_identity_args.field": {
+      "value": "phone_last4",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812987+00:00"
+     },
+     "verify_identity_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813018+00:00"
+     },
+     "verify_identity_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813020+00:00"
+     },
+     "verify_identity_response.data.verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813021+00:00"
+     },
+     "verify_identity_response.data.wrong_answers_left": {
+      "value": 3,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813023+00:00"
+     },
+     "verify_identity_response.data.all_verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813025+00:00"
+     },
+     "verify_identity_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813026+00:00"
+     },
+     "verify_identity_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813028+00:00"
+     },
+     "verify_identity_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:09 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813029+00:00"
+     },
+     "verify_identity_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813031+00:00"
+     },
+     "verify_identity_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813032+00:00"
+     },
+     "verify_identity_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813033+00:00"
+     },
+     "verify_identity_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813035+00:00"
+     },
+     "verify_identity_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813036+00:00"
+     },
+     "verify_identity_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813037+00:00"
+     },
+     "verify_identity_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813039+00:00"
+     },
+     "verify_identity_response.header.CF-RAY": {
+      "value": "a48551edb966dbc1-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813040+00:00"
+     },
+     "verify_identity_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813042+00:00"
+     },
+     "verify_identity_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813045+00:00"
+     },
+     "verify_identity_success_count": {
+      "value": 2,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813048+00:00"
+     },
+     "get_account_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159933+00:00"
+     },
+     "get_account_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159935+00:00"
+     },
+     "get_account_response.data.products.0.product_id": {
+      "value": "p1",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159936+00:00"
+     },
+     "get_account_response.data.products.0.type": {
+      "value": "personal_loan",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159938+00:00"
+     },
+     "get_account_response.data.products.0.past_due": {
+      "value": 780,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159940+00:00"
+     },
+     "get_account_response.data.products.0.days_late": {
+      "value": 21,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159942+00:00"
+     },
+     "get_account_response.data.products.0.instalment_amount": {
+      "value": 260,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159944+00:00"
+     },
+     "get_account_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159945+00:00"
+     },
+     "get_account_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159947+00:00"
+     },
+     "get_account_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:10 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159951+00:00"
+     },
+     "get_account_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159952+00:00"
+     },
+     "get_account_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159954+00:00"
+     },
+     "get_account_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159955+00:00"
+     },
+     "get_account_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159956+00:00"
+     },
+     "get_account_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159958+00:00"
+     },
+     "get_account_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159959+00:00"
+     },
+     "get_account_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159960+00:00"
+     },
+     "get_account_response.header.CF-RAY": {
+      "value": "a48551eff9aedc79-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159961+00:00"
+     },
+     "get_account_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159962+00:00"
+     },
+     "get_account_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159965+00:00"
+     },
+     "get_account_success_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159968+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "user",
+   "message": "I lost my job last month and I cannot pay anything. Can I get a discount?",
+   "messageId": "msg_21_1791632112257",
+   "secondsFromStart": 8.954619884490967,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 3,
+    "totalTurnCount": 3,
+    "nodeTotalTurnCounts": {
+     "call": 3
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 3,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.387994+00:00"
+     },
+     "call.total_turns": {
+      "value": 3,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.387998+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     },
+     "verify_identity_args.answer": {
+      "value": "8846",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812984+00:00"
+     },
+     "verify_identity_args.field": {
+      "value": "phone_last4",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812987+00:00"
+     },
+     "verify_identity_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813018+00:00"
+     },
+     "verify_identity_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813020+00:00"
+     },
+     "verify_identity_response.data.verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813021+00:00"
+     },
+     "verify_identity_response.data.wrong_answers_left": {
+      "value": 3,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813023+00:00"
+     },
+     "verify_identity_response.data.all_verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813025+00:00"
+     },
+     "verify_identity_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813026+00:00"
+     },
+     "verify_identity_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813028+00:00"
+     },
+     "verify_identity_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:09 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813029+00:00"
+     },
+     "verify_identity_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813031+00:00"
+     },
+     "verify_identity_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813032+00:00"
+     },
+     "verify_identity_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813033+00:00"
+     },
+     "verify_identity_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813035+00:00"
+     },
+     "verify_identity_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813036+00:00"
+     },
+     "verify_identity_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813037+00:00"
+     },
+     "verify_identity_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813039+00:00"
+     },
+     "verify_identity_response.header.CF-RAY": {
+      "value": "a48551edb966dbc1-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813040+00:00"
+     },
+     "verify_identity_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813042+00:00"
+     },
+     "verify_identity_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813045+00:00"
+     },
+     "verify_identity_success_count": {
+      "value": 2,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813048+00:00"
+     },
+     "get_account_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159933+00:00"
+     },
+     "get_account_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159935+00:00"
+     },
+     "get_account_response.data.products.0.product_id": {
+      "value": "p1",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159936+00:00"
+     },
+     "get_account_response.data.products.0.type": {
+      "value": "personal_loan",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159938+00:00"
+     },
+     "get_account_response.data.products.0.past_due": {
+      "value": 780,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159940+00:00"
+     },
+     "get_account_response.data.products.0.days_late": {
+      "value": 21,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159942+00:00"
+     },
+     "get_account_response.data.products.0.instalment_amount": {
+      "value": 260,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159944+00:00"
+     },
+     "get_account_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159945+00:00"
+     },
+     "get_account_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159947+00:00"
+     },
+     "get_account_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:10 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159951+00:00"
+     },
+     "get_account_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159952+00:00"
+     },
+     "get_account_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159954+00:00"
+     },
+     "get_account_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159955+00:00"
+     },
+     "get_account_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159956+00:00"
+     },
+     "get_account_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159958+00:00"
+     },
+     "get_account_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159959+00:00"
+     },
+     "get_account_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159960+00:00"
+     },
+     "get_account_response.header.CF-RAY": {
+      "value": "a48551eff9aedc79-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159961+00:00"
+     },
+     "get_account_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159962+00:00"
+     },
+     "get_account_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159965+00:00"
+     },
+     "get_account_success_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159968+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":2.7,\"variable_table\":{\"call.current_turns\":4,\"call.total_turns\":4,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\",\"verify_identity_args.answer\":\"8846\",\"verify_identity_args.field\":\"phone_last4\",\"verify_identity_response.status\":\"success\",\"verify_identity_response.data.ok\":\"true\",\"verify_identity_response.data.verified\":\"true\",\"verify_identity_response.data.wrong_answers_left\":3,\"verify_identity_response.data.all_verified\":\"true\",\"verify_identity_response.message\":\"Successfully executed POST request\",\"verify_identity_response.status_code\":200,\"verify_identity_response.header.Date\":\"Sat, 10 Oct 2026 11:35:09 GMT\",\"verify_identity_response.header.Content-Type\":\"application/json\",\"verify_identity_response.header.Transfer-Encoding\":\"chunked\",\"verify_identity_response.header.Connection\":\"keep-alive\",\"verify_identity_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\\\"}]}\",\"verify_identity_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"verify_identity_response.header.Content-Encoding\":\"gzip\",\"verify_identity_response.header.Server\":\"cloudflare\",\"verify_identity_response.header.CF-RAY\":\"a48551edb966dbc1-FRA\",\"verify_identity_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"verify_identity_status_code\":200,\"verify_identity_success_count\":2,\"get_account_response.status\":\"success\",\"get_account_response.data.ok\":\"true\",\"get_account_response.data.products.0.product_id\":\"p1\",\"get_account_response.data.products.0.type\":\"personal_loan\",\"get_account_response.data.products.0.past_due\":780,\"get_account_response.data.products.0.days_late\":21,\"get_account_response.data.products.0.instalment_amount\":260,\"get_account_response.message\":\"Successfully executed POST request\",\"get_account_response.status_code\":200,\"get_account_response.header.Date\":\"Sat, 10 Oct 2026 11:35:10 GMT\",\"get_account_response.header.Content-Type\":\"application/json\",\"get_account_response.header.Transfer-Encoding\":\"chunked\",\"get_account_response.header.Connection\":\"keep-alive\",\"get_account_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\\\"}]}\",\"get_account_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"get_account_response.header.Content-Encoding\":\"gzip\",\"get_account_response.header.Server\":\"cloudflare\",\"get_account_response.header.CF-RAY\":\"a48551eff9aedc79-FRA\",\"get_account_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"get_account_status_code\":200,\"get_account_success_count\":1}}",
+   "messageId": "msg_22_1791632112265",
+   "secondsFromStart": 8.966546535491943,
+   "nodeId": "call"
+  },
+  {
+   "role": "assistant",
+   "message": "I am very sorry to hear about your job loss. I cannot offer a discount, but I can connect you with our customer support team for help. Would you like me to do that?",
+   "messageId": "msg_23_1791632112695",
+   "secondsFromStart": 8.981619834899902,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 4,
+    "totalTurnCount": 4,
+    "nodeTotalTurnCounts": {
+     "call": 4
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 4,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:12.262540+00:00"
+     },
+     "call.total_turns": {
+      "value": 4,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:12.262544+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     },
+     "verify_identity_args.answer": {
+      "value": "8846",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812984+00:00"
+     },
+     "verify_identity_args.field": {
+      "value": "phone_last4",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812987+00:00"
+     },
+     "verify_identity_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813018+00:00"
+     },
+     "verify_identity_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813020+00:00"
+     },
+     "verify_identity_response.data.verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813021+00:00"
+     },
+     "verify_identity_response.data.wrong_answers_left": {
+      "value": 3,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813023+00:00"
+     },
+     "verify_identity_response.data.all_verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813025+00:00"
+     },
+     "verify_identity_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813026+00:00"
+     },
+     "verify_identity_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813028+00:00"
+     },
+     "verify_identity_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:09 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813029+00:00"
+     },
+     "verify_identity_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813031+00:00"
+     },
+     "verify_identity_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813032+00:00"
+     },
+     "verify_identity_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813033+00:00"
+     },
+     "verify_identity_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813035+00:00"
+     },
+     "verify_identity_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813036+00:00"
+     },
+     "verify_identity_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813037+00:00"
+     },
+     "verify_identity_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813039+00:00"
+     },
+     "verify_identity_response.header.CF-RAY": {
+      "value": "a48551edb966dbc1-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813040+00:00"
+     },
+     "verify_identity_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813042+00:00"
+     },
+     "verify_identity_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813045+00:00"
+     },
+     "verify_identity_success_count": {
+      "value": 2,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813048+00:00"
+     },
+     "get_account_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159933+00:00"
+     },
+     "get_account_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159935+00:00"
+     },
+     "get_account_response.data.products.0.product_id": {
+      "value": "p1",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159936+00:00"
+     },
+     "get_account_response.data.products.0.type": {
+      "value": "personal_loan",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159938+00:00"
+     },
+     "get_account_response.data.products.0.past_due": {
+      "value": 780,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159940+00:00"
+     },
+     "get_account_response.data.products.0.days_late": {
+      "value": 21,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159942+00:00"
+     },
+     "get_account_response.data.products.0.instalment_amount": {
+      "value": 260,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159944+00:00"
+     },
+     "get_account_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159945+00:00"
+     },
+     "get_account_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159947+00:00"
+     },
+     "get_account_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:10 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159951+00:00"
+     },
+     "get_account_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159952+00:00"
+     },
+     "get_account_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159954+00:00"
+     },
+     "get_account_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159955+00:00"
+     },
+     "get_account_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159956+00:00"
+     },
+     "get_account_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159958+00:00"
+     },
+     "get_account_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159959+00:00"
+     },
+     "get_account_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159960+00:00"
+     },
+     "get_account_response.header.CF-RAY": {
+      "value": "a48551eff9aedc79-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159961+00:00"
+     },
+     "get_account_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159962+00:00"
+     },
+     "get_account_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159965+00:00"
+     },
+     "get_account_success_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159968+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "user",
+   "message": "No, I do not want to be transferred. Can you help me with a discount instead?",
+   "messageId": "msg_24_1791632114063",
+   "secondsFromStart": 10.760619878768921,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 4,
+    "totalTurnCount": 4,
+    "nodeTotalTurnCounts": {
+     "call": 4
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 4,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:12.262540+00:00"
+     },
+     "call.total_turns": {
+      "value": 4,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:12.262544+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     },
+     "verify_identity_args.answer": {
+      "value": "8846",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812984+00:00"
+     },
+     "verify_identity_args.field": {
+      "value": "phone_last4",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812987+00:00"
+     },
+     "verify_identity_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813018+00:00"
+     },
+     "verify_identity_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813020+00:00"
+     },
+     "verify_identity_response.data.verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813021+00:00"
+     },
+     "verify_identity_response.data.wrong_answers_left": {
+      "value": 3,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813023+00:00"
+     },
+     "verify_identity_response.data.all_verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813025+00:00"
+     },
+     "verify_identity_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813026+00:00"
+     },
+     "verify_identity_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813028+00:00"
+     },
+     "verify_identity_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:09 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813029+00:00"
+     },
+     "verify_identity_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813031+00:00"
+     },
+     "verify_identity_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813032+00:00"
+     },
+     "verify_identity_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813033+00:00"
+     },
+     "verify_identity_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813035+00:00"
+     },
+     "verify_identity_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813036+00:00"
+     },
+     "verify_identity_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813037+00:00"
+     },
+     "verify_identity_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813039+00:00"
+     },
+     "verify_identity_response.header.CF-RAY": {
+      "value": "a48551edb966dbc1-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813040+00:00"
+     },
+     "verify_identity_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813042+00:00"
+     },
+     "verify_identity_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813045+00:00"
+     },
+     "verify_identity_success_count": {
+      "value": 2,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813048+00:00"
+     },
+     "get_account_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159933+00:00"
+     },
+     "get_account_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159935+00:00"
+     },
+     "get_account_response.data.products.0.product_id": {
+      "value": "p1",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159936+00:00"
+     },
+     "get_account_response.data.products.0.type": {
+      "value": "personal_loan",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159938+00:00"
+     },
+     "get_account_response.data.products.0.past_due": {
+      "value": 780,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159940+00:00"
+     },
+     "get_account_response.data.products.0.days_late": {
+      "value": 21,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159942+00:00"
+     },
+     "get_account_response.data.products.0.instalment_amount": {
+      "value": 260,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159944+00:00"
+     },
+     "get_account_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159945+00:00"
+     },
+     "get_account_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159947+00:00"
+     },
+     "get_account_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:10 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159951+00:00"
+     },
+     "get_account_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159952+00:00"
+     },
+     "get_account_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159954+00:00"
+     },
+     "get_account_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159955+00:00"
+     },
+     "get_account_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159956+00:00"
+     },
+     "get_account_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159958+00:00"
+     },
+     "get_account_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159959+00:00"
+     },
+     "get_account_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159960+00:00"
+     },
+     "get_account_response.header.CF-RAY": {
+      "value": "a48551eff9aedc79-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159961+00:00"
+     },
+     "get_account_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159962+00:00"
+     },
+     "get_account_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159965+00:00"
+     },
+     "get_account_success_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159968+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":false,\"from_node\":\"call\",\"confidence\":0.0,\"reason\":\"No transition matched\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":false,\"condition_results\":{\"logic\":\"or\",\"result\":false,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":false},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":2.8,\"variable_table\":{\"call.current_turns\":5,\"call.total_turns\":5,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\",\"verify_identity_args.answer\":\"8846\",\"verify_identity_args.field\":\"phone_last4\",\"verify_identity_response.status\":\"success\",\"verify_identity_response.data.ok\":\"true\",\"verify_identity_response.data.verified\":\"true\",\"verify_identity_response.data.wrong_answers_left\":3,\"verify_identity_response.data.all_verified\":\"true\",\"verify_identity_response.message\":\"Successfully executed POST request\",\"verify_identity_response.status_code\":200,\"verify_identity_response.header.Date\":\"Sat, 10 Oct 2026 11:35:09 GMT\",\"verify_identity_response.header.Content-Type\":\"application/json\",\"verify_identity_response.header.Transfer-Encoding\":\"chunked\",\"verify_identity_response.header.Connection\":\"keep-alive\",\"verify_identity_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\\\"}]}\",\"verify_identity_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"verify_identity_response.header.Content-Encoding\":\"gzip\",\"verify_identity_response.header.Server\":\"cloudflare\",\"verify_identity_response.header.CF-RAY\":\"a48551edb966dbc1-FRA\",\"verify_identity_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"verify_identity_status_code\":200,\"verify_identity_success_count\":2,\"get_account_response.status\":\"success\",\"get_account_response.data.ok\":\"true\",\"get_account_response.data.products.0.product_id\":\"p1\",\"get_account_response.data.products.0.type\":\"personal_loan\",\"get_account_response.data.products.0.past_due\":780,\"get_account_response.data.products.0.days_late\":21,\"get_account_response.data.products.0.instalment_amount\":260,\"get_account_response.message\":\"Successfully executed POST request\",\"get_account_response.status_code\":200,\"get_account_response.header.Date\":\"Sat, 10 Oct 2026 11:35:10 GMT\",\"get_account_response.header.Content-Type\":\"application/json\",\"get_account_response.header.Transfer-Encoding\":\"chunked\",\"get_account_response.header.Connection\":\"keep-alive\",\"get_account_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\\\"}]}\",\"get_account_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"get_account_response.header.Content-Encoding\":\"gzip\",\"get_account_response.header.Server\":\"cloudflare\",\"get_account_response.header.CF-RAY\":\"a48551eff9aedc79-FRA\",\"get_account_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"get_account_status_code\":200,\"get_account_success_count\":1}}",
+   "messageId": "msg_25_1791632114072",
+   "secondsFromStart": 10.77286958694458,
+   "nodeId": "call"
+  },
+  {
+   "role": "assistant",
+   "message": "I'm afraid I cannot offer any discounts or waivers. Since you're unable to make a payment, I will have to end the call now.\n Thank you and goodbye.",
+   "messageId": "msg_27_1791632114785",
+   "secondsFromStart": 10.788619995117188,
+   "nodeId": "call",
+   "workflowSnapshot": {
+    "currentNode": "call",
+    "previousNode": null,
+    "nodeTurnCount": 5,
+    "totalTurnCount": 5,
+    "nodeTotalTurnCounts": {
+     "call": 5
+    },
+    "transitionHistory": [],
+    "enteredNodes": [
+     "call"
+    ],
+    "variableTable": {
+     "call.current_turns": {
+      "value": 5,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:14.068757+00:00"
+     },
+     "call.total_turns": {
+      "value": 5,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:14.068760+00:00"
+     },
+     "hang_up.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269698+00:00"
+     },
+     "hang_up.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269706+00:00"
+     },
+     "now": {
+      "value": "2026-10-14T11:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269708+00:00"
+     },
+     "title": {
+      "value": "Mr",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269709+00:00"
+     },
+     "last_name": {
+      "value": "Novak",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269711+00:00"
+     },
+     "first_name": {
+      "value": "Tomas",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269712+00:00"
+     },
+     "customer_id": {
+      "value": "c_6632b97e-db0",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269713+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269714+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269715+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269717+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269718+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-10T11:35:02.770179Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269719+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "10 October 2026 Saturday 05:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269720+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "10 October 2026 Saturday 06:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269722+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "10 Ekim 2026 Cumartesi 14:35",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269723+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-10",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269724+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ceda7b479a149f9bd9f41214e41f673",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:03.269725+00:00"
+     },
+     "verify_identity_args.answer": {
+      "value": "8846",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812984+00:00"
+     },
+     "verify_identity_args.field": {
+      "value": "phone_last4",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.812987+00:00"
+     },
+     "verify_identity_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813018+00:00"
+     },
+     "verify_identity_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813020+00:00"
+     },
+     "verify_identity_response.data.verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813021+00:00"
+     },
+     "verify_identity_response.data.wrong_answers_left": {
+      "value": 3,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813023+00:00"
+     },
+     "verify_identity_response.data.all_verified": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813025+00:00"
+     },
+     "verify_identity_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813026+00:00"
+     },
+     "verify_identity_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813028+00:00"
+     },
+     "verify_identity_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:09 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813029+00:00"
+     },
+     "verify_identity_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813031+00:00"
+     },
+     "verify_identity_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813032+00:00"
+     },
+     "verify_identity_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813033+00:00"
+     },
+     "verify_identity_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813035+00:00"
+     },
+     "verify_identity_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813036+00:00"
+     },
+     "verify_identity_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813037+00:00"
+     },
+     "verify_identity_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813039+00:00"
+     },
+     "verify_identity_response.header.CF-RAY": {
+      "value": "a48551edb966dbc1-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813040+00:00"
+     },
+     "verify_identity_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:09.813042+00:00"
+     },
+     "verify_identity_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813045+00:00"
+     },
+     "verify_identity_success_count": {
+      "value": 2,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:09.813048+00:00"
+     },
+     "get_account_response.status": {
+      "value": "success",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159933+00:00"
+     },
+     "get_account_response.data.ok": {
+      "value": "true",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159935+00:00"
+     },
+     "get_account_response.data.products.0.product_id": {
+      "value": "p1",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159936+00:00"
+     },
+     "get_account_response.data.products.0.type": {
+      "value": "personal_loan",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159938+00:00"
+     },
+     "get_account_response.data.products.0.past_due": {
+      "value": 780,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159940+00:00"
+     },
+     "get_account_response.data.products.0.days_late": {
+      "value": 21,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159942+00:00"
+     },
+     "get_account_response.data.products.0.instalment_amount": {
+      "value": 260,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159944+00:00"
+     },
+     "get_account_response.message": {
+      "value": "Successfully executed POST request",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159945+00:00"
+     },
+     "get_account_response.status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159947+00:00"
+     },
+     "get_account_response.header.Date": {
+      "value": "Sat, 10 Oct 2026 11:35:10 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159951+00:00"
+     },
+     "get_account_response.header.Content-Type": {
+      "value": "application/json",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159952+00:00"
+     },
+     "get_account_response.header.Transfer-Encoding": {
+      "value": "chunked",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159954+00:00"
+     },
+     "get_account_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159955+00:00"
+     },
+     "get_account_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159956+00:00"
+     },
+     "get_account_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159958+00:00"
+     },
+     "get_account_response.header.Content-Encoding": {
+      "value": "gzip",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159959+00:00"
+     },
+     "get_account_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159960+00:00"
+     },
+     "get_account_response.header.CF-RAY": {
+      "value": "a48551eff9aedc79-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159961+00:00"
+     },
+     "get_account_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "call",
+      "extracted_at": "2026-10-10T11:35:10.159962+00:00"
+     },
+     "get_account_status_code": {
+      "value": 200,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159965+00:00"
+     },
+     "get_account_success_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-10T11:35:10.159968+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "98311de2-1472-4f95-aeb9-59d8ec154a87",
+     "entityVersionId": "d57dcbd3-ae8c-4782-8563-184f3285969a"
+    },
+    "controlFlags": {
+     "terminalActionFired": false
+    }
+   }
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_start\",\"function\":\"close_call\",\"args\":{\"url\":\"https://freya-bank-mock.freyavoice.workers.dev/v1/close_call\",\"method\":\"POST\",\"headers\":{\"Content-Type\":\"application/json\"},\"body\":{\"reason\":\"hardship\",\"outcome\":\"no_promise\",\"customer_id\":\"c_6632b97e-db0\"}}}",
+   "messageId": "msg_26_1791632114773",
+   "secondsFromStart": 11.47408390045166,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete\",\"function\":\"close_call\",\"result\":{\"status\":\"success\",\"data\":{\"ok\":true},\"message\":\"Successfully executed POST request\",\"status_code\":200,\"header\":{\"Date\":\"Sat, 10 Oct 2026 11:35:14 GMT\",\"Content-Type\":\"application/json\",\"Content-Length\":\"11\",\"Connection\":\"keep-alive\",\"Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=wlRkE1wfbZJzcZoYMy5SrloZp%2B2TTFlindjRliuZqtL4lAp%2B%2BxNkhhz3exkJ2o5%2BMXetEkEkcjra3feYPv09e59zWbMOr6cgAEmsOXwoNR%2BhdNJXvpVs8QncyNMh6AejzrbeD3qhpww1ayg8a3uGnSUq6RnobFeTYQ%3D%3D\\\"}]}\",\"Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"Server\":\"cloudflare\",\"CF-RAY\":\"a485520d8c483813-FRA\",\"alt-svc\":\"h3=\\\":443\\\"; ma=86400\"}}}",
+   "messageId": "msg_28_1791632114938",
+   "secondsFromStart": 11.638815641403198,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":true,\"from_node\":\"call\",\"target\":\"hang_up\",\"confidence\":1.0,\"reason\":\"close_call succeeded (close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"branches\":[{\"target\":\"hang_up\",\"description\":\"(close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\",\"result\":true,\"condition_results\":{\"logic\":\"or\",\"result\":true,\"conditions\":[{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"true\",\"result\":true},{\"operator\":\"equals\",\"variable\":\"close_call_response.data.ok\",\"operand\":\"True\",\"result\":false}]}}],\"total_duration_ms\":1.8,\"variable_table\":{\"call.current_turns\":5,\"call.total_turns\":5,\"hang_up.current_turns\":0,\"hang_up.total_turns\":0,\"now\":\"2026-10-14T11:00\",\"title\":\"Mr\",\"last_name\":\"Novak\",\"first_name\":\"Tomas\",\"customer_id\":\"c_6632b97e-db0\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-10T11:35:02.770179Z\",\"system.todays_date_en_cst\":\"10 October 2026 Saturday 05:35\",\"system.todays_date_en_est\":\"10 October 2026 Saturday 06:35\",\"system.todays_date_tr\":\"10 Ekim 2026 Cumartesi 14:35\",\"system.todays_date_tr.iso_8601\":\"2026-10-10\",\"system.uuid4()\":\"6ceda7b479a149f9bd9f41214e41f673\",\"verify_identity_args.answer\":\"8846\",\"verify_identity_args.field\":\"phone_last4\",\"verify_identity_response.status\":\"success\",\"verify_identity_response.data.ok\":\"true\",\"verify_identity_response.data.verified\":\"true\",\"verify_identity_response.data.wrong_answers_left\":3,\"verify_identity_response.data.all_verified\":\"true\",\"verify_identity_response.message\":\"Successfully executed POST request\",\"verify_identity_response.status_code\":200,\"verify_identity_response.header.Date\":\"Sat, 10 Oct 2026 11:35:09 GMT\",\"verify_identity_response.header.Content-Type\":\"application/json\",\"verify_identity_response.header.Transfer-Encoding\":\"chunked\",\"verify_identity_response.header.Connection\":\"keep-alive\",\"verify_identity_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=ZniS6qvDBvyi5K8eaJq2j0brjgHe7TIH7eZvO8UX1DBA%2Fz0vUJTFhdMVtjYRGXdoMxYDTX5u373EU0EWJNj2O8J0cBwPYeZhuiVSflHaAJAvEdsfYLwkOvqn5wTya8SEvCcLXSR4chmb%2F61MWft7choC2ft5O7sYnA%3D%3D\\\"}]}\",\"verify_identity_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"verify_identity_response.header.Content-Encoding\":\"gzip\",\"verify_identity_response.header.Server\":\"cloudflare\",\"verify_identity_response.header.CF-RAY\":\"a48551edb966dbc1-FRA\",\"verify_identity_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"verify_identity_status_code\":200,\"verify_identity_success_count\":2,\"get_account_response.status\":\"success\",\"get_account_response.data.ok\":\"true\",\"get_account_response.data.products.0.product_id\":\"p1\",\"get_account_response.data.products.0.type\":\"personal_loan\",\"get_account_response.data.products.0.past_due\":780,\"get_account_response.data.products.0.days_late\":21,\"get_account_response.data.products.0.instalment_amount\":260,\"get_account_response.message\":\"Successfully executed POST request\",\"get_account_response.status_code\":200,\"get_account_response.header.Date\":\"Sat, 10 Oct 2026 11:35:10 GMT\",\"get_account_response.header.Content-Type\":\"application/json\",\"get_account_response.header.Transfer-Encoding\":\"chunked\",\"get_account_response.header.Connection\":\"keep-alive\",\"get_account_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=zRjesegYF5JI1wUE9ETBfzQni8F42X8brBct3RsGPknKfskHq608oy1NCBBEl54tf5F7feI7%2B8eMb%2FBHg4GG6wdN2KnxfmDNWbgorm7kfN0m0STd4chfgpnHiBXeWC2tPP272NfcS7A0%2FgcpozOZgKn%2FWLC7jnKPKw%3D%3D\\\"}]}\",\"get_account_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"get_account_response.header.Content-Encoding\":\"gzip\",\"get_account_response.header.Server\":\"cloudflare\",\"get_account_response.header.CF-RAY\":\"a48551eff9aedc79-FRA\",\"get_account_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"get_account_status_code\":200,\"get_account_success_count\":1,\"close_call_args.outcome\":\"no_promise\",\"close_call_args.reason\":\"hardship\",\"close_call_response.status\":\"success\",\"close_call_response.data.ok\":\"true\",\"close_call_response.message\":\"Successfully executed POST request\",\"close_call_response.status_code\":200,\"close_call_response.header.Date\":\"Sat, 10 Oct 2026 11:35:14 GMT\",\"close_call_response.header.Content-Type\":\"application/json\",\"close_call_response.header.Content-Length\":\"11\",\"close_call_response.header.Connection\":\"keep-alive\",\"close_call_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=wlRkE1wfbZJzcZoYMy5SrloZp%2B2TTFlindjRliuZqtL4lAp%2B%2BxNkhhz3exkJ2o5%2BMXetEkEkcjra3feYPv09e59zWbMOr6cgAEmsOXwoNR%2BhdNJXvpVs8QncyNMh6AejzrbeD3qhpww1ayg8a3uGnSUq6RnobFeTYQ%3D%3D\\\"}]}\",\"close_call_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"close_call_response.header.Server\":\"cloudflare\",\"close_call_response.header.CF-RAY\":\"a485520d8c483813-FRA\",\"close_call_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"close_call_status_code\":200,\"close_call_success_count\":1}}",
+   "messageId": "msg_29_1791632114942",
+   "secondsFromStart": 11.64331579208374,
+   "nodeId": "call"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"node_enter\",\"node\":\"hang_up\",\"from_node\":\"call\",\"reason\":\"close_call succeeded (close_call_response.data.ok == 'true' OR close_call_response.data.ok == 'True')\"}",
+   "messageId": "msg_30_1791632114943",
+   "secondsFromStart": 11.643911838531494,
+   "nodeId": "hang_up"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_start\",\"function\":\"end_call\",\"args\":{\"message_mode\":\"none\"}}",
+   "messageId": "msg_31_1791632114944",
+   "secondsFromStart": 11.644681453704834,
+   "nodeId": "hang_up"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete_deferred\",\"function\":\"end_call\",\"result\":null,\"deferred\":true}",
+   "messageId": "msg_32_1791632114944",
+   "secondsFromStart": 11.64524507522583,
+   "nodeId": "hang_up"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"call_ended\",\"reason\":\"assistant-ended-call\"}",
+   "messageId": "msg_33_1791632114951",
+   "secondsFromStart": 11.651917219161987,
+   "nodeId": "hang_up"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete\",\"function\":\"end_call\",\"result\":{\"status\":\"success\",\"message\":\"Call ended\"}}",
+   "messageId": "msg_34_1791632115052",
+   "secondsFromStart": 11.752717971801758,
+   "nodeId": "hang_up"
+  }
+ ],
+ "ended_reason": "assistant-ended-call"
+}

@@ -1,0 +1,298 @@
+{
+ "agent_id": "30467fe2-1b3e-4101-938a-696a09f02f3c",
+ "simulation_id": "c028e9a8-58ca-45f2-9983-adda9907ba2c",
+ "iteration_id": "48890071-6af8-49c2-b175-b99e0289170b",
+ "seconds": 146,
+ "passed": 1,
+ "total": 3,
+ "runs": 3,
+ "final": [
+  {
+   "id": "PUB-11",
+   "family": "Multi-product",
+   "passes": 3,
+   "runs": 3,
+   "pass": true
+  },
+  {
+   "id": "PUB-12",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 3,
+   "pass": false
+  },
+  {
+   "id": "PUB-13",
+   "family": "Multi-product",
+   "passes": 2,
+   "runs": 3,
+   "pass": false
+  }
+ ],
+ "rows": [
+  {
+   "id": "PUB-11",
+   "level": "medium",
+   "family": "Multi-product",
+   "pass": true,
+   "failed": [],
+   "call_id": "9a42b1cd-fdb1-46a7-b53d-8edba9e9d687",
+   "tools": [
+    "verify_identity",
+    "verify_identity",
+    "get_account",
+    "create_promise",
+    "create_promise",
+    "create_promise",
+    "close_call"
+   ],
+   "customer_id": "c_208a0271-ecd",
+   "slowest_turn_s": 1.3,
+   "ended": "assistant-ended-call"
+  },
+  {
+   "id": "PUB-12",
+   "level": "hard",
+   "family": "Multi-product",
+   "pass": false,
+   "failed": [
+    "conversation: The conversation failed to meet the success criteria because there were two attempts to collect on the car loan (early band) instead of the required one. Message 8 constituted the first attempt for all items (asking to pay today), and Message 12 was a second specific attempt for the car loan. All other criteria were satisfied: the date of birth was asked only once (Message 2) while the phone was a"
+   ],
+   "call_id": "01ff27e9-ea15-4870-a901-7ab82409e224",
+   "tools": [
+    "verify_identity",
+    "verify_identity",
+    "verify_identity",
+    "get_account",
+    "add_note",
+    "create_promise",
+    "add_note",
+    "close_call"
+   ],
+   "customer_id": "c_388342a8-4fd",
+   "slowest_turn_s": 1.1,
+   "ended": "assistant-ended-call"
+  },
+  {
+   "id": "PUB-13",
+   "level": "hard",
+   "family": "Multi-product",
+   "pass": false,
+   "failed": [
+    "promises [('p1', 300.0, '2026-10-26'), ('p2', 900.0, '2026-10-30')], expected [('p1', 300.0, '2026-10-30'), ('p2', 900.0, '2026-10-23')]",
+    "conversation: The conversation failed to meet the specified date requirements for the promises. The success criteria required the credit card promise to be recorded for 30 October and the loan for 23 October. However, the agent recorded the credit card promise for 26 October and the loan promise for 30 October (as evidenced by the create_promise system events and messages 8 and 12). Although the agent performed"
+   ],
+   "call_id": "c260c0e9-cab2-4243-bdd0-888223ed9351",
+   "tools": [
+    "verify_identity",
+    "verify_identity",
+    "get_account",
+    "create_promise",
+    "create_promise",
+    "close_call"
+   ],
+   "customer_id": "c_5ff4ddc0-4fd",
+   "slowest_turn_s": 0.9,
+   "ended": "assistant-ended-call"
+  }
+ ],
+ "all_rows": [
+  [
+   {
+    "id": "PUB-11",
+    "level": "medium",
+    "family": "Multi-product",
+    "pass": true,
+    "failed": [],
+    "call_id": "efa7335c-d92d-4777-81fb-2600455d543e",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ],
+    "customer_id": "c_91abc95a-fa4",
+    "slowest_turn_s": 1.1,
+    "ended": "assistant-ended-call"
+   },
+   {
+    "id": "PUB-12",
+    "level": "hard",
+    "family": "Multi-product",
+    "pass": false,
+    "failed": [
+     "get_account called before identity was verified",
+     "conversation: The assistant failed to meet the requirement for the number of attempts on the car loan. While it correctly asked the phone question twice [Message 4, Message 6] and the date of birth once [Message 2], and properly recorded a single promise for the credit card and 'refused' notes for the other products, it made two attempts on the car loan [Message 8, Message 10] despite the success criteria speci"
+    ],
+    "call_id": "6f6c23b5-c0f9-404f-930a-0da0900b4701",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "add_note",
+     "create_promise",
+     "close_call"
+    ],
+    "customer_id": "c_54a45dd1-f91",
+    "slowest_turn_s": 1.1,
+    "ended": "assistant-ended-call"
+   },
+   {
+    "id": "PUB-13",
+    "level": "hard",
+    "family": "Multi-product",
+    "pass": true,
+    "failed": [],
+    "call_id": "08136777-62c6-4049-88f6-1f3a9d1f5a01",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ],
+    "customer_id": "c_a401f4d7-8a5",
+    "slowest_turn_s": 1.1,
+    "ended": "assistant-ended-call"
+   }
+  ],
+  [
+   {
+    "id": "PUB-11",
+    "level": "medium",
+    "family": "Multi-product",
+    "pass": true,
+    "failed": [],
+    "call_id": "853ee773-6316-4ef6-a894-0c65bc586bd9",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ],
+    "customer_id": "c_7944de3d-c4d",
+    "slowest_turn_s": 1.2,
+    "ended": "assistant-ended-call"
+   },
+   {
+    "id": "PUB-12",
+    "level": "hard",
+    "family": "Multi-product",
+    "pass": false,
+    "failed": [
+     "conversation: The conversation failed to meet the specific attempt count criteria for the loans. While the identity verification and notes/promises were handled correctly, the agent made three attempts to collect payment on the personal loan (instead of the required two) and three attempts on the car loan (instead of the required one). - Phone question: Asked once initially [4] and repeated once [6]. Success. -"
+    ],
+    "call_id": "c1377a98-eba4-4de2-8f8e-68ec9f594a6a",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "create_promise",
+     "add_note",
+     "close_call"
+    ],
+    "customer_id": "c_56d2ad4d-9c8",
+    "slowest_turn_s": 1.1,
+    "ended": "assistant-ended-call"
+   },
+   {
+    "id": "PUB-13",
+    "level": "hard",
+    "family": "Multi-product",
+    "pass": true,
+    "failed": [],
+    "call_id": "67c95c37-1b9b-43d1-82fc-70d05cb15061",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ],
+    "customer_id": "c_efff61b6-118",
+    "slowest_turn_s": 1.0,
+    "ended": "assistant-ended-call"
+   }
+  ],
+  [
+   {
+    "id": "PUB-11",
+    "level": "medium",
+    "family": "Multi-product",
+    "pass": true,
+    "failed": [],
+    "call_id": "9a42b1cd-fdb1-46a7-b53d-8edba9e9d687",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ],
+    "customer_id": "c_208a0271-ecd",
+    "slowest_turn_s": 1.3,
+    "ended": "assistant-ended-call"
+   },
+   {
+    "id": "PUB-12",
+    "level": "hard",
+    "family": "Multi-product",
+    "pass": false,
+    "failed": [
+     "conversation: The conversation failed to meet the success criteria because there were two attempts to collect on the car loan (early band) instead of the required one. Message 8 constituted the first attempt for all items (asking to pay today), and Message 12 was a second specific attempt for the car loan. All other criteria were satisfied: the date of birth was asked only once (Message 2) while the phone was a"
+    ],
+    "call_id": "01ff27e9-ea15-4870-a901-7ab82409e224",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "create_promise",
+     "add_note",
+     "close_call"
+    ],
+    "customer_id": "c_388342a8-4fd",
+    "slowest_turn_s": 1.1,
+    "ended": "assistant-ended-call"
+   },
+   {
+    "id": "PUB-13",
+    "level": "hard",
+    "family": "Multi-product",
+    "pass": false,
+    "failed": [
+     "promises [('p1', 300.0, '2026-10-26'), ('p2', 900.0, '2026-10-30')], expected [('p1', 300.0, '2026-10-30'), ('p2', 900.0, '2026-10-23')]",
+     "conversation: The conversation failed to meet the specified date requirements for the promises. The success criteria required the credit card promise to be recorded for 30 October and the loan for 23 October. However, the agent recorded the credit card promise for 26 October and the loan promise for 30 October (as evidenced by the create_promise system events and messages 8 and 12). Although the agent performed"
+    ],
+    "call_id": "c260c0e9-cab2-4243-bdd0-888223ed9351",
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ],
+    "customer_id": "c_5ff4ddc0-4fd",
+    "slowest_turn_s": 0.9,
+    "ended": "assistant-ended-call"
+   }
+  ]
+ ]
+}
