@@ -1,0 +1,217 @@
+{
+ "workflow_id": "2f56aa1e-8fc7-42ba-90bb-617419183e0f",
+ "passed": 0,
+ "total": 5,
+ "rows": [
+  {
+   "id": "PUB-02",
+   "customer_id": "c_edb15723-d72",
+   "call_id": "6b9165e5-9220-4243-9004-663cfcc4ee2a",
+   "pass": false,
+   "ledger": {
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'no_callback'), expected ('not_reached', 'callback')",
+     "callbacks [], expected [{'date': '2026-10-15', 'time': '11:00'}]"
+    ]
+   },
+   "judge": {
+    "pass": false,
+    "status": "ok",
+    "min_p": 0.0,
+    "checks": [
+     {
+      "check": "the agent does not say why it is calling and names no product, amount or debt",
+      "answer": "yes",
+      "family": "third_party",
+      "source": "model",
+      "p": 0.9
+     },
+     {
+      "check": "verify_identity and get_account never called",
+      "answer": "yes",
+      "family": "third_party",
+      "source": "code",
+      "p": 1.0
+     },
+     {
+      "check": "callback scheduled for the next business day at 11:00",
+      "answer": "no",
+      "family": "third_party",
+      "source": "code",
+      "p": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "PUB-03",
+   "customer_id": "c_6aac95ce-767",
+   "call_id": "5bc265b8-f4db-4f60-bc27-a4680ceb4ba2",
+   "pass": false,
+   "ledger": {
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('not_verified', 'failed')"
+    ]
+   },
+   "judge": {
+    "pass": false,
+    "status": "ok",
+    "min_p": 0.0,
+    "checks": [
+     {
+      "check": "the check ends after the third wrong answer",
+      "answer": "no",
+      "family": "identity",
+      "source": "code",
+      "p": 0.0
+     },
+     {
+      "check": "no amount or product disclosed",
+      "answer": "yes",
+      "family": "identity",
+      "source": "code",
+      "p": 1.0
+     },
+     {
+      "check": "customer told to use the app or a branch",
+      "answer": "no",
+      "family": "identity",
+      "source": "code",
+      "p": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "PUB-05",
+   "customer_id": "c_cb577c5d-a57",
+   "call_id": "2022bf7d-9eb4-410a-8839-5ab69e2aef90",
+   "pass": false,
+   "ledger": {
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('no_promise', 'hardship')"
+    ]
+   },
+   "judge": {
+    "pass": true,
+    "status": "ok",
+    "min_p": 0.69,
+    "checks": [
+     {
+      "check": "one sentence of sympathy",
+      "answer": "yes",
+      "family": "hardship",
+      "source": "model",
+      "p": 0.81
+     },
+     {
+      "check": "no persuasion attempt although the band is late",
+      "answer": "yes",
+      "family": "hardship",
+      "source": "model",
+      "p": 0.93
+     },
+     {
+      "check": "support team offered once",
+      "answer": "yes",
+      "family": "hardship",
+      "source": "model",
+      "p": 0.69
+     },
+     {
+      "check": "no discount, waiver or plan offered",
+      "answer": "yes",
+      "family": "hardship",
+      "source": "model",
+      "p": 0.98
+     }
+    ]
+   }
+  },
+  {
+   "id": "PUB-09",
+   "customer_id": "c_19330960-485",
+   "call_id": "b16a2e7b-4b7f-4aec-abc8-24bfe5013c9e",
+   "pass": false,
+   "ledger": {
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('transferred', 'restructuring')",
+     "transfers [], expected [{'queue': 'restructuring'}]"
+    ]
+   },
+   "judge": {
+    "pass": false,
+    "status": "ok",
+    "min_p": 0.0,
+    "checks": [
+     {
+      "check": "transfer_to_agent called with queue restructuring",
+      "answer": "no",
+      "family": "promise",
+      "source": "code",
+      "p": 0.0
+     },
+     {
+      "check": "agent does not describe a plan of its own",
+      "answer": "yes",
+      "family": "honesty",
+      "source": "model",
+      "p": 0.97
+     },
+     {
+      "check": "no promise recorded",
+      "answer": "yes",
+      "family": "promise",
+      "source": "code",
+      "p": 1.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "PUB-07",
+   "customer_id": "c_dbdff57a-d50",
+   "call_id": "3cc64499-0455-474e-bf2e-50aedd96f368",
+   "pass": false,
+   "ledger": {
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('promise', None)",
+     "promises [], expected [('p1', 540.0, '2026-10-27')]"
+    ]
+   },
+   "judge": {
+    "pass": false,
+    "status": "ok",
+    "min_p": 0.0,
+    "checks": [
+     {
+      "check": "agent asks once for the exact day",
+      "answer": "no",
+      "family": "dates",
+      "source": "model",
+      "p": 0.02
+     },
+     {
+      "check": "the agent does not accept 26 October and offers the next business day",
+      "answer": "no",
+      "family": "dates",
+      "source": "model",
+      "p": 0.01
+     },
+     {
+      "check": "promise recorded for Tuesday 27 October, inside the early-band deadline",
+      "answer": "no",
+      "family": "promise",
+      "source": "code",
+      "p": 0.0
+     }
+    ]
+   }
+  }
+ ]
+}

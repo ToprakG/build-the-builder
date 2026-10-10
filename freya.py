@@ -12,7 +12,9 @@ HEADERS = {"Authorization": "Bearer " + os.environ.get("FREYA_API_KEY", ""), "Co
 def api(method, path, body=None, **params):
     """Call the API and return the `result` part of its {success, data: {message, result}} envelope."""
     q = "?" + urllib.parse.urlencode(params) if params else ""
-    req = urllib.request.Request(URL + path + q, data=json.dumps(body).encode() if body is not None else None, headers=HEADERS, method=method)
+    headers = dict(HEADERS)
+    headers["Authorization"] = "Bearer " + os.environ.get("FREYA_API_KEY", "")
+    req = urllib.request.Request(URL + path + q, data=json.dumps(body).encode() if body is not None else None, headers=headers, method=method)
     try:
         with urllib.request.urlopen(req, timeout=120) as r: out = json.load(r)
     except urllib.error.HTTPError as e:
@@ -79,6 +81,53 @@ def get_iteration(sim_id, it_id):
 def get_call(call_id):
     """One simulated call: `messages` holds the transcript, tool calls included. Run ids and call ids come from get_iteration()['runs']."""
     return api("GET", f"/api/v2/call/{call_id}")["call"]
+
+def list_unit_tests(entity_type, entity_id):
+    """Every unit test on an agent or workflow, including archived ones."""
+    out, offset = [], 0
+    while True:
+        page = api("GET", "/api/v2/unit-tests", workspaceId=workspace_id(), entityType=entity_type, entityId=entity_id, includeArchived="true", limit=200, offset=offset)
+        tests = page.get("tests") or []
+        out += tests
+        offset += len(tests)
+        if len(tests) < 200:
+            return out
+
+def create_unit_test(entity_type, entity_id, test):
+    """Create one unit test. `test` has name, expectation, assertions, messages, customer_variables, tags."""
+    body = {
+        "workspaceId": workspace_id(), "entityType": entity_type, "entityId": entity_id,
+        "name": test["name"], "expectation": test.get("expectation") or "", "assertions": test.get("assertions") or [],
+        "tags": test.get("tags") or [],
+        "input": {"schemaVersion": 1, "callType": "web", "messages": test["messages"], "customerVariables": test.get("customer_variables") or {}},
+        "judgeContext": {"includeRoutingEvents": True, "includeExtractionEvents": True, "includeToolCalls": True, "includeOtherEvents": False},
+    }
+    if test.get("seed_call_id"): body["seedCallId"] = test["seed_call_id"]
+    if test.get("seed_message_id"): body["seedMessageId"] = test["seed_message_id"]
+    return api("POST", "/api/v2/unit-tests", body)
+
+def update_unit_test(unit_test_id, test):
+    """Replace the script, checks, and judge text. Un-archives a test that is current again."""
+    body = {
+        "name": test["name"], "expectation": test.get("expectation") or "", "assertions": test.get("assertions") or [],
+        "tags": test.get("tags") or [], "isArchived": False,
+        "input": {"schemaVersion": 1, "callType": "web", "messages": test["messages"], "customerVariables": test.get("customer_variables") or {}},
+        "judgeContext": {"includeRoutingEvents": True, "includeExtractionEvents": True, "includeToolCalls": True, "includeOtherEvents": False},
+    }
+    return api("PATCH", f"/api/v2/unit-tests/{unit_test_id}", body)
+
+def archive_unit_test(unit_test_id):
+    return api("PATCH", f"/api/v2/unit-tests/{unit_test_id}", {"isArchived": True})
+
+def run_all_unit_tests(entity_type, entity_id, unit_test_ids=None, mock_tool_results=None):
+    """Enqueue every active test, or the given ids. There is no run-one endpoint."""
+    body = {"workspaceId": workspace_id(), "entityType": entity_type, "entityId": entity_id}
+    if unit_test_ids: body["unitTestIds"] = unit_test_ids
+    if mock_tool_results: body["mockToolResults"] = mock_tool_results
+    return api("POST", "/api/v2/unit-tests/run-all", body)
+
+def get_unit_test_run(run_id):
+    return api("GET", f"/api/v2/unit-tests/runs/{run_id}")
 
 # The model every team's phone agent runs on: Freya's model on the event's own GPU box. Do not change it. (Organisers can point a test at another model with the two variables.)
 AGENT_LLM = {"provider": os.environ.get("FREYA_AGENT_PROVIDER", "experimental-5"), "model": os.environ.get("FREYA_AGENT_MODEL", "experimental-5")}

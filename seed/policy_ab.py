@@ -1,97 +1,63 @@
-"""The policy of Freya Bank's early-stage collections call (Brief A) and its up-to-three-product
-extension (Brief B), as plain data. No part of seed/graph.py knows a holiday date, a band
-threshold, a floor field name or a sentence; it only reads this dict. A final brief with other
-numbers, fields or outcome names is a new file like this one, not a change to graph.py.
+"""Brief A and Brief B as plain data, in the canonical config schema seed/graph.py reads for any
+brief: holidays, bands, identity, callback window, outcome/queue/note maps, close rule, product
+types, account field names, tool field-name roles, sentences. graph.py never sees a Brief A/B
+value directly -- it reads this same shape for the testbed's seven fake briefs too, each with its
+own holidays, bands, renamed fields and renamed enum values.
 
-Brief B's own closing rule ("promise wins if any promise was recorded, otherwise no_promise with
-the reason of the first non-paid note") is also exactly Brief A's table for a one-product call, so
-one policy and one graph serve both: pass brief-a.md alone and the up-to-three-product machinery
-is simply never exercised, because get_account only ever returns one product.
+POLICY_B is POLICY_A plus multi_product=True, max_products=3: Brief B's own closing rule ("promise
+wins if any was recorded, otherwise no_promise with the reason of the first non-paid note, in
+get_account order") is exactly Brief A's table when there is one product, so one shape serves both.
 """
 
-POLICY = {
+A_OUTCOMES = {
+    "promise": ["promise", None], "paid": ["paid", None],
+    "tr_restructuring": ["transferred", "restructuring"], "tr_human": ["transferred", "human"], "tr_support": ["transferred", "support"],
+    "np_refused": ["no_promise", "refused"], "np_hardship": ["no_promise", "hardship"], "np_dispute": ["no_promise", "dispute"],
+    "np_service_error": ["no_promise", "service_error"],
+    "nv_failed": ["not_verified", "failed"], "nv_declined": ["not_verified", "declined"],
+    "nr_callback": ["not_reached", "callback"], "nr_no_callback": ["not_reached", "no_callback"],
+    "nr_wrong_number": ["not_reached", "wrong_number"], "nr_deceased": ["not_reached", "deceased"], "nr_unclear": ["not_reached", "unclear"],
+}
+A_QUEUES = {"restructuring": "restructuring", "human": "general", "support": "support"}
+A_NOTES = {"refused": "refused", "hardship": "hardship", "dispute": "dispute", "paid": "paid", "service_error": "service_error"}
+A_TYPES = {
+    "card": {"enum": "credit_card", "label": "credit card ending {last4}", "floor_field": "minimum_payment", "last4_field": "card_last4"},
+    "loan": {"enum": "personal_loan", "label": "personal loan", "floor_field": "instalment_amount", "last4_field": None},
+    "car": {"enum": "car_loan", "label": "car loan", "floor_field": "instalment_amount", "last4_field": None},
+}
+A_ACCOUNT = {"product_id": "product_id", "type": "type", "past_due": "past_due", "days_late": "days_late"}
+
+POLICY_A = {
+    "id": "brief-a", "name": "Brief A", "bank": "Freya Bank", "kind": "clean", "language": "en",
+    "address": "{title} {last_name}",
+    "identity": {"questions": ["date_of_birth", "phone_last4"], "max_wrong": 3, "swap_hint": True},
+    "callback": {"start": "10:00", "end": "19:00", "same_day": True},
+    "outcome_map": A_OUTCOMES, "queue_map": A_QUEUES, "note_map": A_NOTES,
+    "close_rule": {"kind": "first_non_paid"},
+    "notes_on_restructuring": None,
+    "product_types": A_TYPES, "account_fields": A_ACCOUNT, "product_id_format": "p{n}",
+    "tools": {
+        "verify_identity": {"field": "field", "answer": "answer"},
+        "create_promise": {"product_id": "product_id", "amount": "amount", "date": "date", "amount_unit": "currency"},
+        "schedule_callback": {"mode": "date_time", "date": "date", "time": "time"},
+        "close_call": {"mode": "outcome_reason", "outcome": "outcome", "reason": "reason"},
+        "transfer_to_agent": {"queue": "queue"},
+        "add_note": {"product_id": "product_id", "reason": "reason"},
+    },
+    "forbidden_before_verify": ["collections", "debt", "payment"],
+    "multi_product": False, "max_products": 1,
     "holidays": ["2026-10-26", "2026-11-11", "2026-11-26", "2026-12-25", "2027-01-01"],
-
-    # days_late band -> deadline (business days after `now`) and persuasion attempts allowed.
     "bands": [
-        {"name": "early", "min": 1, "max": 7, "deadline_business_days": 12, "attempts": 1},
-        {"name": "late", "min": 8, "max": 45, "deadline_business_days": 7, "attempts": 2},
+        {"name": "early", "min_days": 1, "max_days": 7, "deadline_business_days": 12, "attempts": 1},
+        {"name": "late", "min_days": 8, "max_days": 45, "deadline_business_days": 7, "attempts": 2},
     ],
-
-    "floor_field_by_type": {
-        "credit_card": "minimum_payment",
-        "personal_loan": "instalment_amount",
-        "car_loan": "instalment_amount",
-    },
-
-    "identity": {
-        "questions": ["date_of_birth", "phone_last4"],
-        "max_wrong_total": 3,
-        "formats": {
-            "date_of_birth": "YYYY-MM-DD. The caller may say it any way; read day, then month, then year when only numbers are given.",
-            "phone_last4": "four digits",
-        },
-        "swap_hint": "day_month_swapped",
-    },
-
-    "callback": {"window_start": "10:00", "window_end": "19:00", "days_ahead": ["today", "next_business_day"]},
-
-    # outcome -> allowed reasons. A reason of "" means the outcome takes none.
-    "outcomes": {
-        "promise": [""],
-        "paid": [""],
-        "transferred": ["restructuring", "human", "support"],
-        "no_promise": ["refused", "hardship", "dispute", "service_error"],
-        "not_verified": ["failed", "declined"],
-        "not_reached": ["callback", "no_callback", "wrong_number", "deceased", "unclear"],
-    },
-    "note_reasons": ["refused", "hardship", "dispute", "paid", "service_error"],
-    "paid_note_reason": "paid",
-
-    "queues": ["restructuring", "general", "support"],
-
-    # transfer trigger -> {queue to call transfer_to_agent with, reason close_call takes}.
-    # "human" is the one case where the two differ: queue general, close reason human.
-    "transfer_map": {
-        "restructuring": {"queue": "restructuring", "reason": "restructuring"},
-        "human": {"queue": "general", "reason": "human"},
-        "support": {"queue": "support", "reason": "support"},
-    },
-
-    "limits": {
-        "opening_max_asks": 2,
-        "identity_max_declines": 2,
-        "human_insist_threshold": 2,
-    },
-
-    "forbidden_before_verification": ["collections", "debt", "payment"],
-
-    # Every value here is the literal sentence the agent speaks (first person, Freya's "{{var}}"
-    # double-brace substitution where a call variable belongs), never an instruction describing
-    # one, since graph.py drops these straight into on_enter.text or a task_message quote.
     "sentences": {
-        "opener": "I am a digital assistant calling from Freya Bank, and this call is recorded.",
-        "confirm_identity": "Am I speaking with {{title}} {{last_name}}?",
-        "robot_question": "I am Freya Bank's digital assistant.",
-        "scam_question": "You can verify this call by phoning Freya Bank's customer service number.",
-        "not_verified_failed": "Please use the mobile app or visit a branch.",
-        "deceased": "I am sorry for your loss.",
-        "text_message": "You will receive a text message confirming this promise.",
-        "already_paid": "Payments can take one business day to appear.",
-        "goodbye": "Thank you, goodbye.",
-    },
-
-    # Brief A rule 30: attempt 1 proposes the full amount (or the floor, if already refused as too
-    # much) on the last business day of this week (next week's if today already is that day).
-    # Attempt 2 (late band only) proposes the floor on the deadline. graph.py reads these keys to
-    # build the facts it hands the model; it does not know the rule numbers.
-    "attempts": {
-        1: {"amount": "full_or_floor", "date": "attempt1_date"},
-        2: {"amount": "floor", "date": "deadline", "bands_only": ["late"]},
-    },
-
-    "multi_product": {
-        "max_products": 3,
-        "ask_all_today_first": True,
+        "opening": "a digital assistant calling from Freya Bank; the call is recorded",
+        "promise_confirmation": "You will receive a text message confirming this promise.",
+        "ai": "Freya Bank's digital assistant",
+        "scam": "verify the call by phoning Freya Bank's customer service number",
+        "failed_id": "use the mobile app or a branch",
     },
 }
+
+POLICY_B = {**POLICY_A, "id": "brief-b", "name": "Brief B", "multi_product": True, "max_products": 3}

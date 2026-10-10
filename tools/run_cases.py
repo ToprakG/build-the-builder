@@ -48,7 +48,17 @@ def persona_for(case, ident, style=None):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("agent_id"); ap.add_argument("--brief"); ap.add_argument("--cases", default=str(ROOT / "public-test-set.json")); ap.add_argument("--out"); ap.add_argument("--only"); ap.add_argument("--reps", type=int, default=1); ap.add_argument("--style", choices=sorted(STYLES)); ap.add_argument("--rerun-if-slow", type=int, default=0); ap.add_argument("--judges", action="store_true", help="also score the conversation with Judge C; the Freya pass/fail line stays")
+    ap.add_argument("--unit-gate", action="store_true", help="refuse to start unless results/unit-tests.json is all pass for this agent")
     a = ap.parse_args()
+    if a.unit_gate:
+        report_path = ROOT / "results" / "unit-tests.json"
+        if not report_path.exists():
+            print("unit gate: no results/unit-tests.json. Run python3 seed/unit_tests.py --slot <brief> first.")
+            sys.exit(1)
+        report = json.loads(report_path.read_text())
+        if report.get("agent_id") != a.agent_id or report.get("passed") != report.get("total") or not report.get("total"):
+            print(f"unit gate: {report.get('passed')}/{report.get('total')} passed for agent {report.get('agent_id')}. Not starting a simulation.")
+            sys.exit(1)
     cases = [c for c in json.load(open(a.cases)) if (not a.brief or c["brief"] == a.brief) and (not a.only or c["id"] in a.only.split(","))]
     ident = {c["id"]: {"identity": c["identity"]} for c in cases}
     store = ROOT / ".personas.json"; ids = json.load(open(store)) if store.exists() else {}

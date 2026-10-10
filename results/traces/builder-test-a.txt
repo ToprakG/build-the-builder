@@ -1,0 +1,22 @@
+Brief: builder-test-a
+Start: 2026-10-10 17:21:09
+
+Model calls:
+- none. This build compiles the policy into the workflow and does not call a model.
+
+Extract:
+- config read from testbed/configs/brief-a.config.json, no model call
+
+Graph:
+- 46 nodes built from the config
+
+Self-tests:
+- workflow check: pass. 46 nodes, 23 code snippets ran.
+- seed/test_datefns.py: pass. All datefns checks passed.
+- mockbank.py --self-test: pass. self-test passed
+
+Freya:
+- agent model: experimental-5 / experimental-5 (set in freya.py; this build does not call it)
+- dry-run valid: True
+
+End: 2026-10-10 17:21:10

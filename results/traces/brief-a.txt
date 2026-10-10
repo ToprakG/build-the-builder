@@ -1,0 +1,13 @@
+Brief: brief-a
+Start: 2026-10-10 17:19:07
+
+Model calls:
+- none. This build compiles the policy into the workflow and does not call a model.
+
+Extract:
+- config read from testbed/configs/brief-a.config.json, no model call
+
+Graph:
+- 46 nodes built from the config
+
+End: 2026-10-10 17:19:07

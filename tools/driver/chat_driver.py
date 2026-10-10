@@ -9,9 +9,11 @@ The ledger score is score.score_ledger. The conversation score is judge.judge_tr
 
 --compare-banks replays the saved transcripts' tool calls on the hosted bank and on this mock.
 It compares both ledgers with the ledger lines in results/*.json. It does not call a model.
-The customer model is gemini-3-flash-preview and needs GEMINI_API_KEY or GOOGLE_API_KEY.
+The customer model is gemini-3-flash-preview. A Gemini key is used when it is set.
+Otherwise the same model is called through OpenRouter.
+A case style, when the case has one, is the same HOW YOU TALK block run_cases.py uses.
 """
-import argparse, json, os, pathlib, sys, urllib.error, urllib.request
+import argparse, json, os, pathlib, re, sys, urllib.error, urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -28,10 +30,30 @@ from judge import judge_transcript
 from bank_url import origin
 
 GEMINI_MODEL = "gemini-3-flash-preview"
+OPENROUTER_CUSTOMER = "google/gemini-3-flash-preview"
 MAX_TURNS = 30
+# The chat route needs one user message before it will speak the opener. That line is not
+# the customer. Saved simulations start with the agent, so the judge must not see it.
+STARTERS = {"[call connected]", "Hello?"}
 
 def _gemini_key():
     return os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or ""
+
+def _spoken(text):
+    """Keep the words the customer says. Drop a label, a code fence, or a stage direction."""
+    text = (text or "").strip()
+    text = re.sub(r"^```[a-zA-Z]*\n?", "", text)
+    text = re.sub(r"\n?```$", "", text).strip()
+    text = text.strip('"').strip()
+    text = re.sub(r"^(Customer|User)\s*:\s*", "", text, flags=re.I)
+    text = re.sub(r"\[[^\]]*\]", "", text)
+    return " ".join(text.split())
+
+def for_judge(messages):
+    rows = list(messages or [])
+    if rows and rows[0].get("role") == "user" and (rows[0].get("message") or "").strip() in STARTERS:
+        rows = rows[1:]
+    return rows
 
 def bank_call(host, path, body=None):
     headers = {"user-agent": "freya-bank-scorer/0.1", "content-type": "application/json", "x-team-key": os.environ["FREYA_BANK_TEAM_KEY"]}
@@ -47,15 +69,8 @@ def bank_call(host, path, body=None):
         except json.JSONDecodeError:
             return error.code, {"ok": False, "error": raw[:400]}
 
-def customer_reply(prompt, agent_lines, customer_lines):
+def _customer_gemini(prompt, contents):
     key = _gemini_key()
-    if not key:
-        raise RuntimeError("GEMINI_API_KEY or GOOGLE_API_KEY is empty. The customer model needs it.")
-    contents = []
-    for index, line in enumerate(agent_lines):
-        contents.append({"role": "user", "parts": [{"text": line}]})
-        if index < len(customer_lines):
-            contents.append({"role": "model", "parts": [{"text": customer_lines[index]}]})
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={key}"
     payload = {
         "systemInstruction": {"parts": [{"text": prompt}]},
@@ -69,17 +84,63 @@ def customer_reply(prompt, agent_lines, customer_lines):
     except urllib.error.HTTPError as error:
         raise RuntimeError(f"gemini {error.code}: {error.read().decode()[:500]}") from None
     parts = (((body.get("candidates") or [{}])[0].get("content") or {}).get("parts") or [{}])
-    text = "\n".join(part.get("text") or "" for part in parts).strip()
+    return "\n".join(part.get("text") or "" for part in parts).strip()
+
+def _customer_openrouter(prompt, agent_lines, customer_lines):
+    key = os.environ.get("OPENROUTER_API_KEY") or ""
+    if not key:
+        raise RuntimeError("GEMINI_API_KEY and OPENROUTER_API_KEY are empty. The customer model needs one.")
+    messages = [{"role": "system", "content": prompt}]
+    for index, line in enumerate(agent_lines):
+        messages.append({"role": "user", "content": line})
+        if index < len(customer_lines):
+            messages.append({"role": "assistant", "content": customer_lines[index]})
+    payload = {"model": OPENROUTER_CUSTOMER, "temperature": 0.4, "messages": messages}
+    request = urllib.request.Request(
+        "https://openrouter.ai/api/v1/chat/completions",
+        data=json.dumps(payload).encode(),
+        method="POST",
+        headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=90) as response:
+            body = json.load(response)
+    except urllib.error.HTTPError as error:
+        raise RuntimeError(f"openrouter {error.code}: {error.read().decode()[:500]}") from None
+    choice = ((body.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
+    return choice.strip()
+
+def customer_reply(prompt, agent_lines, customer_lines):
+    if _gemini_key():
+        contents = []
+        for index, line in enumerate(agent_lines):
+            contents.append({"role": "user", "parts": [{"text": line}]})
+            if index < len(customer_lines):
+                contents.append({"role": "model", "parts": [{"text": customer_lines[index]}]})
+        raw = _customer_gemini(prompt, contents)
+    else:
+        raw = _customer_openrouter(prompt, agent_lines, customer_lines)
+    text = _spoken(raw)
     if not text:
-        raise RuntimeError("gemini returned no customer line")
+        raise RuntimeError("the customer model returned no spoken line")
     return text
 
 def chat_turn(workflow_id, message, variables, call_id=None):
     body = {"workflowId": workflow_id, "message": message, "customerVariables": variables}
     if call_id:
         body = {"workflowId": workflow_id, "message": message, "callId": call_id}
-    result = freya.api("POST", "/api/v2/chat/message", body)
-    return result.get("callId") or call_id, (result.get("response") or "").strip(), result
+    last = None
+    for attempt in range(5):
+        try:
+            result = freya.api("POST", "/api/v2/chat/message", body)
+            return result.get("callId") or call_id, (result.get("response") or "").strip(), result
+        except RuntimeError as error:
+            last = error
+            if "-> 503" not in str(error) and "-> 502" not in str(error) and "-> 504" not in str(error):
+                raise
+            import time
+            time.sleep(2 * (attempt + 1))
+    raise last
 
 def run_case(workflow_id, case, host, style=None):
     status, opened = bank_call(host, "/v1/practice/sessions", {"case": case["id"]})
@@ -87,7 +148,8 @@ def run_case(workflow_id, case, host, style=None):
         raise RuntimeError(f"session {case['id']} -> {status} {opened}")
     variables = opened["variables"]
     prompt = persona_for(case, {"identity": case["identity"]}, style)["prompt"]
-    call_id, agent, _ = chat_turn(workflow_id, "[call connected]", variables)
+    prompt += "\n\nWHEN YOU NAME A TIME: say the hour and the minutes, like 11:00. Do not say morning, afternoon, or around in place of that time."
+    call_id, agent, _ = chat_turn(workflow_id, "Hello?", variables)
     agent_lines, customer_lines = [], []
     if agent:
         agent_lines.append(agent)
@@ -117,7 +179,7 @@ def run_case(workflow_id, case, host, style=None):
             messages = freya.get_call(call_id).get("messages") or []
         except Exception:
             messages = []
-    judged = judge_transcript(messages, case) if messages else {"pass": None, "status": "no_transcript", "checks": [], "min_p": None}
+    judged = judge_transcript(for_judge(messages), case) if messages else {"pass": None, "status": "no_transcript", "checks": [], "min_p": None}
     passed = ledger_score["pass"] and judged["pass"] is True
     return {
         "id": case["id"],
@@ -205,6 +267,7 @@ def main():
     parser.add_argument("--style", choices=["pieces", "corrects", "talkative", "asks_back", "in_words"])
     parser.add_argument("--compare-banks", action="store_true")
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--out")
     args = parser.parse_args()
     if args.compare_banks:
         sys.exit(compare_banks())
@@ -232,6 +295,11 @@ def main():
                 if check["answer"] == "no":
                     print("       -", check["check"])
     print(f"\n{sum(row['pass'] for row in rows)} / {len(rows)} passed")
+    if args.out:
+        path = pathlib.Path(args.out)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"workflow_id": args.workflow_id, "passed": sum(row["pass"] for row in rows), "total": len(rows), "rows": rows}, indent=1))
+        print(f"wrote {path}")
 
 if __name__ == "__main__":
     main()

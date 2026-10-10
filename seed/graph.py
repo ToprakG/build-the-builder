@@ -1,22 +1,37 @@
 """build_workflow(policy, tools_api) -> workflow JSON.
 
-Everything brief-specific (holiday dates, band thresholds, floor field names, sentences, the
-outcome table) lives in a policy dict (see policy_ab.py). This file only knows the SHAPE of an
-early-stage collections call: open -> who's on the line -> identity -> fetch the account -> settle
-each product one at a time -> transfer or close. It reads every number and word it needs from
-`policy`, and it reads every tool's fields and enums from `tools_api` (the brief's openapi.json),
-never typing a field name or enum value by hand. Swap either argument for a final brief's and the
-same function builds a correct workflow for it.
+`policy` is the canonical config schema (see seed/policy_ab.py's POLICY_A/POLICY_B, or any
+testbed/fake_briefs/<id>/config.json): holidays, bands, identity questions, callback window,
+outcome/queue/note maps, close rule, product types, account field names, and -- critically --
+`policy["tools"][tool_name]`, which names which literal field in that tool plays which role
+(verify_identity's security-answer field might be called "field" or "check"; create_promise's
+amount might be "amount" (currency) or "amount_cents" (integer cents); schedule_callback might
+take separate date/time fields or one combined "callback_at"; close_call might take outcome+
+reason or a single disposition "code"). Every one of those decisions is read from `policy`, never
+hardcoded here, and `tools_api` (the brief's own openapi.json) supplies each field's JSON-schema
+type, enum and description, so the generated tool definitions always match the real API regardless
+of which fields exist or what they're called.
+
+Internally, outcomes are tracked as a single canonical key from `policy["outcome_map"]`
+("promise", "paid", "np_refused", "nr_wrong_number", "tr_restructuring", ...) and note reasons as
+one of the five canonical keys (refused/hardship/dispute/paid/service_error); both are translated
+to the brief's actual values only at the add_note/close_call boundary. This mirrors the
+testbed's own `oracle.outcome_key` field, which uses the identical vocabulary.
 
 Every piece of arithmetic, counting and policy validation happens in a `code` node or a tool's
 pre/post hook, built from seed/datefns.py's functions via inspect.getsource so the sandboxed copy
 is byte-identical to the one seed/test_datefns.py tests. The dialogue model is never asked to do
-date math, count attempts, or decide whether get_account may be called yet.
+date math, count attempts, decide whether get_account may be called yet, or remember which fields
+a renamed brief uses.
 """
 import inspect
 import json
 
 from seed import datefns as D
+
+OPENING_MAX_ASKS = 2
+IDENTITY_MAX_DECLINES = 2
+HUMAN_INSIST_THRESHOLD = 2
 
 # ---------------------------------------------------------------------------
 # Code-node source assembly
@@ -25,8 +40,8 @@ from seed import datefns as D
 _DATEFN_NAMES = [
     "parse_date", "parse_datetime", "is_business_day", "next_business_day",
     "on_or_after_business_day", "add_business_days", "band_for", "deadline_for",
-    "floor_for", "last_business_day_of_week", "attempt1_proposal_date", "label_for",
-    "product_facts", "validate_promise", "callback_ok", "outcome_for_call",
+    "floor_for", "last_business_day_of_week", "attempt1_date_uncapped", "product_facts",
+    "resolve_named_date", "validate_promise", "callback_ok", "outcome_for_call",
 ]
 
 
@@ -45,9 +60,8 @@ def _guard_no_mustache(code):
 
 
 def _py_literal(value):
-    """Render a plain-data value (str/int/float/bool/list/dict of those) as Python source,
-    guaranteed not to contain "}}" by construction (json.dumps never emits a space, and we insert
-    one between any two adjacent closing brackets/braces)."""
+    """Render a plain-data value (str/int/float/bool/None/list/dict of those) as Python source,
+    guaranteed not to contain "}}" by construction."""
     text = json.dumps(value)
     text = text.replace("null", "None").replace("true", "True").replace("false", "False")
     out = []
@@ -77,8 +91,6 @@ def code_action(code, timeout_ms=10000):
 
 
 def code_node(name, body, next_node, extra_transitions=None, on_enter=None):
-    """A passthrough `code` node: run `body` (python using `vars`), then go to `next_node`.
-    `extra_transitions` are checked before the always-fallback to `next_node`."""
     transitions = list(extra_transitions or [])
     transitions.append({"target_node": next_node, "description": "always", "condition": {"operator": "always"}})
     return {
@@ -94,8 +106,6 @@ def code_node(name, body, next_node, extra_transitions=None, on_enter=None):
 
 
 def say_then_node(name, text, next_node):
-    """A fixed, model-free line (on_enter tts), then move on. Used for required sentences that do
-    not depend on anything the model negotiated (sympathy, the app-or-branch line, goodbye)."""
     return {
         "name": name,
         "node_type": "code",
@@ -109,7 +119,7 @@ def say_then_node(name, text, next_node):
 
 
 # ---------------------------------------------------------------------------
-# Tool definitions, generated from tools_api (the brief's openapi.json)
+# Tool definitions, generated from tools_api (the brief's own openapi.json)
 # ---------------------------------------------------------------------------
 
 def _op_schema(tools_api, name):
@@ -128,10 +138,10 @@ def _leaf(spec, default_value):
 
 
 def build_tool(tools_api, name, description, baked=None, config=None):
-    """One tool function, shaped from tools_api's schema for `/<name>`. `baked[field]` supplies a
-    literal or `{{var}}` default that hides the field from the model (the engine fills it); every
-    other field defaults to `{{field}}`, so the model sees and fills it. `customer_id` is always
-    baked from the call variable of the same name, matching every tool in this API."""
+    """One tool function, shaped entirely from tools_api's schema for `/<name>`: whatever
+    properties that schema has, under whatever names, become this tool's body fields. `baked`
+    supplies a literal or `{{var}}` default for the fields the engine should fill (hidden from the
+    model); every other field defaults to `{{<its own name>}}`, so the model sees and fills it."""
     schema = _op_schema(tools_api, name)
     props = schema.get("properties", {})
     required = schema.get("required", [])
@@ -163,9 +173,6 @@ def build_tool(tools_api, name, description, baked=None, config=None):
 
 
 def pre_action_node(name, tool, next_node, response_mapping=None, on_enter=None, failure_target=None):
-    """An `api_request` node: the engine fires `tool` on entry, then moves on. `failure_target`,
-    if given, is tried first and catches a non-ok result via the tool's own success/failure
-    counters (`<name>_failure_count`), before the unconditional fallback to `next_node`."""
     transitions = []
     if failure_target:
         transitions.append({
@@ -189,24 +196,68 @@ def pre_action_node(name, tool, next_node, response_mapping=None, on_enter=None,
 
 
 # ---------------------------------------------------------------------------
+# Canonical outcome-map helpers (schema structure, not brief content: every config, including
+# every testbed fake brief, uses this exact key vocabulary -- only the mapped values vary)
+# ---------------------------------------------------------------------------
+
+def _close_bake(policy, outcome_key):
+    """The baked `default` fields for a close_call whose canonical outcome is `outcome_key`."""
+    cc = policy["tools"]["close_call"]
+    value, reason = policy["outcome_map"][outcome_key]
+    if cc["mode"] == "code":
+        return {cc["code"]: value}
+    return {cc["outcome"]: value, cc["reason"]: (reason or "")}
+
+
+def _tr_key(trigger):
+    return "tr_" + trigger
+
+
+def _np_key(reason_key):
+    return {"refused": "np_refused", "hardship": "np_hardship", "dispute": "np_dispute", "service_error": "np_service_error"}[reason_key]
+
+
+# ---------------------------------------------------------------------------
 # build_workflow
 # ---------------------------------------------------------------------------
 
 def build_workflow(policy, tools_api):
     holidays = policy["holidays"]
     bands = policy["bands"]
-    floor_field = policy["floor_field_by_type"]
     sentences = policy["sentences"]
-    limits = policy["limits"]
     identity_cfg = policy["identity"]
-    transfer_map = policy["transfer_map"]
-    outcomes = policy["outcomes"]
-    note_reasons = policy["note_reasons"]
-    paid_reason = policy["paid_note_reason"]
-    forbidden = policy["forbidden_before_verification"]
+    cb = policy["callback"]
+    outcome_map = policy["outcome_map"]
+    queue_map = policy["queue_map"]
+    note_map = policy["note_map"]
+    close_rule = policy["close_rule"]
+    notes_on_restructuring = policy.get("notes_on_restructuring")
+    account_fields = policy["account_fields"]
+    product_types = policy["product_types"]
+    forbidden = policy["forbidden_before_verify"]
+    t = policy["tools"]
+
+    type_by_enum = {pt["enum"]: pt for pt in product_types.values()}
+    floor_field_by_enum = {pt["enum"]: pt["floor_field"] for pt in product_types.values()}
+    type_field = account_fields["type"]
+    product_id_field = account_fields["product_id"]
+    past_due_field = account_fields["past_due"]
+    days_late_field = account_fields["days_late"]
+
+    vi = t["verify_identity"]
+    cp = t["create_promise"]
+    sc = t["schedule_callback"]
+    cc = t["close_call"]
+    tf = t["transfer_to_agent"]
+    an = t["add_note"]
 
     datefns_src = _datefns_source()
-    goodbye = sentences["goodbye"]
+    address_tmpl = policy["address"].replace("{", "{{").replace("}", "}}")
+    opener_line = f"I am {sentences['opening']}."
+    robot_line = f"I am {sentences['ai']}."
+    scam_line = f"You can {sentences['scam']}."
+    failed_id_line = f"Please {sentences['failed_id']}."
+    promise_confirmation_line = sentences["promise_confirmation"]
 
     nodes = {}
 
@@ -214,7 +265,7 @@ def build_workflow(policy, tools_api):
         nodes[n["name"]] = n
 
     # ---- terminal helper: say an (optional) fixed line + goodbye, close_call, hang up ----
-    def terminal(key, outcome, reason, extra_sentence=""):
+    def terminal(key, outcome_key, extra_sentence=""):
         hang = f"hang_up_{key}"
         close = f"close_{key}"
         say = f"say_{key}"
@@ -225,30 +276,24 @@ def build_workflow(policy, tools_api):
                          "parameters": {"type": "object", "properties": {"message_mode": {"type": "string", "default": "none"}}}}},
         })
         close_tool = build_tool(tools_api, "close_call", "End the call. Always the last tool call.",
-                                 baked={"outcome": outcome, "reason": reason})
+                                 baked=_close_bake(policy, outcome_key))
         add(pre_action_node(close, close_tool, hang))
-        text = (extra_sentence + " " + goodbye).strip() if extra_sentence else goodbye
+        text = (extra_sentence + " Thank you, goodbye.").strip() if extra_sentence else "Thank you, goodbye."
         add(say_then_node(say, text, close))
-        return say  # transitions should target this node
+        return say
 
-    close_not_reached_wrong_number = terminal("not_reached_wrong_number", "not_reached", "wrong_number")
-    close_not_reached_deceased = terminal("not_reached_deceased", "not_reached", "deceased", sentences["deceased"])
-    close_not_reached_unclear = terminal("not_reached_unclear", "not_reached", "unclear")
-    close_not_reached_no_callback = terminal("not_reached_no_callback", "not_reached", "no_callback")
-    close_not_reached_callback = terminal("not_reached_callback", "not_reached", "callback")
-    close_not_verified_failed = terminal("not_verified_failed", "not_verified", "failed", sentences["not_verified_failed"])
-    close_not_verified_declined = terminal("not_verified_declined", "not_verified", "declined")
-    close_service_error_account = terminal("service_error_account", "no_promise", "service_error")
+    close_not_reached_wrong_number = terminal("not_reached_wrong_number", "nr_wrong_number")
+    close_not_reached_deceased = terminal("not_reached_deceased", "nr_deceased", "I am sorry for your loss.")
+    close_not_reached_unclear = terminal("not_reached_unclear", "nr_unclear")
+    close_not_reached_no_callback = terminal("not_reached_no_callback", "nr_no_callback")
+    close_not_reached_callback = terminal("not_reached_callback", "nr_callback")
+    close_not_verified_failed = terminal("not_verified_failed", "nv_failed", failed_id_line)
+    close_not_verified_declined = terminal("not_verified_declined", "nv_declined")
+    close_service_error_account = terminal("service_error_account", _np_key("service_error"))
 
     # ================================= 0. init =================================
-    # A passthrough code node seeds every counter used in a prompt's {{var}} substitution, so a
-    # node is never asked to reason about an unresolved placeholder (Freya leaves "{{x}}" as
-    # literal text when x is unset, rather than a sensible default -- the first version of this
-    # builder put a raw "if {{opening_asks}} is 0" conditional straight into a task_message, the
-    # model saw the literal, un-substituted "{{opening_asks}}" text on the very first turn, and
-    # produced nonsense. The fix: code always decides which branch applies, in a name-free flag
-    # string; the {{title}}/{{last_name}} substitution itself stays directly in the task_message's
-    # own static text, where it is a plain first-pass substitution, never passed through code.
+    callback_window_text = ("today ({{today}}) or the next business day ({{next_business_day}})" if cb["same_day"]
+                             else "the next business day ({{next_business_day}}) only")
     add(code_node(
         "init",
         "import datetime\n" + f"""
@@ -271,18 +316,17 @@ vars['opening_instruction'] = 'This is the first ask: say the opener sentence, t
     ))
 
     # ================================= 1. opening =================================
-    opening_max = limits["opening_max_asks"]
     add({
         "name": "opening", "node_type": "conversation",
         "task_message": (
             "{{opening_instruction}}\n\n"
-            f"The opener sentence, word for word, said only on the first ask: \"{sentences['opener']}\"\n"
-            f"The identification question, asked every time: \"Am I speaking with {{{{title}}}} {{{{last_name}}}}?\"\n\n"
+            f"The opener sentence, word for word, said only on the first ask: \"{opener_line}\"\n"
+            f"The identification question, asked every time: \"Am I speaking with {address_tmpl}?\"\n\n"
             f"Only an explicit yes, \"that's me\", \"speaking\", or the customer saying their own name "
             f"counts as confirmation. \"Hello\", \"go ahead\" and \"who is this\" do not. "
             f"Never say the words {', '.join(forbidden)} or any product name before identity is "
             f"verified, even to a relative. If asked whether you are a robot or an AI, say: "
-            f"\"{sentences['robot_question']}\" and continue. Do not call a tool in this turn."
+            f"\"{robot_line}\" and continue. Do not call a tool in this turn."
         ),
         "extraction_schema": [
             {"name": "who_answered", "type": "string", "min_confidence": 0.65,
@@ -313,10 +357,10 @@ vars['opening_instruction'] = 'This is the first ask: say the opener sentence, t
 try:
     asks = int(vars.get('opening_asks') or 0) + 1
     vars['opening_asks'] = asks
-    vars['opening_exhausted'] = 'yes' if asks >= {opening_max} else 'no'
+    vars['opening_exhausted'] = 'yes' if asks >= {OPENING_MAX_ASKS} else 'no'
     vars['opening_instruction'] = 'Do not repeat the opener. Just ask the identification question again.'
 except Exception:
-    vars['opening_asks'] = {opening_max}
+    vars['opening_asks'] = {OPENING_MAX_ASKS}
     vars['opening_exhausted'] = 'yes'
 """,
         "opening",
@@ -326,20 +370,27 @@ except Exception:
 
     # ================================= 2. third_party =================================
     schedule_tool = build_tool(tools_api, "schedule_callback", "Book a callback when someone else answered. CALL it only after a valid day and time are known.")
+    if sc["mode"] == "datetime":
+        extraction_cb = [
+            {"name": "callback_date", "type": "date", "min_confidence": 0.6, "description": "The day the customer can be reached, if a specific day was given."},
+            {"name": "callback_time", "type": "string", "min_confidence": 0.6, "validation_pattern": "^[0-2][0-9]:[0-5][0-9]$", "description": "The time of day the customer can be reached, as HH:MM 24-hour, if given."},
+        ]
+    else:
+        extraction_cb = [
+            {"name": "callback_date", "type": "date", "min_confidence": 0.6, "description": "The day the customer can be reached, if a specific day was given."},
+            {"name": "callback_time", "type": "string", "min_confidence": 0.6, "validation_pattern": "^[0-2][0-9]:[0-5][0-9]$", "description": "The time of day the customer can be reached, as HH:MM 24-hour, if given."},
+        ]
     add({
         "name": "third_party", "node_type": "conversation", "tools": [schedule_tool],
         "task_message": (
             "Do not say why you are calling and do not name any product, amount or debt. Say nothing beyond the "
-            "opening sentence already said. Ask when the customer can be reached. A valid callback is today "
-            f"({{{{today}}}}) or the next business day ({{{{next_business_day}}}}), between {policy['callback']['window_start']} "
-            f"and {policy['callback']['window_end']}, and later than the current time. If the day or time given is "
-            "outside that, ask once for another time; if that is also outside it, do not call schedule_callback. "
-            "When a day and a time are both known, CALL schedule_callback with them. Never answer security questions "
-            "and never tell this person anything about the account, even if they offer to pay."
+            "opening sentence already said. Ask when the customer can be reached. A valid callback is "
+            f"{callback_window_text}, between {cb['start']} and {cb['end']}, and later than the current time. "
+            "If the day or time given is outside that, ask once for another time; if that is also outside it, do "
+            "not call schedule_callback. When a day and a time are both known, CALL schedule_callback with them. "
+            "Never answer security questions and never tell this person anything about the account, even if they offer to pay."
         ),
-        "extraction_schema": [
-            {"name": "callback_date", "type": "date", "min_confidence": 0.6, "description": "The day the customer can be reached, if a specific day was given."},
-            {"name": "callback_time", "type": "string", "min_confidence": 0.6, "validation_pattern": "^[0-2][0-9]:[0-5][0-9]$", "description": "The time of day the customer can be reached, as HH:MM 24-hour, if given."},
+        "extraction_schema": extraction_cb + [
             {"name": "tp_wrong_number", "type": "string", "enum_values": ["yes", "no"], "min_confidence": 0.7, "description": "Yes if this person says the number does not belong to the customer."},
             {"name": "tp_deceased", "type": "string", "enum_values": ["yes", "no"], "min_confidence": 0.7, "description": "Yes if this person says the customer has died."},
         ],
@@ -356,12 +407,15 @@ except Exception:
         "third_party_check",
         datefns_src + f"""
 try:
-    ok, reason = callback_ok(vars.get('callback_date'), vars.get('callback_time'), vars.get('now'), {_py_literal(holidays)})
+    ok, reason = callback_ok(vars.get('callback_date'), vars.get('callback_time'), vars.get('now'),
+                              {_py_literal(holidays)}, {cb['start']!r}, {cb['end']!r}, {bool(cb['same_day'])!r})
     vars['callback_valid'] = 'yes' if ok else 'no'
     if not ok:
         tries = int(vars.get('callback_tries') or 0) + 1
         vars['callback_tries'] = tries
         vars['callback_exhausted'] = 'yes' if tries >= 2 else 'no'
+    if {sc['mode']!r} == 'datetime':
+        vars['callback_at_combined'] = str(vars.get('callback_date')) + 'T' + str(vars.get('callback_time'))
 except Exception:
     vars['callback_valid'] = 'no'
     vars['callback_exhausted'] = 'yes'
@@ -374,36 +428,41 @@ except Exception:
              "condition": {"logic": "or", "conditions": [{"variable": "callback_valid", "operator": "equals", "operand": "no"}]}},
         ],
     ))
-    do_callback_tool = build_tool(tools_api, "schedule_callback", "Book the callback.", baked={"date": "{{callback_date}}", "time": "{{callback_time}}"})
+    if sc["mode"] == "datetime":
+        do_callback_tool = build_tool(tools_api, "schedule_callback", "Book the callback.", baked={sc["datetime"]: "{{callback_at_combined}}"})
+    else:
+        do_callback_tool = build_tool(tools_api, "schedule_callback", "Book the callback.", baked={sc["date"]: "{{callback_date}}", sc["time"]: "{{callback_time}}"})
     add(pre_action_node("do_callback", do_callback_tool, close_not_reached_callback))
 
     # ================================= 3. identity =================================
-    max_wrong = identity_cfg["max_wrong_total"]
-    max_declines = limits["identity_max_declines"]
+    questions = identity_cfg["questions"]
+    max_wrong = identity_cfg["max_wrong"]
+    swap_hint = bool(identity_cfg.get("swap_hint"))
+    questions_text = ", then ".join(q.replace("_", " ") for q in questions)
     verify_tool = build_tool(tools_api, "verify_identity", "Check one security answer. CALL it every time the customer answers a security question.")
     verify_tool["post_process_code"] = _guard_no_mustache(f"""
 try:
     if isinstance(result, dict):
         result.pop('header', None)
         d = result.get('data') or {{}}
-        field = str(vars.get('verify_identity_args.field') or '')
-        hint = d.get('hint') or ''
+        field = str(vars.get({f'verify_identity_args.{vi["field"]}'!r}) or '')
+        hint = d.get('hint') or '' if {swap_hint!r} else ''
         wrong_total = int(vars.get('identity_wrong_total') or 0)
         if d.get('ok') and not d.get('verified') and not hint:
             wrong_total += 1
         vars['identity_wrong_total'] = wrong_total
         if d.get('verified') and field:
             vars['identity_passed_' + field] = 'yes'
-        dob_ok = vars.get('identity_passed_date_of_birth') == 'yes'
-        phone_ok = vars.get('identity_passed_phone_last4') == 'yes'
-        vars['identity_all_passed'] = 'yes' if (dob_ok and phone_ok) else 'no'
+        questions = {_py_literal(questions)}
+        all_passed = all(vars.get('identity_passed_' + q) == 'yes' for q in questions)
+        vars['identity_all_passed'] = 'yes' if all_passed else 'no'
         vars['identity_failed'] = 'yes' if wrong_total >= {max_wrong} else 'no'
         if wrong_total >= {max_wrong}:
             d['what_to_do_next'] = 'Stop. Do not state the debt. The call will close as not verified.'
-        elif hint == {identity_cfg['swap_hint']!r}:
+        elif hint == 'day_month_swapped':
             d['what_to_do_next'] = 'Ask the customer to say the month as a word. This retry does not count as a wrong answer.'
-        elif d.get('verified') and dob_ok and phone_ok:
-            d['what_to_do_next'] = 'Both questions passed. Say nothing about the account yet; the next step will fetch it.'
+        elif d.get('verified') and all_passed:
+            d['what_to_do_next'] = 'Every question passed. Say nothing about the account yet; the next step will fetch it.'
         elif d.get('verified'):
             d['what_to_do_next'] = 'That question passed. Ask the next security question.'
         else:
@@ -414,22 +473,22 @@ except Exception:
     add({
         "name": "identity", "node_type": "conversation", "tools": [verify_tool],
         "task_message": (
-            f"Ask for the date of birth first, then the last four digits of the phone number on file, one at a "
-            f"time. When the customer answers, CALL verify_identity with field and answer. Send a date of birth "
-            f"as YYYY-MM-DD; {identity_cfg['formats']['date_of_birth']} After the tool result, follow its "
-            f"what_to_do_next instruction exactly. If the customer does not want to answer, or asks what the call "
-            f"is about instead of answering, explain once that the questions protect their account; a second "
-            f"refusal or a second such question ends the check. Never state the debt, the product or the amount "
-            f"in this node. Never say the words {', '.join(forbidden)}."
+            f"Ask these security questions, one at a time, in this order: {questions_text}. When the customer "
+            f"answers, CALL verify_identity with {vi['field']} set to the question key and {vi['answer']} set to "
+            "their answer; the tool's own description tells you the exact format each question needs. After the "
+            "tool result, follow its what_to_do_next instruction exactly. If the customer does not want to answer, "
+            "or asks what the call is about instead of answering, explain once that the questions protect their "
+            "account; a second refusal or a second such question ends the check. Never state the debt, the "
+            f"product or the amount in this node. Never say the words {', '.join(forbidden)}."
         ),
         "extraction_schema": [
             {"name": "identity_declined", "type": "string", "enum_values": ["yes", "no"], "min_confidence": 0.65,
              "description": "Yes if the customer refused to answer the security question just asked, or asked what the call is about instead of answering."},
         ],
         "transitions": [
-            {"target_node": close_not_verified_failed, "description": "Three wrong answers",
+            {"target_node": close_not_verified_failed, "description": "Every allowed wrong answer used",
              "condition": {"logic": "or", "conditions": [{"variable": "identity_failed", "operator": "equals", "operand": "yes"}]}},
-            {"target_node": "fetch_account", "description": "Both questions passed",
+            {"target_node": "fetch_account", "description": "Every question passed",
              "condition": {"logic": "or", "conditions": [{"variable": "identity_all_passed", "operator": "equals", "operand": "yes"}]}},
             {"target_node": "identity_decline_bump", "description": "Declined to answer",
              "condition": {"logic": "or", "conditions": [{"variable": "identity_declined", "operator": "equals", "operand": "yes"}]}},
@@ -442,7 +501,7 @@ except Exception:
 try:
     c = int(vars.get('identity_decline_count') or 0) + 1
     vars['identity_decline_count'] = c
-    vars['identity_declined_exhausted'] = 'yes' if c >= {max_declines} else 'no'
+    vars['identity_declined_exhausted'] = 'yes' if c >= {IDENTITY_MAX_DECLINES} else 'no'
 except Exception:
     vars['identity_declined_exhausted'] = 'yes'
 """,
@@ -472,8 +531,20 @@ try:
     today = parse_datetime(vars.get('now')).date()
     bands = {_py_literal(bands)}
     holidays = {_py_literal(holidays)}
-    floor_field = {_py_literal(floor_field)}
-    facts = [product_facts(p, today, bands, holidays, floor_field) for p in raw]
+    floor_by_enum = {_py_literal(floor_field_by_enum)}
+    type_labels = {_py_literal({pt["enum"]: pt["label"] for pt in product_types.values()})}
+    last4_fields = {_py_literal({pt["enum"]: pt["last4_field"] for pt in product_types.values()})}
+    facts = []
+    for p in raw:
+        f = product_facts(p, today, bands, holidays, {type_field!r}, floor_by_enum, {past_due_field!r}, {days_late_field!r})
+        f['product_id'] = p.get({product_id_field!r})
+        type_value = p.get({type_field!r})
+        label = type_labels.get(type_value, str(type_value))
+        last4_field = last4_fields.get(type_value)
+        if last4_field:
+            label = label.replace('{{last4}}', str(p.get(last4_field) or ''))
+        f['label'] = label
+        facts.append(f)
     vars['products_json'] = _json.dumps(facts)
     vars['product_count'] = len(facts)
     vars['current_product_index'] = 0
@@ -515,21 +586,24 @@ except Exception:
     ))
 
     # ================================= 5. negotiate =================================
+    cents = cp.get("amount_unit") == "cents"
     create_promise_tool = build_tool(
         tools_api, "create_promise", "Record a payment promise. CALL it only after the customer confirmed the read-back.",
-        baked={"product_id": "{{current_product_id}}"},
+        baked={cp["product_id"]: "{{current_product_id}}"},
     )
     create_promise_tool["pre_process_code"] = _guard_no_mustache(datefns_src + f"""
 try:
     holidays = {_py_literal(holidays)}
-    date_in = config['body'].get('date')
-    amt_in = config['body'].get('amount')
+    date_in = config['body'].get({cp['date']!r})
+    amt_in = config['body'].get({cp['amount']!r})
+    amt_dollars = (float(amt_in) / 100.0) if {cents!r} and amt_in is not None else amt_in
     ok, date_out, amt_out, reason = validate_promise(
-        date_in, amt_in, vars.get('current_min_date'), vars.get('current_deadline'),
+        date_in, amt_dollars, vars.get('current_min_date'), vars.get('current_deadline'),
         float(vars.get('current_floor') or 0), float(vars.get('current_full') or 0), holidays)
-    config['body']['date'] = date_out
-    config['body']['amount'] = amt_out
+    config['body'][{cp['date']!r}] = date_out
+    config['body'][{cp['amount']!r}] = int(round(amt_out * 100)) if {cents!r} else amt_out
     vars['promise_correction_reason'] = reason
+    vars['promise_corrected_amount_dollars'] = amt_out
 except Exception:
     pass
 """)
@@ -542,28 +616,27 @@ try:
         if d.get('ok'):
             promises = vars.get('promises_json')
             promises = _json.loads(promises) if isinstance(promises, str) else (promises or [])
-            promises.append({{'product_id': vars.get('current_product_id'), 'amount': d.get('amount', 0) or 0, 'date': d.get('date', '')}})
-            body_amount = None
+            corrected_amount = vars.get('promise_corrected_amount_dollars')
             try:
-                body_amount = float(vars.get('create_promise_args.amount'))
+                corrected_amount = float(vars.get({f'create_promise_args.{cp["amount"]}'!r}))
+                if {cents!r}:
+                    corrected_amount = corrected_amount / 100.0
             except Exception:
                 pass
-            corrected_amount = body_amount
-            corrected_date = vars.get('create_promise_args.date')
-            promises[-1]['amount'] = corrected_amount
-            promises[-1]['date'] = corrected_date
+            corrected_date = vars.get({f'create_promise_args.{cp["date"]}'!r})
+            promises.append({{'product_id': vars.get('current_product_id'), 'amount': corrected_amount, 'date': corrected_date}})
             vars['promises_json'] = _json.dumps(promises)
             vars['advance_reason'] = 'promised'
             reason = vars.get('promise_correction_reason') or ''
             lead = ('Before recording, the date or amount was adjusted (' + reason + '). ') if reason else ''
             next_step = (lead + 'Say the promise is recorded for ' + str(corrected_amount) + ' on ' + str(corrected_date) +
-                ', then say word for word: "{sentences['text_message']}"')
+                ', then say word for word: "{promise_confirmation_line}"')
             d['what_to_do_next'] = next_step + ' If this was the last unresolved product, also thank the customer and say goodbye, then call finish_call.'
         else:
             fails = int(vars.get('current_promise_fails') or 0) + 1
             vars['current_promise_fails'] = fails
             if fails >= 2:
-                d['what_to_do_next'] = 'It failed twice. Say you could not record it. Call add_note with reason service_error for this product.'
+                d['what_to_do_next'] = 'It failed twice. Say you could not record it. Call add_note with reason {note_map["service_error"]} for this product.'
             else:
                 d['what_to_do_next'] = 'It failed. Do not say it is recorded. Try create_promise once more with the same values.'
 except Exception:
@@ -572,18 +645,21 @@ except Exception:
 
     add_note_tool = build_tool(
         tools_api, "add_note", "Record why a product ends without a promise. CALL it once per product that is refused, disputed, already paid, or a hardship case the customer did not accept a transfer for.",
-        baked={"product_id": "{{current_product_id}}"},
+        baked={an["product_id"]: "{{current_product_id}}"},
     )
-    add_note_tool["post_process_code"] = _guard_no_mustache("""
+    reverse_note_map = {v: k for k, v in note_map.items()}
+    add_note_tool["post_process_code"] = _guard_no_mustache(f"""
 import json as _json
 try:
     if isinstance(result, dict):
         result.pop('header', None)
-        d = result.get('data') or {}
+        d = result.get('data') or {{}}
         if d.get('ok'):
+            reverse_note_map = {_py_literal(reverse_note_map)}
+            actual_reason = vars.get({f'add_note_args.{an["reason"]}'!r})
             notes = vars.get('notes_json')
             notes = _json.loads(notes) if isinstance(notes, str) else (notes or [])
-            notes.append({'product_id': vars.get('current_product_id'), 'reason': vars.get('add_note_args.reason')})
+            notes.append({{'product_id': vars.get('current_product_id'), 'reason': reverse_note_map.get(actual_reason, actual_reason)}})
             vars['notes_json'] = _json.dumps(notes)
             vars['advance_reason'] = 'noted'
             d['what_to_do_next'] = 'Move on to the next product, or if this was the last one, thank the customer and say goodbye, then call finish_call.'
@@ -619,14 +695,15 @@ except Exception:
             "You never calculate a date or a deadline yourself; these facts are already correct. Propose every "
             "amount yourself; never ask how much the customer can pay. Never offer a discount, waiver, instalment "
             f"plan or any term not in these facts. If the customer says they already paid, say word for word: "
-            f"\"{sentences['already_paid']}\" then call add_note with reason paid for this product and move on. If "
-            "the customer says this debt or product is not theirs, do not argue; call add_note with reason dispute "
-            "for this product and move on. If the customer mentions illness, a death in the family or job loss, say one short sentence "
-            "of sympathy, make no persuasion attempt, and offer the support team once (only once per call). If a "
-            "security-sounding question like 'is this a scam' comes up, say they can verify the call through "
-            "Freya Bank's customer service number, and continue. When a rule here says to call a tool, call the "
-            "tool; saying you did something is not enough. When every product is resolved, thank the customer "
-            "and say goodbye in the same turn, then call the finish_call transition."
+            f"\"Payments can take one business day to appear.\" then call add_note with reason {note_map['paid']} "
+            f"for this product and move on. If the customer says this debt or product is not theirs, do not "
+            f"argue; call add_note with reason {note_map['dispute']} for this product and move on. If the "
+            "customer mentions illness, a death in the family or job loss, say one short sentence of sympathy, "
+            "make no persuasion attempt, and offer the support team once (only once per call). If a "
+            f"security-sounding question like 'is this a scam' comes up, say word for word: \"{scam_line}\" and "
+            "continue. When a rule here says to call a tool, call the tool; saying you did something is not "
+            "enough. When every product is resolved, thank the customer and say goodbye in the same turn, then "
+            "call the finish_call transition."
         ),
         "extraction_schema": [
             {"name": "turn_signal", "type": "string", "min_confidence": 0.6,
@@ -678,11 +755,11 @@ except Exception:
 
     add(code_node(
         "negotiate_bump_attempt",
-        """
+        f"""
 import json as _json
 try:
     pid = vars.get('current_product_id')
-    used = _json.loads(vars.get('attempts_used_json') or '{}')
+    used = _json.loads(vars.get('attempts_used_json') or '{{}}')
     n = int(used.get(pid) or 0) + 1
     used[pid] = n
     vars['attempts_used_json'] = _json.dumps(used)
@@ -690,7 +767,7 @@ try:
     band = vars.get('current_band')
     if n >= allowed:
         vars['current_instruction'] = ('The customer refused the ' + str(vars.get('current_label')) +
-            ' after every allowed attempt. Do not repeat an offer already refused. Call add_note with reason refused for this product, then move on.')
+            ' after every allowed attempt. Do not repeat an offer already refused. Call add_note with reason {note_map["refused"]} for this product, then move on.')
     elif n == 1 and band == 'late':
         vars['current_instruction'] = ('Make the second and final attempt on the ' + str(vars.get('current_label')) +
             ': propose the floor amount, ' + str(vars.get('current_floor')) + ', on the deadline, ' + str(vars.get('current_deadline')) + '.')
@@ -703,31 +780,93 @@ except Exception:
         "negotiate",
     ))
 
-    add(code_node(
-        "finish_call",
-        "pass",
-        "closing",
-    ))
+    add(code_node("finish_call", "pass", "closing"))
 
     # ================================= 6. transfer =================================
+    def _close_tool_for_var(var_name):
+        """A close_call whose outcome is only known at runtime: both fields (or the single code
+        field) are baked from vars the way _close_bake would compute them, but since the key
+        itself varies at runtime we bake the already-resolved value/reason strings instead."""
+        if cc["mode"] == "code":
+            return build_tool(tools_api, "close_call", "End the call.", baked={cc["code"]: "{{" + var_name + "_value}}"})
+        return build_tool(tools_api, "close_call", "End the call.", baked={cc["outcome"]: "{{" + var_name + "_value}}", cc["reason"]: "{{" + var_name + "_reason}}"})
+
     add(code_node(
         "prepare_transfer",
         f"""
+import json as _json
 try:
     trigger = str(vars.get('turn_signal') or '')
-    mapping = {_py_literal(transfer_map)}
-    m = mapping.get(trigger) or mapping.get('restructuring')
-    vars['transfer_queue'] = m['queue']
-    vars['transfer_reason'] = m['reason']
+    queue_map = {_py_literal(queue_map)}
+    vars['transfer_queue'] = queue_map.get(trigger, queue_map.get('restructuring'))
+    vars['transfer_outcome_key'] = 'tr_' + (trigger or 'restructuring')
 except Exception:
     pass
 """,
-        "transfer_call",
+        "note_before_transfer_check" if notes_on_restructuring else "transfer_call",
     ))
-    transfer_tool = build_tool(tools_api, "transfer_to_agent", "Hand the call to a person.", baked={"queue": "{{transfer_queue}}"})
+
+    if notes_on_restructuring:
+        # f3-kestrel style ("Notes before a restructuring transfer"): every product still without
+        # a promise is noted with a fixed reason before the transfer fires. Only transfer_to_agent
+        # itself is a forced code call; add_note is still a real tool the model calls, in a tiny
+        # dedicated loop that is not the main per-product negotiation (the reason is fixed, not
+        # negotiated), one product at a time until none are left.
+        add(code_node(
+            "note_before_transfer_check",
+            f"""
+import json as _json
+try:
+    if vars.get('transfer_outcome_key') != 'tr_restructuring':
+        vars['note_before_transfer_done'] = 'yes'
+    else:
+        products = _json.loads(vars.get('products_json') or '[]')
+        promised = set(p['product_id'] for p in _json.loads(vars.get('promises_json') or '[]'))
+        noted = set(n['product_id'] for n in _json.loads(vars.get('notes_json') or '[]'))
+        remaining = [p for p in products if p['product_id'] not in promised and p['product_id'] not in noted]
+        if not remaining:
+            vars['note_before_transfer_done'] = 'yes'
+        else:
+            vars['note_before_transfer_done'] = 'no'
+            vars['current_product_id'] = remaining[0]['product_id']
+            vars['current_label'] = remaining[0]['label']
+            vars['current_instruction'] = 'Before the transfer, call add_note with reason {notes_on_restructuring} for the ' + remaining[0]['label'] + '.'
+except Exception:
+    vars['note_before_transfer_done'] = 'yes'
+""",
+            "note_before_transfer",
+            extra_transitions=[{"target_node": "transfer_call", "description": "Nothing left to note",
+                                 "condition": {"logic": "or", "conditions": [{"variable": "note_before_transfer_done", "operator": "equals", "operand": "yes"}]}}],
+        ))
+        note_before_transfer_tool = build_tool(
+            tools_api, "add_note", "Record why a product ends without a promise before the transfer.",
+            baked={an["product_id"]: "{{current_product_id}}", an["reason"]: note_map[notes_on_restructuring]},
+        )
+        add({
+            "name": "note_before_transfer", "node_type": "conversation", "tools": [note_before_transfer_tool],
+            "task_message": "{{current_instruction}} Call add_note now; do not say anything to the customer in this turn.",
+            "transitions": [
+                {"target_node": "note_before_transfer_check", "description": "always", "condition": {"operator": "always"}},
+            ],
+        })
+
+    transfer_tool = build_tool(tools_api, "transfer_to_agent", "Hand the call to a person.", baked={tf["queue"]: "{{transfer_queue}}"})
     add(pre_action_node("transfer_call", transfer_tool, "close_transferred"))
-    close_transferred_tool = build_tool(tools_api, "close_call", "End the call.", baked={"outcome": "transferred", "reason": "{{transfer_reason}}"})
-    add(pre_action_node("close_transferred", close_transferred_tool, "hang_up_transferred"))
+    add(code_node(
+        "close_transferred",
+        f"""
+try:
+    outcome_map = {_py_literal(outcome_map)}
+    key = vars.get('transfer_outcome_key') or 'tr_restructuring'
+    value, reason = outcome_map.get(key, outcome_map['tr_restructuring'])
+    vars['closevar_value'] = value
+    vars['closevar_reason'] = reason or ''
+except Exception:
+    pass
+""",
+        "close_transferred_call",
+    ))
+    add(pre_action_node("close_transferred_call", _close_tool_for_var("closevar"), "hang_up_transferred"))
     add({
         "name": "hang_up_transferred", "node_type": "end_call", "on_enter": {"type": "silent"},
         "disable_inactivity_monitor": True, "transitions": [],
@@ -743,17 +882,27 @@ import json as _json
 try:
     promises = _json.loads(vars.get('promises_json') or '[]')
     notes = _json.loads(vars.get('notes_json') or '[]')
-    outcome, reason = outcome_for_call(promises, notes, {paid_reason!r})
-    vars['final_outcome'] = outcome
-    vars['final_reason'] = reason if outcome not in ('promise', 'paid') else ''
+    close_rule = {_py_literal(close_rule)}
+    outcome, reason = outcome_for_call(promises, notes, close_rule)
+    if outcome == 'promise':
+        key = 'promise'
+    elif outcome == 'paid':
+        key = 'paid'
+    else:
+        key = {{'refused': 'np_refused', 'hardship': 'np_hardship', 'dispute': 'np_dispute', 'service_error': 'np_service_error'}}.get(reason, 'np_refused')
+    outcome_map = {_py_literal(outcome_map)}
+    value, out_reason = outcome_map[key]
+    vars['closevar_value'] = value
+    vars['closevar_reason'] = out_reason or ''
 except Exception:
-    vars['final_outcome'] = 'no_promise'
-    vars['final_reason'] = 'service_error'
+    outcome_map = {_py_literal(outcome_map)}
+    value, out_reason = outcome_map[{_np_key('service_error')!r}]
+    vars['closevar_value'] = value
+    vars['closevar_reason'] = out_reason or ''
 """,
         "close_final",
     ))
-    close_final_tool = build_tool(tools_api, "close_call", "End the call.", baked={"outcome": "{{final_outcome}}", "reason": "{{final_reason}}"})
-    add(pre_action_node("close_final", close_final_tool, "hang_up_final"))
+    add(pre_action_node("close_final", _close_tool_for_var("closevar"), "hang_up_final"))
     add({
         "name": "hang_up_final", "node_type": "end_call", "on_enter": {"type": "silent"},
         "disable_inactivity_monitor": True, "transitions": [],
@@ -762,12 +911,12 @@ except Exception:
     })
 
     system_prompt = (
-        "You are Freya Bank's digital assistant on an outbound phone call. Speak English. Keep every turn to one "
+        "You are the bank's digital assistant on an outbound phone call. Speak English. Keep every turn to one "
         "or two short sentences. Call one tool per message and speak after every tool result; never end a turn "
         "with nothing and no tool call. If asked whether you are a robot or an AI, say: "
-        f"\"{sentences['robot_question']}\" and continue. If asked whether this is a scam, say: "
-        f"\"{sentences['scam_question']}\" and continue. If you cannot answer something from the tools, say you "
-        "do not have that information; never invent a figure, a date or a reason."
+        f"\"{robot_line}\" and continue. If asked whether this is a scam, say: \"{scam_line}\" and continue. If "
+        "you cannot answer something from the tools, say you do not have that information; never invent a "
+        "figure, a date or a reason."
     )
 
     return {
