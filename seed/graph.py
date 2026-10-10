@@ -240,15 +240,44 @@ def build_workflow(policy, tools_api):
     close_not_verified_declined = terminal("not_verified_declined", "not_verified", "declined")
     close_service_error_account = terminal("service_error_account", "no_promise", "service_error")
 
+    # ================================= 0. init =================================
+    # A passthrough code node seeds every counter used in a prompt's {{var}} substitution, so a
+    # node is never asked to reason about an unresolved placeholder (Freya leaves "{{x}}" as
+    # literal text when x is unset, rather than a sensible default -- the first version of this
+    # builder put a raw "if {{opening_asks}} is 0" conditional straight into a task_message, the
+    # model saw the literal, un-substituted "{{opening_asks}}" text on the very first turn, and
+    # produced nonsense. The fix: code always decides which branch applies, in a name-free flag
+    # string; the {{title}}/{{last_name}} substitution itself stays directly in the task_message's
+    # own static text, where it is a plain first-pass substitution, never passed through code.
+    add(code_node(
+        "init",
+        "import datetime\n" + f"""
+try:
+    now_dt = datetime.datetime.fromisoformat(str(vars.get('now')))
+    today = now_dt.date()
+    holidays = {_py_literal(holidays)}
+    nb = today + datetime.timedelta(days=1)
+    while nb.weekday() >= 5 or nb.isoformat() in holidays:
+        nb = nb + datetime.timedelta(days=1)
+    vars['today'] = today.isoformat()
+    vars['next_business_day'] = nb.isoformat()
+except Exception:
+    vars['today'] = ''
+    vars['next_business_day'] = ''
+vars['opening_asks'] = 0
+vars['opening_instruction'] = 'This is the first ask: say the opener sentence, then ask the identification question.'
+""",
+        "opening",
+    ))
+
     # ================================= 1. opening =================================
     opening_max = limits["opening_max_asks"]
     add({
         "name": "opening", "node_type": "conversation",
         "task_message": (
-            f"If {{{{opening_asks}}}} is 0 or unset, say: \"{sentences['opener']}\" then ask: "
-            f"\"{sentences['confirm_identity']}\" (fill in the title and last name). "
-            f"If {{{{opening_asks}}}} is 1, do not repeat the opener; just ask once more: "
-            f"\"{sentences['confirm_identity']}\" (fill in the title and last name). "
+            "{{opening_instruction}}\n\n"
+            f"The opener sentence, word for word, said only on the first ask: \"{sentences['opener']}\"\n"
+            f"The identification question, asked every time: \"Am I speaking with {{{{title}}}} {{{{last_name}}}}?\"\n\n"
             f"Only an explicit yes, \"that's me\", \"speaking\", or the customer saying their own name "
             f"counts as confirmation. \"Hello\", \"go ahead\" and \"who is this\" do not. "
             f"Never say the words {', '.join(forbidden)} or any product name before identity is "
@@ -285,6 +314,7 @@ try:
     asks = int(vars.get('opening_asks') or 0) + 1
     vars['opening_asks'] = asks
     vars['opening_exhausted'] = 'yes' if asks >= {opening_max} else 'no'
+    vars['opening_instruction'] = 'Do not repeat the opener. Just ask the identification question again.'
 except Exception:
     vars['opening_asks'] = {opening_max}
     vars['opening_exhausted'] = 'yes'
@@ -503,16 +533,16 @@ try:
 except Exception:
     pass
 """)
-    create_promise_tool["post_process_code"] = _guard_no_mustache("""
+    create_promise_tool["post_process_code"] = _guard_no_mustache(f"""
 import json as _json
 try:
     if isinstance(result, dict):
         result.pop('header', None)
-        d = result.get('data') or {}
+        d = result.get('data') or {{}}
         if d.get('ok'):
             promises = vars.get('promises_json')
             promises = _json.loads(promises) if isinstance(promises, str) else (promises or [])
-            promises.append({'product_id': vars.get('current_product_id'), 'amount': d.get('amount', 0) or 0, 'date': d.get('date', '')})
+            promises.append({{'product_id': vars.get('current_product_id'), 'amount': d.get('amount', 0) or 0, 'date': d.get('date', '')}})
             body_amount = None
             try:
                 body_amount = float(vars.get('create_promise_args.amount'))
@@ -525,12 +555,10 @@ try:
             vars['promises_json'] = _json.dumps(promises)
             vars['advance_reason'] = 'promised'
             reason = vars.get('promise_correction_reason') or ''
-            if reason:
-                d['correction'] = ('Before recording, the date or amount was adjusted (' + reason +
-                    '). Read the recorded value back to the customer: ' + str(corrected_amount) + ' on ' + str(corrected_date) + '.')
-            d['what_to_do_next'] = ('Say the promise is recorded for the amount and date just confirmed in the result, then say the '
-                'text-message sentence. If this was the last unresolved product, thank the customer and say goodbye, '
-                'then call finish_call.')
+            lead = ('Before recording, the date or amount was adjusted (' + reason + '). ') if reason else ''
+            next_step = (lead + 'Say the promise is recorded for ' + str(corrected_amount) + ' on ' + str(corrected_date) +
+                ', then say word for word: "{sentences['text_message']}"')
+            d['what_to_do_next'] = next_step + ' If this was the last unresolved product, also thank the customer and say goodbye, then call finish_call.'
         else:
             fails = int(vars.get('current_promise_fails') or 0) + 1
             vars['current_promise_fails'] = fails
@@ -590,9 +618,10 @@ except Exception:
             "date (deadline) {{current_deadline}}, band {{current_band}}, attempts allowed {{current_attempts_allowed}}. "
             "You never calculate a date or a deadline yourself; these facts are already correct. Propose every "
             "amount yourself; never ask how much the customer can pay. Never offer a discount, waiver, instalment "
-            "plan or any term not in these facts. If the customer says they already paid, or that this debt or "
-            "product is not theirs, do not argue; call add_note with reason paid or dispute for this product and "
-            "move on. If the customer mentions illness, a death in the family or job loss, say one short sentence "
+            f"plan or any term not in these facts. If the customer says they already paid, say word for word: "
+            f"\"{sentences['already_paid']}\" then call add_note with reason paid for this product and move on. If "
+            "the customer says this debt or product is not theirs, do not argue; call add_note with reason dispute "
+            "for this product and move on. If the customer mentions illness, a death in the family or job loss, say one short sentence "
             "of sympathy, make no persuasion attempt, and offer the support team once (only once per call). If a "
             "security-sounding question like 'is this a scam' comes up, say they can verify the call through "
             "Freya Bank's customer service number, and continue. When a rule here says to call a tool, call the "
@@ -742,7 +771,7 @@ except Exception:
     )
 
     return {
-        "initial_node": "opening",
+        "initial_node": "init",
         "system_prompt": system_prompt,
         "nodes": nodes,
         "global_nodes": {},

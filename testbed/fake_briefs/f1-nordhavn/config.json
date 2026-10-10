@@ -1,0 +1,206 @@
+{
+ "language": "en",
+ "address": "{title} {last_name}",
+ "identity": {
+  "questions": [
+   "date_of_birth",
+   "phone_last4"
+  ],
+  "max_wrong": 3,
+  "swap_hint": true
+ },
+ "callback": {
+  "start": "09:00",
+  "end": "18:00",
+  "same_day": true
+ },
+ "outcome_map": {
+  "promise": [
+   "promise",
+   null
+  ],
+  "paid": [
+   "paid",
+   null
+  ],
+  "tr_restructuring": [
+   "transferred",
+   "restructuring"
+  ],
+  "tr_human": [
+   "transferred",
+   "human"
+  ],
+  "tr_support": [
+   "transferred",
+   "support"
+  ],
+  "np_refused": [
+   "no_promise",
+   "refused"
+  ],
+  "np_hardship": [
+   "no_promise",
+   "hardship"
+  ],
+  "np_dispute": [
+   "no_promise",
+   "dispute"
+  ],
+  "np_service_error": [
+   "no_promise",
+   "service_error"
+  ],
+  "nv_failed": [
+   "not_verified",
+   "failed"
+  ],
+  "nv_declined": [
+   "not_verified",
+   "declined"
+  ],
+  "nr_callback": [
+   "not_reached",
+   "callback"
+  ],
+  "nr_no_callback": [
+   "not_reached",
+   "no_callback"
+  ],
+  "nr_wrong_number": [
+   "not_reached",
+   "wrong_number"
+  ],
+  "nr_deceased": [
+   "not_reached",
+   "deceased"
+  ],
+  "nr_unclear": [
+   "not_reached",
+   "unclear"
+  ]
+ },
+ "queue_map": {
+  "restructuring": "restructuring",
+  "human": "general",
+  "support": "support"
+ },
+ "note_map": {
+  "refused": "refused",
+  "hardship": "hardship",
+  "dispute": "dispute",
+  "paid": "paid",
+  "service_error": "service_error"
+ },
+ "close_rule": {
+  "kind": "first_non_paid"
+ },
+ "notes_on_restructuring": null,
+ "product_types": {
+  "card": {
+   "enum": "credit_card",
+   "label": "credit card ending {last4}",
+   "floor_field": "min_due",
+   "last4_field": "card_ending"
+  },
+  "overdraft": {
+   "enum": "overdraft",
+   "label": "overdraft",
+   "floor_field": "min_due",
+   "last4_field": null
+  },
+  "loan": {
+   "enum": "personal_loan",
+   "label": "personal loan",
+   "floor_field": "monthly_instalment",
+   "last4_field": null
+  }
+ },
+ "account_fields": {
+  "product_id": "product_id",
+  "type": "type",
+  "past_due": "overdue_amount",
+  "days_late": "days_past_due"
+ },
+ "product_id_format": "p{n}",
+ "tools": {
+  "verify_identity": {
+   "field": "field",
+   "answer": "answer"
+  },
+  "create_promise": {
+   "product_id": "product_id",
+   "amount": "amount",
+   "date": "promise_date",
+   "amount_unit": "currency"
+  },
+  "schedule_callback": {
+   "mode": "date_time",
+   "date": "date",
+   "time": "time"
+  },
+  "close_call": {
+   "mode": "outcome_reason",
+   "outcome": "outcome",
+   "reason": "reason"
+  },
+  "transfer_to_agent": {
+   "queue": "queue"
+  },
+  "add_note": {
+   "product_id": "product_id",
+   "reason": "reason"
+  }
+ },
+ "forbidden_before_verify": [
+  "collections",
+  "debt",
+  "payment"
+ ],
+ "multi_product": false,
+ "max_products": 1,
+ "attempt1": "last business day of this week (next week's if today is that day), never after the deadline",
+ "id": "f1-nordhavn",
+ "name": "Nordhavn Bank (clean, 3 bands)",
+ "bank": "Nordhavn Bank",
+ "kind": "clean",
+ "holidays": [
+  "2026-10-30",
+  "2026-11-02",
+  "2026-11-20",
+  "2026-12-24",
+  "2026-12-25",
+  "2026-12-31"
+ ],
+ "bands": [
+  {
+   "name": "soft",
+   "min_days": 1,
+   "max_days": 10,
+   "deadline_business_days": 10,
+   "attempts": 1
+  },
+  {
+   "name": "firm",
+   "min_days": 11,
+   "max_days": 30,
+   "deadline_business_days": 6,
+   "attempts": 2
+  },
+  {
+   "name": "final",
+   "min_days": 31,
+   "max_days": 60,
+   "deadline_business_days": 3,
+   "attempts": 1
+  }
+ ],
+ "sentences": {
+  "opening": "a virtual assistant from Nordhavn Bank; the call is recorded",
+  "promise_confirmation": "A confirmation of this promise will be sent to you by text message.",
+  "ai": "Nordhavn Bank's virtual assistant",
+  "scam": "verify the call by phoning the number on the back of their card or on nordhavn.example",
+  "failed_id": "visit a branch or use online banking"
+ },
+ "_note": "Hand-written correct config: what a perfect extractor reads from this brief. Canonical keys on the left, the brief's own values on the right."
+}

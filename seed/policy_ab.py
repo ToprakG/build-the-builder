@@ -66,17 +66,19 @@ POLICY = {
 
     "forbidden_before_verification": ["collections", "debt", "payment"],
 
+    # Every value here is the literal sentence the agent speaks (first person, Freya's "{{var}}"
+    # double-brace substitution where a call variable belongs), never an instruction describing
+    # one, since graph.py drops these straight into on_enter.text or a task_message quote.
     "sentences": {
-        "opener": "You are a digital assistant calling from Freya Bank, and this call is recorded.",
-        "confirm_identity": "Am I speaking with {title} {last_name}?",
+        "opener": "I am a digital assistant calling from Freya Bank, and this call is recorded.",
+        "confirm_identity": "Am I speaking with {{title}} {{last_name}}?",
         "robot_question": "I am Freya Bank's digital assistant.",
         "scam_question": "You can verify this call by phoning Freya Bank's customer service number.",
         "not_verified_failed": "Please use the mobile app or visit a branch.",
         "deceased": "I am sorry for your loss.",
         "text_message": "You will receive a text message confirming this promise.",
         "already_paid": "Payments can take one business day to appear.",
-        "sympathy": "One short sentence of sympathy for the customer's hardship, no persuasion attempt.",
-        "goodbye": "Thank the customer and say goodbye.",
+        "goodbye": "Thank you, goodbye.",
     },
 
     # Brief A rule 30: attempt 1 proposes the full amount (or the floor, if already refused as too

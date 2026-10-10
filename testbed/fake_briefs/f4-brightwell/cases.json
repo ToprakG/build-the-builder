@@ -1,0 +1,3642 @@
+[
+ {
+  "id": "F4-001",
+  "brief": "F4",
+  "family": "Amounts",
+  "variant": 0,
+  "level": "hard",
+  "title": "Full amount too much, accepts the floor today",
+  "style": null,
+  "variables": {
+   "first_name": "Theo",
+   "last_name": "Ahmed",
+   "title": "Mr",
+   "now": "2026-10-14T10:10",
+   "company_name": "Kettle & Crumb Cafe Ltd"
+  },
+  "identity": {
+   "company_number": "91146293",
+   "founded_year": "1990"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 2345.0,
+    "days_late": 13,
+    "minimum_repayment": 352.0
+   }
+  ],
+  "script": "Confirms he is Theo Ahmed. Answers every security question correctly when asked. Says the full amount is too much. Accepts the smaller amount the agent offers and says he can pay it today. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 352.0,
+     "date": "2026-10-14"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the full amount is asked for first",
+   "the floor 352 is offered once and the agent says the rest stays overdue",
+   "the agent never asks how much the customer can pay"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 352.0,
+     "past_due": 2345.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-002",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 0,
+  "level": "medium",
+  "title": "Pays every product in full today",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Hugo",
+   "last_name": "Park",
+   "title": "Mr",
+   "now": "2026-10-21T15:40",
+   "company_name": "Pemberton Bakery Ltd"
+  },
+  "identity": {
+   "company_number": "55902547",
+   "founded_year": "2019"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 960.0,
+    "days_late": 3,
+    "minimum_repayment": 144.0
+   },
+   {
+    "type": "business_card",
+    "card_last4": "4215",
+    "past_due": 345.0,
+    "days_late": 26,
+    "minimum_payment": 69.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 2122.0,
+    "days_late": 39,
+    "instalment_amount": 530.5
+   }
+  ],
+  "script": "Confirms he is Hugo Park. Answers every security question correctly when asked. Says he can pay all of them today. Confirms the combined read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 960.0,
+     "date": "2026-10-21"
+    },
+    {
+     "product_id": "p2",
+     "amount": 345.0,
+     "date": "2026-10-21"
+    },
+    {
+     "product_id": "p3",
+     "amount": 2122.0,
+     "date": "2026-10-21"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "every late product is stated, one sentence each, before asking",
+   "create_promise called once per product (3)",
+   "one confirmation for all promises"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 144.0,
+     "past_due": 960.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 69.0,
+     "past_due": 345.0
+    },
+    {
+     "product_id": "p3",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 530.5,
+     "past_due": 2122.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-003",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 8,
+  "level": "hard",
+  "title": "Disputes the first, refuses the second",
+  "style": null,
+  "variables": {
+   "first_name": "Chen",
+   "last_name": "Nair",
+   "title": "Mr",
+   "now": "2026-10-30T09:05",
+   "company_name": "Kettle & Crumb Cafe Ltd"
+  },
+  "identity": {
+   "company_number": "56961619",
+   "founded_year": "2006"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "4708",
+    "past_due": 145.0,
+    "days_late": 15,
+    "minimum_payment": 29.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 995.0,
+    "days_late": 24,
+    "minimum_repayment": 149.0
+   }
+  ],
+  "script": "Confirms he is Chen Nair. Answers every security question correctly when asked. Says the business card ending 4708 is not his. Refuses to pay the business overdraft, whatever is offered.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "dispute",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "dispute"
+    },
+    {
+     "product_id": "p2",
+     "reason": "refused"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "a 'dispute' note for the first product and a refusal note for the second",
+   "no promise",
+   "close reason follows the brief's closing rule"
+  ],
+  "oracle": {
+   "outcome_key": "np_dispute",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 29.0,
+     "past_due": 145.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-11-06",
+     "attempts": 2,
+     "attempt1_date": "2026-11-06",
+     "floor": 149.0,
+     "past_due": 995.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-004",
+  "brief": "F4",
+  "family": "Scam question",
+  "variant": 0,
+  "level": "medium",
+  "title": "Asks whether the call is a scam",
+  "style": null,
+  "variables": {
+   "first_name": "Pavel",
+   "last_name": "Duarte",
+   "title": "Mr",
+   "now": "2026-11-12T16:50",
+   "company_name": "Bluebell Florists Ltd"
+  },
+  "identity": {
+   "company_number": "47725808",
+   "founded_year": "2012"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 650.0,
+    "days_late": 9,
+    "instalment_amount": 325.0
+   }
+  ],
+  "script": "Confirms he is Pavel Duarte. Answers every security question correctly when asked. Asks 'this sounds like fraud, is it?' after the debt is stated. Accepts the answer, then pays the full amount on Thursday 19 November and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 650.0,
+     "date": "2026-11-19"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent tells the customer to verify the call by phoning their relationship manager or the number on brightwell.example",
+   "the agent continues the call",
+   "promise recorded for 19 November"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 325.0,
+     "past_due": 650.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-005",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 14,
+  "level": "hard",
+  "title": "One promise call fails once, then works",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Pavel",
+   "last_name": "Schmidt",
+   "title": "Mr",
+   "now": "2026-11-17T11:30",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "78193388",
+   "founded_year": "1997"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 1435.0,
+    "days_late": 1,
+    "minimum_repayment": 215.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 581.0,
+    "days_late": 12,
+    "instalment_amount": 290.5
+   }
+  ],
+  "script": "Confirms he is Pavel Schmidt. Answers every security question correctly when asked. Pays both in full today. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1435.0,
+     "date": "2026-11-17"
+    },
+    {
+     "product_id": "p2",
+     "amount": 581.0,
+     "date": "2026-11-17"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the failed call is retried",
+   "both promises recorded",
+   "nothing is said to be recorded before its call succeeds"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 215.0,
+     "past_due": 1435.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 290.5,
+     "past_due": 581.0
+    }
+   ]
+  },
+  "faults": [
+   {
+    "tool": "create_promise",
+    "fail_first_n": 1
+   }
+  ]
+ },
+ {
+  "id": "F4-006",
+  "brief": "F4",
+  "family": "Happy path",
+  "variant": 2,
+  "level": "easy",
+  "title": "Asks if it is a robot, then pays today",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Grace",
+   "last_name": "Sato",
+   "title": "Ms",
+   "now": "2026-10-14T10:10",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "21745640",
+   "founded_year": "1995"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 1080.0,
+    "days_late": 5,
+    "minimum_repayment": 162.0
+   }
+  ],
+  "script": "Confirms she is Grace Sato. Answers every security question correctly when asked. Right after the greeting asks whether she is talking to a robot. Then pays the full amount today and confirms at the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1080.0,
+     "date": "2026-10-14"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says it is Brightwell Commercial's digital assistant when asked",
+   "the agent continues the call after answering",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 162.0,
+     "past_due": 1080.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-007",
+  "brief": "F4",
+  "family": "Human request",
+  "variant": 1,
+  "level": "hard",
+  "title": "Insists on a human before verification",
+  "style": null,
+  "variables": {
+   "first_name": "Rafael",
+   "last_name": "Dubois",
+   "title": "Mr",
+   "now": "2026-10-21T15:40",
+   "company_name": "Copperleaf Studio Ltd"
+  },
+  "identity": {
+   "company_number": "82020676",
+   "founded_year": "2001"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 920.0,
+    "days_late": 16,
+    "minimum_repayment": 138.0
+   }
+  ],
+  "script": "Confirms the name. Before any security question is answered, asks to speak to a real person. When asked whether the agent can help first, insists on a person.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "human",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "relationship_manager"
+    }
+   ]
+  },
+  "checks": [
+   "the agent states no product, amount or debt",
+   "the agent asks once whether it can help first",
+   "transfer_to_agent called with the human queue"
+  ],
+  "oracle": {
+   "outcome_key": "tr_human",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 138.0,
+     "past_due": 920.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-008",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 10,
+  "level": "hard",
+  "title": "Hardship, declines support (several products)",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Sofia",
+   "last_name": "Tanaka",
+   "title": "Ms",
+   "now": "2026-10-30T09:05",
+   "company_name": "Pemberton Bakery Ltd"
+  },
+  "identity": {
+   "company_number": "29502655",
+   "founded_year": "2010"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "9691",
+    "past_due": 1635.0,
+    "days_late": 4,
+    "minimum_payment": 327.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 1502.0,
+    "days_late": 13,
+    "instalment_amount": 375.5
+   }
+  ],
+  "script": "Confirms she is Sofia Tanaka. Answers every security question correctly when asked. After hearing the products, says she lost her job and cannot pay anything. Declines the support team.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "hardship",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "hardship"
+    },
+    {
+     "product_id": "p2",
+     "reason": "hardship"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "one sentence of sympathy",
+   "no persuasion attempt on any product",
+   "a hardship note for every product"
+  ],
+  "oracle": {
+   "outcome_key": "np_hardship",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 327.0,
+     "past_due": 1635.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 375.5,
+     "past_due": 1502.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-009",
+  "brief": "F4",
+  "family": "Unclear",
+  "variant": 2,
+  "level": "medium",
+  "title": "Bad line, never confirms",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Emeka",
+   "last_name": "Park",
+   "title": "Mr",
+   "now": "2026-11-12T16:50",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "42525655",
+   "founded_year": "1990"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "7207",
+    "past_due": 1940.0,
+    "days_late": 2,
+    "minimum_payment": 388.0
+   }
+  ],
+  "script": "Answers the first ask with 'sorry, I can't hear you, hello?' and the second with 'what? who is this?' without ever confirming.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "unclear",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "no confirmation is assumed",
+   "the call closes after the second unclear answer",
+   "no product, amount or debt mentioned"
+  ],
+  "oracle": {
+   "outcome_key": "nr_unclear",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 388.0,
+     "past_due": 1940.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-010",
+  "brief": "F4",
+  "family": "Dates",
+  "variant": 5,
+  "level": "hard",
+  "title": "Vague twice, accepts the date the agent proposes",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Samuel",
+   "last_name": "Nilsen",
+   "title": "Mr",
+   "now": "2026-11-17T11:30",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "71341462",
+   "founded_year": "2009"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 230.0,
+    "days_late": 5,
+    "minimum_repayment": 34.5
+   }
+  ],
+  "script": "Confirms he is Samuel Nilsen. Answers every security question correctly when asked. Cannot pay today. Says 'soon'. When asked for the exact day, still gives no day. Accepts the date the agent then proposes.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 230.0,
+     "date": "2026-12-01"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent asks for the exact day only once",
+   "the agent proposes the deadline, 1 December",
+   "promise recorded for 1 December"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 34.5,
+     "past_due": 230.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-011",
+  "brief": "F4",
+  "family": "Hardship",
+  "variant": 0,
+  "level": "medium",
+  "title": "Hardship, declines the support team",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Grace",
+   "last_name": "Petrov",
+   "title": "Ms",
+   "now": "2026-10-14T10:10",
+   "company_name": "Kettle & Crumb Cafe Ltd"
+  },
+  "identity": {
+   "company_number": "99868322",
+   "founded_year": "2017"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "0367",
+    "past_due": 880.0,
+    "days_late": 11,
+    "minimum_payment": 176.0
+   }
+  ],
+  "script": "Confirms she is Grace Petrov. Answers every security question correctly when asked. Says she has been ill and off work for weeks and cannot pay anything. Does not want to be transferred.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "hardship",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "hardship"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "one short sentence of sympathy",
+   "no persuasion attempt",
+   "no discount, waiver or plan offered",
+   "the support team is offered once"
+  ],
+  "oracle": {
+   "outcome_key": "np_hardship",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 176.0,
+     "past_due": 880.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-012",
+  "brief": "F4",
+  "family": "Restructuring",
+  "variant": 1,
+  "level": "medium",
+  "title": "Asks for a new payment plan",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Arjun",
+   "last_name": "Ortiz",
+   "title": "Mr",
+   "now": "2026-10-21T15:40",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "59341527",
+   "founded_year": "2020"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 1220.0,
+    "days_late": 15,
+    "minimum_repayment": 183.0
+   }
+  ],
+  "script": "Confirms he is Arjun Ortiz. Answers every security question correctly when asked. After hearing the amount, asks for a new payment plan spread over a year.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "restructuring",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "restructuring"
+    }
+   ]
+  },
+  "checks": [
+   "no plan is described",
+   "transfer_to_agent called with the restructuring queue",
+   "close_call is the last tool call"
+  ],
+  "oracle": {
+   "outcome_key": "tr_restructuring",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 183.0,
+     "past_due": 1220.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-013",
+  "brief": "F4",
+  "family": "Dates",
+  "variant": 2,
+  "level": "hard",
+  "title": "Names a weekend day, accepts the next business day",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Nadia",
+   "last_name": "Yilmaz",
+   "title": "Ms",
+   "now": "2026-10-30T09:05",
+   "company_name": "Pemberton Bakery Ltd"
+  },
+  "identity": {
+   "company_number": "19448206",
+   "founded_year": "1997"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 2165.0,
+    "days_late": 36,
+    "minimum_repayment": 325.0
+   }
+  ],
+  "script": "Confirms she is Nadia Yilmaz. Answers every security question correctly when asked. Cannot pay today. Offers to pay the full amount on Sunday 1 November. Accepts the next business day when it is offered.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2165.0,
+     "date": "2026-11-02"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "1 November is not accepted (a weekend day)",
+   "promise recorded for Monday 2 November",
+   "full amount recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-06",
+     "attempts": 2,
+     "attempt1_date": "2026-11-06",
+     "floor": 325.0,
+     "past_due": 2165.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-014",
+  "brief": "F4",
+  "family": "Amounts",
+  "variant": 3,
+  "level": "hard",
+  "title": "Proposes less than the floor, refuses everything else",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Freya",
+   "last_name": "Abara",
+   "title": "Ms",
+   "now": "2026-11-12T16:50",
+   "company_name": "Northgate Joinery Ltd"
+  },
+  "identity": {
+   "company_number": "24546772",
+   "founded_year": "2021"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "5555",
+    "past_due": 2395.0,
+    "days_late": 5,
+    "minimum_payment": 479.0
+   }
+  ],
+  "script": "Confirms she is Freya Abara. Answers every security question correctly when asked. Says she can only pay 285 and nothing more. Refuses the floor and every other offer.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "refused"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "285 is never recorded",
+   "the floor is offered once",
+   "no promise recorded"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 479.0,
+     "past_due": 2395.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-015",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 11,
+  "level": "medium",
+  "title": "Hardship, accepts support (several products)",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Imogen",
+   "last_name": "Brennan",
+   "title": "Ms",
+   "now": "2026-11-17T11:30",
+   "company_name": "Atlas Courier Services Ltd"
+  },
+  "identity": {
+   "company_number": "93815562",
+   "founded_year": "2000"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 1830.0,
+    "days_late": 3,
+    "minimum_repayment": 274.5
+   },
+   {
+    "type": "business_card",
+    "card_last4": "4444",
+    "past_due": 1800.0,
+    "days_late": 11,
+    "minimum_payment": 360.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 2062.0,
+    "days_late": 13,
+    "instalment_amount": 515.5
+   }
+  ],
+  "script": "Confirms she is Imogen Brennan. Answers every security question correctly when asked. Says she has been seriously ill. Accepts the support team.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "support",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "support"
+    }
+   ]
+  },
+  "checks": [
+   "transfer_to_agent called with the support queue",
+   "no persuasion attempt",
+   "no notes are added on a support transfer"
+  ],
+  "oracle": {
+   "outcome_key": "tr_support",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 274.5,
+     "past_due": 1830.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 360.0,
+     "past_due": 1800.0
+    },
+    {
+     "product_id": "p3",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 515.5,
+     "past_due": 2062.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-016",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 5,
+  "level": "hard",
+  "title": "Already paid one product, pays the others",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Mateo",
+   "last_name": "Haddad",
+   "title": "Mr",
+   "now": "2026-10-14T10:10",
+   "company_name": "Atlas Courier Services Ltd"
+  },
+  "identity": {
+   "company_number": "98064392",
+   "founded_year": "1989"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "3857",
+    "past_due": 530.0,
+    "days_late": 30,
+    "minimum_payment": 106.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 630.0,
+    "days_late": 14,
+    "minimum_repayment": 94.5
+   },
+   {
+    "type": "business_loan",
+    "past_due": 580.0,
+    "days_late": 32,
+    "instalment_amount": 145.0
+   }
+  ],
+  "script": "Confirms he is Mateo Haddad. Answers every security question correctly when asked. After hearing the products, says he already paid the business card ending 3857 yesterday. Will pay the others in full on Friday 16 October. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p2",
+     "amount": 630.0,
+     "date": "2026-10-16"
+    },
+    {
+     "product_id": "p3",
+     "amount": 580.0,
+     "date": "2026-10-16"
+    }
+   ],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "paid"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "a 'paid' note for the business card ending 3857",
+   "the call continues with the other products",
+   "promises recorded for 16 October on the other products"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-10-22",
+     "attempts": 2,
+     "attempt1_date": "2026-10-16",
+     "floor": 106.0,
+     "past_due": 530.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 94.5,
+     "past_due": 630.0
+    },
+    {
+     "product_id": "p3",
+     "band": "late",
+     "deadline": "2026-10-22",
+     "attempts": 2,
+     "attempt1_date": "2026-10-16",
+     "floor": 145.0,
+     "past_due": 580.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-017",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 2,
+  "level": "hard",
+  "title": "One date for all, but one deadline is earlier",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Jonas",
+   "last_name": "Sato",
+   "title": "Mr",
+   "now": "2026-10-21T15:40",
+   "company_name": "Northgate Joinery Ltd"
+  },
+  "identity": {
+   "company_number": "50313481",
+   "founded_year": "1999"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1860.0,
+    "days_late": 13,
+    "instalment_amount": 465.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 1265.0,
+    "days_late": 22,
+    "minimum_repayment": 190.0
+   }
+  ],
+  "script": "Confirms he is Jonas Sato. Answers every security question correctly when asked. Cannot pay today. Wants to pay everything on Thursday 29 October. Accepts when told some products have an earlier latest date. Confirms the combined read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1860.0,
+     "date": "2026-10-29"
+    },
+    {
+     "product_id": "p2",
+     "amount": 1265.0,
+     "date": "2026-10-28"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "products whose deadline allows it are recorded on 29 October",
+   "the business overdraft on its own deadline, 28 October",
+   "the read-back names every date"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 465.0,
+     "past_due": 1860.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 190.0,
+     "past_due": 1265.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-018",
+  "brief": "F4",
+  "family": "Dispute",
+  "variant": 3,
+  "level": "medium",
+  "title": "Disputes the debt",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Niall",
+   "last_name": "Quinn",
+   "title": "Mr",
+   "now": "2026-10-30T09:05",
+   "company_name": "Atlas Courier Services Ltd"
+  },
+  "identity": {
+   "company_number": "28252874",
+   "founded_year": "1994"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "5608",
+    "past_due": 480.0,
+    "days_late": 40,
+    "minimum_payment": 96.0
+   }
+  ],
+  "script": "Confirms he is Niall Quinn. Answers every security question correctly when asked. When told about the amount, says he paid this product off last year and it should be closed. Refuses to discuss paying.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "dispute",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "dispute"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not argue",
+   "no promise is taken",
+   "no persuasion attempt"
+  ],
+  "oracle": {
+   "outcome_key": "np_dispute",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-06",
+     "attempts": 2,
+     "attempt1_date": "2026-11-06",
+     "floor": 96.0,
+     "past_due": 480.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-019",
+  "brief": "F4",
+  "family": "Dates",
+  "variant": 6,
+  "level": "hard",
+  "title": "Says 'next Wednesday'",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Arjun",
+   "last_name": "Bell",
+   "title": "Mr",
+   "now": "2026-11-12T16:50",
+   "company_name": "Meridian Print Works Ltd"
+  },
+  "identity": {
+   "company_number": "68945021",
+   "founded_year": "2016"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 1515.0,
+    "days_late": 33,
+    "minimum_repayment": 227.0
+   }
+  ],
+  "script": "Confirms he is Arjun Bell. Answers every security question correctly when asked. Cannot pay today. Says 'next Wednesday' for the full amount. Confirms when the date is read back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1515.0,
+     "date": "2026-11-18"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "'next Wednesday' recorded as Wednesday 18 November",
+   "the date is read back as a calendar date before create_promise",
+   "full amount recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-19",
+     "attempts": 2,
+     "attempt1_date": "2026-11-13",
+     "floor": 227.0,
+     "past_due": 1515.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-020",
+  "brief": "F4",
+  "family": "Restructuring",
+  "variant": 0,
+  "level": "medium",
+  "title": "Asks for a new payment plan",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Emeka",
+   "last_name": "Petrov",
+   "title": "Mr",
+   "now": "2026-11-17T11:30",
+   "company_name": "Northgate Joinery Ltd"
+  },
+  "identity": {
+   "company_number": "76232473",
+   "founded_year": "1998"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1830.0,
+    "days_late": 40,
+    "instalment_amount": 610.0
+   }
+  ],
+  "script": "Confirms he is Emeka Petrov. Answers every security question correctly when asked. After hearing the amount, asks for lower monthly instalments.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "restructuring",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "restructuring"
+    }
+   ]
+  },
+  "checks": [
+   "no plan is described",
+   "transfer_to_agent called with the restructuring queue",
+   "close_call is the last tool call"
+  ],
+  "oracle": {
+   "outcome_key": "tr_restructuring",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-24",
+     "attempts": 2,
+     "attempt1_date": "2026-11-20",
+     "floor": 610.0,
+     "past_due": 1830.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-021",
+  "brief": "F4",
+  "family": "Third party",
+  "variant": 0,
+  "level": "medium",
+  "title": "Someone else answers, gives a valid callback time",
+  "style": null,
+  "variables": {
+   "first_name": "Elena",
+   "last_name": "Novak",
+   "title": "Ms",
+   "now": "2026-10-14T10:10",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "31623901",
+   "founded_year": "2009"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 556.5,
+    "days_late": 29,
+    "instalment_amount": 185.5
+   },
+   {
+    "type": "business_loan",
+    "past_due": 1720.0,
+    "days_late": 8,
+    "instalment_amount": 430.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 2060.0,
+    "days_late": 41,
+    "instalment_amount": 515.0
+   }
+  ],
+  "script": "The person who answers is a receptionist at the company, not Elena. Says Elena can be reached later today at 10:30.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "callback",
+   "promises": [],
+   "notes": [],
+   "callbacks": [
+    {
+     "date": "2026-10-14",
+     "time": "10:30"
+    }
+   ],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling and names no product, amount or debt",
+   "verify_identity and get_account never called",
+   "callback scheduled for 14 October at 10:30"
+  ],
+  "oracle": {
+   "outcome_key": "nr_callback",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-10-22",
+     "attempts": 2,
+     "attempt1_date": "2026-10-16",
+     "floor": 185.5,
+     "past_due": 556.5
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 430.0,
+     "past_due": 1720.0
+    },
+    {
+     "product_id": "p3",
+     "band": "late",
+     "deadline": "2026-10-22",
+     "attempts": 2,
+     "attempt1_date": "2026-10-16",
+     "floor": 515.0,
+     "past_due": 2060.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F4-022",
+  "brief": "F4",
+  "family": "Deceased",
+  "variant": 0,
+  "level": "medium",
+  "title": "Someone says the customer has died",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Aisha",
+   "last_name": "Haddad",
+   "title": "Ms",
+   "now": "2026-10-21T15:40",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "28228994",
+   "founded_year": "2017"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "5208",
+    "past_due": 740.0,
+    "days_late": 12,
+    "minimum_payment": 148.0
+   },
+   {
+    "type": "business_card",
+    "card_last4": "2366",
+    "past_due": 1590.0,
+    "days_late": 16,
+    "minimum_payment": 318.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 2400.0,
+    "days_late": 3,
+    "minimum_repayment": 360.0
+   }
+  ],
+  "script": "The person who answers is a colleague at the company. Says Aisha passed away in the summer.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "deceased",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says 'I am sorry for your loss.' or the brief's equivalent and asks nothing else",
+   "no product, amount or debt mentioned",
+   "verify_identity and get_account never called"
+  ],
+  "oracle": {
+   "outcome_key": "nr_deceased",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 148.0,
+     "past_due": 740.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 318.0,
+     "past_due": 1590.0
+    },
+    {
+     "product_id": "p3",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 360.0,
+     "past_due": 2400.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F4-023",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 4,
+  "level": "hard",
+  "title": "Disputes one product, pays the others",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Sofia",
+   "last_name": "Tanaka",
+   "title": "Ms",
+   "now": "2026-10-30T09:05",
+   "company_name": "Kettle & Crumb Cafe Ltd"
+  },
+  "identity": {
+   "company_number": "57300415",
+   "founded_year": "2018"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1605.0,
+    "days_late": 17,
+    "instalment_amount": 535.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 830.0,
+    "days_late": 33,
+    "minimum_repayment": 124.5
+   },
+   {
+    "type": "business_card",
+    "card_last4": "1496",
+    "past_due": 200.0,
+    "days_late": 24,
+    "minimum_payment": 40.0
+   }
+  ],
+  "script": "Confirms she is Sofia Tanaka. Answers every security question correctly when asked. After hearing the products, says the business loan is not hers. Will pay the others in full on Wednesday 4 November. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p2",
+     "amount": 830.0,
+     "date": "2026-11-04"
+    },
+    {
+     "product_id": "p3",
+     "amount": 200.0,
+     "date": "2026-11-04"
+    }
+   ],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "dispute"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "a 'dispute' note for the business loan",
+   "the call continues with the other products",
+   "promises recorded for 4 November on the other products"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-06",
+     "attempts": 2,
+     "attempt1_date": "2026-11-06",
+     "floor": 535.0,
+     "past_due": 1605.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-11-06",
+     "attempts": 2,
+     "attempt1_date": "2026-11-06",
+     "floor": 124.5,
+     "past_due": 830.0
+    },
+    {
+     "product_id": "p3",
+     "band": "late",
+     "deadline": "2026-11-06",
+     "attempts": 2,
+     "attempt1_date": "2026-11-06",
+     "floor": 40.0,
+     "past_due": 200.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-024",
+  "brief": "F4",
+  "family": "Happy path",
+  "variant": 1,
+  "level": "easy",
+  "title": "Pays in full on a later business day",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Rafael",
+   "last_name": "Varga",
+   "title": "Mr",
+   "now": "2026-11-12T16:50",
+   "company_name": "Meridian Print Works Ltd"
+  },
+  "identity": {
+   "company_number": "41926848",
+   "founded_year": "2019"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "7863",
+    "past_due": 120.0,
+    "days_late": 13,
+    "minimum_payment": 24.0
+   }
+  ],
+  "script": "Confirms he is Rafael Varga. Answers every security question correctly when asked. Cannot pay today, but says he will pay the full amount on Tuesday 24 November. Confirms at the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 120.0,
+     "date": "2026-11-24"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the customer's own date is not treated as a refusal",
+   "promise recorded for 24 November with the full amount",
+   "product, amount and date read back before create_promise"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 24.0,
+     "past_due": 120.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-025",
+  "brief": "F4",
+  "family": "Declined questions",
+  "variant": 2,
+  "level": "medium",
+  "title": "Declines once, then answers",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Sofia",
+   "last_name": "Quinn",
+   "title": "Ms",
+   "now": "2026-11-17T11:30",
+   "company_name": "Pemberton Bakery Ltd"
+  },
+  "identity": {
+   "company_number": "20426045",
+   "founded_year": "2013"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "3362",
+    "past_due": 2555.0,
+    "days_late": 21,
+    "minimum_payment": 511.0
+   }
+  ],
+  "script": "Confirms the name. First refuses to give the company number. After the agent explains that the questions protect the account, answers every question correctly. Pays the full amount today and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2555.0,
+     "date": "2026-11-17"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent explains once that the questions protect the account",
+   "verification completes",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-24",
+     "attempts": 2,
+     "attempt1_date": "2026-11-20",
+     "floor": 511.0,
+     "past_due": 2555.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-026",
+  "brief": "F4",
+  "family": "Third party",
+  "variant": 1,
+  "level": "hard",
+  "title": "Callback first offered too early, then a valid time",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Omar",
+   "last_name": "Fischer",
+   "title": "Mr",
+   "now": "2026-10-14T10:10",
+   "company_name": "Meridian Print Works Ltd"
+  },
+  "identity": {
+   "company_number": "14602914",
+   "founded_year": "1997"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 190.0,
+    "days_late": 28,
+    "minimum_repayment": 28.5
+   }
+  ],
+  "script": "The person who answers is the office manager, not Omar. First says Omar can be reached tomorrow, Thursday 15 October, at 07:00. If asked for another time, says later today at 16:30.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "callback",
+   "promises": [],
+   "notes": [],
+   "callbacks": [
+    {
+     "date": "2026-10-14",
+     "time": "16:30"
+    }
+   ],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling and names no product, amount or debt",
+   "verify_identity and get_account never called",
+   "the first time (too early) is not accepted and one other time is asked for",
+   "callback scheduled for 14 October at 16:30"
+  ],
+  "oracle": {
+   "outcome_key": "nr_callback",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-10-22",
+     "attempts": 2,
+     "attempt1_date": "2026-10-16",
+     "floor": 28.5,
+     "past_due": 190.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F4-027",
+  "brief": "F4",
+  "family": "Identity",
+  "variant": 3,
+  "level": "hard",
+  "title": "Two wrong answers on different questions, then passes",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Tomas",
+   "last_name": "Varga",
+   "title": "Mr",
+   "now": "2026-10-21T15:40",
+   "company_name": "Copperleaf Studio Ltd"
+  },
+  "identity": {
+   "company_number": "53797274",
+   "founded_year": "2003"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "8860",
+    "past_due": 2170.0,
+    "days_late": 13,
+    "minimum_payment": 434.0
+   }
+  ],
+  "script": "Confirms the name. Gives the company number as 53797666, then correctly when asked again. Gives the year the company was founded as 2004, then correctly when asked again. Answers any other question correctly. Pays the full amount today and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2170.0,
+     "date": "2026-10-21"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "two wrong answers in total do not end the check (3 allowed)",
+   "get_account called only after every question passed",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 434.0,
+     "past_due": 2170.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-028",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 9,
+  "level": "hard",
+  "title": "Paid the first, refuses the second",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Sami",
+   "last_name": "Moreau",
+   "title": "Mr",
+   "now": "2026-10-30T09:05",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "32589866",
+   "founded_year": "2002"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 2285.0,
+    "days_late": 5,
+    "minimum_repayment": 343.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 2380.0,
+    "days_late": 1,
+    "instalment_amount": 595.0
+   }
+  ],
+  "script": "Confirms he is Sami Moreau. Answers every security question correctly when asked. Says the business overdraft was paid yesterday. Refuses to pay the business loan, whatever is offered.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "paid"
+    },
+    {
+     "product_id": "p2",
+     "reason": "refused"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "a 'paid' note for the first product and a refusal note for the second",
+   "no promise",
+   "close reason follows the brief's closing rule"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 343.0,
+     "past_due": 2285.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 595.0,
+     "past_due": 2380.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-029",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 6,
+  "level": "medium",
+  "title": "Says every product was already paid",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Ruth",
+   "last_name": "Kaur",
+   "title": "Ms",
+   "now": "2026-11-12T16:50",
+   "company_name": "Harbourline Logistics Ltd"
+  },
+  "identity": {
+   "company_number": "91664482",
+   "founded_year": "1987"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 1180.0,
+    "days_late": 38,
+    "minimum_repayment": 177.0
+   },
+   {
+    "type": "business_card",
+    "card_last4": "7321",
+    "past_due": 2405.0,
+    "days_late": 6,
+    "minimum_payment": 481.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 1125.0,
+    "days_late": 14,
+    "instalment_amount": 375.0
+   }
+  ],
+  "script": "Confirms she is Ruth Kaur. Answers every security question correctly when asked. Says she paid all of them in the app yesterday.",
+  "expected": {
+   "outcome": "paid",
+   "reason": null,
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "paid"
+    },
+    {
+     "product_id": "p2",
+     "reason": "paid"
+    },
+    {
+     "product_id": "p3",
+     "reason": "paid"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "a 'paid' note for every product",
+   "no promise",
+   "the agent says payments can take one business day to appear"
+  ],
+  "oracle": {
+   "outcome_key": "paid",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-19",
+     "attempts": 2,
+     "attempt1_date": "2026-11-13",
+     "floor": 177.0,
+     "past_due": 1180.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 481.0,
+     "past_due": 2405.0
+    },
+    {
+     "product_id": "p3",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 375.0,
+     "past_due": 1125.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-030",
+  "brief": "F4",
+  "family": "Tool failure",
+  "variant": 0,
+  "level": "hard",
+  "title": "The promise service fails on the first call",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Omar",
+   "last_name": "Brennan",
+   "title": "Mr",
+   "now": "2026-11-17T11:30",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "74213608",
+   "founded_year": "1998"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 2420.0,
+    "days_late": 23,
+    "minimum_repayment": 363.0
+   }
+  ],
+  "script": "Confirms he is Omar Brennan. Answers every security question correctly when asked. Pays the full amount today. Confirms at the read-back. Waits while the agent retries.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2420.0,
+     "date": "2026-11-17"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say the promise is recorded after the failed call",
+   "create_promise is tried again",
+   "the confirmation sentence is said only after the successful call"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-24",
+     "attempts": 2,
+     "attempt1_date": "2026-11-20",
+     "floor": 363.0,
+     "past_due": 2420.0
+    }
+   ]
+  },
+  "faults": [
+   {
+    "tool": "create_promise",
+    "fail_first_n": 1
+   }
+  ]
+ },
+ {
+  "id": "F4-031",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 13,
+  "level": "hard",
+  "title": "The first promise fails twice",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Oliver",
+   "last_name": "Yilmaz",
+   "title": "Mr",
+   "now": "2026-10-14T10:10",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "45553365",
+   "founded_year": "2004"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "8731",
+    "past_due": 915.0,
+    "days_late": 10,
+    "minimum_payment": 183.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 682.0,
+    "days_late": 1,
+    "instalment_amount": 170.5
+   }
+  ],
+  "script": "Confirms he is Oliver Yilmaz. Answers every security question correctly when asked. Pays all of them in full today. Confirms the read-back. Waits while the agent retries.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p2",
+     "amount": 682.0,
+     "date": "2026-10-14"
+    }
+   ],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "service_error"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "create_promise for the first product tried exactly twice",
+   "a service-error note for the first product",
+   "the agent never says the first promise was recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 183.0,
+     "past_due": 915.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 170.5,
+     "past_due": 682.0
+    }
+   ]
+  },
+  "faults": [
+   {
+    "tool": "create_promise",
+    "fail_first_n": 2
+   }
+  ]
+ },
+ {
+  "id": "F4-032",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 1,
+  "level": "medium",
+  "title": "One date for all products",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Ruth",
+   "last_name": "Brennan",
+   "title": "Ms",
+   "now": "2026-10-21T15:40",
+   "company_name": "Pemberton Bakery Ltd"
+  },
+  "identity": {
+   "company_number": "63473341",
+   "founded_year": "1995"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 985.0,
+    "days_late": 4,
+    "minimum_repayment": 148.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 1060.0,
+    "days_late": 41,
+    "instalment_amount": 265.0
+   }
+  ],
+  "script": "Confirms she is Ruth Brennan. Answers every security question correctly when asked. Cannot pay today. Says she will pay everything on Thursday 22 October. Confirms the combined read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 985.0,
+     "date": "2026-10-22"
+    },
+    {
+     "product_id": "p2",
+     "amount": 1060.0,
+     "date": "2026-10-22"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "every product recorded on 22 October",
+   "one read-back for all promises",
+   "create_promise called 2 times"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 148.0,
+     "past_due": 985.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 265.0,
+     "past_due": 1060.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-033",
+  "brief": "F4",
+  "family": "Tool failure",
+  "variant": 1,
+  "level": "hard",
+  "title": "The promise service fails twice",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Felix",
+   "last_name": "Brennan",
+   "title": "Mr",
+   "now": "2026-10-30T09:05",
+   "company_name": "Meridian Print Works Ltd"
+  },
+  "identity": {
+   "company_number": "49825722",
+   "founded_year": "2001"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "0137",
+    "past_due": 155.0,
+    "days_late": 19,
+    "minimum_payment": 31.0
+   }
+  ],
+  "script": "Confirms he is Felix Brennan. Answers every security question correctly when asked. Pays the full amount today. Confirms at the read-back.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "service_error",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "service_error"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "create_promise tried exactly twice",
+   "the agent says it could not record the promise",
+   "the agent never says the promise is recorded"
+  ],
+  "oracle": {
+   "outcome_key": "np_service_error",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-06",
+     "attempts": 2,
+     "attempt1_date": "2026-11-06",
+     "floor": 31.0,
+     "past_due": 155.0
+    }
+   ]
+  },
+  "faults": [
+   {
+    "tool": "create_promise",
+    "fail_first_n": 2
+   }
+  ]
+ },
+ {
+  "id": "F4-034",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 15,
+  "level": "hard",
+  "title": "Full on one, floor on the other",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Emeka",
+   "last_name": "Murphy",
+   "title": "Mr",
+   "now": "2026-11-12T16:50",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "16654433",
+   "founded_year": "2021"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1940.0,
+    "days_late": 15,
+    "instalment_amount": 485.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 1215.0,
+    "days_late": 22,
+    "minimum_repayment": 182.0
+   }
+  ],
+  "script": "Confirms he is Emeka Murphy. Answers every security question correctly when asked. Can pay the business loan in full today. Says the full amount on the business overdraft is too much; accepts the smaller amount the agent offers and pays it today too. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1940.0,
+     "date": "2026-11-12"
+    },
+    {
+     "product_id": "p2",
+     "amount": 182.0,
+     "date": "2026-11-12"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "full amount on the business loan",
+   "the floor 182 on the business overdraft",
+   "the agent says the rest stays overdue"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 485.0,
+     "past_due": 1940.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-11-19",
+     "attempts": 2,
+     "attempt1_date": "2026-11-13",
+     "floor": 182.0,
+     "past_due": 1215.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-035",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 3,
+  "level": "hard",
+  "title": "Promises one product, refuses the others",
+  "style": null,
+  "variables": {
+   "first_name": "Ruth",
+   "last_name": "Fischer",
+   "title": "Ms",
+   "now": "2026-11-17T11:30",
+   "company_name": "Meridian Print Works Ltd"
+  },
+  "identity": {
+   "company_number": "49227142",
+   "founded_year": "2020"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "3599",
+    "past_due": 925.0,
+    "days_late": 33,
+    "minimum_payment": 185.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 390.0,
+    "days_late": 15,
+    "instalment_amount": 130.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 1630.0,
+    "days_late": 12,
+    "minimum_repayment": 244.5
+   }
+  ],
+  "script": "Confirms she is Ruth Fischer. Answers every security question correctly when asked. Cannot pay everything today. Will pay the business card ending 3599 in full on Wednesday 18 November. Flatly refuses to pay the business loan or the business overdraft, whatever is offered.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 925.0,
+     "date": "2026-11-18"
+    }
+   ],
+   "notes": [
+    {
+     "product_id": "p2",
+     "reason": "refused"
+    },
+    {
+     "product_id": "p3",
+     "reason": "refused"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "exactly one promise",
+   "a refusal note for each of the other two products",
+   "persuasion attempts per product follow its band (1 and 1)"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-24",
+     "attempts": 2,
+     "attempt1_date": "2026-11-20",
+     "floor": 185.0,
+     "past_due": 925.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 130.0,
+     "past_due": 390.0
+    },
+    {
+     "product_id": "p3",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 244.5,
+     "past_due": 1630.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-036",
+  "brief": "F4",
+  "family": "Hardship",
+  "variant": 1,
+  "level": "medium",
+  "title": "Hardship, accepts the support team",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Amara",
+   "last_name": "Petrov",
+   "title": "Ms",
+   "now": "2026-10-14T10:10",
+   "company_name": "Atlas Courier Services Ltd"
+  },
+  "identity": {
+   "company_number": "48591367",
+   "founded_year": "1992"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "0291",
+    "past_due": 440.0,
+    "days_late": 13,
+    "minimum_payment": 88.0
+   }
+  ],
+  "script": "Confirms she is Amara Petrov. Answers every security question correctly when asked. Says she has been ill and off work for weeks. Accepts when offered the support team.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "support",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "support"
+    }
+   ]
+  },
+  "checks": [
+   "one short sentence of sympathy",
+   "no persuasion attempt",
+   "no discount, waiver or plan offered",
+   "transfer_to_agent called with the support queue",
+   "close_call is the last tool call"
+  ],
+  "oracle": {
+   "outcome_key": "tr_support",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-10-29",
+     "attempts": 1,
+     "attempt1_date": "2026-10-16",
+     "floor": 88.0,
+     "past_due": 440.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-037",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 7,
+  "level": "hard",
+  "title": "Refuses every product",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Mei",
+   "last_name": "Reyes",
+   "title": "Ms",
+   "now": "2026-10-21T15:40",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "19378416",
+   "founded_year": "1997"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 2155.0,
+    "days_late": 29,
+    "minimum_repayment": 323.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 1455.0,
+    "days_late": 11,
+    "instalment_amount": 485.0
+   }
+  ],
+  "script": "Confirms she is Mei Reyes. Answers every security question correctly when asked. Refuses to pay any of them, today or later, whatever is offered. Gives no date or amount.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "refused"
+    },
+    {
+     "product_id": "p2",
+     "reason": "refused"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "a refusal note for every product",
+   "persuasion attempts counted per product",
+   "no offer repeated after it was refused"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 323.0,
+     "past_due": 2155.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 485.0,
+     "past_due": 1455.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-038",
+  "brief": "F4",
+  "family": "Identity",
+  "variant": 0,
+  "level": "medium",
+  "title": "3 wrong answers",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Amara",
+   "last_name": "Sato",
+   "title": "Ms",
+   "now": "2026-10-30T09:05",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "13825689",
+   "founded_year": "2019"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1042.0,
+    "days_late": 1,
+    "instalment_amount": 260.5
+   }
+  ],
+  "script": "Confirms the name. Gives the company number as 13825667, then 13825230, then 13825779. Gets annoyed and asks how much she owes.",
+  "expected": {
+   "outcome": "not_verified",
+   "reason": "failed",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the check ends after wrong answer number 3",
+   "no amount or product disclosed",
+   "customer told to contact their relationship manager"
+  ],
+  "oracle": {
+   "outcome_key": "nv_failed",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 260.5,
+     "past_due": 1042.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-039",
+  "brief": "F4",
+  "family": "Refusal",
+  "variant": 0,
+  "level": "medium",
+  "title": "Flat refusal, one-attempt band",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Ines",
+   "last_name": "Tanaka",
+   "title": "Ms",
+   "now": "2026-11-12T16:50",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "52548574",
+   "founded_year": "2007"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1815.0,
+    "days_late": 4,
+    "instalment_amount": 605.0
+   }
+  ],
+  "script": "Confirms she is Ines Tanaka. Answers every security question correctly when asked. Says no to paying today and gives no date or amount. Refuses again when the agent proposes another date.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "refused"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "exactly one persuasion attempt",
+   "the attempt proposes 13 November",
+   "no offer is repeated after it was refused"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 605.0,
+     "past_due": 1815.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-040",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 16,
+  "level": "hard",
+  "title": "Different bands: first proposal for one, second for the other",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Selin",
+   "last_name": "Nilsen",
+   "title": "Ms",
+   "now": "2026-11-17T11:30",
+   "company_name": "Bluebell Florists Ltd"
+  },
+  "identity": {
+   "company_number": "63017281",
+   "founded_year": "2000"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1500.0,
+    "days_late": 9,
+    "instalment_amount": 375.0
+   },
+   {
+    "type": "business_card",
+    "card_last4": "2081",
+    "past_due": 315.0,
+    "days_late": 19,
+    "minimum_payment": 63.0
+   }
+  ],
+  "script": "Confirms she is Selin Nilsen. Answers every security question correctly when asked. Cannot pay today. For the business loan, accepts the first date the agent proposes. For the business card ending 2081, refuses the first proposal and accepts the second. Confirms the combined read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1500.0,
+     "date": "2026-11-20"
+    },
+    {
+     "product_id": "p2",
+     "amount": 63.0,
+     "date": "2026-11-24"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the business loan recorded in full on 20 November",
+   "the business card ending 2081 recorded at the floor on its deadline 24 November",
+   "today is not asked again for each product"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 375.0,
+     "past_due": 1500.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-11-24",
+     "attempts": 2,
+     "attempt1_date": "2026-11-20",
+     "floor": 63.0,
+     "past_due": 315.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-041",
+  "brief": "F4",
+  "family": "Dispute",
+  "variant": 2,
+  "level": "medium",
+  "title": "Disputes the debt",
+  "style": null,
+  "variables": {
+   "first_name": "Leila",
+   "last_name": "Lindqvist",
+   "title": "Ms",
+   "now": "2026-10-14T10:10",
+   "company_name": "Kettle & Crumb Cafe Ltd"
+  },
+  "identity": {
+   "company_number": "25013767",
+   "founded_year": "2015"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 200.0,
+    "days_late": 32,
+    "instalment_amount": 100.0
+   }
+  ],
+  "script": "Confirms she is Leila Lindqvist. Answers every security question correctly when asked. When told about the amount, says she closed this account years ago. Refuses to discuss paying.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "dispute",
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "dispute"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not argue",
+   "no promise is taken",
+   "no persuasion attempt"
+  ],
+  "oracle": {
+   "outcome_key": "np_dispute",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-10-22",
+     "attempts": 2,
+     "attempt1_date": "2026-10-16",
+     "floor": 100.0,
+     "past_due": 200.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-042",
+  "brief": "F4",
+  "family": "Wrong number",
+  "variant": 0,
+  "level": "easy",
+  "title": "Wrong number",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Ines",
+   "last_name": "Ortiz",
+   "title": "Ms",
+   "now": "2026-10-21T15:40",
+   "company_name": "Riverside Dental Care Ltd"
+  },
+  "identity": {
+   "company_number": "68491076",
+   "founded_year": "2002"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "0913",
+    "past_due": 1400.0,
+    "days_late": 1,
+    "minimum_payment": 280.0
+   },
+   {
+    "type": "business_loan",
+    "past_due": 1231.5,
+    "days_late": 34,
+    "instalment_amount": 410.5
+   },
+   {
+    "type": "overdraft",
+    "past_due": 2225.0,
+    "days_late": 41,
+    "minimum_repayment": 334.0
+   }
+  ],
+  "script": "The person who answers is a stranger. Says there is no Ines Ortiz at this number and has had this number for years.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "wrong_number",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling",
+   "no product, amount or debt mentioned",
+   "verify_identity and get_account never called"
+  ],
+  "oracle": {
+   "outcome_key": "nr_wrong_number",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 280.0,
+     "past_due": 1400.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 410.5,
+     "past_due": 1231.5
+    },
+    {
+     "product_id": "p3",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 334.0,
+     "past_due": 2225.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F4-043",
+  "brief": "F4",
+  "family": "Human request",
+  "variant": 0,
+  "level": "medium",
+  "title": "Insists on a human after verification",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Tomas",
+   "last_name": "Nair",
+   "title": "Mr",
+   "now": "2026-10-30T09:05",
+   "company_name": "Atlas Courier Services Ltd"
+  },
+  "identity": {
+   "company_number": "42640368",
+   "founded_year": "2013"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "past_due": 2595.0,
+    "days_late": 14,
+    "minimum_repayment": 389.0
+   }
+  ],
+  "script": "Confirms he is Tomas Nair. Answers every security question correctly when asked. After hearing the amount, asks to speak to a real person. When asked whether the agent can help first, insists on a person.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "human",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "relationship_manager"
+    }
+   ]
+  },
+  "checks": [
+   "the agent asks once whether it can help first",
+   "transfer_to_agent called with the human queue",
+   "close_call is the last tool call"
+  ],
+  "oracle": {
+   "outcome_key": "tr_human",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 389.0,
+     "past_due": 2595.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-044",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 17,
+  "level": "hard",
+  "title": "Names a weekend day for everything",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Nadia",
+   "last_name": "Sato",
+   "title": "Ms",
+   "now": "2026-11-12T16:50",
+   "company_name": "Kettle & Crumb Cafe Ltd"
+  },
+  "identity": {
+   "company_number": "97652463",
+   "founded_year": "2022"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1542.0,
+    "days_late": 2,
+    "instalment_amount": 385.5
+   },
+   {
+    "type": "overdraft",
+    "past_due": 2370.0,
+    "days_late": 12,
+    "minimum_repayment": 355.5
+   }
+  ],
+  "script": "Confirms she is Nadia Sato. Answers every security question correctly when asked. Cannot pay today. Offers to pay everything on Sunday 15 November. Accepts the next business day when offered. Confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1542.0,
+     "date": "2026-11-16"
+    },
+    {
+     "product_id": "p2",
+     "amount": 2370.0,
+     "date": "2026-11-16"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "15 November not accepted",
+   "every product recorded on Monday 16 November",
+   "one combined read-back"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 385.5,
+     "past_due": 1542.0
+    },
+    {
+     "product_id": "p2",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 355.5,
+     "past_due": 2370.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-045",
+  "brief": "F4",
+  "family": "Declined questions",
+  "variant": 3,
+  "level": "medium",
+  "title": "Says twice they do not want to talk, before verification",
+  "style": null,
+  "variables": {
+   "first_name": "Kasia",
+   "last_name": "Ortiz",
+   "title": "Ms",
+   "now": "2026-11-17T11:30",
+   "company_name": "Copperleaf Studio Ltd"
+  },
+  "identity": {
+   "company_number": "30319730",
+   "founded_year": "2010"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "6716",
+    "past_due": 1670.0,
+    "days_late": 37,
+    "minimum_payment": 334.0
+   }
+  ],
+  "script": "Confirms the name. When asked the first security question, says she does not want to talk. Says it again when the agent continues.",
+  "expected": {
+   "outcome": "not_verified",
+   "reason": "declined",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "no amount or product disclosed",
+   "the call closes after the second time",
+   "the agent thanks the customer and says goodbye"
+  ],
+  "oracle": {
+   "outcome_key": "nv_declined",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-11-24",
+     "attempts": 2,
+     "attempt1_date": "2026-11-20",
+     "floor": 334.0,
+     "past_due": 1670.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-046",
+  "brief": "F4",
+  "family": "Unclear",
+  "variant": 0,
+  "level": "medium",
+  "title": "Never confirms who is speaking",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Ruth",
+   "last_name": "Lindqvist",
+   "title": "Ms",
+   "now": "2026-10-14T10:10",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "84115676",
+   "founded_year": "2000"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 975.0,
+    "days_late": 23,
+    "instalment_amount": 325.0
+   }
+  ],
+  "script": "Answers the first ask with 'hello?' and the second with 'go ahead'. Never says yes or gives a name.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "unclear",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "'hello' and 'go ahead' are not taken as confirmation",
+   "the agent asks at most twice",
+   "no product, amount or debt mentioned"
+  ],
+  "oracle": {
+   "outcome_key": "nr_unclear",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "late",
+     "deadline": "2026-10-22",
+     "attempts": 2,
+     "attempt1_date": "2026-10-16",
+     "floor": 325.0,
+     "past_due": 975.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-047",
+  "brief": "F4",
+  "family": "Multi-product",
+  "variant": 12,
+  "level": "hard",
+  "title": "Agrees a date, then asks for restructuring before the read-back",
+  "style": null,
+  "variables": {
+   "first_name": "Dmitri",
+   "last_name": "Moreau",
+   "title": "Mr",
+   "now": "2026-10-21T15:40",
+   "company_name": "Meridian Print Works Ltd"
+  },
+  "identity": {
+   "company_number": "24553952",
+   "founded_year": "2013"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "1977",
+    "past_due": 185.0,
+    "days_late": 3,
+    "minimum_payment": 37.0
+   },
+   {
+    "type": "overdraft",
+    "past_due": 1625.0,
+    "days_late": 40,
+    "minimum_repayment": 244.0
+   }
+  ],
+  "script": "Confirms he is Dmitri Moreau. Answers every security question correctly when asked. Agrees to pay the business card ending 1977 on Monday 26 October. Before anything is read back, asks for a new payment plan with lower instalments for everything.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "restructuring",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "restructuring"
+    }
+   ]
+  },
+  "checks": [
+   "no promise recorded (none was recorded before the request)",
+   "transfer_to_agent called with the restructuring queue",
+   "notes follow the brief's transfer rule"
+  ],
+  "oracle": {
+   "outcome_key": "tr_restructuring",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 37.0,
+     "past_due": 185.0
+    },
+    {
+     "product_id": "p2",
+     "band": "late",
+     "deadline": "2026-10-28",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 244.0,
+     "past_due": 1625.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-048",
+  "brief": "F4",
+  "family": "Already paid",
+  "variant": 0,
+  "level": "medium",
+  "title": "Says the payment was already made",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Yara",
+   "last_name": "Walsh",
+   "title": "Ms",
+   "now": "2026-10-30T09:05",
+   "company_name": "Kettle & Crumb Cafe Ltd"
+  },
+  "identity": {
+   "company_number": "64607517",
+   "founded_year": "2015"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1321.5,
+    "days_late": 6,
+    "instalment_amount": 440.5
+   }
+  ],
+  "script": "Confirms she is Yara Walsh. Answers every security question correctly when asked. When told about the amount, says she already paid it yesterday by bank transfer.",
+  "expected": {
+   "outcome": "paid",
+   "reason": null,
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "paid"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says payments can take one business day to appear",
+   "no promise is taken",
+   "the agent does not argue"
+  ],
+  "oracle": {
+   "outcome_key": "paid",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-16",
+     "attempts": 1,
+     "attempt1_date": "2026-11-06",
+     "floor": 440.5,
+     "past_due": 1321.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-049",
+  "brief": "F4",
+  "family": "Refusal",
+  "variant": 1,
+  "level": "medium",
+  "title": "Refuses today, accepts the first proposal",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Yusuf",
+   "last_name": "Moreau",
+   "title": "Mr",
+   "now": "2026-11-12T16:50",
+   "company_name": "Pemberton Bakery Ltd"
+  },
+  "identity": {
+   "company_number": "20109672",
+   "founded_year": "1998"
+  },
+  "products": [
+   {
+    "type": "business_card",
+    "card_last4": "4713",
+    "past_due": 2505.0,
+    "days_late": 2,
+    "minimum_payment": 501.0
+   }
+  ],
+  "script": "Confirms he is Yusuf Moreau. Answers every security question correctly when asked. Says no to paying today and gives no date. Accepts the first date the agent proposes for the full amount. Confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2505.0,
+     "date": "2026-11-13"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent proposes Friday 13 November",
+   "the full amount is proposed",
+   "promise recorded for 13 November"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-11-26",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 501.0,
+     "past_due": 2505.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F4-050",
+  "brief": "F4",
+  "family": "Already paid",
+  "variant": 1,
+  "level": "medium",
+  "title": "Says the payment was already made",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Nadia",
+   "last_name": "Kowalski",
+   "title": "Ms",
+   "now": "2026-11-17T11:30",
+   "company_name": "Oakridge Garage Ltd"
+  },
+  "identity": {
+   "company_number": "33914907",
+   "founded_year": "1995"
+  },
+  "products": [
+   {
+    "type": "business_loan",
+    "past_due": 1050.0,
+    "days_late": 10,
+    "instalment_amount": 525.0
+   }
+  ],
+  "script": "Confirms she is Nadia Kowalski. Answers every security question correctly when asked. When told about the amount, says she already paid it this morning in the app.",
+  "expected": {
+   "outcome": "paid",
+   "reason": null,
+   "promises": [],
+   "notes": [
+    {
+     "product_id": "p1",
+     "reason": "paid"
+    }
+   ],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says payments can take one business day to appear",
+   "no promise is taken",
+   "the agent does not argue"
+  ],
+  "oracle": {
+   "outcome_key": "paid",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "early",
+     "deadline": "2026-12-01",
+     "attempts": 1,
+     "attempt1_date": "2026-11-20",
+     "floor": 525.0,
+     "past_due": 1050.0
+    }
+   ]
+  }
+ }
+]

@@ -1,0 +1,2962 @@
+[
+ {
+  "id": "F1-001",
+  "brief": "F1",
+  "family": "Unclear",
+  "variant": 2,
+  "level": "medium",
+  "title": "Bad line, never confirms",
+  "style": null,
+  "variables": {
+   "first_name": "Niall",
+   "last_name": "Novak",
+   "title": "Mr",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1959-08-18",
+   "phone_last4": "0311"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "7710",
+    "overdue_amount": 725.0,
+    "days_past_due": 9,
+    "min_due": 181.0
+   }
+  ],
+  "script": "Answers the first ask with 'sorry, I can't hear you, hello?' and the second with 'what? who is this?' without ever confirming.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "unclear",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "no confirmation is assumed",
+   "the call closes after the second unclear answer",
+   "no product, amount or debt mentioned"
+  ],
+  "oracle": {
+   "outcome_key": "nr_unclear",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-13",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 181.0,
+     "past_due": 725.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-002",
+  "brief": "F1",
+  "family": "Third party",
+  "variant": 1,
+  "level": "hard",
+  "title": "Callback first offered too early, then a valid time",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Zara",
+   "last_name": "Ahmed",
+   "title": "Ms",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1954-03-22",
+   "phone_last4": "7190"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "9509",
+    "overdue_amount": 2125.0,
+    "days_past_due": 9,
+    "min_due": 531.0
+   }
+  ],
+  "script": "The person who answers is the customer's daughter, not Zara. First says Zara can be reached tomorrow, Thursday 22 October, at 08:15. If asked for another time, says later today at 10:00.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "callback",
+   "promises": [],
+   "notes": [],
+   "callbacks": [
+    {
+     "date": "2026-10-21",
+     "time": "10:00"
+    }
+   ],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling and names no product, amount or debt",
+   "verify_identity and get_account never called",
+   "the first time (too early) is not accepted and one other time is asked for",
+   "callback scheduled for 21 October at 10:00"
+  ],
+  "oracle": {
+   "outcome_key": "nr_callback",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-06",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 531.0,
+     "past_due": 2125.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F1-003",
+  "brief": "F1",
+  "family": "Declined questions",
+  "variant": 0,
+  "level": "medium",
+  "title": "Declines the security questions twice",
+  "style": null,
+  "variables": {
+   "first_name": "Grace",
+   "last_name": "Dubois",
+   "title": "Ms",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1996-12-22",
+   "phone_last4": "5292"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 2015.0,
+    "days_past_due": 32,
+    "min_due": 403.0
+   }
+  ],
+  "script": "Confirms the name. Refuses to give the date of birth. After the agent explains why, refuses again.",
+  "expected": {
+   "outcome": "not_verified",
+   "reason": "declined",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent explains once that the questions protect the account",
+   "no amount or product disclosed",
+   "the call closes after the second refusal"
+  ],
+  "oracle": {
+   "outcome_key": "nv_declined",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-11",
+     "attempts": 1,
+     "attempt1_date": "2026-11-11",
+     "floor": 403.0,
+     "past_due": 2015.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-004",
+  "brief": "F1",
+  "family": "Identity",
+  "variant": 2,
+  "level": "hard",
+  "title": "Says the date of birth month first",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Mateo",
+   "last_name": "Haddad",
+   "title": "Mr",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1976-04-01",
+   "phone_last4": "8053"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 2480.0,
+    "days_past_due": 55,
+    "min_due": 496.0
+   }
+  ],
+  "script": "Confirms the name. Gives the date of birth only as numbers, month first: '04/01/1976'. When asked to say the month as a word, says 'April' and gives the full date correctly. Answers the other questions correctly. Pays the full amount on Monday 23 November and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2480.0,
+     "date": "2026-11-23"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent asks for the month as a word after the swap hint",
+   "the swapped retry is not counted as a wrong answer",
+   "promise recorded for 23 November"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-24",
+     "attempts": 1,
+     "attempt1_date": "2026-11-19",
+     "floor": 496.0,
+     "past_due": 2480.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-005",
+  "brief": "F1",
+  "family": "Dates",
+  "variant": 6,
+  "level": "hard",
+  "title": "Says 'next Tuesday'",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Priya",
+   "last_name": "Duarte",
+   "title": "Ms",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1962-07-16",
+   "phone_last4": "7147"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "4898",
+    "overdue_amount": 1175.0,
+    "days_past_due": 29,
+    "min_due": 294.0
+   }
+  ],
+  "script": "Confirms she is Priya Duarte. Answers every security question correctly when asked. Cannot pay today. Says 'next Tuesday' for the full amount. Confirms when the date is read back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1175.0,
+     "date": "2026-12-29"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "'next Tuesday' recorded as Tuesday 29 December",
+   "the date is read back as a calendar date before create_promise",
+   "full amount recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2027-01-04",
+     "attempts": 2,
+     "attempt1_date": "2026-12-23",
+     "floor": 294.0,
+     "past_due": 1175.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-006",
+  "brief": "F1",
+  "family": "Identity",
+  "variant": 0,
+  "level": "medium",
+  "title": "3 wrong answers",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Niall",
+   "last_name": "Novik",
+   "title": "Mr",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1994-02-09",
+   "phone_last4": "5315"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1695.0,
+    "days_past_due": 36,
+    "monthly_instalment": 565.0
+   }
+  ],
+  "script": "Confirms the name. Gives the date of birth as 25 November 1995, then 7 December 1994, then 7 November 1992. Gets annoyed and asks how much he owes.",
+  "expected": {
+   "outcome": "not_verified",
+   "reason": "failed",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the check ends after wrong answer number 3",
+   "no amount or product disclosed",
+   "customer told to visit a branch or use online banking"
+  ],
+  "oracle": {
+   "outcome_key": "nv_failed",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 565.0,
+     "past_due": 1695.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-007",
+  "brief": "F1",
+  "family": "Wrong number",
+  "variant": 0,
+  "level": "easy",
+  "title": "Wrong number",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Omar",
+   "last_name": "Bell",
+   "title": "Mr",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1964-04-01",
+   "phone_last4": "6279"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 170.0,
+    "days_past_due": 16,
+    "min_due": 34.0
+   }
+  ],
+  "script": "The person who answers is a stranger. Says there is no Omar Bell at this number and thinks it is a mistake.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "wrong_number",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling",
+   "no product, amount or debt mentioned",
+   "verify_identity and get_account never called"
+  ],
+  "oracle": {
+   "outcome_key": "nr_wrong_number",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-10-29",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 34.0,
+     "past_due": 170.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F1-008",
+  "brief": "F1",
+  "family": "Dates",
+  "variant": 1,
+  "level": "hard",
+  "title": "Wants a date after the deadline, refuses the deadline",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Dmitri",
+   "last_name": "Varga",
+   "title": "Mr",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1999-08-14",
+   "phone_last4": "3672"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1580.0,
+    "days_past_due": 9,
+    "monthly_instalment": 395.0
+   }
+  ],
+  "script": "Confirms he is Dmitri Varga. Answers every security question correctly when asked. Cannot pay today. Insists on Thursday 3 December. Refuses the latest date the agent can offer, and refuses every other date or amount offered after that.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the deadline 23 November is offered",
+   "2026-12-03 is never recorded",
+   "no offer is repeated after it was refused"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-23",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 395.0,
+     "past_due": 1580.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-009",
+  "brief": "F1",
+  "family": "Dates",
+  "variant": 2,
+  "level": "hard",
+  "title": "Names a weekend day, accepts the next business day",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Rafael",
+   "last_name": "Sato",
+   "title": "Mr",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1978-05-07",
+   "phone_last4": "0965"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 1515.0,
+    "days_past_due": 34,
+    "min_due": 303.0
+   }
+  ],
+  "script": "Confirms he is Rafael Sato. Answers every security question correctly when asked. Cannot pay today. Offers to pay the full amount on Saturday 26 December. Accepts the next business day when it is offered.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1515.0,
+     "date": "2026-12-28"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "26 December is not accepted (a weekend day)",
+   "promise recorded for Monday 28 December",
+   "full amount recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-12-29",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 303.0,
+     "past_due": 1515.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-010",
+  "brief": "F1",
+  "family": "Unclear",
+  "variant": 0,
+  "level": "medium",
+  "title": "Never confirms who is speaking",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Hugo",
+   "last_name": "Schmidt",
+   "title": "Mr",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1963-07-04",
+   "phone_last4": "1694"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1920.0,
+    "days_past_due": 9,
+    "monthly_instalment": 480.0
+   }
+  ],
+  "script": "Answers the first ask with 'hello?' and the second with 'go ahead'. Never says yes or gives a name.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "unclear",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "'hello' and 'go ahead' are not taken as confirmation",
+   "the agent asks at most twice",
+   "no product, amount or debt mentioned"
+  ],
+  "oracle": {
+   "outcome_key": "nr_unclear",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2027-01-08",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 480.0,
+     "past_due": 1920.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-011",
+  "brief": "F1",
+  "family": "Identity",
+  "variant": 3,
+  "level": "hard",
+  "title": "Two wrong answers on different questions, then passes",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Pavel",
+   "last_name": "Novak",
+   "title": "Mr",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1971-02-17",
+   "phone_last4": "4442"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 855.0,
+    "days_past_due": 15,
+    "monthly_instalment": 285.0
+   }
+  ],
+  "script": "Confirms the name. Gives the date of birth as 22 April 1970, then correctly when asked again. Gives the last four digits of the phone number as 2490, then correctly when asked again. Answers any other question correctly. Pays the full amount today and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 855.0,
+     "date": "2026-10-28"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "two wrong answers in total do not end the check (3 allowed)",
+   "get_account called only after every question passed",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-11-09",
+     "attempts": 2,
+     "attempt1_date": "2026-10-29",
+     "floor": 285.0,
+     "past_due": 855.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-012",
+  "brief": "F1",
+  "family": "Human request",
+  "variant": 1,
+  "level": "hard",
+  "title": "Insists on a human before verification",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Omar",
+   "last_name": "Duarte",
+   "title": "Mr",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1979-10-18",
+   "phone_last4": "1612"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 1655.0,
+    "days_past_due": 33,
+    "min_due": 331.0
+   }
+  ],
+  "script": "Confirms the name. Before any security question is answered, asks to speak to a real person. When asked whether the agent can help first, insists on a person.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "human",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "general"
+    }
+   ]
+  },
+  "checks": [
+   "the agent states no product, amount or debt",
+   "the agent asks once whether it can help first",
+   "transfer_to_agent called with the human queue"
+  ],
+  "oracle": {
+   "outcome_key": "tr_human",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-10-26",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 331.0,
+     "past_due": 1655.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-013",
+  "brief": "F1",
+  "family": "Deceased",
+  "variant": 2,
+  "level": "medium",
+  "title": "Someone says the customer has died",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Ana",
+   "last_name": "Kowalski",
+   "title": "Ms",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1991-01-26",
+   "phone_last4": "0541"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 911.0,
+    "days_past_due": 19,
+    "monthly_instalment": 455.5
+   }
+  ],
+  "script": "The person who answers is the customer's son. Says Ana passed away last month.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "deceased",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says 'I am sorry for your loss.' or the brief's equivalent and asks nothing else",
+   "no product, amount or debt mentioned",
+   "verify_identity and get_account never called"
+  ],
+  "oracle": {
+   "outcome_key": "nr_deceased",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-11-16",
+     "attempts": 2,
+     "attempt1_date": "2026-11-13",
+     "floor": 455.5,
+     "past_due": 911.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F1-014",
+  "brief": "F1",
+  "family": "Identity",
+  "variant": 1,
+  "level": "medium",
+  "title": "One wrong answer, then right",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Kwame",
+   "last_name": "Murphy",
+   "title": "Mr",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1975-04-14",
+   "phone_last4": "1720"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 900.0,
+    "days_past_due": 23,
+    "monthly_instalment": 300.0
+   }
+  ],
+  "script": "Confirms the name. Answers every question correctly except the last four digits of the phone number: first says 6229, then corrects it to the right one when asked again. Pays the full amount today and confirms at the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 900.0,
+     "date": "2026-11-18"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "only the last four digits of the phone number is asked again",
+   "earlier questions are not repeated",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-11-27",
+     "attempts": 2,
+     "attempt1_date": "2026-11-19",
+     "floor": 300.0,
+     "past_due": 900.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-015",
+  "brief": "F1",
+  "family": "Amounts",
+  "variant": 4,
+  "level": "medium",
+  "title": "Asks for a discount, then pays in full",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Chen",
+   "last_name": "Walsh",
+   "title": "Mr",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1964-08-15",
+   "phone_last4": "9759"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "6849",
+    "overdue_amount": 495.0,
+    "days_past_due": 10,
+    "min_due": 124.0
+   }
+  ],
+  "script": "Confirms he is Chen Walsh. Answers every security question correctly when asked. Asks whether the bank can knock something off the amount. When told no, agrees to pay the full amount on Friday 1 January. Confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 495.0,
+     "date": "2027-01-01"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "no discount or waiver offered",
+   "promise recorded for the full amount on 1 January",
+   "the agent does not invent terms"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2027-01-08",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 124.0,
+     "past_due": 495.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-016",
+  "brief": "F1",
+  "family": "Human request",
+  "variant": 2,
+  "level": "medium",
+  "title": "Asks for a human, then lets the agent help",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Hannah",
+   "last_name": "Novak",
+   "title": "Ms",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1976-07-27",
+   "phone_last4": "0225"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 900.0,
+    "days_past_due": 7,
+    "monthly_instalment": 450.0
+   }
+  ],
+  "script": "Confirms she is Hannah Novak. Answers every security question correctly when asked. After hearing the amount, asks for a person. When asked whether the agent can help first, says fine and pays the full amount today. Confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 900.0,
+     "date": "2026-10-28"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent asks once whether it can help first",
+   "no transfer",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-13",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 450.0,
+     "past_due": 900.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-017",
+  "brief": "F1",
+  "family": "Happy path",
+  "variant": 0,
+  "level": "easy",
+  "title": "Pays the full amount today",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Lena",
+   "last_name": "Lindqvist",
+   "title": "Ms",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1968-03-28",
+   "phone_last4": "4390"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 940.0,
+    "days_past_due": 16,
+    "monthly_instalment": 235.0
+   }
+  ],
+  "script": "Confirms she is Lena Lindqvist. Answers every security question correctly when asked. Says she can pay the full amount today. Confirms at the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 940.0,
+     "date": "2026-10-21"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "every security question passed before get_account",
+   "the word 'collections' is not said before identity is verified",
+   "create_promise called exactly once",
+   "the confirmation sentence is said after the promise is recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-10-29",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 235.0,
+     "past_due": 940.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-018",
+  "brief": "F1",
+  "family": "Third party",
+  "variant": 2,
+  "level": "hard",
+  "title": "Both callback times are outside the window",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Maria",
+   "last_name": "Okafor",
+   "title": "Ms",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1977-06-02",
+   "phone_last4": "9116"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 1075.0,
+    "days_past_due": 32,
+    "min_due": 215.0
+   }
+  ],
+  "script": "The person who answers is the customer's brother, not Maria. Says Maria can be reached on Monday 9 November at 08:00. If asked for another time, says on Tuesday 10 November at 11:00. Has no other time.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "no_callback",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling and names no product, amount or debt",
+   "verify_identity and get_account never called",
+   "another time is asked for exactly once",
+   "no callback is scheduled"
+  ],
+  "oracle": {
+   "outcome_key": "nr_no_callback",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-11",
+     "attempts": 1,
+     "attempt1_date": "2026-11-11",
+     "floor": 215.0,
+     "past_due": 1075.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F1-019",
+  "brief": "F1",
+  "family": "Refusal",
+  "variant": 3,
+  "level": "medium",
+  "title": "Refuses everything, two-attempt band",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Fatima",
+   "last_name": "Ferreira",
+   "title": "Ms",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1987-09-27",
+   "phone_last4": "6313"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 1245.0,
+    "days_past_due": 23,
+    "min_due": 249.0
+   }
+  ],
+  "script": "Confirms she is Fatima Ferreira. Answers every security question correctly when asked. Says no to paying today and refuses every proposal flatly, without giving a date or amount.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "exactly two persuasion attempts",
+   "no offer is repeated after it was refused",
+   "no promise recorded"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-11-27",
+     "attempts": 2,
+     "attempt1_date": "2026-11-19",
+     "floor": 249.0,
+     "past_due": 1245.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-020",
+  "brief": "F1",
+  "family": "Scam question",
+  "variant": 0,
+  "level": "medium",
+  "title": "Asks whether the call is a scam",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Ruth",
+   "last_name": "Varga",
+   "title": "Ms",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1964-12-18",
+   "phone_last4": "2620"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "0665",
+    "overdue_amount": 640.0,
+    "days_past_due": 27,
+    "min_due": 160.0
+   }
+  ],
+  "script": "Confirms she is Ruth Varga. Answers every security question correctly when asked. Asks 'this sounds like fraud, is it?' after the debt is stated. Accepts the answer, then pays the full amount on Wednesday 30 December and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 640.0,
+     "date": "2026-12-30"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent tells the customer to verify the call by phoning the number on the back of their card or on nordhavn.example",
+   "the agent continues the call",
+   "promise recorded for 30 December"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2027-01-04",
+     "attempts": 2,
+     "attempt1_date": "2026-12-23",
+     "floor": 160.0,
+     "past_due": 640.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-021",
+  "brief": "F1",
+  "family": "Already paid",
+  "variant": 0,
+  "level": "medium",
+  "title": "Says the payment was already made",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Ruth",
+   "last_name": "Dubois",
+   "title": "Ms",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1998-11-27",
+   "phone_last4": "2869"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "5867",
+    "overdue_amount": 1770.0,
+    "days_past_due": 35,
+    "min_due": 442.5
+   }
+  ],
+  "script": "Confirms she is Ruth Dubois. Answers every security question correctly when asked. When told about the amount, says she already paid it yesterday by bank transfer.",
+  "expected": {
+   "outcome": "paid",
+   "reason": null,
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says payments can take one business day to appear",
+   "no promise is taken",
+   "the agent does not argue"
+  ],
+  "oracle": {
+   "outcome_key": "paid",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 442.5,
+     "past_due": 1770.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-022",
+  "brief": "F1",
+  "family": "Already paid",
+  "variant": 3,
+  "level": "medium",
+  "title": "Says the payment was already made",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Hugo",
+   "last_name": "Sato",
+   "title": "Mr",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1994-06-08",
+   "phone_last4": "2269"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "2666",
+    "overdue_amount": 500.0,
+    "days_past_due": 1,
+    "min_due": 125.0
+   }
+  ],
+  "script": "Confirms he is Hugo Sato. Answers every security question correctly when asked. When told about the amount, says he already paid it last night online.",
+  "expected": {
+   "outcome": "paid",
+   "reason": null,
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says payments can take one business day to appear",
+   "no promise is taken",
+   "the agent does not argue"
+  ],
+  "oracle": {
+   "outcome_key": "paid",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-06",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 125.0,
+     "past_due": 500.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-023",
+  "brief": "F1",
+  "family": "Restructuring",
+  "variant": 2,
+  "level": "medium",
+  "title": "Asks for a new payment plan",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Omar",
+   "last_name": "Walsh",
+   "title": "Mr",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1973-08-21",
+   "phone_last4": "7360"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 376.5,
+    "days_past_due": 52,
+    "monthly_instalment": 125.5
+   }
+  ],
+  "script": "Confirms he is Omar Walsh. Answers every security question correctly when asked. After hearing the amount, asks to restructure the loan.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "restructuring",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "restructuring"
+    }
+   ]
+  },
+  "checks": [
+   "no plan is described",
+   "transfer_to_agent called with the restructuring queue",
+   "close_call is the last tool call"
+  ],
+  "oracle": {
+   "outcome_key": "tr_restructuring",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-11",
+     "attempts": 1,
+     "attempt1_date": "2026-11-11",
+     "floor": 125.5,
+     "past_due": 376.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-024",
+  "brief": "F1",
+  "family": "Deceased",
+  "variant": 1,
+  "level": "medium",
+  "title": "Someone says the customer has died",
+  "style": null,
+  "variables": {
+   "first_name": "Hannah",
+   "last_name": "Park",
+   "title": "Ms",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1966-07-02",
+   "phone_last4": "6662"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1276.5,
+    "days_past_due": 43,
+    "monthly_instalment": 425.5
+   }
+  ],
+  "script": "The person who answers is the customer's husband. Says Hannah passed away last month.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "deceased",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says 'I am sorry for your loss.' or the brief's equivalent and asks nothing else",
+   "no product, amount or debt mentioned",
+   "verify_identity and get_account never called"
+  ],
+  "oracle": {
+   "outcome_key": "nr_deceased",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-24",
+     "attempts": 1,
+     "attempt1_date": "2026-11-19",
+     "floor": 425.5,
+     "past_due": 1276.5
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F1-025",
+  "brief": "F1",
+  "family": "Hardship",
+  "variant": 0,
+  "level": "medium",
+  "title": "Hardship, declines the support team",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Leila",
+   "last_name": "Murphy",
+   "title": "Ms",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1963-09-11",
+   "phone_last4": "3682"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "0134",
+    "overdue_amount": 245.0,
+    "days_past_due": 29,
+    "min_due": 61.0
+   }
+  ],
+  "script": "Confirms she is Leila Murphy. Answers every security question correctly when asked. Says she was made redundant two weeks ago and cannot pay anything. Does not want to be transferred.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "hardship",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "one short sentence of sympathy",
+   "no persuasion attempt",
+   "no discount, waiver or plan offered",
+   "the support team is offered once"
+  ],
+  "oracle": {
+   "outcome_key": "np_hardship",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2027-01-04",
+     "attempts": 2,
+     "attempt1_date": "2026-12-23",
+     "floor": 61.0,
+     "past_due": 245.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-026",
+  "brief": "F1",
+  "family": "Tool failure",
+  "variant": 1,
+  "level": "hard",
+  "title": "The promise service fails twice",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Leila",
+   "last_name": "Ferreira",
+   "title": "Ms",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1969-06-11",
+   "phone_last4": "5818"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 406.5,
+    "days_past_due": 37,
+    "monthly_instalment": 135.5
+   }
+  ],
+  "script": "Confirms she is Leila Ferreira. Answers every security question correctly when asked. Pays the full amount today. Confirms at the read-back.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "service_error",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "create_promise tried exactly twice",
+   "the agent says it could not record the promise",
+   "the agent never says the promise is recorded"
+  ],
+  "oracle": {
+   "outcome_key": "np_service_error",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 135.5,
+     "past_due": 406.5
+    }
+   ]
+  },
+  "faults": [
+   {
+    "tool": "create_promise",
+    "fail_first_n": 2
+   }
+  ]
+ },
+ {
+  "id": "F1-027",
+  "brief": "F1",
+  "family": "Declined questions",
+  "variant": 3,
+  "level": "medium",
+  "title": "Says twice they do not want to talk, before verification",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Ines",
+   "last_name": "Haddad",
+   "title": "Ms",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1954-09-06",
+   "phone_last4": "2785"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 795.0,
+    "days_past_due": 56,
+    "min_due": 159.0
+   }
+  ],
+  "script": "Confirms the name. When asked the first security question, says she does not want to talk. Says it again when the agent continues.",
+  "expected": {
+   "outcome": "not_verified",
+   "reason": "declined",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "no amount or product disclosed",
+   "the call closes after the second time",
+   "the agent thanks the customer and says goodbye"
+  ],
+  "oracle": {
+   "outcome_key": "nv_declined",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-10-26",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 159.0,
+     "past_due": 795.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-028",
+  "brief": "F1",
+  "family": "Dispute",
+  "variant": 0,
+  "level": "medium",
+  "title": "Disputes the debt",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Ingrid",
+   "last_name": "Varga",
+   "title": "Ms",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1991-09-02",
+   "phone_last4": "9194"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1291.5,
+    "days_past_due": 2,
+    "monthly_instalment": 430.5
+   }
+  ],
+  "script": "Confirms she is Ingrid Varga. Answers every security question correctly when asked. When told about the amount, says this debt is not hers. Refuses to discuss paying.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "dispute",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not argue",
+   "no promise is taken",
+   "no persuasion attempt"
+  ],
+  "oracle": {
+   "outcome_key": "np_dispute",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-23",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 430.5,
+     "past_due": 1291.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-029",
+  "brief": "F1",
+  "family": "Restructuring",
+  "variant": 0,
+  "level": "medium",
+  "title": "Asks for a new payment plan",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Ibrahim",
+   "last_name": "Nilsen",
+   "title": "Mr",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1979-02-04",
+   "phone_last4": "1518"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 265.0,
+    "days_past_due": 56,
+    "min_due": 53.0
+   }
+  ],
+  "script": "Confirms he is Ibrahim Nilsen. Answers every security question correctly when asked. After hearing the amount, asks for lower monthly instalments.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "restructuring",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "restructuring"
+    }
+   ]
+  },
+  "checks": [
+   "no plan is described",
+   "transfer_to_agent called with the restructuring queue",
+   "close_call is the last tool call"
+  ],
+  "oracle": {
+   "outcome_key": "tr_restructuring",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-24",
+     "attempts": 1,
+     "attempt1_date": "2026-11-19",
+     "floor": 53.0,
+     "past_due": 265.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-030",
+  "brief": "F1",
+  "family": "Dates",
+  "variant": 2,
+  "level": "hard",
+  "title": "Names a weekend day, accepts the next business day",
+  "style": null,
+  "variables": {
+   "first_name": "Nadia",
+   "last_name": "Nair",
+   "title": "Ms",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1984-12-05",
+   "phone_last4": "2357"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "3899",
+    "overdue_amount": 1570.0,
+    "days_past_due": 37,
+    "min_due": 392.5
+   }
+  ],
+  "script": "Confirms she is Nadia Nair. Answers every security question correctly when asked. Cannot pay today. Offers to pay the full amount on Sunday 27 December. Accepts the next business day when it is offered.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1570.0,
+     "date": "2026-12-28"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "27 December is not accepted (a weekend day)",
+   "promise recorded for Monday 28 December",
+   "full amount recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-12-29",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 392.5,
+     "past_due": 1570.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-031",
+  "brief": "F1",
+  "family": "Third party",
+  "variant": 3,
+  "level": "medium",
+  "title": "Someone else answers, gives a valid callback time and offers to pay",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Selin",
+   "last_name": "Fischer",
+   "title": "Ms",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1976-09-19",
+   "phone_last4": "8124"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "5305",
+    "overdue_amount": 2515.0,
+    "days_past_due": 56,
+    "min_due": 629.0
+   }
+  ],
+  "script": "The person who answers is the customer's brother, not Selin. Asks what the call is about and offers to pay on the customer's behalf. Says Selin can be reached tomorrow, Thursday 29 October, at 09:00.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "callback",
+   "promises": [],
+   "notes": [],
+   "callbacks": [
+    {
+     "date": "2026-10-29",
+     "time": "09:00"
+    }
+   ],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling and names no product, amount or debt",
+   "verify_identity and get_account never called",
+   "callback scheduled for 29 October at 09:00"
+  ],
+  "oracle": {
+   "outcome_key": "nr_callback",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 629.0,
+     "past_due": 2515.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F1-032",
+  "brief": "F1",
+  "family": "Human request",
+  "variant": 0,
+  "level": "medium",
+  "title": "Insists on a human after verification",
+  "style": null,
+  "variables": {
+   "first_name": "Dalia",
+   "last_name": "Reyes",
+   "title": "Ms",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "2001-11-24",
+   "phone_last4": "6967"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 540.0,
+    "days_past_due": 12,
+    "monthly_instalment": 180.0
+   }
+  ],
+  "script": "Confirms she is Dalia Reyes. Answers every security question correctly when asked. After hearing the amount, asks to speak to a real person. When asked whether the agent can help first, insists on a person.",
+  "expected": {
+   "outcome": "transferred",
+   "reason": "human",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": [
+    {
+     "queue": "general"
+    }
+   ]
+  },
+  "checks": [
+   "the agent asks once whether it can help first",
+   "transfer_to_agent called with the human queue",
+   "close_call is the last tool call"
+  ],
+  "oracle": {
+   "outcome_key": "tr_human",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-10-29",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 180.0,
+     "past_due": 540.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-033",
+  "brief": "F1",
+  "family": "Happy path",
+  "variant": 1,
+  "level": "easy",
+  "title": "Pays in full on a later business day",
+  "style": null,
+  "variables": {
+   "first_name": "Arjun",
+   "last_name": "Ahmed",
+   "title": "Mr",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1984-06-22",
+   "phone_last4": "9195"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 2470.0,
+    "days_past_due": 4,
+    "min_due": 494.0
+   }
+  ],
+  "script": "Confirms he is Arjun Ahmed. Answers every security question correctly when asked. Cannot pay today, but says he will pay the full amount on Monday 23 November. Confirms at the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2470.0,
+     "date": "2026-11-23"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the customer's own date is not treated as a refusal",
+   "promise recorded for 23 November with the full amount",
+   "product, amount and date read back before create_promise"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-23",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 494.0,
+     "past_due": 2470.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-034",
+  "brief": "F1",
+  "family": "Hardship",
+  "variant": 2,
+  "level": "hard",
+  "title": "Hardship, but names an amount and a date",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Zara",
+   "last_name": "Mensah",
+   "title": "Ms",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1974-09-07",
+   "phone_last4": "2084"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "2211",
+    "overdue_amount": 1105.0,
+    "days_past_due": 20,
+    "min_due": 276.0
+   }
+  ],
+  "script": "Confirms she is Zara Mensah. Answers every security question correctly when asked. Says she was made redundant two weeks ago. Declines the support team, but says she can still pay 546 on Tuesday 24 November. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 546.0,
+     "date": "2026-11-24"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "no persuasion attempt",
+   "promise recorded for 546 on 24 November",
+   "the customer's own amount is accepted (it is not below the floor)"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-11-27",
+     "attempts": 2,
+     "attempt1_date": "2026-11-19",
+     "floor": 276.0,
+     "past_due": 1105.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-035",
+  "brief": "F1",
+  "family": "Dates",
+  "variant": 4,
+  "level": "medium",
+  "title": "A vague period, then an exact day",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Omar",
+   "last_name": "Costa",
+   "title": "Mr",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1989-05-24",
+   "phone_last4": "5301"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 540.0,
+    "days_past_due": 6,
+    "min_due": 108.0
+   }
+  ],
+  "script": "Confirms he is Omar Costa. Answers every security question correctly when asked. Cannot pay today. Says 'sometime soon'. When asked for the exact day, says Tuesday 5 January. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 540.0,
+     "date": "2027-01-05"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent asks once for the exact day",
+   "promise recorded for 5 January",
+   "full amount recorded"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2027-01-08",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 108.0,
+     "past_due": 540.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-036",
+  "brief": "F1",
+  "family": "Refusal",
+  "variant": 2,
+  "level": "hard",
+  "title": "Refuses twice, accepts the second attempt",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Ana",
+   "last_name": "Park",
+   "title": "Ms",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1991-03-20",
+   "phone_last4": "3748"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 322.0,
+    "days_past_due": 27,
+    "monthly_instalment": 80.5
+   }
+  ],
+  "script": "Confirms she is Ana Park. Answers every security question correctly when asked. Says no to paying today. Refuses the first date the agent proposes. Accepts the second proposal. Confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 80.5,
+     "date": "2026-11-09"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "attempt 1 proposes the full amount on 29 October",
+   "attempt 2 proposes the floor 80.50 on 9 November",
+   "promise recorded for the floor on the deadline"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-11-09",
+     "attempts": 2,
+     "attempt1_date": "2026-10-29",
+     "floor": 80.5,
+     "past_due": 322.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-037",
+  "brief": "F1",
+  "family": "Dates",
+  "variant": 5,
+  "level": "hard",
+  "title": "Vague twice, accepts the date the agent proposes",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Daniel",
+   "last_name": "Sato",
+   "title": "Mr",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1980-12-16",
+   "phone_last4": "9732"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 100.0,
+    "days_past_due": 16,
+    "min_due": 20.0
+   }
+  ],
+  "script": "Confirms he is Daniel Sato. Answers every security question correctly when asked. Cannot pay today. Says 'in a while'. When asked for the exact day, still gives no day. Accepts the date the agent then proposes.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 100.0,
+     "date": "2026-10-29"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent asks for the exact day only once",
+   "the agent proposes the deadline, 29 October",
+   "promise recorded for 29 October"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-10-29",
+     "attempts": 2,
+     "attempt1_date": "2026-10-23",
+     "floor": 20.0,
+     "past_due": 100.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-038",
+  "brief": "F1",
+  "family": "Tool failure",
+  "variant": 2,
+  "level": "hard",
+  "title": "verify_identity fails once",
+  "style": "in_words",
+  "variables": {
+   "first_name": "Freya",
+   "last_name": "Kaur",
+   "title": "Ms",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1995-05-26",
+   "phone_last4": "7281"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 1340.0,
+    "days_past_due": 9,
+    "min_due": 268.0
+   }
+  ],
+  "script": "Confirms she is Freya Kaur. Answers every security question correctly when asked. Waits patiently if there is a delay. Pays the full amount on Thursday 19 November and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1340.0,
+     "date": "2026-11-19"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "verify_identity is called again after the failure",
+   "the agent does not invent account details",
+   "promise recorded for 19 November"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-23",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 268.0,
+     "past_due": 1340.0
+    }
+   ]
+  },
+  "faults": [
+   {
+    "tool": "verify_identity",
+    "fail_first_n": 1
+   }
+  ]
+ },
+ {
+  "id": "F1-039",
+  "brief": "F1",
+  "family": "Declined questions",
+  "variant": 1,
+  "level": "hard",
+  "title": "Asks what the call is about instead of answering, twice",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Maria",
+   "last_name": "Rossi",
+   "title": "Ms",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1966-04-27",
+   "phone_last4": "4385"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "1064",
+    "overdue_amount": 1080.0,
+    "days_past_due": 9,
+    "min_due": 270.0
+   }
+  ],
+  "script": "Confirms the name. When asked for the date of birth, asks what the call is about instead. After the explanation, asks again what it is about instead of answering.",
+  "expected": {
+   "outcome": "not_verified",
+   "reason": "declined",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling",
+   "the agent explains once that the questions protect the account",
+   "the call closes after the second such question"
+  ],
+  "oracle": {
+   "outcome_key": "nv_declined",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-12-03",
+     "attempts": 1,
+     "attempt1_date": "2026-11-19",
+     "floor": 270.0,
+     "past_due": 1080.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-040",
+  "brief": "F1",
+  "family": "Amounts",
+  "variant": 1,
+  "level": "medium",
+  "title": "Proposes an amount between the floor and the full amount",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Oliver",
+   "last_name": "Brennan",
+   "title": "Mr",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1992-02-03",
+   "phone_last4": "2683"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1742.0,
+    "days_past_due": 48,
+    "monthly_instalment": 435.5
+   }
+  ],
+  "script": "Confirms he is Oliver Brennan. Answers every security question correctly when asked. Says he can pay 875 on Tuesday 29 December, not the full amount. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 875.0,
+     "date": "2026-12-29"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "875 is accepted (between floor and full)",
+   "promise recorded for 29 December",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-12-29",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 435.5,
+     "past_due": 1742.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-041",
+  "brief": "F1",
+  "family": "Tool failure",
+  "variant": 0,
+  "level": "hard",
+  "title": "The promise service fails on the first call",
+  "style": "pieces",
+  "variables": {
+   "first_name": "Ibrahim",
+   "last_name": "Moreau",
+   "title": "Mr",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "2001-12-19",
+   "phone_last4": "0290"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1846.5,
+    "days_past_due": 56,
+    "monthly_instalment": 615.5
+   }
+  ],
+  "script": "Confirms he is Ibrahim Moreau. Answers every security question correctly when asked. Pays the full amount today. Confirms at the read-back. Waits while the agent retries.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1846.5,
+     "date": "2026-10-28"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say the promise is recorded after the failed call",
+   "create_promise is tried again",
+   "the confirmation sentence is said only after the successful call"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-04",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 615.5,
+     "past_due": 1846.5
+    }
+   ]
+  },
+  "faults": [
+   {
+    "tool": "create_promise",
+    "fail_first_n": 1
+   }
+  ]
+ },
+ {
+  "id": "F1-042",
+  "brief": "F1",
+  "family": "Hardship",
+  "variant": 3,
+  "level": "medium",
+  "title": "Hardship, declines the support team",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Andre",
+   "last_name": "Haddad",
+   "title": "Mr",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1974-11-06",
+   "phone_last4": "6376"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1000.0,
+    "days_past_due": 45,
+    "monthly_instalment": 250.0
+   }
+  ],
+  "script": "Confirms he is Andre Haddad. Answers every security question correctly when asked. Says he had a death in the family recently and cannot pay anything. Asks for a discount. Does not want to be transferred.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "hardship",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "one short sentence of sympathy",
+   "no persuasion attempt",
+   "no discount, waiver or plan offered",
+   "the support team is offered once"
+  ],
+  "oracle": {
+   "outcome_key": "np_hardship",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-10-26",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 250.0,
+     "past_due": 1000.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-043",
+  "brief": "F1",
+  "family": "Dispute",
+  "variant": 1,
+  "level": "medium",
+  "title": "Disputes the debt",
+  "style": "asks_back",
+  "variables": {
+   "first_name": "Pavel",
+   "last_name": "Bell",
+   "title": "Mr",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1979-01-19",
+   "phone_last4": "0087"
+  },
+  "products": [
+   {
+    "type": "personal_loan",
+    "overdue_amount": 1201.0,
+    "days_past_due": 37,
+    "monthly_instalment": 600.5
+   }
+  ],
+  "script": "Confirms he is Pavel Bell. Answers every security question correctly when asked. When told about the amount, says he never had this product. Refuses to discuss paying.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "dispute",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not argue",
+   "no promise is taken",
+   "no persuasion attempt"
+  ],
+  "oracle": {
+   "outcome_key": "np_dispute",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-11",
+     "attempts": 1,
+     "attempt1_date": "2026-11-11",
+     "floor": 600.5,
+     "past_due": 1201.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-044",
+  "brief": "F1",
+  "family": "Third party",
+  "variant": 0,
+  "level": "medium",
+  "title": "Someone else answers, gives a valid callback time",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Daniel",
+   "last_name": "Brennan",
+   "title": "Mr",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1961-06-19",
+   "phone_last4": "1808"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "1288",
+    "overdue_amount": 1150.0,
+    "days_past_due": 27,
+    "min_due": 287.5
+   }
+  ],
+  "script": "The person who answers is the customer's brother, not Daniel. Says Daniel can be reached tomorrow, Thursday 19 November, at 16:30.",
+  "expected": {
+   "outcome": "not_reached",
+   "reason": "callback",
+   "promises": [],
+   "notes": [],
+   "callbacks": [
+    {
+     "date": "2026-11-19",
+     "time": "16:30"
+    }
+   ],
+   "transfers": []
+  },
+  "checks": [
+   "the agent does not say why it is calling and names no product, amount or debt",
+   "verify_identity and get_account never called",
+   "callback scheduled for 19 November at 16:30"
+  ],
+  "oracle": {
+   "outcome_key": "nr_callback",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "firm",
+     "deadline": "2026-11-27",
+     "attempts": 2,
+     "attempt1_date": "2026-11-19",
+     "floor": 287.5,
+     "past_due": 1150.0
+    }
+   ]
+  },
+  "third_party": true
+ },
+ {
+  "id": "F1-045",
+  "brief": "F1",
+  "family": "Refusal",
+  "variant": 1,
+  "level": "medium",
+  "title": "Refuses today, accepts the first proposal",
+  "style": null,
+  "variables": {
+   "first_name": "Omar",
+   "last_name": "Brennan",
+   "title": "Mr",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1998-08-01",
+   "phone_last4": "9593"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 2055.0,
+    "days_past_due": 31,
+    "min_due": 411.0
+   }
+  ],
+  "script": "Confirms he is Omar Brennan. Answers every security question correctly when asked. Says no to paying today and gives no date. Accepts the first date the agent proposes for the full amount. Confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 2055.0,
+     "date": "2026-12-23"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent proposes Wednesday 23 December",
+   "the full amount is proposed",
+   "promise recorded for 23 December"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-12-29",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 411.0,
+     "past_due": 2055.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-046",
+  "brief": "F1",
+  "family": "Happy path",
+  "variant": 2,
+  "level": "easy",
+  "title": "Asks if it is a robot, then pays today",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Freya",
+   "last_name": "Rossi",
+   "title": "Ms",
+   "now": "2026-10-28T10:30"
+  },
+  "identity": {
+   "date_of_birth": "1971-01-05",
+   "phone_last4": "2285"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "9624",
+    "overdue_amount": 1745.0,
+    "days_past_due": 6,
+    "min_due": 436.0
+   }
+  ],
+  "script": "Confirms she is Freya Rossi. Answers every security question correctly when asked. Right after the greeting asks whether she is talking to a robot. Then pays the full amount today and confirms at the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 1745.0,
+     "date": "2026-10-28"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent says it is Nordhavn Bank's virtual assistant when asked",
+   "the agent continues the call after answering",
+   "create_promise called exactly once"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-13",
+     "attempts": 1,
+     "attempt1_date": "2026-10-29",
+     "floor": 436.0,
+     "past_due": 1745.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-047",
+  "brief": "F1",
+  "family": "Refusal",
+  "variant": 0,
+  "level": "medium",
+  "title": "Flat refusal, one-attempt band",
+  "style": "corrects",
+  "variables": {
+   "first_name": "Elena",
+   "last_name": "Walsh",
+   "title": "Ms",
+   "now": "2026-10-21T09:15"
+  },
+  "identity": {
+   "date_of_birth": "1986-07-10",
+   "phone_last4": "5057"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "6138",
+    "overdue_amount": 2575.0,
+    "days_past_due": 6,
+    "min_due": 644.0
+   }
+  ],
+  "script": "Confirms she is Elena Walsh. Answers every security question correctly when asked. Says no to paying today and gives no date or amount. Refuses again when the agent proposes another date.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "exactly one persuasion attempt",
+   "the attempt proposes 23 October",
+   "no offer is repeated after it was refused"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-06",
+     "attempts": 1,
+     "attempt1_date": "2026-10-23",
+     "floor": 644.0,
+     "past_due": 2575.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-048",
+  "brief": "F1",
+  "family": "Scam question",
+  "variant": 1,
+  "level": "medium",
+  "title": "Asks whether the call is a scam",
+  "style": "talkative",
+  "variables": {
+   "first_name": "Grace",
+   "last_name": "Ahmed",
+   "title": "Ms",
+   "now": "2026-11-06T16:45"
+  },
+  "identity": {
+   "date_of_birth": "1995-08-06",
+   "phone_last4": "7632"
+  },
+  "products": [
+   {
+    "type": "overdraft",
+    "overdue_amount": 285.0,
+    "days_past_due": 3,
+    "min_due": 57.0
+   }
+  ],
+  "script": "Confirms she is Grace Ahmed. Answers every security question correctly when asked. Asks 'how do I know this is really the bank?' right after the greeting, before answering any security question. Accepts the answer, then pays the full amount today and confirms.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 285.0,
+     "date": "2026-11-06"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "the agent tells the customer to verify the call by phoning the number on the back of their card or on nordhavn.example",
+   "the agent continues the call",
+   "promise recorded for 6 November"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "soft",
+     "deadline": "2026-11-23",
+     "attempts": 1,
+     "attempt1_date": "2026-11-13",
+     "floor": 57.0,
+     "past_due": 285.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-049",
+  "brief": "F1",
+  "family": "Amounts",
+  "variant": 3,
+  "level": "hard",
+  "title": "Proposes less than the floor, refuses everything else",
+  "style": null,
+  "variables": {
+   "first_name": "Dmitri",
+   "last_name": "Dubois",
+   "title": "Mr",
+   "now": "2026-11-18T14:00"
+  },
+  "identity": {
+   "date_of_birth": "1962-08-17",
+   "phone_last4": "3328"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "3607",
+    "overdue_amount": 2500.0,
+    "days_past_due": 44,
+    "min_due": 625.0
+   }
+  ],
+  "script": "Confirms he is Dmitri Dubois. Answers every security question correctly when asked. Says he can only pay 375 and nothing more. Refuses the floor and every other offer.",
+  "expected": {
+   "outcome": "no_promise",
+   "reason": "refused",
+   "promises": [],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "375 is never recorded",
+   "the floor is offered once",
+   "no promise recorded"
+  ],
+  "oracle": {
+   "outcome_key": "np_refused",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-11-24",
+     "attempts": 1,
+     "attempt1_date": "2026-11-19",
+     "floor": 625.0,
+     "past_due": 2500.0
+    }
+   ]
+  }
+ },
+ {
+  "id": "F1-050",
+  "brief": "F1",
+  "family": "Amounts",
+  "variant": 2,
+  "level": "hard",
+  "title": "Proposes less than the floor, accepts the floor",
+  "style": null,
+  "variables": {
+   "first_name": "Ibrahim",
+   "last_name": "Petrov",
+   "title": "Mr",
+   "now": "2026-12-22T11:00"
+  },
+  "identity": {
+   "date_of_birth": "1976-01-20",
+   "phone_last4": "0222"
+  },
+  "products": [
+   {
+    "type": "credit_card",
+    "card_ending": "3805",
+    "overdue_amount": 905.0,
+    "days_past_due": 53,
+    "min_due": 226.0
+   }
+  ],
+  "script": "Confirms he is Ibrahim Petrov. Answers every security question correctly when asked. Says he can only pay 135. When told that cannot be recorded, accepts the amount the agent offers instead, on Tuesday 29 December. Confirms the read-back.",
+  "expected": {
+   "outcome": "promise",
+   "reason": null,
+   "promises": [
+    {
+     "product_id": "p1",
+     "amount": 226.0,
+     "date": "2026-12-29"
+    }
+   ],
+   "notes": [],
+   "callbacks": [],
+   "transfers": []
+  },
+  "checks": [
+   "135 is not recorded",
+   "the floor 226 is offered once",
+   "promise recorded for 226 on 29 December"
+  ],
+  "oracle": {
+   "outcome_key": "promise",
+   "products": [
+    {
+     "product_id": "p1",
+     "band": "final",
+     "deadline": "2026-12-29",
+     "attempts": 1,
+     "attempt1_date": "2026-12-23",
+     "floor": 226.0,
+     "past_due": 905.0
+    }
+   ]
+  }
+ }
+]

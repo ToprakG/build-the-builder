@@ -1,0 +1,204 @@
+{
+ "language": "en",
+ "address": "{title} {last_name}",
+ "identity": {
+  "questions": [
+   "date_of_birth",
+   "phone_last4"
+  ],
+  "max_wrong": 3,
+  "swap_hint": true
+ },
+ "callback": {
+  "start": "10:00",
+  "end": "19:00",
+  "same_day": true
+ },
+ "outcome_map": {
+  "promise": [
+   "10-PTP",
+   null
+  ],
+  "paid": [
+   "20-PAID",
+   null
+  ],
+  "tr_restructuring": [
+   "31-TRF-RS",
+   null
+  ],
+  "tr_human": [
+   "32-TRF-HU",
+   null
+  ],
+  "tr_support": [
+   "33-TRF-SU",
+   null
+  ],
+  "np_refused": [
+   "41-NP-REF",
+   null
+  ],
+  "np_hardship": [
+   "42-NP-HS",
+   null
+  ],
+  "np_dispute": [
+   "43-NP-DSP",
+   null
+  ],
+  "np_service_error": [
+   "44-NP-ERR",
+   null
+  ],
+  "nv_failed": [
+   "51-NV-FAIL",
+   null
+  ],
+  "nv_declined": [
+   "52-NV-DEC",
+   null
+  ],
+  "nr_callback": [
+   "61-NR-CB",
+   null
+  ],
+  "nr_no_callback": [
+   "62-NR-NOCB",
+   null
+  ],
+  "nr_wrong_number": [
+   "63-NR-WN",
+   null
+  ],
+  "nr_deceased": [
+   "64-NR-RIP",
+   null
+  ],
+  "nr_unclear": [
+   "65-NR-UNC",
+   null
+  ]
+ },
+ "queue_map": {
+  "restructuring": "restructuring",
+  "human": "general",
+  "support": "support"
+ },
+ "note_map": {
+  "refused": "refused",
+  "hardship": "hardship",
+  "dispute": "dispute",
+  "paid": "paid",
+  "service_error": "service_error"
+ },
+ "close_rule": {
+  "kind": "first_non_paid"
+ },
+ "notes_on_restructuring": null,
+ "product_types": {
+  "card": {
+   "enum": "CC",
+   "label": "credit card ending {last4}",
+   "floor_field": "minimum_payment",
+   "last4_field": "card_last4"
+  },
+  "loan": {
+   "enum": "PL",
+   "label": "personal loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  },
+  "car": {
+   "enum": "AL",
+   "label": "car loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  }
+ },
+ "account_fields": {
+  "product_id": "product_id",
+  "type": "type",
+  "past_due": "past_due",
+  "days_late": "days_late"
+ },
+ "product_id_format": "p{n}",
+ "tools": {
+  "verify_identity": {
+   "field": "field",
+   "answer": "answer"
+  },
+  "create_promise": {
+   "product_id": "product_id",
+   "amount": "amount",
+   "date": "date",
+   "amount_unit": "currency"
+  },
+  "schedule_callback": {
+   "mode": "date_time",
+   "date": "date",
+   "time": "time"
+  },
+  "close_call": {
+   "mode": "code",
+   "code": "code"
+  },
+  "transfer_to_agent": {
+   "queue": "queue"
+  },
+  "add_note": {
+   "product_id": "product_id",
+   "reason": "reason"
+  }
+ },
+ "forbidden_before_verify": [
+  "collections",
+  "debt",
+  "payment"
+ ],
+ "multi_product": false,
+ "max_products": 1,
+ "attempt1": "last business day of this week (next week's if today is that day), never after the deadline",
+ "id": "f7-lumen-codes",
+ "name": "Lumen Bank (raw code list)",
+ "bank": "Lumen Bank",
+ "kind": "raw",
+ "holidays": [
+  "2026-10-23",
+  "2026-11-11",
+  "2026-11-26",
+  "2026-12-25",
+  "2026-12-28"
+ ],
+ "bands": [
+  {
+   "name": "B1",
+   "min_days": 1,
+   "max_days": 5,
+   "deadline_business_days": 12,
+   "attempts": 1
+  },
+  {
+   "name": "B2",
+   "min_days": 6,
+   "max_days": 20,
+   "deadline_business_days": 8,
+   "attempts": 2
+  },
+  {
+   "name": "B3",
+   "min_days": 21,
+   "max_days": 45,
+   "deadline_business_days": 4,
+   "attempts": 2
+  }
+ ],
+ "sentences": {
+  "opening": "a digital assistant calling from Lumen Bank; the call is recorded",
+  "promise_confirmation": "You will receive a text message confirming this promise.",
+  "ai": "Lumen Bank's digital assistant",
+  "scam": "verify the call by phoning Lumen Bank's customer service number",
+  "failed_id": "use the mobile app or a branch"
+ },
+ "_note": "Hand-written correct config: what a perfect extractor reads from this brief. Canonical keys on the left, the brief's own values on the right."
+}

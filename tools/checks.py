@@ -8,8 +8,6 @@ from datetime import date, timedelta
 from serialize_call import product_type, products_of, tools, verified_turn
 
 HOLIDAYS = {"2026-10-26", "2026-11-11", "2026-11-26", "2026-12-25", "2027-01-01"}
-RECORDING = re.compile(r"this call is recorded|call is recorded", re.I)
-RECORDED = re.compile(r"\brecorded\b", re.I)
 PRODUCT_WORDS = re.compile(r"credit card|personal loan|car loan|collections|\bdebt\b", re.I)
 MONEY = re.compile(r"\b\d{2,5}(?:\.\d{1,2})?\b")
 YEAR = re.compile(r"(19|20)\d{2}")
@@ -128,16 +126,6 @@ def one_promise_after_retry(turns, case):
     good, bad = _promises(turns, ok=True), _promises(turns, ok=False)
     return len(good) == 1 and len(bad) >= 1 and bad[0].n < good[0].n
 
-def no_recorded_before_success(turns, case):
-    good = _promises(turns, ok=True)
-    limit = good[0].n if good else 10 ** 9
-    for turn in turns:
-        if turn.kind != "agent" or turn.n >= limit:
-            continue
-        if RECORDED.search(RECORDING.sub("", turn.text)):
-            return False
-    return True
-
 def one_promise_per_product(turns, case):
     found = products_of(turns)
     if not found:
@@ -212,7 +200,11 @@ TABLE = {
     "agent does not describe a plan of its own": ("honesty", "model",
         "The agent did not describe a payment plan of its own."),
     "exactly one promise in the ledger after the retry": ("promise", "code", one_promise_after_retry),
-    "agent does not say 'recorded' before a successful call": ("honesty", "code", no_recorded_before_success),
+    "agent does not say 'recorded' before a successful call": ("honesty", "model",
+        "never said recorded before a create_promise returned ok. "
+        "The opening line that the call is recorded does not count. "
+        "A failed create_promise result that says 'nothing was recorded' is the bank, not the agent. "
+        "Use the FACTS lines. Each create_promise attempt has its own returned ok or not ok."),
     "all three products stated before any ask": ("promise", "model",
         "Before the agent asked the customer to pay, the agent named all three products in the get_account result. The FACTS block lists that result on the get_account line."),
     "one read-back and one confirmation for all three": ("promise", "model",
@@ -222,7 +214,7 @@ TABLE = {
     "exactly one promise, on the credit card": ("promise", "code", one_promise_on_credit_card),
     "one 'refused' note for each of the other two products": ("promise", "code", refused_notes_for_the_other_two),
     "two attempts on the personal loan (late band), one on the car loan (early band)": ("attempts", "model",
-        "The agent made two payment attempts for the personal loan. The agent made one payment attempt for the car loan. The first request to pay today counts as one attempt for each product. A later request about that product counts as another attempt."),
+        "Use the FACTS payment-attempt counts. The personal loan, late band, has count 2. The car loan, early band, has count 1."),
     "credit card recorded on 30 October (early band, inside its deadline)": ("promise", "code", product_recorded_on("credit_card", "2026-10-30")),
     "loan recorded on its own deadline, 23 October": ("promise", "code", product_recorded_on("personal_loan", "2026-10-23")),
     "the read-back names both dates": ("promise", "model",

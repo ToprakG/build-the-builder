@@ -4,7 +4,7 @@
     python3 tools/judge_call.py results/transcripts/A-PUB-05-rep1-188337f5.json --judge both
     python3 tools/judge_call.py --audit
 
-Judge C uses OPENAI_API_KEY from .env for the predicate checks.
+Judge C uses OPENROUTER_API_KEY from .env and calls Jev for the semantic checks.
 Coded checks run with no key. Judge B uses GEMINI_API_KEY or GOOGLE_API_KEY.
 --audit compares coded checks with Freya on every saved transcript. It does not call an API.
 """

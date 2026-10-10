@@ -1,9 +1,11 @@
 """One decisions call.
 
-OpenAI is first: POST https://api.openai.com/v1/decisions with model gpt-6-luna.
-When that key is missing, rejected, or out of credits, the same questions go to
-OpenRouter: POST https://openrouter.ai/api/alpha/decisions
-model openai/gpt-6-luna-decisions. A yes/no question there is type noul.
+The judge uses TypeSafe Jev on OpenRouter:
+POST https://openrouter.ai/api/v1/systemone
+model typesafe/jev-1.13. A yes/no question there is type noul.
+
+When OPENROUTER_API_KEY is empty and OPENAI_API_KEY is set, the call goes to
+POST https://api.openai.com/v1/decisions with model gpt-6-luna.
 The returned body always uses OpenAI's answers list: [{name, probability}].
 """
 import json, os, urllib.error, urllib.request
@@ -11,9 +13,9 @@ from envfile import load_env
 
 OPENAI_URL = "https://api.openai.com/v1/decisions"
 OPENAI_MODEL = "gpt-6-luna"
-OPENROUTER_URL = "https://openrouter.ai/api/alpha/decisions"
-OPENROUTER_MODEL = "openai/gpt-6-luna-decisions"
-MODEL = OPENAI_MODEL
+OPENROUTER_URL = "https://openrouter.ai/api/v1/systemone"
+OPENROUTER_MODEL = "typesafe/jev-1.13"
+MODEL = OPENROUTER_MODEL
 
 class DecisionsError(RuntimeError):
     def __init__(self, message, status=None):
@@ -43,9 +45,6 @@ def _post(url, key, payload, timeout):
         detail = error.read().decode()[:1500]
         raise DecisionsError(f"POST {url} -> {error.code}: {detail}", status=error.code) from None
 
-def _fallback(error):
-    return error.status in (401, 402, 429) or (error.status or 0) >= 500
-
 def _from_openrouter(body):
     """Map {answers: {name: {type, noul}}} onto the OpenAI answers list."""
     raw = body.get("answers") or {}
@@ -70,27 +69,17 @@ def _from_openai(body):
     body.setdefault("model", OPENAI_MODEL)
     return body
 
-def decide(text, questions, model=OPENAI_MODEL, timeout=90):
+def decide(text, questions, model=None, timeout=90):
     """questions: [{name, type, instructions}]. type predicate is sent as noul on OpenRouter."""
     load_env()
     openai = api_key()
     router = openrouter_key()
     if not openai and not router:
         raise DecisionsError("OPENAI_API_KEY and OPENROUTER_API_KEY are empty. Put one in .env.")
-    openai_error = None
-    if openai:
-        try:
-            return _from_openai(_post(OPENAI_URL, openai, {"model": model, "input": text, "questions": questions}, timeout))
-        except DecisionsError as error:
-            if not _fallback(error) or not router:
-                raise
-            openai_error = error
-    try:
+    if router:
         named = {}
         for item in questions:
             named[item["name"]] = {"type": "noul", "instructions": item["instructions"]}
-        return _from_openrouter(_post(OPENROUTER_URL, router, {"model": OPENROUTER_MODEL, "state": text, "questions": named}, timeout))
-    except DecisionsError as error:
-        if openai_error:
-            raise DecisionsError(f"OpenAI failed ({openai_error}). OpenRouter failed ({error}).", status=error.status) from None
-        raise
+        chosen = model or OPENROUTER_MODEL
+        return _from_openrouter(_post(OPENROUTER_URL, router, {"model": chosen, "state": text, "questions": named}, timeout))
+    return _from_openai(_post(OPENAI_URL, openai, {"model": model or OPENAI_MODEL, "input": text, "questions": questions}, timeout))

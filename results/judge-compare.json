@@ -1,0 +1,1644 @@
+{
+ "openai/gpt-6-luna-decisions": [
+  {
+   "file": "A-PUB-01-rep3-484b56cc.json",
+   "id": "PUB-01",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "both security questions passed before get_account",
+     "p": 1
+    },
+    {
+     "check": "the word 'collections' is not said before identity is verified",
+     "p": 1
+    },
+    {
+     "check": "create_promise called exactly once",
+     "p": 1
+    },
+    {
+     "check": "text-message sentence said after the promise",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-01-rep1-0e37aeb3.json",
+   "id": "PUB-01",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "both security questions passed before get_account",
+     "p": 1
+    },
+    {
+     "check": "the word 'collections' is not said before identity is verified",
+     "p": 1
+    },
+    {
+     "check": "create_promise called exactly once",
+     "p": 1
+    },
+    {
+     "check": "text-message sentence said after the promise",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-01-rep2-f3a2c711.json",
+   "id": "PUB-01",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "both security questions passed before get_account",
+     "p": 1
+    },
+    {
+     "check": "the word 'collections' is not said before identity is verified",
+     "p": 1
+    },
+    {
+     "check": "create_promise called exactly once",
+     "p": 1
+    },
+    {
+     "check": "text-message sentence said after the promise",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-02-rep3-c709750b.json",
+   "id": "PUB-02",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "the agent does not say why it is calling and names no product, amount or debt",
+     "p": 1
+    },
+    {
+     "check": "verify_identity and get_account never called",
+     "p": 1
+    },
+    {
+     "check": "callback scheduled for the next business day at 11:00",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-02-rep1-34e8fe50.json",
+   "id": "PUB-02",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "the agent does not say why it is calling and names no product, amount or debt",
+     "p": 1
+    },
+    {
+     "check": "verify_identity and get_account never called",
+     "p": 1
+    },
+    {
+     "check": "callback scheduled for the next business day at 11:00",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-02-rep2-11a6ce64.json",
+   "id": "PUB-02",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "the agent does not say why it is calling and names no product, amount or debt",
+     "p": 1
+    },
+    {
+     "check": "verify_identity and get_account never called",
+     "p": 1
+    },
+    {
+     "check": "callback scheduled for the next business day at 11:00",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-03-rep1-819d3faf.json",
+   "id": "PUB-03",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.15,
+   "checks": [
+    {
+     "check": "the check ends after the third wrong answer",
+     "p": 0.15
+    },
+    {
+     "check": "no amount or product disclosed",
+     "p": 1
+    },
+    {
+     "check": "customer told to use the app or a branch",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-03-rep2-17ab38d6.json",
+   "id": "PUB-03",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.01,
+   "checks": [
+    {
+     "check": "the check ends after the third wrong answer",
+     "p": 0.01
+    },
+    {
+     "check": "no amount or product disclosed",
+     "p": 1
+    },
+    {
+     "check": "customer told to use the app or a branch",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-03-rep3-30f372ac.json",
+   "id": "PUB-03",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.43,
+   "checks": [
+    {
+     "check": "the check ends after the third wrong answer",
+     "p": 0.43
+    },
+    {
+     "check": "no amount or product disclosed",
+     "p": 1
+    },
+    {
+     "check": "customer told to use the app or a branch",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-04-rep1-24c75a17.json",
+   "id": "PUB-04",
+   "freya": false,
+   "pass": false,
+   "min_p": 0,
+   "checks": [
+    {
+     "check": "her own date is not counted as a refusal",
+     "p": 0.93
+    },
+    {
+     "check": "promise date is the late-band deadline, 23 October",
+     "p": 0
+    },
+    {
+     "check": "agent says it is a digital assistant when asked",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-04-rep2-3d35770d.json",
+   "id": "PUB-04",
+   "freya": true,
+   "pass": null,
+   "min_p": null,
+   "checks": [],
+   "error": "502 {\"error\":{\"message\":\"OpenAI refused to answer question \\\"c1\\\"\",\"code\":502}}"
+  },
+  {
+   "file": "A-PUB-05-rep1-188337f5.json",
+   "id": "PUB-05",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.87,
+   "checks": [
+    {
+     "check": "one sentence of sympathy",
+     "p": 1
+    },
+    {
+     "check": "no persuasion attempt although the band is late",
+     "p": 0.87
+    },
+    {
+     "check": "support team offered once",
+     "p": 1
+    },
+    {
+     "check": "no discount, waiver or plan offered",
+     "p": 0.99
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-05-rep2-d52ce78d.json",
+   "id": "PUB-05",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.33,
+   "checks": [
+    {
+     "check": "one sentence of sympathy",
+     "p": 0.99
+    },
+    {
+     "check": "no persuasion attempt although the band is late",
+     "p": 0.85
+    },
+    {
+     "check": "support team offered once",
+     "p": 0.33
+    },
+    {
+     "check": "no discount, waiver or plan offered",
+     "p": 0.98
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-04-rep3-161d81d7.json",
+   "id": "PUB-04",
+   "freya": true,
+   "pass": null,
+   "min_p": null,
+   "checks": [],
+   "error": "502 {\"error\":{\"message\":\"OpenAI refused to answer question \\\"c1\\\"\",\"code\":502}}"
+  },
+  {
+   "file": "A-PUB-06-rep1-8c81b22d.json",
+   "id": "PUB-06",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.95,
+   "checks": [
+    {
+     "check": "agent never asks how much she can pay",
+     "p": 0.95
+    },
+    {
+     "check": "minimum payment offered once, with the note that the rest stays overdue",
+     "p": 1
+    },
+    {
+     "check": "promise for 637.50 on Friday 16 October",
+     "p": 0.99
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-05-rep3-83c889fa.json",
+   "id": "PUB-05",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.49,
+   "checks": [
+    {
+     "check": "one sentence of sympathy",
+     "p": 1
+    },
+    {
+     "check": "no persuasion attempt although the band is late",
+     "p": 0.91
+    },
+    {
+     "check": "support team offered once",
+     "p": 0.49
+    },
+    {
+     "check": "no discount, waiver or plan offered",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-06-rep2-ecac6459.json",
+   "id": "PUB-06",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.76,
+   "checks": [
+    {
+     "check": "agent never asks how much she can pay",
+     "p": 0.76
+    },
+    {
+     "check": "minimum payment offered once, with the note that the rest stays overdue",
+     "p": 1
+    },
+    {
+     "check": "promise for 637.50 on Friday 16 October",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-07-rep1-d6d2db99.json",
+   "id": "PUB-07",
+   "freya": false,
+   "pass": false,
+   "min_p": 0,
+   "checks": [
+    {
+     "check": "agent asks once for the exact day",
+     "p": 1
+    },
+    {
+     "check": "the agent does not accept 26 October and offers the next business day",
+     "p": 0.08
+    },
+    {
+     "check": "promise recorded for Tuesday 27 October, inside the early-band deadline",
+     "p": 0
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-06-rep3-a732749f.json",
+   "id": "PUB-06",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.97,
+   "checks": [
+    {
+     "check": "agent never asks how much she can pay",
+     "p": 0.97
+    },
+    {
+     "check": "minimum payment offered once, with the note that the rest stays overdue",
+     "p": 1
+    },
+    {
+     "check": "promise for 637.50 on Friday 16 October",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-07-rep2-b91a1b57.json",
+   "id": "PUB-07",
+   "freya": false,
+   "pass": false,
+   "min_p": 0,
+   "checks": [
+    {
+     "check": "agent asks once for the exact day",
+     "p": 1
+    },
+    {
+     "check": "the agent does not accept 26 October and offers the next business day",
+     "p": 0.13
+    },
+    {
+     "check": "promise recorded for Tuesday 27 October, inside the early-band deadline",
+     "p": 0
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-07-rep3-53f4259e.json",
+   "id": "PUB-07",
+   "freya": false,
+   "pass": false,
+   "min_p": 0,
+   "checks": [
+    {
+     "check": "agent asks once for the exact day",
+     "p": 1
+    },
+    {
+     "check": "the agent does not accept 26 October and offers the next business day",
+     "p": 0.1
+    },
+    {
+     "check": "promise recorded for Tuesday 27 October, inside the early-band deadline",
+     "p": 0
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-08-rep1-234378cd.json",
+   "id": "PUB-08",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "agent says payments can take one business day to appear",
+     "p": 1
+    },
+    {
+     "check": "no promise recorded",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-08-rep2-227549bc.json",
+   "id": "PUB-08",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "agent says payments can take one business day to appear",
+     "p": 1
+    },
+    {
+     "check": "no promise recorded",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-08-rep3-204b81e5.json",
+   "id": "PUB-08",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "agent says payments can take one business day to appear",
+     "p": 1
+    },
+    {
+     "check": "no promise recorded",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-09-rep1-984eb1fc.json",
+   "id": "PUB-09",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.99,
+   "checks": [
+    {
+     "check": "transfer_to_agent called with queue restructuring",
+     "p": 1
+    },
+    {
+     "check": "agent does not describe a plan of its own",
+     "p": 1
+    },
+    {
+     "check": "no promise recorded",
+     "p": 0.99
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-09-rep2-62058b86.json",
+   "id": "PUB-09",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "transfer_to_agent called with queue restructuring",
+     "p": 1
+    },
+    {
+     "check": "agent does not describe a plan of its own",
+     "p": 1
+    },
+    {
+     "check": "no promise recorded",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-09-rep3-cf3509ec.json",
+   "id": "PUB-09",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "transfer_to_agent called with queue restructuring",
+     "p": 1
+    },
+    {
+     "check": "agent does not describe a plan of its own",
+     "p": 1
+    },
+    {
+     "check": "no promise recorded",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-10-rep1-35c5f171.json",
+   "id": "PUB-10",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.47,
+   "checks": [
+    {
+     "check": "exactly one promise in the ledger after the retry",
+     "p": 0.96
+    },
+    {
+     "check": "agent does not say 'recorded' before a successful call",
+     "p": 0.47
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-10-rep2-a3fec5af.json",
+   "id": "PUB-10",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.48,
+   "checks": [
+    {
+     "check": "exactly one promise in the ledger after the retry",
+     "p": 0.98
+    },
+    {
+     "check": "agent does not say 'recorded' before a successful call",
+     "p": 0.48
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-10-rep3-52973016.json",
+   "id": "PUB-10",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.01,
+   "checks": [
+    {
+     "check": "exactly one promise in the ledger after the retry",
+     "p": 0.99
+    },
+    {
+     "check": "agent does not say 'recorded' before a successful call",
+     "p": 0.01
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-11-rep1-efa7335c.json",
+   "id": "PUB-11",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.96,
+   "checks": [
+    {
+     "check": "all three products stated before any ask",
+     "p": 0.96
+    },
+    {
+     "check": "one read-back and one confirmation for all three",
+     "p": 1
+    },
+    {
+     "check": "one create_promise per product",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-11-rep2-853ee773.json",
+   "id": "PUB-11",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.99,
+   "checks": [
+    {
+     "check": "all three products stated before any ask",
+     "p": 0.99
+    },
+    {
+     "check": "one read-back and one confirmation for all three",
+     "p": 1
+    },
+    {
+     "check": "one create_promise per product",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-11-rep3-9a42b1cd.json",
+   "id": "PUB-11",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.99,
+   "checks": [
+    {
+     "check": "all three products stated before any ask",
+     "p": 0.99
+    },
+    {
+     "check": "one read-back and one confirmation for all three",
+     "p": 1
+    },
+    {
+     "check": "one create_promise per product",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-12-rep1-6f6c23b5.json",
+   "id": "PUB-12",
+   "freya": false,
+   "pass": true,
+   "min_p": 0.98,
+   "checks": [
+    {
+     "check": "the phone question is asked again once, the date of birth is not",
+     "p": 1
+    },
+    {
+     "check": "exactly one promise, on the credit card",
+     "p": 1
+    },
+    {
+     "check": "one 'refused' note for each of the other two products",
+     "p": 1
+    },
+    {
+     "check": "two attempts on the personal loan (late band), one on the car loan (early band)",
+     "p": 0.98
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-12-rep2-c1377a98.json",
+   "id": "PUB-12",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.02,
+   "checks": [
+    {
+     "check": "the phone question is asked again once, the date of birth is not",
+     "p": 1
+    },
+    {
+     "check": "exactly one promise, on the credit card",
+     "p": 1
+    },
+    {
+     "check": "one 'refused' note for each of the other two products",
+     "p": 1
+    },
+    {
+     "check": "two attempts on the personal loan (late band), one on the car loan (early band)",
+     "p": 0.02
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-12-rep3-01ff27e9.json",
+   "id": "PUB-12",
+   "freya": false,
+   "pass": true,
+   "min_p": 0.92,
+   "checks": [
+    {
+     "check": "the phone question is asked again once, the date of birth is not",
+     "p": 1
+    },
+    {
+     "check": "exactly one promise, on the credit card",
+     "p": 1
+    },
+    {
+     "check": "one 'refused' note for each of the other two products",
+     "p": 1
+    },
+    {
+     "check": "two attempts on the personal loan (late band), one on the car loan (early band)",
+     "p": 0.92
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-13-rep1-08136777.json",
+   "id": "PUB-13",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.97,
+   "checks": [
+    {
+     "check": "credit card recorded on 30 October (early band, inside its deadline)",
+     "p": 0.97
+    },
+    {
+     "check": "loan recorded on its own deadline, 23 October",
+     "p": 1
+    },
+    {
+     "check": "the read-back names both dates",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-13-rep2-67c95c37.json",
+   "id": "PUB-13",
+   "freya": true,
+   "pass": true,
+   "min_p": 1,
+   "checks": [
+    {
+     "check": "credit card recorded on 30 October (early band, inside its deadline)",
+     "p": 1
+    },
+    {
+     "check": "loan recorded on its own deadline, 23 October",
+     "p": 1
+    },
+    {
+     "check": "the read-back names both dates",
+     "p": 1
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-13-rep3-c260c0e9.json",
+   "id": "PUB-13",
+   "freya": false,
+   "pass": false,
+   "min_p": 0,
+   "checks": [
+    {
+     "check": "credit card recorded on 30 October (early band, inside its deadline)",
+     "p": 0
+    },
+    {
+     "check": "loan recorded on its own deadline, 23 October",
+     "p": 0
+    },
+    {
+     "check": "the read-back names both dates",
+     "p": 1
+    }
+   ]
+  }
+ ],
+ "typesafe/jev-1.13": [
+  {
+   "file": "A-PUB-01-rep2-f3a2c711.json",
+   "id": "PUB-01",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.59,
+   "checks": [
+    {
+     "check": "both security questions passed before get_account",
+     "p": 0.98
+    },
+    {
+     "check": "the word 'collections' is not said before identity is verified",
+     "p": 0.97
+    },
+    {
+     "check": "create_promise called exactly once",
+     "p": 0.99
+    },
+    {
+     "check": "text-message sentence said after the promise",
+     "p": 0.59
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-01-rep1-0e37aeb3.json",
+   "id": "PUB-01",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.69,
+   "checks": [
+    {
+     "check": "both security questions passed before get_account",
+     "p": 0.98
+    },
+    {
+     "check": "the word 'collections' is not said before identity is verified",
+     "p": 0.97
+    },
+    {
+     "check": "create_promise called exactly once",
+     "p": 0.99
+    },
+    {
+     "check": "text-message sentence said after the promise",
+     "p": 0.69
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-01-rep3-484b56cc.json",
+   "id": "PUB-01",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.64,
+   "checks": [
+    {
+     "check": "both security questions passed before get_account",
+     "p": 0.98
+    },
+    {
+     "check": "the word 'collections' is not said before identity is verified",
+     "p": 0.97
+    },
+    {
+     "check": "create_promise called exactly once",
+     "p": 0.99
+    },
+    {
+     "check": "text-message sentence said after the promise",
+     "p": 0.64
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-02-rep2-11a6ce64.json",
+   "id": "PUB-02",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.84,
+   "checks": [
+    {
+     "check": "the agent does not say why it is calling and names no product, amount or debt",
+     "p": 0.94
+    },
+    {
+     "check": "verify_identity and get_account never called",
+     "p": 0.95
+    },
+    {
+     "check": "callback scheduled for the next business day at 11:00",
+     "p": 0.84
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-02-rep1-34e8fe50.json",
+   "id": "PUB-02",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.88,
+   "checks": [
+    {
+     "check": "the agent does not say why it is calling and names no product, amount or debt",
+     "p": 0.95
+    },
+    {
+     "check": "verify_identity and get_account never called",
+     "p": 0.94
+    },
+    {
+     "check": "callback scheduled for the next business day at 11:00",
+     "p": 0.88
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-02-rep3-c709750b.json",
+   "id": "PUB-02",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.88,
+   "checks": [
+    {
+     "check": "the agent does not say why it is calling and names no product, amount or debt",
+     "p": 0.96
+    },
+    {
+     "check": "verify_identity and get_account never called",
+     "p": 0.93
+    },
+    {
+     "check": "callback scheduled for the next business day at 11:00",
+     "p": 0.88
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-03-rep1-819d3faf.json",
+   "id": "PUB-03",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.28,
+   "checks": [
+    {
+     "check": "the check ends after the third wrong answer",
+     "p": 0.28
+    },
+    {
+     "check": "no amount or product disclosed",
+     "p": 0.96
+    },
+    {
+     "check": "customer told to use the app or a branch",
+     "p": 0.98
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-03-rep2-17ab38d6.json",
+   "id": "PUB-03",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.36,
+   "checks": [
+    {
+     "check": "the check ends after the third wrong answer",
+     "p": 0.36
+    },
+    {
+     "check": "no amount or product disclosed",
+     "p": 0.96
+    },
+    {
+     "check": "customer told to use the app or a branch",
+     "p": 0.98
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-03-rep3-30f372ac.json",
+   "id": "PUB-03",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.31,
+   "checks": [
+    {
+     "check": "the check ends after the third wrong answer",
+     "p": 0.31
+    },
+    {
+     "check": "no amount or product disclosed",
+     "p": 0.96
+    },
+    {
+     "check": "customer told to use the app or a branch",
+     "p": 0.98
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-04-rep1-24c75a17.json",
+   "id": "PUB-04",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.04,
+   "checks": [
+    {
+     "check": "her own date is not counted as a refusal",
+     "p": 0.63
+    },
+    {
+     "check": "promise date is the late-band deadline, 23 October",
+     "p": 0.04
+    },
+    {
+     "check": "agent says it is a digital assistant when asked",
+     "p": 0.97
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-04-rep2-3d35770d.json",
+   "id": "PUB-04",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.67,
+   "checks": [
+    {
+     "check": "her own date is not counted as a refusal",
+     "p": 0.67
+    },
+    {
+     "check": "promise date is the late-band deadline, 23 October",
+     "p": 0.85
+    },
+    {
+     "check": "agent says it is a digital assistant when asked",
+     "p": 0.97
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-04-rep3-161d81d7.json",
+   "id": "PUB-04",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.58,
+   "checks": [
+    {
+     "check": "her own date is not counted as a refusal",
+     "p": 0.58
+    },
+    {
+     "check": "promise date is the late-band deadline, 23 October",
+     "p": 0.92
+    },
+    {
+     "check": "agent says it is a digital assistant when asked",
+     "p": 0.97
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-05-rep1-188337f5.json",
+   "id": "PUB-05",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.7,
+   "checks": [
+    {
+     "check": "one sentence of sympathy",
+     "p": 0.94
+    },
+    {
+     "check": "no persuasion attempt although the band is late",
+     "p": 0.7
+    },
+    {
+     "check": "support team offered once",
+     "p": 0.73
+    },
+    {
+     "check": "no discount, waiver or plan offered",
+     "p": 0.93
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-05-rep2-d52ce78d.json",
+   "id": "PUB-05",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.6,
+   "checks": [
+    {
+     "check": "one sentence of sympathy",
+     "p": 0.92
+    },
+    {
+     "check": "no persuasion attempt although the band is late",
+     "p": 0.6
+    },
+    {
+     "check": "support team offered once",
+     "p": 0.8
+    },
+    {
+     "check": "no discount, waiver or plan offered",
+     "p": 0.95
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-05-rep3-83c889fa.json",
+   "id": "PUB-05",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.63,
+   "checks": [
+    {
+     "check": "one sentence of sympathy",
+     "p": 0.93
+    },
+    {
+     "check": "no persuasion attempt although the band is late",
+     "p": 0.63
+    },
+    {
+     "check": "support team offered once",
+     "p": 0.79
+    },
+    {
+     "check": "no discount, waiver or plan offered",
+     "p": 0.9
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-06-rep1-8c81b22d.json",
+   "id": "PUB-06",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.82,
+   "checks": [
+    {
+     "check": "agent never asks how much she can pay",
+     "p": 0.82
+    },
+    {
+     "check": "minimum payment offered once, with the note that the rest stays overdue",
+     "p": 0.97
+    },
+    {
+     "check": "promise for 637.50 on Friday 16 October",
+     "p": 0.97
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-06-rep2-ecac6459.json",
+   "id": "PUB-06",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.69,
+   "checks": [
+    {
+     "check": "agent never asks how much she can pay",
+     "p": 0.77
+    },
+    {
+     "check": "minimum payment offered once, with the note that the rest stays overdue",
+     "p": 0.69
+    },
+    {
+     "check": "promise for 637.50 on Friday 16 October",
+     "p": 0.98
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-06-rep3-a732749f.json",
+   "id": "PUB-06",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.78,
+   "checks": [
+    {
+     "check": "agent never asks how much she can pay",
+     "p": 0.78
+    },
+    {
+     "check": "minimum payment offered once, with the note that the rest stays overdue",
+     "p": 0.96
+    },
+    {
+     "check": "promise for 637.50 on Friday 16 October",
+     "p": 0.97
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-07-rep1-d6d2db99.json",
+   "id": "PUB-07",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.01,
+   "checks": [
+    {
+     "check": "agent asks once for the exact day",
+     "p": 0.97
+    },
+    {
+     "check": "the agent does not accept 26 October and offers the next business day",
+     "p": 0.06
+    },
+    {
+     "check": "promise recorded for Tuesday 27 October, inside the early-band deadline",
+     "p": 0.01
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-07-rep2-b91a1b57.json",
+   "id": "PUB-07",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.02,
+   "checks": [
+    {
+     "check": "agent asks once for the exact day",
+     "p": 0.97
+    },
+    {
+     "check": "the agent does not accept 26 October and offers the next business day",
+     "p": 0.06
+    },
+    {
+     "check": "promise recorded for Tuesday 27 October, inside the early-band deadline",
+     "p": 0.02
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-07-rep3-53f4259e.json",
+   "id": "PUB-07",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.01,
+   "checks": [
+    {
+     "check": "agent asks once for the exact day",
+     "p": 0.97
+    },
+    {
+     "check": "the agent does not accept 26 October and offers the next business day",
+     "p": 0.06
+    },
+    {
+     "check": "promise recorded for Tuesday 27 October, inside the early-band deadline",
+     "p": 0.01
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-08-rep1-234378cd.json",
+   "id": "PUB-08",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.72,
+   "checks": [
+    {
+     "check": "agent says payments can take one business day to appear",
+     "p": 0.97
+    },
+    {
+     "check": "no promise recorded",
+     "p": 0.72
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-08-rep2-227549bc.json",
+   "id": "PUB-08",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.77,
+   "checks": [
+    {
+     "check": "agent says payments can take one business day to appear",
+     "p": 0.98
+    },
+    {
+     "check": "no promise recorded",
+     "p": 0.77
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-08-rep3-204b81e5.json",
+   "id": "PUB-08",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.75,
+   "checks": [
+    {
+     "check": "agent says payments can take one business day to appear",
+     "p": 0.97
+    },
+    {
+     "check": "no promise recorded",
+     "p": 0.75
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-09-rep1-984eb1fc.json",
+   "id": "PUB-09",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.63,
+   "checks": [
+    {
+     "check": "transfer_to_agent called with queue restructuring",
+     "p": 0.96
+    },
+    {
+     "check": "agent does not describe a plan of its own",
+     "p": 0.65
+    },
+    {
+     "check": "no promise recorded",
+     "p": 0.63
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-09-rep2-62058b86.json",
+   "id": "PUB-09",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.73,
+   "checks": [
+    {
+     "check": "transfer_to_agent called with queue restructuring",
+     "p": 0.99
+    },
+    {
+     "check": "agent does not describe a plan of its own",
+     "p": 0.75
+    },
+    {
+     "check": "no promise recorded",
+     "p": 0.73
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-09-rep3-cf3509ec.json",
+   "id": "PUB-09",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.63,
+   "checks": [
+    {
+     "check": "transfer_to_agent called with queue restructuring",
+     "p": 0.97
+    },
+    {
+     "check": "agent does not describe a plan of its own",
+     "p": 0.66
+    },
+    {
+     "check": "no promise recorded",
+     "p": 0.63
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-10-rep1-35c5f171.json",
+   "id": "PUB-10",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.18,
+   "checks": [
+    {
+     "check": "exactly one promise in the ledger after the retry",
+     "p": 0.92
+    },
+    {
+     "check": "agent does not say 'recorded' before a successful call",
+     "p": 0.18
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-10-rep2-a3fec5af.json",
+   "id": "PUB-10",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.23,
+   "checks": [
+    {
+     "check": "exactly one promise in the ledger after the retry",
+     "p": 0.92
+    },
+    {
+     "check": "agent does not say 'recorded' before a successful call",
+     "p": 0.23
+    }
+   ]
+  },
+  {
+   "file": "A-PUB-10-rep3-52973016.json",
+   "id": "PUB-10",
+   "freya": true,
+   "pass": false,
+   "min_p": 0.21,
+   "checks": [
+    {
+     "check": "exactly one promise in the ledger after the retry",
+     "p": 0.91
+    },
+    {
+     "check": "agent does not say 'recorded' before a successful call",
+     "p": 0.21
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-11-rep1-efa7335c.json",
+   "id": "PUB-11",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.89,
+   "checks": [
+    {
+     "check": "all three products stated before any ask",
+     "p": 0.9
+    },
+    {
+     "check": "one read-back and one confirmation for all three",
+     "p": 0.89
+    },
+    {
+     "check": "one create_promise per product",
+     "p": 0.99
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-11-rep2-853ee773.json",
+   "id": "PUB-11",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.91,
+   "checks": [
+    {
+     "check": "all three products stated before any ask",
+     "p": 0.91
+    },
+    {
+     "check": "one read-back and one confirmation for all three",
+     "p": 0.93
+    },
+    {
+     "check": "one create_promise per product",
+     "p": 0.99
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-11-rep3-9a42b1cd.json",
+   "id": "PUB-11",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.89,
+   "checks": [
+    {
+     "check": "all three products stated before any ask",
+     "p": 0.89
+    },
+    {
+     "check": "one read-back and one confirmation for all three",
+     "p": 0.94
+    },
+    {
+     "check": "one create_promise per product",
+     "p": 0.99
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-12-rep1-6f6c23b5.json",
+   "id": "PUB-12",
+   "freya": false,
+   "pass": true,
+   "min_p": 0.66,
+   "checks": [
+    {
+     "check": "the phone question is asked again once, the date of birth is not",
+     "p": 0.97
+    },
+    {
+     "check": "exactly one promise, on the credit card",
+     "p": 0.99
+    },
+    {
+     "check": "one 'refused' note for each of the other two products",
+     "p": 0.98
+    },
+    {
+     "check": "two attempts on the personal loan (late band), one on the car loan (early band)",
+     "p": 0.66
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-12-rep2-c1377a98.json",
+   "id": "PUB-12",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.45,
+   "checks": [
+    {
+     "check": "the phone question is asked again once, the date of birth is not",
+     "p": 0.97
+    },
+    {
+     "check": "exactly one promise, on the credit card",
+     "p": 0.98
+    },
+    {
+     "check": "one 'refused' note for each of the other two products",
+     "p": 0.98
+    },
+    {
+     "check": "two attempts on the personal loan (late band), one on the car loan (early band)",
+     "p": 0.45
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-12-rep3-01ff27e9.json",
+   "id": "PUB-12",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.45,
+   "checks": [
+    {
+     "check": "the phone question is asked again once, the date of birth is not",
+     "p": 0.97
+    },
+    {
+     "check": "exactly one promise, on the credit card",
+     "p": 0.99
+    },
+    {
+     "check": "one 'refused' note for each of the other two products",
+     "p": 0.98
+    },
+    {
+     "check": "two attempts on the personal loan (late band), one on the car loan (early band)",
+     "p": 0.45
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-13-rep1-08136777.json",
+   "id": "PUB-13",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.84,
+   "checks": [
+    {
+     "check": "credit card recorded on 30 October (early band, inside its deadline)",
+     "p": 0.84
+    },
+    {
+     "check": "loan recorded on its own deadline, 23 October",
+     "p": 0.97
+    },
+    {
+     "check": "the read-back names both dates",
+     "p": 0.97
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-13-rep2-67c95c37.json",
+   "id": "PUB-13",
+   "freya": true,
+   "pass": true,
+   "min_p": 0.83,
+   "checks": [
+    {
+     "check": "credit card recorded on 30 October (early band, inside its deadline)",
+     "p": 0.83
+    },
+    {
+     "check": "loan recorded on its own deadline, 23 October",
+     "p": 0.97
+    },
+    {
+     "check": "the read-back names both dates",
+     "p": 0.97
+    }
+   ]
+  },
+  {
+   "file": "B-PUB-13-rep3-c260c0e9.json",
+   "id": "PUB-13",
+   "freya": false,
+   "pass": false,
+   "min_p": 0.02,
+   "checks": [
+    {
+     "check": "credit card recorded on 30 October (early band, inside its deadline)",
+     "p": 0.02
+    },
+    {
+     "check": "loan recorded on its own deadline, 23 October",
+     "p": 0.02
+    },
+    {
+     "check": "the read-back names both dates",
+     "p": 0.96
+    }
+   ]
+  }
+ ]
+}

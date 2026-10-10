@@ -1,6 +1,6 @@
 """Two conversation judges.
 
-Judge C codes the mechanical checks and sends the other checks to POST /v1/decisions.
+Judge C codes the mechanical checks and sends the other checks to Jev.
 Judge B sends the same criteria text Freya uses to gemini-3-flash-preview.
 The ledger score stays in score.py. These judges do not change that score.
 """

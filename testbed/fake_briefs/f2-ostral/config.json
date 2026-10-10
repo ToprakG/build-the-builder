@@ -1,0 +1,200 @@
+{
+ "language": "en",
+ "address": "{title} {last_name}",
+ "identity": {
+  "questions": [
+   "date_of_birth",
+   "postcode",
+   "phone_last4"
+  ],
+  "max_wrong": 2,
+  "swap_hint": true
+ },
+ "callback": {
+  "start": "10:00",
+  "end": "20:00",
+  "same_day": true
+ },
+ "outcome_map": {
+  "promise": [
+   "promise",
+   null
+  ],
+  "paid": [
+   "paid",
+   null
+  ],
+  "tr_restructuring": [
+   "transferred",
+   "restructuring"
+  ],
+  "tr_human": [
+   "transferred",
+   "human"
+  ],
+  "tr_support": [
+   "transferred",
+   "support"
+  ],
+  "np_refused": [
+   "no_promise",
+   "refused"
+  ],
+  "np_hardship": [
+   "no_promise",
+   "hardship"
+  ],
+  "np_dispute": [
+   "no_promise",
+   "dispute"
+  ],
+  "np_service_error": [
+   "no_promise",
+   "service_error"
+  ],
+  "nv_failed": [
+   "not_verified",
+   "failed"
+  ],
+  "nv_declined": [
+   "not_verified",
+   "declined"
+  ],
+  "nr_callback": [
+   "not_reached",
+   "callback"
+  ],
+  "nr_no_callback": [
+   "not_reached",
+   "no_callback"
+  ],
+  "nr_wrong_number": [
+   "not_reached",
+   "wrong_number"
+  ],
+  "nr_deceased": [
+   "not_reached",
+   "deceased"
+  ],
+  "nr_unclear": [
+   "not_reached",
+   "unclear"
+  ]
+ },
+ "queue_map": {
+  "restructuring": "restructuring",
+  "human": "agent",
+  "support": "welfare"
+ },
+ "note_map": {
+  "refused": "refused",
+  "hardship": "hardship",
+  "dispute": "dispute",
+  "paid": "paid",
+  "service_error": "service_error"
+ },
+ "close_rule": {
+  "kind": "first_non_paid"
+ },
+ "notes_on_restructuring": null,
+ "product_types": {
+  "card": {
+   "enum": "credit_card",
+   "label": "credit card ending {last4}",
+   "floor_field": "minimum_payment",
+   "last4_field": "card_last4"
+  },
+  "loan": {
+   "enum": "personal_loan",
+   "label": "personal loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  },
+  "car": {
+   "enum": "car_loan",
+   "label": "car loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  }
+ },
+ "account_fields": {
+  "product_id": "product_id",
+  "type": "type",
+  "past_due": "past_due",
+  "days_late": "days_late"
+ },
+ "product_id_format": "p{n}",
+ "tools": {
+  "verify_identity": {
+   "field": "field",
+   "answer": "answer"
+  },
+  "create_promise": {
+   "product_id": "product_id",
+   "amount": "amount",
+   "date": "date",
+   "amount_unit": "currency"
+  },
+  "schedule_callback": {
+   "mode": "date_time",
+   "date": "date",
+   "time": "time"
+  },
+  "close_call": {
+   "mode": "outcome_reason",
+   "outcome": "outcome",
+   "reason": "reason"
+  },
+  "transfer_to_agent": {
+   "queue": "queue"
+  },
+  "add_note": {
+   "product_id": "product_id",
+   "reason": "reason"
+  }
+ },
+ "forbidden_before_verify": [
+  "arrears",
+  "debt",
+  "payment",
+  "overdue"
+ ],
+ "multi_product": false,
+ "max_products": 1,
+ "attempt1": "last business day of this week (next week's if today is that day), never after the deadline",
+ "id": "f2-ostral",
+ "name": "Ostral Bank (clean, 3 identity questions)",
+ "bank": "Ostral Bank",
+ "kind": "clean",
+ "holidays": [
+  "2026-11-09",
+  "2026-11-23",
+  "2026-12-08",
+  "2026-12-25",
+  "2026-12-28"
+ ],
+ "bands": [
+  {
+   "name": "early",
+   "min_days": 1,
+   "max_days": 14,
+   "deadline_business_days": 10,
+   "attempts": 1
+  },
+  {
+   "name": "late",
+   "min_days": 15,
+   "max_days": 60,
+   "deadline_business_days": 5,
+   "attempts": 2
+  }
+ ],
+ "sentences": {
+  "opening": "Ostral Bank's automated assistant; the call is recorded for quality and security",
+  "promise_confirmation": "You will get a text message with the details of this promise.",
+  "ai": "Ostral Bank's automated assistant",
+  "scam": "hang up and call Ostral Bank on the number printed on their statement",
+  "failed_id": "call the number on their statement or visit a branch"
+ },
+ "_note": "Hand-written correct config: what a perfect extractor reads from this brief. Canonical keys on the left, the brief's own values on the right."
+}

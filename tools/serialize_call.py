@@ -3,7 +3,7 @@
 Tool calls sit inline with their arguments and results. A FACTS block at the end
 is computed here, so the model checks words against those facts.
 """
-import json
+import json, re
 from dataclasses import dataclass, field
 
 SKIP_TOOLS = {"end_call"}
@@ -107,7 +107,102 @@ def product_type(turns, product_id):
             return product.get("type")
     return None
 
-def fact_lines(turns):
+ASK = re.compile(
+    r"\b(can you|could you|would you)\b.{0,120}\b(pay|payment|payments)\b|\bmake (this|these|all|the full)\b",
+    re.I,
+)
+CONFIRM = re.compile(r"do you confirm", re.I)
+PRODUCT_WORD = {
+    "credit_card": re.compile(r"credit card", re.I),
+    "personal_loan": re.compile(r"personal loan", re.I),
+    "car_loan": re.compile(r"car loan", re.I),
+}
+
+def _cell(table, key):
+    cell = table.get(key)
+    if isinstance(cell, dict):
+        return cell.get("value")
+    return cell
+
+def variable_table(messages):
+    found = {}
+    for message in messages or []:
+        table = (message.get("workflowSnapshot") or {}).get("variableTable") or {}
+        if table:
+            found = table
+    return found
+
+def _band(days_late):
+    try:
+        days = int(days_late)
+    except (TypeError, ValueError):
+        return "unknown", None
+    if 1 <= days <= 7:
+        return "early", 1
+    if 8 <= days <= 45:
+        return "late", 2
+    return "unknown", None
+
+def _json_cell(table, key):
+    raw = _cell(table, key)
+    if isinstance(raw, str):
+        try:
+            raw = json.loads(raw)
+        except json.JSONDecodeError:
+            return None
+    return raw
+
+def attempt_counts(turns, messages=None):
+    """Per product: label, band, allowed, count.
+
+    A workflow that ran the code nodes stores attempts_used_json. Saved calls
+    that predate those nodes get the same count from the payment asks.
+    """
+    products = products_of(turns)
+    if not products:
+        return []
+    stored = _json_cell(variable_table(messages), "attempts_used_json")
+    described = _json_cell(variable_table(messages), "products_json")
+    by_id = {}
+    if isinstance(described, list):
+        for item in described:
+            if isinstance(item, dict) and item.get("product_id"):
+                by_id[item["product_id"]] = item
+    rows = []
+    current = []
+    spoken = {product.get("product_id"): 0 for product in products}
+    account_at = next((turn.n for turn in tools(turns, "get_account")), 0)
+    for turn in turns:
+        if turn.kind != "agent" or turn.n < account_at or CONFIRM.search(turn.text):
+            continue
+        for sentence in re.split(r"(?<=[.!?])\s+", turn.text.strip()):
+            named = [product for product in products if PRODUCT_WORD.get(product.get("type")) and PRODUCT_WORD[product.get("type")].search(sentence)]
+            if named:
+                current = named
+            if not ASK.search(sentence):
+                continue
+            targets = named
+            if not targets and re.search(r"\b(these payments|this payment|all of these)\b", sentence, re.I):
+                targets = products
+            elif not targets:
+                targets = current
+            for product in targets:
+                spoken[product.get("product_id")] = spoken.get(product.get("product_id"), 0) + 1
+    for product in products:
+        pid = product.get("product_id")
+        meta = by_id.get(pid) or {}
+        band, allowed = _band(product.get("days_late"))
+        band = meta.get("band") or band
+        if meta.get("attempts_allowed") is not None:
+            allowed = meta.get("attempts_allowed")
+        count = spoken.get(pid, 0)
+        if isinstance(stored, dict):
+            count = stored.get(pid, 0)
+        label = meta.get("label") or str(product.get("type") or "product").replace("_", " ")
+        rows.append({"product_id": pid, "label": label, "band": band, "allowed": allowed, "count": count})
+    return rows
+
+def fact_lines(turns, messages=None):
     lines = []
     mark = verified_turn(turns)
     lines.append(f"identity verified at T{mark}" if mark else "identity not verified")
@@ -124,13 +219,19 @@ def fact_lines(turns):
         lines.append("get_account calls: 0")
     promises = tools(turns, "create_promise")
     if promises:
-        bits = []
-        for turn in promises:
-            state = "ok" if turn.result.get("ok") is True else "fail"
-            bits.append(f"T{turn.n} {state} product={turn.args.get('product_id')} amount={turn.args.get('amount')} date={turn.args.get('date')}")
-        lines.append(f"create_promise calls: {len(promises)} (" + "; ".join(bits) + ")")
+        for index, turn in enumerate(promises, 1):
+            returned = "ok" if turn.result.get("ok") is True else "not ok"
+            error = f" error={turn.result.get('error')}" if turn.result.get("error") else ""
+            lines.append(
+                f"create_promise attempt {index} at T{turn.n}: returned {returned}"
+                f" product={turn.args.get('product_id')} amount={turn.args.get('amount')} date={turn.args.get('date')}{error}"
+            )
     else:
-        lines.append("create_promise calls: 0")
+        lines.append("create_promise attempts: none")
+    for row in attempt_counts(turns, messages):
+        lines.append(
+            f"payment attempts: {row['label']} ({row['product_id']}, {row['band']} band, allowed {row['allowed']}) count={row['count']}"
+        )
     notes = tools(turns, "add_note")
     if notes:
         lines.append("add_note calls: " + "; ".join(f"T{turn.n} product={turn.args.get('product_id')} reason={turn.args.get('reason')}" for turn in notes))
@@ -169,5 +270,5 @@ def render(messages, case=None, facts=True):
     parts = [header, *body]
     if facts:
         parts.append("FACTS (computed by code):")
-        parts.extend("- " + line for line in fact_lines(turns))
+        parts.extend("- " + line for line in fact_lines(turns, messages))
     return "\n".join(parts), turns
