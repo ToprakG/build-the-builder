@@ -1,0 +1,3 @@
+ingest: 18 file(s), 205479 chars, tool API from https://statement-mock.guntop-mockbank.workers.dev/openapi.json
+ledger: 211 rule(s), 6 open
+{"status": "failed", "slot": "case-test-environment", "saved": null, "fallback_used": false, "message": "save to Freya failed: The read operation timed out", "trace": "/Users/toprakgundogdu/Downloads/build-the-builder/traces/agentic-case-test-environment-20261011-211107", "submission": "/Users/toprakgundogdu/Downloads/build-the-builder/submission.json"}

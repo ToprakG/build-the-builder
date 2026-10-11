@@ -68,7 +68,7 @@ def review_options(ws: Path, model: str, hook, max_turns: int = 80):
 
 
 def sdk_options(ws: Path, model: str, hook, server, max_turns: int = 200, max_usd: float | None = None,
-                resume: str | None = None):
+                resume: str | None = None, skill_names: list | None = None):
     from claude_agent_sdk import ClaudeAgentOptions, HookMatcher  # noqa: PLC0415
 
     return ClaudeAgentOptions(
@@ -78,7 +78,7 @@ def sdk_options(ws: Path, model: str, hook, server, max_turns: int = 200, max_us
         tools=FILE_TOOLS + ["Skill"],  # the base set: no Bash, no web, no subagents (types.py:1974)
         allowed_tools=FILE_TOOLS + mcp_server.tool_names(),
         disallowed_tools=DENIED_TOOLS,
-        skills=[SKILL_NAME],
+        skills=skill_names or [SKILL_NAME],
         setting_sources=["project"],  # the workspace's .claude/ only
         permission_mode="dontAsk",  # anything not pre-approved is refused
         max_turns=max_turns,
@@ -472,15 +472,32 @@ def run(opts: BuildOptions, query_fn=None, freya_mod=None, validate_fn=validate.
     report: dict = {}
     try:
         build_workspace(ws, opts.briefs, opts.api)
+        skill_names = [SKILL_NAME]
+        for raw in (opts.extra or {}).get("skill_dirs") or []:
+            src = Path(raw)
+            if not (src / "SKILL.md").exists():
+                continue
+            shutil.copytree(src, ws / ".claude" / "skills" / src.name,
+                            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+            skill_names.append(src.name)
         _install_ledger(ws, opts, trace)
-        trace.event("workspace", {"path": str(ws), "files": sorted(str(p.relative_to(ws)) for p in ws.rglob("*") if p.is_file())[:60]})
+        trace.event("workspace", {"path": str(ws), "files": sorted(str(p.relative_to(ws)) for p in ws.rglob("*") if p.is_file())[:80],
+                                  "skills": skill_names})
         clock = Clock(opts.max_minutes)
         bound = mcp_server.BoundTools(ws, clock, on_event=trace.event, validate_fn=validate_fn)
+        bind = (opts.extra or {}).get("bind_tools")
+        if bind:
+            bound = bind(bound)
         hook = guard.make_hook(ws, on_event=trace.event)
         if query_fn is None:
             from claude_agent_sdk import query as query_fn  # noqa: PLC0415
-        options = sdk_options(ws, opts.model, hook, mcp_server.build_server(bound), opts.max_turns, opts.max_usd)
+        server_fn = (opts.extra or {}).get("server_fn") or mcp_server.build_server
+        options = sdk_options(ws, opts.model, hook, server_fn(bound), opts.max_turns, opts.max_usd,
+                              skill_names=skill_names)
         task = prompt.task_prompt(len(opts.briefs), opts.max_minutes)
+        append = (opts.extra or {}).get("prompt_append") or ""
+        if append:
+            task += "\n\n" + append
         trace.event("prompt", task)
         state = _phase(query_fn, task, options, trace, opts.max_minutes, "build")
         t_agent = time.monotonic() - t0

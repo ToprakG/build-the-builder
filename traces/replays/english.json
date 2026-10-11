@@ -1,0 +1,6 @@
+[
+ {
+  "user": "Hello, please tell me my balance in English.",
+  "error": "POST /api/v2/chat/message -> 504: error code: 504\n"
+ }
+]

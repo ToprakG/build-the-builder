@@ -80,5 +80,10 @@
  "case-freyabank-test": {
   "workflow_id": "b4099d27-1da1-4954-aa92-a1b04168f5c8",
   "agent_id": "5fdb3a91-b168-4472-acaf-2cb7c7aa4fec"
+ },
+ "case-test-environment": {
+  "workflow_id": "9ef88f95-2a75-40fd-9c06-4f1d05a544b0",
+  "agent_id": "bc275c9d-9300-4576-b8a6-030841f495d0",
+  "version": 1
  }
 }

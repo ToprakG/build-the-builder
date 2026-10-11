@@ -32,7 +32,46 @@ def _card_bucket(service, card_number):
     return None
 
 
+def unwrap(body):
+    if isinstance(body, dict) and isinstance(body.get("data"), dict):
+        return body["data"]
+    return body if isinstance(body, dict) else {}
+
+
+SERVICES = [
+    ("cards.list", "customer"),
+    ("cards.balance", "card"),
+    ("statement.week.get", "card"),
+    ("statement.week.decide", "card"),
+    ("statement.week.change", "card"),
+    ("contact.email.get", "customer"),
+    ("statement.pdf.send", "card"),
+]
+
+
+def openapi():
+    paths = {}
+    for service, kind in SERVICES:
+        required = ["customerNo"] if kind == "customer" else ["cardNumber"]
+        if service in ("statement.week.decide", "statement.week.change"):
+            required = ["cardNumber", "newStatementWeek"]
+        if service == "statement.pdf.send":
+            required = ["customerNo", "cardNumber"]
+        props = {name: {"type": "string"} for name in required}
+        paths[f"/voice/v1/{service}"] = {"post": {
+            "operationId": service,
+            "requestBody": {"required": True, "content": {"application/json": {"schema": {
+                "type": "object",
+                "required": ["data"],
+                "properties": {"data": {"type": "object", "properties": props, "required": required}},
+            }}}},
+            "responses": {"200": {"description": "Fixture body"}},
+        }}
+    return {"openapi": "3.0.3", "info": {"title": "Statement services", "version": "trial"}, "paths": paths}
+
+
 def lookup(path, body):
+    body = unwrap(body)
     services = _customer(body)
     if services is None:
         return 404, {"result": {"messageText": "Müşteri bulunamadı.", "type": "WARNING"}}
@@ -59,6 +98,20 @@ def lookup(path, body):
 
 
 class Handler(BaseHTTPRequestHandler):
+    def _send(self, status, payload):
+        data = json.dumps(payload, ensure_ascii=False).encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def do_GET(self):
+        if self.path.split("?")[0] == "/openapi.json":
+            self._send(200, openapi())
+            return
+        self._send(404, {"result": {"messageText": "Yok."}})
+
     def do_POST(self):
         length = int(self.headers.get("Content-Length") or 0)
         raw = self.rfile.read(length) if length else b"{}"
@@ -67,13 +120,9 @@ class Handler(BaseHTTPRequestHandler):
         except Exception:
             body = {}
         status, payload = lookup(self.path, body)
-        data = json.dumps(payload, ensure_ascii=False).encode()
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(data)))
-        self.end_headers()
-        self.wfile.write(data)
-        print(status, self.path, body.get("customerNo") or body.get("customerNumber"), body.get("cardNumber"), body.get("newStatementWeek"), flush=True)
+        self._send(status, payload)
+        flat = unwrap(body)
+        print(status, self.path, flat.get("customerNo") or flat.get("customerNumber"), flat.get("cardNumber"), flat.get("newStatementWeek"), flush=True)
 
     def log_message(self, fmt, *args):
         return

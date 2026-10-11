@@ -1,0 +1,6 @@
+[
+ {
+  "user": "Bütün kartlarımın borcunu söyle.",
+  "error": "POST /api/v2/chat/message -> 504: error code: 504\n"
+ }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "key": "selin_week_down",
+    "customerNumber": "94835408",
+    "name": "Selin week service down",
+    "prompt": "You are Selin Kaya, customer 94835408. Speak only Turkish, one short sentence each turn. Wait for the assistant. Then say: Hesap kesim haftamı değiştirmek istiyorum. If it asks which card, say: 1111. If it transfers you, stop.",
+    "successCriteria": "statement.week.get returns HTTP 500. The assistant says Şu anda hesap kesim tarihinizi değiştiremiyorum, sizi müşteri temsilcimize aktarıyorum. It does not say the week was changed and does not invent a new statement date. It does not use the main-menu sentence for this failure."
+  },
+  {
+    "key": "bora_preview_down",
+    "customerNumber": "94339861",
+    "name": "Bora preview fails",
+    "prompt": "You are Bora Tekin, customer 94339861. Speak only Turkish, one short sentence. Say: Kesim tarihini üçüncü haftaya al. If asked which card, say: 1112. If asked whether you want to change it, say: Evet. If it transfers you, stop. Do not say evet to a date that was never read.",
+    "successCriteria": "The card is week 2, next statement 9 Kasım 2026, next due date 19 Kasım 2026. statement.week.decide for week 3 returns HTTP 500. The assistant says Şu anda hesap kesim tarihinizi değiştiremiyorum, sizi müşteri temsilcimize aktarıyorum. It does not say the week was changed to the third week and does not invent 16 Kasım 2026 as an already applied date."
+  },
+  {
+    "key": "duru_pdf_missing",
+    "customerNumber": "93635512",
+    "name": "Duru statement PDF missing",
+    "prompt": "You are Duru Akıncı, customer 93635512. Speak only Turkish, one short sentence. If asked which card, say: 7201. After a debt is read, say: Ekstreyi e-postama gönder. If an address is read, say: Evet, gönderin. If transferred, stop.",
+    "successCriteria": "The assistant reads the card ending 7201: remaining Turkish lira debt 4.200 and a thank-you that the minimum was paid. It does not use 1.240,60 or 12.300 for this card. After a clear yes, statement.pdf.send returns 404, document not found. The assistant does not say the statement was sent. It says Şu anda işleminizi gerçekleştiremiyorum, sizi müşteri temsilcimize aktarıyorum."
+  },
+  {
+    "key": "gul_messy_email",
+    "customerNumber": "93261864",
+    "name": "Gül long email address",
+    "prompt": "You are Gül Özkaratepe, customer 93261864. Speak only Turkish, one short sentence. If asked which card, say: 7101. Then say: Ekstreyi mailime yolla. When an address is described, say: Evet, o adrese gönder. Then stop.",
+    "successCriteria": "The assistant does not spell m.ozkaratepe-1987.k@ornekposta.example letter by letter. It shortens that long address and sends only after a clear yes. It says Ekstreniz kayıtlı e-posta adresinize gönderildi only after the service succeeds, then hands the call to the main menu. The debt it reads for 7101 is remaining 4.200 Türk Lirası, with the minimum already paid, not 12.300."
+  },
+  {
+    "key": "arda_no_cut",
+    "customerNumber": "97631186",
+    "name": "Arda no statement yet",
+    "prompt": "You are Arda Bulut, customer 97631186. Speak only Turkish, one short sentence. Say: Ekstre borcum var mı, kesim tarihim ne? If offered an email, say: Olmaz, adresim yok zaten. Then say: Başka bir şey istemiyorum.",
+    "successCriteria": "The card ending 2020 has no statement date in the service. The assistant says there is no statement debt and does not invent a cut date such as 5 Ekim 2026. If it reads a future total, that total is 860,40 Türk Lirası. There is no registered email, so it does not offer to send the statement and does not say one was sent. When Arda is done, it goes to the main menu."
+  },
+  {
+    "key": "derin_fx_only",
+    "customerNumber": "97783309",
+    "name": "Derin foreign currency, no email",
+    "prompt": "You are Derin Koç, customer 97783309. Speak only Turkish, one short sentence. Wait for the whole debt. Then say: Mailime de atın. If that is refused, say: Haftayı da değiştirmeyelim, sağ ol.",
+    "successCriteria": "There is no Turkish lira debt, so the reading starts with the card ending 0310, cut on 9 Ekim 2026. Dollar debt is 95,40 with minimum 38,16. Euro debt is 210,75 with minimum 210,75. Turkish lira and İngiliz Sterlini are together in the no-debt sentence. The due date is 19 Ekim 2026. The words Dolar and Euro are used, not USD or EUR. No email is on file, so the offer does not mention email. When Derin asks anyway, the assistant says there is no registered email and does not send the statement."
+  },
+  {
+    "key": "nehir_two_bins",
+    "customerNumber": "93931069",
+    "name": "Nehir same last four",
+    "prompt": "You are Nehir Aydın, customer 93931069. Speak only Turkish, one short sentence. Say: Yıldız Miles Platinum borcu. If asked for the last four, say: 3215. If asked for the last six or the full number, say: Kart 546000 ile başlıyor, sonu 3215. After the debt, say: Bu kadar.",
+    "successCriteria": "Two cards share the name and the last four 3215. The assistant asks for the last four, then asks for the last six, and never speaks 540000 or 546000 itself. It reads the card that starts with 546000: Turkish lira statement debt 21.400 and minimum 8.560, dollar debt 730 with minimum 292. It does not read 30.000, 16.000, or sterling 75,40 for this card. The statement date is 23 Ekim 2026 and the due date is 2 Kasım 2026. It does not say the due date has passed."
+  },
+  {
+    "key": "ayla_three_names",
+    "customerNumber": "98814070",
+    "name": "Ayla three cards, one name",
+    "prompt": "You are Ayla Çelik, customer 98814070. Speak only Turkish, one short sentence. Say: Miles Platinum borcum ne? If asked for digits, say: 2402. Correct yourself once if you say 2401, then repeat 2402. After the debt, say: Başka kart istemiyorum.",
+    "successCriteria": "The assistant says there is more than one Yıldız Miles Platinum and asks for the last four digits. It then reads only the card ending 2402: Turkish lira debt 4.300 and minimum 1.720, cut 5 Ekim 2026, due 15 Ekim 2026. It does not read the euro debt 842,30 from 2401 or the dollar debt 260 from 2403. Dollar, euro, and sterling have no debt on 2402. It does not speak a full card number."
+  },
+  {
+    "key": "burak_blank_name",
+    "customerNumber": "96451507",
+    "name": "Burak card with no product name",
+    "prompt": "You are Burak Ateş, customer 96451507. Speak only Turkish, one short sentence. Say: Adı boş görünen kart, sonu 1303. If asked to pick from names, say again: 1303, ürün adı yok. After the debt, say: Sağ ol, bu kadar.",
+    "successCriteria": "The card ending 1303 has an empty product name. The assistant introduces it by the last four only and does not invent Yıldız Premium, Yıldız Fly, or any other product name. The Turkish lira statement debt is 6.350,80 and the minimum is 2.540,32. Dollar, euro, and sterling have no debt. The cut date is 5 Ekim 2026 and the due date is 15 Ekim 2026. It does not read 22.500 or 3.100 as this card."
+  },
+  {
+    "key": "tamer_minimum",
+    "customerNumber": "97974112",
+    "name": "Tamer wants only the minimum",
+    "prompt": "You are Tamer Altun, customer 97974112. Speak only Turkish, one short sentence. If asked which card, say: Gold, 2801. Then say: Sadece minimum tutarı söyle, hepsini anlatma. After that figure, say: Başka bir şey istemiyorum.",
+    "successCriteria": "The assistant does not read all five cards together. For the Gold card ending 2801 it gives the Turkish lira minimum 10.000,25 and goes to the offer. It does not continue into the dollar debt 4.567,55 or the euro debt 6.567,55 after Tamer asked for only the minimum. It does not add the five cards into one total. When he wants nothing else, it goes to the main menu."
+  },
+  {
+    "key": "tarik_linked_week",
+    "customerNumber": "95960044",
+    "name": "Tarık changes the linked card",
+    "prompt": "You are Tarık Yıldırım, customer 95960044. Speak only Turkish, one short sentence. Say: Premium kartın kesim haftasını dördüncü haftaya al, sonu 3102. If asked to confirm the new dates, say: Evet, onaylıyorum. Do not ask for a second change.",
+    "successCriteria": "The card ending 3102 is the linked card, current week 3, next cut 16 Kasım 2026, next due date 26 Kasım 2026. The assistant says the change also moves the main card it hangs off, Yıldız Pratik. It offers weeks 1, 2, and 4, not week 3. The week-4 preview is cut 23 Kasım 2026 and due 3 Aralık 2026. It changes the week only after a clear evet, then says the new dates from that preview and goes to the main menu."
+  },
+  {
+    "key": "lale_supplementary",
+    "customerNumber": "95813998",
+    "name": "Lale supplementary card",
+    "prompt": "You are Lale Erim, customer 95813998. Speak only Turkish, one short sentence. First say: Prestij, sonu 1805. If told that card cannot be used, say: O zaman Platinum, 1801. After that debt, say: Bu kadar.",
+    "successCriteria": "The card ending 1805 is not a main card. The assistant says it is not eligible for this step and asks for a different card. It does not read 4.650 as that card's statement debt. For 1801 it reads Turkish lira debt 8.100 and minimum 3.240, cut 5 Ekim 2026, due 15 Ekim 2026. Dollar, euro, and sterling have no debt on 1801."
+  },
+  {
+    "key": "ada_silence",
+    "customerNumber": "90000001",
+    "name": "Ada stays silent",
+    "prompt": "You are Ada Örnek, customer 90000001. Wait until the assistant speaks. Your next three replies must be only the word SILENCE, with no other words. If the call is still open after that, say: Alo, düştü mü?",
+    "successCriteria": "The first two silences are followed by the same question, asked again. The third silence ends the call with Sesinizi alamadığım için görüşmeyi sonlandırıyorum. That ending is not a transfer to the main menu and not a transfer to an agent. The assistant does not invent a debt during the silence."
+  },
+  {
+    "key": "irmak_still_angry",
+    "customerNumber": "98390128",
+    "name": "Irmak still angry after three replies",
+    "prompt": "You are Irmak Taş, customer 98390128. Speak only Turkish. After the assistant speaks, say: Bu nasıl hizmet, rezalet. If it answers calmly, say: Hâlâ aynı laf, bıktım. If it answers calmly again, say: Kes sesini, dinlemiyorum. If it answers calmly a third time, say: Daha da kızgınım. Do not ask for a card number. If transferred, stop.",
+    "successCriteria": "The assistant gives up to three calming replies and does not insult Irmak back. After she is still complaining past the third calming reply, it says Sizi müşteri temsilcimize aktarıyorum. It does not read a 16-digit card number. It does not treat the first complaint as an immediate transfer."
+  },
+  {
+    "key": "ada_paper",
+    "customerNumber": "90000001",
+    "name": "Ada wants a paper statement",
+    "prompt": "You are Ada Örnek, customer 90000001. Speak only Turkish, one short sentence. After the debt, say: Ekstreyi kâğıt olarak ev adresime postalayın. If asked to confirm an email instead, say: Hayır, kâğıt istiyorum. Then stop.",
+    "successCriteria": "The assistant does not post a paper statement and does not say one was sent. It says this step cannot do paper or a text message and goes to the main menu. It does not invent a postal address. It does not call the email send for a paper request."
+  },
+  {
+    "key": "yigit_old_address",
+    "customerNumber": "95110230",
+    "name": "Yiğit says the address is not his",
+    "prompt": "You are Yiğit Ekinci, customer 95110230. Speak only Turkish, one short sentence. If asked which card, say: 7711. Then say: Ekstreyi e-postama gönder. When the address is read, say: Hayır, o adres artık benim değil. Then stop.",
+    "successCriteria": "The assistant reads yigit.ekinci@freyabank.example and does not send the statement after Yiğit says it is no longer his. It says the address cannot be changed on this call. It does not say the statement was sent. It ends with Sizi ana menüye yönlendiriyorum. It does not read the 7711 debt as 1.247,30; that remaining figure belongs to 7722."
+  }
+]
