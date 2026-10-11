@@ -1,0 +1,11 @@
+{
+ "input": [
+  "briefs/brief-a.md",
+  "briefs/brief-b.md"
+ ],
+ "resolved": [
+  "briefs/brief-a.md",
+  "briefs/brief-b.md"
+ ],
+ "log": []
+}

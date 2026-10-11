@@ -2,7 +2,7 @@
   "team": "",
   "members": [],
   "repo": "https://github.com/ToprakG/build-the-builder.git",
-  "commit": "848f448",
+  "commit": "79869f4",
   "run_command": "experiments/cursor-statement/run_agent.sh",
   "workflow": "submission/final.workflow.json",
   "trace": "experiments/cursor-statement/trace/session-20261011-222250.jsonl",

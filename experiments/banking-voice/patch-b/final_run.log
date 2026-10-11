@@ -1,0 +1,4 @@
+22:37:26 mode patcher_on, budget 30 min, ship at 23:03:26
+22:37:26 final_run: briefs briefs/brief-a.md,briefs/brief-b.md, window ends 23:07, flags: f11_promise_typed,f12_slot_summary,f13_verifier,f15_hardship_terms,f1_id_complete,f2_question_not_refusal,f3_human_first,f4_discount,f7_router,f8_fixed_lines,f9_number_input,f18_side_resume,f19_refusal_rule,f20_once_flags,f21_spoken_answers,f24_day_once,f25_dispute_wins,f28_tool_failure,f29_scam_open,-f18_opening_fallback
+22:37:28 LLM preflight FAILED: provider claude_cli, model sonnet: claude -p failed (exit 1): You've hit your session limit · resets 2:30am (Europe/Istanbul). is `claude` logged in and under its usage limit? (the final setup has no other provider: wait for the limit to reset, do not loop)
+22:37:28 STOP: no usable LLM provider. Fix it (see RUNBOOK_FINAL.md, section LLM provider) and re-run this brief.

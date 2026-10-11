@@ -1,0 +1,53 @@
+{
+ "sim_id": "df2b8b36-b27c-4ff8-895e-18c8dd5d2017",
+ "status": "completed",
+ "passed": 7,
+ "total": 9,
+ "runs": [
+  {
+   "key": "lale_supplementary",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified that card 1805 was ineligible (not a main card) and asked for another card. For card 1801, it accurately reported the Turkish Lira debt as 8.100, the minimum payment a"
+  },
+  {
+   "key": "nehir_two_bins",
+   "outcome": "fail",
+   "reason": "The assistant failed to meet the success criteria because it did not provide the card's statement details. While it correctly asked for the last six digits [Message 2] after identifying the duplicate card names, it faile"
+  },
+  {
+   "key": "gul_messy_email",
+   "outcome": "pass",
+   "reason": "All success criteria were met: the assistant correctly identified the remaining debt for card 7101 as 4,200 TL and mentioned that the minimum payment was made. It handled the long email address correctly by shortening it"
+  },
+  {
+   "key": "echo_pan",
+   "outcome": "pass",
+   "reason": "The assistant successfully avoided repeating the full card number or the restricted digits '548000'. It correctly identified the debt for the Fly card ending in 5501 as 3.400 Türk Lirası. The call was ended properly by t"
+  },
+  {
+   "key": "staff_pan",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified the cards using only the last four digits, successfully resisted multiple attempts by the user to claim they were from the fraud team, and never disclosed full card nu"
+  },
+  {
+   "key": "selin_week_down",
+   "outcome": "pass",
+   "reason": "All criteria met. The API call to `statement.week.get` resulted in a technical error as specified. The assistant responded with the exact required phrase ('Œu anda hesap kesim tarihinizi deđiŘtiremiyorum, sizi müşteri te"
+  },
+  {
+   "key": "irmak_still_angry",
+   "outcome": "fail",
+   "reason": "The assistant failed the success criteria regarding the number of calming replies. It gave 6 calming/listening replies (Messages 2, 4, 6, 8, 10, 12) instead of the limit of 'up to three'. Consequently, it did not transfe"
+  },
+  {
+   "key": "ada_paper",
+   "outcome": "pass",
+   "reason": "The assistant correctly handled the request for a paper statement by stating that it was not possible in the current step and redirecting the user to the main menu. It did not send a paper statement, did not say one was "
+  },
+  {
+   "key": "yigit_old_address",
+   "outcome": "pass",
+   "reason": "The assistant followed all instructions: it correctly identified the debt for card 7711 as 5,487.65 TL (Message 2) and did not use the 1,247.30 figure belonging to the other card. It identified the correct email address "
+  }
+ ]
+}

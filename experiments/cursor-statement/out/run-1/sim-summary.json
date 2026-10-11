@@ -1,0 +1,21 @@
+{
+  "sim_id": "b6d33d15-8d84-45ba-9e15-2ea8900c7b5c",
+  "status": "completed",
+  "runs": [
+    {
+      "persona": "f5c6b67e-a34e-4a09-9cd7-73c521a99c12",
+      "outcome": "inconclusive",
+      "callId": "a7cd5a0e-9837-4fe0-b4cb-f859101a5162"
+    },
+    {
+      "persona": "754690a0-29e4-4096-b652-c3fbaa6e629a",
+      "outcome": "inconclusive",
+      "callId": "7a5b57c1-1326-440d-add6-687835a92687"
+    },
+    {
+      "persona": "56dad4ea-702a-4f2b-81aa-ce602789e622",
+      "outcome": "inconclusive",
+      "callId": "6e9f2b2a-79a2-40cb-b508-e7263d5f94ae"
+    }
+  ]
+}

@@ -13,3 +13,8 @@
 22:29:06 WARNING judge: vendor decision model NOT available at /Users/toprakgundogdu/Downloads/build-the-builder/vendor/build-the-builder; using LocalDecisionJudge (claude_cli:sonnet)
 22:29:06 WARNING claude_cli ignores temperature and max_tokens
 22:36:41 model call claude_cli:sonnet: extract reading A: brief -> policy.json | 454.3s | ERROR claude -p failed (exit 1): You've hit your session limit · resets 2:30am (Europe/Istanbul)
+22:36:45 model call claude_cli:sonnet: extract reading A: brief -> policy.json | 2.3s | ERROR claude -p failed (exit 1): You've hit your session limit · resets 2:30am (Europe/Istanbul)
+22:36:49 model call claude_cli:sonnet: extract reading A: brief -> policy.json | 1.8s | ERROR claude -p failed (exit 1): You've hit your session limit · resets 2:30am (Europe/Istanbul)
+22:36:55 model call claude_cli:sonnet: extract reading A: brief -> policy.json | 1.9s | ERROR claude -p failed (exit 1): You've hit your session limit · resets 2:30am (Europe/Istanbul)
+22:36:55 WARNING build failed: LLMError("claude -p failed (exit 1): You've hit your session limit · resets 2:30am (Europe/Istanbul)")
+22:36:55 end 2026-10-11T22:36:55+0300 status=failed wall=468.8s model_calls=4 tokens_in=0 tokens_out=0 cost=$0.0000
