@@ -1,0 +1,14 @@
+22:29:06 start 2026-10-11T22:29:06+0300
+22:29:06   variant: T-CC (template compiler + Claude Code patcher + decision-model judge)
+22:29:06   slot: final-patch-a-e2
+22:29:06   briefs: ["briefs/brief-a.md"]
+22:29:06   tool_api: /Users/toprakgundogdu/Downloads/build-the-builder/tools/openapi.json
+22:29:06   save: none
+22:29:06   audit: off
+22:29:06   self_test: none
+22:29:06   max_minutes: 25.0
+22:29:06   close_form: lifecycle
+22:29:06   models: {"extract": "claude_cli:sonnet", "analyze": "claude_cli:sonnet", "patch": "sonnet", "judge": "claude_cli:sonnet", "judge_threshold": 0.5, "judge_votes": 1, "judge_vendor_model": "", "audit_budget_usd": 3.0, "patch_budget_usd": 3.0}
+22:29:06 inputs: 1 brief part(s), 10174 chars; tool API 'Freya Bank collections tools' with 7 tools; missing kit tools: []
+22:29:06 WARNING judge: vendor decision model NOT available at /Users/toprakgundogdu/Downloads/build-the-builder/vendor/build-the-builder; using LocalDecisionJudge (claude_cli:sonnet)
+22:29:06 WARNING claude_cli ignores temperature and max_tokens

@@ -70,12 +70,21 @@ def openapi():
     return {"openapi": "3.0.3", "info": {"title": "Statement services", "version": "trial"}, "paths": paths}
 
 
+def _owner_by_card(service_name, card_number):
+    for services in CUSTOMERS.values():
+        if _card_bucket(services.get(service_name), card_number) is not None:
+            return services
+    return None
+
+
 def lookup(path, body):
     body = unwrap(body)
+    name = path.strip("/").split("/")[-1]
     services = _customer(body)
+    if services is None and body.get("cardNumber"):
+        services = _owner_by_card(name, body.get("cardNumber"))
     if services is None:
         return 404, {"result": {"messageText": "Müşteri bulunamadı.", "type": "WARNING"}}
-    name = path.strip("/").split("/")[-1]
     service = services.get(name)
     if service is None:
         return 404, {"result": {"messageText": "Servis yanıtı yok.", "type": "WARNING"}}

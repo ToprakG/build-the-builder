@@ -1,0 +1,107 @@
+{
+ "server": "https://statement-mock.guntop-mockbank.workers.dev",
+ "operations": [
+  {
+   "method": "POST",
+   "path": "/voice/v1/cards.list",
+   "operationId": "cards.list",
+   "data_properties": [
+    "customerNo"
+   ],
+   "data_required": [
+    "customerNo"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/voice/v1/cards.balance",
+   "operationId": "cards.balance",
+   "data_properties": [
+    "cardNumber"
+   ],
+   "data_required": [
+    "cardNumber"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/voice/v1/statement.week.get",
+   "operationId": "statement.week.get",
+   "data_properties": [
+    "cardNumber"
+   ],
+   "data_required": [
+    "cardNumber"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/voice/v1/statement.week.decide",
+   "operationId": "statement.week.decide",
+   "data_properties": [
+    "cardNumber",
+    "newStatementWeek",
+    "statementDay"
+   ],
+   "data_required": [
+    "cardNumber",
+    "newStatementWeek",
+    "statementDay"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/voice/v1/statement.week.change",
+   "operationId": "statement.week.change",
+   "data_properties": [
+    "cardNumber",
+    "newStatementWeek",
+    "statementDay"
+   ],
+   "data_required": [
+    "cardNumber",
+    "newStatementWeek",
+    "statementDay"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/voice/v1/contact.email.get",
+   "operationId": "contact.email.get",
+   "data_properties": [
+    "customerNo",
+    "intAddressInfoType"
+   ],
+   "data_required": [
+    "customerNo",
+    "intAddressInfoType"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/voice/v1/statement.pdf.send",
+   "operationId": "statement.pdf.send",
+   "data_properties": [
+    "customerNo",
+    "cardNumber",
+    "currencyType",
+    "statementDate",
+    "emailAddress"
+   ],
+   "data_required": [
+    "customerNo",
+    "cardNumber",
+    "currencyType",
+    "statementDate",
+    "emailAddress"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/oauth2/token",
+   "operationId": "oauth2.token",
+   "data_properties": [],
+   "data_required": []
+  }
+ ]
+}

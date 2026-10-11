@@ -1,0 +1,17 @@
+{
+ "sim_id": "e8caebfa-c6ab-48cd-be87-76fc06b46782",
+ "iteration_id": "e9cdafb2-6398-4779-b058-ffe25c0a9467",
+ "status": "paused",
+ "runs": [
+  {
+   "persona": "run2-tek-kart-borc",
+   "outcome": "inconclusive",
+   "callId": "83c7c90d-f5c0-422f-81dc-fcdda08181b8"
+  },
+  {
+   "persona": "run2-temsilci",
+   "outcome": "inconclusive",
+   "callId": "b6b76267-2e9c-41b0-9df8-ee06c1dcfa18"
+  }
+ ]
+}

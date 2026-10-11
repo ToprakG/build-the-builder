@@ -6,10 +6,11 @@ import re
 MONTHS = ["", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
 ORDINAL = {"1": "birinci", "2": "ikinci", "3": "üçüncü", "4": "dördüncü"}
 SERVICE_ERROR = "Şu anda işleminizi gerçekleştiremiyorum, sizi müşteri temsilcimize aktarıyorum."
-HANDOFF = "Sizi yönlendiriyorum."
+WEEK_SERVICE_ERROR = "Şu anda hesap kesim tarihinizi değiştiremiyorum, sizi müşteri temsilcimize aktarıyorum."
+HANDOFF = "Sizi ana menüye yönlendiriyorum."
 OFFER = "Ekstre kesim tarihinizi değiştirmemi veya son ekstrenizi e-posta ile göndermemi ister misiniz?"
 ANOTHER = "Başka bir kartınıza bakmamı ister misiniz?"
-NO_EMAIL = "Uygun bir e-posta adresiniz bulunmuyor. Sizi yönlendiriyorum."
+NO_EMAIL = "Uygun bir e-posta adresiniz bulunmuyor. Sizi ana menüye yönlendiriyorum."
 WEEK_FAIL = "Şu an sisteme ulaşamıyoruz, ekstre tarihiniz değişmedi. Birkaç dakika sonra tekrar arayabilirsiniz."
 WEEK_MONTH = "Ekstre tarihinizi değiştiremedik. Ekstre tarihi ayda yalnızca bir kez değiştirilebiliyor."
 WEEK_YEAR = "Ekstre tarihinizi değiştiremedik. Ekstre tarihi yılda en çok üç kez değiştirilebiliyor."
@@ -17,6 +18,18 @@ WEEK_YEAR = "Ekstre tarihinizi değiştiremedik. Ekstre tarihi yılda en çok ü
 
 def tr_lower(text):
     return str(text or "").replace("İ", "i").replace("I", "ı").lower()
+
+
+def folded(text):
+    return tr_lower(text).translate(str.maketrans("çğıöşü", "cgiosu"))
+
+
+def gave_up(text):
+    """The caller cancelled. A week number in the same sentence is still a choice."""
+    if parse_week(text, "") in ("1", "2", "3", "4"):
+        return False
+    t = folded(text)
+    return any(word in t for word in ("kalsin", "bos ver", "vazgec", "hayir", "istemiyorum", "tesekkur", "bu kadar", "baska bir sey"))
 
 
 def money(raw):
@@ -177,6 +190,7 @@ def card_from_service(raw):
     number = str(raw.get("cardNumber") or "")
     last4 = _last4_of(number, raw.get("cardNumberLast4"))
     name = str(raw.get("productName") or "").strip()
+    main = raw.get("isMainCard")
     return {
         "number": number,
         "last4": last4,
@@ -184,6 +198,7 @@ def card_from_service(raw):
         "bin": _bin_of(number),
         "full": "*" not in number and len(re.sub(r"\D", "", number)) >= 15,
         "status": str(raw.get("status") or "A"),
+        "main": False if main is False or str(main).lower() in ("false", "0") else True,
     }
 
 
@@ -211,11 +226,19 @@ def _save_cards(vars, cards):
 
 
 def _select(vars, card):
+    if card.get("main") is False:
+        vars["question_line"] = "Bu kart bu adım için uygun değil. Başka bir kartınızı söyler misiniz?"
+        vars["replay_line"] = vars["question_line"]
+        vars["cards_menu"] = vars["question_line"]
+        vars["resume_at"] = "choose_card"
+        vars["route"] = "ineligible"
+        return False
     vars["selected_number"] = card["number"]
     vars["selected_last4"] = card["last4"]
     vars["selected_name"] = card.get("name") or ""
     vars["selected_bin"] = card.get("bin") or ""
     vars["miss_count"] = "0"
+    return True
 
 
 def _bump(vars):
@@ -249,6 +272,10 @@ def apply_cards(vars):
             return
         _save_cards(vars, cards)
         if len(cards) == 1:
+            if cards[0].get("main") is False:
+                vars["route"] = "none"
+                vars["handoff_line"] = "Bu adım için uygun bir kredi kartınız bulunmuyor. " + HANDOFF
+                return
             _select(vars, cards[0])
             vars["route"] = "one"
             vars["resume_at"] = "say_debt"
@@ -282,9 +309,21 @@ def _by_last4(cards, digits):
     return [card for card in cards if card["last4"] == last4]
 
 
+def _by_bin_and_last4(cards, digits):
+    found = []
+    for card in cards:
+        bin_ = card.get("bin") or ""
+        if bin_ and digits.startswith(bin_) and digits.endswith(card["last4"]):
+            found.append(card)
+    return found
+
+
 def _by_last6(cards, digits):
     if len(digits) < 6:
         return []
+    by_bin = _by_bin_and_last4(cards, digits)
+    if by_bin:
+        return by_bin
     last6 = digits[-6:]
     found = []
     for card in cards:
@@ -292,12 +331,15 @@ def _by_last6(cards, digits):
             number = re.sub(r"\D", "", card["number"])
             if number[-6:] == last6:
                 found.append(card)
-        elif card["last4"] == last6[-4:]:
+        elif card["last4"] == last6[-4:] and len(digits) == 6:
             found.append(card)
     return found
 
 
 def _by_full(cards, digits):
+    by_bin = _by_bin_and_last4(cards, digits)
+    if by_bin:
+        return by_bin
     if len(digits) < 15:
         return []
     found = []
@@ -335,9 +377,9 @@ def apply_pick(vars):
         else:
             found = _name_matches(cards, text)
         if len(found) == 1:
-            _select(vars, found[0])
-            vars["route"] = "selected"
-            vars["resume_at"] = "say_debt"
+            if _select(vars, found[0]):
+                vars["route"] = "selected"
+                vars["resume_at"] = "say_debt"
             return
         if len(found) > 1 and _ambiguous_name(found):
             last4s = set(card["last4"] for card in found)
@@ -389,9 +431,9 @@ def apply_last4(vars):
         digits = digits_of(vars.get("last4_said"))
         found = _by_last4(cards, digits)
         if len(found) == 1:
-            _select(vars, found[0])
-            vars["route"] = "selected"
-            vars["resume_at"] = "say_debt"
+            if _select(vars, found[0]):
+                vars["route"] = "selected"
+                vars["resume_at"] = "say_debt"
             return
         if len(found) > 1:
             vars["pending_json"] = json.dumps(found, ensure_ascii=False)
@@ -415,9 +457,9 @@ def apply_last6(vars):
         digits = digits_of(vars.get("last6_said"))
         found = _by_last6(cards, digits)
         if len(found) == 1:
-            _select(vars, found[0])
-            vars["route"] = "selected"
-            vars["resume_at"] = "say_debt"
+            if _select(vars, found[0]):
+                vars["route"] = "selected"
+                vars["resume_at"] = "say_debt"
             return
         if len(found) > 1:
             vars["pending_json"] = json.dumps(found, ensure_ascii=False)
@@ -440,9 +482,9 @@ def apply_full(vars):
         digits = digits_of(vars.get("full_said"))
         found = _by_full(cards, digits)
         if len(found) == 1:
-            _select(vars, found[0])
-            vars["route"] = "selected"
-            vars["resume_at"] = "say_debt"
+            if _select(vars, found[0]):
+                vars["route"] = "selected"
+                vars["resume_at"] = "say_debt"
             return
         _bump(vars)
         vars["resume_at"] = "ask_full"
@@ -536,6 +578,7 @@ def build_debt_speech(data, last4, name):
         parts.append(_fx_line(eur, "Euro", "Euro", "Euro", "Euro"))
     if _has(gbp):
         parts.append(_fx_line(gbp, "İngiliz Sterlini", "İngiliz Sterlini", "İngiliz Sterlini", "İngiliz Sterlini"))
+    gbp_has = _has(gbp)
     empty = []
     if not tl_has:
         empty.append("tl")
@@ -543,21 +586,21 @@ def build_debt_speech(data, last4, name):
         empty.append("usd")
     if not eur_has:
         empty.append("eur")
-    combo = {
-        ("tl", "usd", "eur"): None,
-        ("tl", "usd"): "Türk Lirası ve Dolar cinsinden bir borcunuz yok.",
-        ("tl", "eur"): "Türk Lirası ve Euro cinsinden bir borcunuz yok.",
-        ("usd", "eur"): "Dolar ve Euro cinsinden bir borcunuz yok.",
-        ("tl",): "Türk Lirası cinsinden bir borcunuz yok.",
-        ("usd",): "Dolar cinsinden bir borcunuz yok.",
-        ("eur",): "Euro cinsinden bir borcunuz yok.",
-    }
-    key = tuple(empty)
-    if key == ("tl", "usd", "eur"):
-        parts.append("Türk Lirası ve Dolar cinsinden bir borcunuz yok.")
-        parts.append("Euro cinsinden bir borcunuz yok.")
-    elif key in combo and combo[key]:
-        parts.append(combo[key])
+    if not gbp_has:
+        empty.append("gbp")
+    names = {"tl": "Türk Lirası", "usd": "Dolar", "eur": "Euro", "gbp": "İngiliz Sterlini"}
+    if empty:
+        if len(empty) == 1:
+            parts.append(names[empty[0]] + " cinsinden bir borcunuz yok.")
+        elif len(empty) == 2:
+            parts.append(names[empty[0]] + " ve " + names[empty[1]] + " cinsinden bir borcunuz yok.")
+        elif len(empty) == 3:
+            parts.append(
+                names[empty[0]] + ", " + names[empty[1]] + " ve " + names[empty[2]]
+                + " cinsinden bir borcunuz yok."
+            )
+        else:
+            parts.append("Türk Lirası, Dolar, Euro ve İngiliz Sterlini cinsinden bir borcunuz yok.")
     due = speak_date(data.get("lastPayDate"))
     if due:
         parts.append("Tüm borçlarınız için son ödeme gününüz " + due + ".")
@@ -608,6 +651,24 @@ def apply_debt(vars):
         vars["service_error_line"] = SERVICE_ERROR
 
 
+def speak_email(address):
+    addr = str(address or "").strip()
+    if not addr or "@" not in addr:
+        return addr
+    local, _, domain = addr.partition("@")
+    messy = (
+        len(addr) > 28
+        or local.count(".") + local.count("-") + local.count("_") >= 2
+        or any(ch.isdigit() for ch in local)
+    )
+    if not messy:
+        return addr
+    first = local[0] if local else "e"
+    host = domain.split(".")[0] if domain else "e-posta"
+    label = "Gmail" if "gmail" in domain.lower() else host
+    return first + " ile başlayan " + label + " adresiniz"
+
+
 def apply_email(vars):
     try:
         status, data, result = parse_body(vars, "load_email")
@@ -616,13 +677,16 @@ def apply_email(vars):
             vars["service_error_line"] = SERVICE_ERROR
             return
         address = ""
+        comm = ""
         if isinstance(data, dict):
-            address = str(data.get("ttsEmail") or data.get("ibanEmail") or "").strip()
-        if status == 404 or not address:
+            address = str(data.get("ibanEmail") or data.get("ttsEmail") or "").strip()
+            comm = str(data.get("communicationType") or "").strip()
+        if status == 404 or not address or comm.lower() == "phone":
             vars["route"] = "no_email"
             return
+        spoken = speak_email(address)
         vars["email_address"] = address
-        line = "Ekstrenizi " + address + " adresine göndermemi ister misiniz?"
+        line = "Ekstrenizi " + spoken + " adresine göndermemi ister misiniz?"
         vars["question_line"] = line
         vars["replay_line"] = line
         vars["resume_at"] = "ask_send"
@@ -702,14 +766,14 @@ def apply_week(vars):
         status, data, result = parse_body(vars, "load_week")
         if status >= 400 or status == 0 or not isinstance(data, dict) or not data.get("statementWeek"):
             vars["route"] = "error"
-            vars["service_error_line"] = SERVICE_ERROR
+            vars["service_error_line"] = WEEK_SERVICE_ERROR
             return
         last4 = str(vars.get("selected_last4") or data.get("cardNumberLast4") or "")
         name = str(vars.get("selected_name") or data.get("productName") or "").strip()
         week, relation, speech, others = build_week_speech(data, last4, name)
         if re.search(r"\d{5,}", speech):
             vars["route"] = "error"
-            vars["service_error_line"] = SERVICE_ERROR
+            vars["service_error_line"] = WEEK_SERVICE_ERROR
             return
         vars["current_week"] = week
         vars["relation_type"] = relation
@@ -729,7 +793,7 @@ def apply_week(vars):
         vars["route"] = "ask"
     except Exception:
         vars["route"] = "error"
-        vars["service_error_line"] = SERVICE_ERROR
+        vars["service_error_line"] = WEEK_SERVICE_ERROR
 
 
 def parse_week(text, current):
@@ -745,6 +809,10 @@ def parse_week(text, current):
 
 def apply_week_pick(vars):
     try:
+        if gave_up(vars.get("week_said")):
+            vars["handoff_line"] = "Sizi ana menüye aktarıyorum."
+            vars["route"] = "cancel"
+            return
         chosen = parse_week(vars.get("week_said"), vars.get("current_week"))
         current = str(vars.get("current_week") or "")
         allowed = set(str(vars.get("other_weeks") or "").split())
@@ -805,12 +873,12 @@ def apply_decide(vars):
         code = str((data or {}).get("responseCode") if isinstance(data, dict) else "")
         if status >= 400 or status == 0 or not isinstance(data, dict) or code not in ("0", "0.0"):
             vars["route"] = "error"
-            vars["service_error_line"] = SERVICE_ERROR
+            vars["service_error_line"] = WEEK_SERVICE_ERROR
             return
         speech = build_preview(vars, data)
         if re.search(r"\d{5,}", speech):
             vars["route"] = "error"
-            vars["service_error_line"] = SERVICE_ERROR
+            vars["service_error_line"] = WEEK_SERVICE_ERROR
             return
         vars["preview_speech"] = speech
         vars["replay_line"] = speech
@@ -820,7 +888,7 @@ def apply_decide(vars):
         vars["route"] = "confirm"
     except Exception:
         vars["route"] = "error"
-        vars["service_error_line"] = SERVICE_ERROR
+        vars["service_error_line"] = WEEK_SERVICE_ERROR
 
 
 def apply_change(vars):
@@ -862,6 +930,20 @@ def apply_which(vars):
     except Exception:
         vars["route"] = "error"
         vars["service_error_line"] = SERVICE_ERROR
+
+
+def apply_silence(vars):
+    try:
+        n = int(float(vars.get("silence_count") or 0)) + 1
+        vars["silence_count"] = str(n)
+        if n >= 3:
+            vars["handoff_line"] = "Sesinizi alamadığım için görüşmeyi sonlandırıyorum."
+            vars["route"] = "end"
+            return
+        vars["route"] = "again"
+    except Exception:
+        vars["route"] = "end"
+        vars["handoff_line"] = "Sesinizi alamadığım için görüşmeyi sonlandırıyorum."
 
 
 def apply_anger(vars):

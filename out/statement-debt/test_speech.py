@@ -76,7 +76,7 @@ def main():
         fail("ada code " + text)
 
     tulay = debt_of("92122831", "540000******0411")["debt_speech"]
-    for bit in ("Türk Lirası cinsinden bir borcunuz yok.", "120 Dolar", "240,50 Euro", "96,20 Euro"):
+    for bit in ("Türk Lirası ve İngiliz Sterlini cinsinden bir borcunuz yok.", "120 Dolar", "240,50 Euro", "96,20 Euro"):
         if bit not in tulay:
             fail("tulay missing " + bit + " :: " + tulay)
     if "USD" in tulay or "EUR" in tulay:
@@ -224,6 +224,24 @@ def main():
     speech.apply_email(z)
     if z["route"] != "no_email":
         fail("empty email " + z["route"])
+
+    week = {"week_said": "boş ver, kalsın", "current_week": "2", "other_weeks": "1 3 4", "week_choices": "birinci, üçüncü ve dördüncü"}
+    speech.apply_week_pick(week)
+    if week.get("route") != "cancel":
+        fail("cancel week " + str(week.get("route")))
+    kept = {"week_said": "üçüncü", "current_week": "2", "other_weeks": "1 3 4"}
+    speech.apply_week_pick(kept)
+    if kept.get("route") != "decide" or kept.get("chosen_week") != "3":
+        fail("pick week " + str(kept.get("route")))
+
+    quiet = {"silence_count": "0"}
+    speech.apply_silence(quiet)
+    speech.apply_silence(quiet)
+    if quiet.get("route") != "again":
+        fail("silence early " + str(quiet.get("route")))
+    speech.apply_silence(quiet)
+    if quiet.get("route") != "end" or "Sesinizi alamadığım için" not in quiet.get("handoff_line", ""):
+        fail("silence end " + str(quiet))
 
     print("speech checks passed")
 

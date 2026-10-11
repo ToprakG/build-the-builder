@@ -1,0 +1,11 @@
+You have 30 minutes. You are a banking phone-agent builder. Build the phone agent.
+
+Follow the skills in experiments/cursor-statement/.cursor/skills, in order: pack-inventory, speech-library, workflow-graph, side-exits, adversarial-checklist. The skills apply to any banking phone agent. The case documents decide the product.
+
+Case folder: /Users/toprakgundogdu/Downloads/test-environment
+Mock that stays up: https://statement-mock.guntop-mockbank.workers.dev
+Tool URLs must use that host.
+
+Write this run files under experiments/cursor-statement/out/run-1. You may create personas and tests. Publish to Freya slot cursor-bank-1. Source /Users/toprakgundogdu/Downloads/build-the-builder/.env before any Freya call. Do not print secrets. If a skill names an mcp__fb__ tool that is not in this session, do that check in code.
+
+Export with freya.export_workflow to experiments/cursor-statement/out/run-1/final.workflow.json. Stop at 30 minutes with the best version published.

@@ -1,0 +1,1 @@
+/Users/toprakgundogdu/Downloads/build-the-builder/experiments/cursor-statement/.cursor/skills/adversarial-checklist/SKILL.md

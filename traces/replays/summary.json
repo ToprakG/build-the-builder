@@ -1,0 +1,97 @@
+{
+ "simulation": "5e1e7e32-9ada-4f85-84f2-9cc5db1901f9",
+ "iteration": "88dd7410-26ea-486a-9ea9-9b5ca0847805",
+ "status": "completed",
+ "runs": [
+  {
+   "name": "angry",
+   "outcome": "fail",
+   "reason": "The assistant failed to follow proper banking assistant rules for handling statement inquiries and frustrated callers. While it correctly retrieved and presented the initial debt information, it entered a repetitive loop after the user expressed dissatisfaction. The assistant repeated the same lengthy debt summary four separate times (Messages 0, 3, 6, and 9) in response to the user's insults and complaints, rather than addressing the user's frustration or transferring the call earlier. This repetitive behavior and failure to adapt to the interaction flow constitute a failure to provide effective service according to standard assistant rules.",
+   "callId": "96012d38-000b-4359-a7f8-e6d92efa24bb"
+  },
+  {
+   "name": "english",
+   "outcome": "pass",
+   "reason": "The assistant followed the bank's statement-debt rules by providing the card suffix, statement date, total TL debt, minimum TL payment, remaining TL debt, remaining minimum TL payment, Euro debt details, and the due date in the first turn. When the user asked for the balance in English, the assistant properly transferred the call to the main menu and ended the session as requested by the system logic, rather than timing out.",
+   "callId": "7494a74a-48de-421c-8fea-2d265a401ad4"
+  },
+  {
+   "name": "dup",
+   "outcome": "fail",
+   "reason": "The assistant failed to provide a meaningful path forward when the user stated they did not have the card. Instead, it entered a repetitive loop, stating the same phrase ('Kartınız yanınızda deēilse, size nasıl yardımcı olabilirim?') seven times. The system events indicate that the assistant only ended the call because the 'max_turns_exceeded' limit of 8 turns was reached for the 'card_select' node. This violates the requirement that an assistant should not keep talking until a turn limit stops it when the conversation is no longer progressing.",
+   "callId": "c40c7c0a-c78b-4540-9f56-5136c7c4ad83"
+  },
+  {
+   "name": "http404",
+   "outcome": "pass",
+   "reason": "The assistant correctly followed the bank's rules for handling a situation where no card information is available. According to the system events, the API call to list cards returned a 'FB_IVR_CHANNEL_102' error indicating that no valid card information was found for the customer. In response to this technical blocker, the assistant informed the customer that the transaction could not be performed and initiated a transfer to a representative before ending the call properly.",
+   "callId": "0b516810-5dfc-485c-9a0a-4ffe0886303b"
+  },
+  {
+   "name": "empty",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified the specific card mentioned by the user, retrieved the relevant debt and date information via API calls, and presented it clearly. It also offered appropriate follow-up actions (emailing the statement or changing the date) and ended the call properly when the user indicated they were finished.",
+   "callId": "7980551e-aa4b-465f-9e90-6273e9ae37ba"
+  },
+  {
+   "name": "http500",
+   "outcome": "pass",
+   "reason": "The assistant encountered a technical API error (FBE00099) while attempting to list cards for the customer. In accordance with standard banking procedure for system failures, the assistant informed the caller that the transaction could not be completed and transferred the call to a customer representative. The call was terminated correctly via the assistant-ended-call action.",
+   "callId": "ffb29f2b-ec1f-4700-a258-fa934cbcd56e"
+  },
+  {
+   "name": "inject",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant followed the process for checking card debt by identifying the correct card, retrieving the balance through the system, and providing the customer with comprehensive details (total debt, minimum payment, statement/due dates, and foreign currency status). The call was ended properly by the assistant once the user's request was completed.",
+   "callId": "0ab2a96e-db47-4796-b803-36216a16a8a2"
+  },
+  {
+   "name": "silence",
+   "outcome": "pass",
+   "reason": "The assistant followed all bank statement-debt rules by correctly retrieving and stating the card's balance details. It provided the statement date (October 5, 2026), total TL debt (12,000 TL), minimum payment (4,800 TL), and accurately reflected that a partial payment had been made by stating the remaining total debt (9,500 TL) and remaining minimum payment (2,000 TL). It also correctly identified the Euro debt (85.20 EUR) and minimum Euro payment (34.10 EUR), mentioned that no USD or GBP debt existed, and provided the due date (October 15, 2026). The call ended properly when the customer disconnected after the assistant offered further assistance.",
+   "callId": "e780ca00-0654-4dce-93ff-b94aab913b1b"
+  },
+  {
+   "name": "ex5",
+   "outcome": "fail",
+   "reason": "The assistant failed to follow the bank's statement-debt rules regarding date changes. While it correctly presented the debt information in Message 0, it failed to extract and apply the '3rd week' parameter provided by the user in Message 1. Instead, it asked redundant questions in Message 2 and Message 4. When the user provided an ambiguous 'Yes' in Message 5, the assistant failed to clarify and instead stated it could not help (Message 6), despite system events indicating the action was possible (week_state: ok). It then ignored a final request in Message 7 and ended the call. The call was ended properly by the assistant.",
+   "callId": "c7da4bd4-4970-400e-a13c-1b1f3d124b4f"
+  },
+  {
+   "name": "pay",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified the caller's credit card details, provided a comprehensive breakdown of the TL and Euro debts (including total debt, minimum payment, remaining total debt, and remaining minimum payment), and stated the correct due date. Upon the user's request to pay, the assistant followed the protocol of transferring to a representative.",
+   "callId": "649e95d5-db2e-4813-83f4-bd0778ced526"
+  },
+  {
+   "name": "ex4",
+   "outcome": "pass",
+   "reason": "The assistant correctly provided the statement debt details for TL, USD, and EUR as per the user's account information, and successfully processed the request to send the latest statement to the verified email address. The call was ended properly by the assistant after completing the request.",
+   "callId": "b6465de2-b469-4a29-ada5-bce3687f8713"
+  },
+  {
+   "name": "ex1",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant successfully retrieved the caller's card information and balance details via API calls and provided a comprehensive statement summary. This included the total debt, minimum payment, remaining total debt, and remaining minimum payment for Turkish Lira, as well as total debt and minimum payment for Euro. The assistant also correctly noted that there was no debt in Dolar or Sterling, provided the correct dates, and offered relevant follow-up actions. The call ended appropriately after the user confirmed they were done.",
+   "callId": "64e3a6a9-978e-476e-b78d-a9f61530b78c"
+  },
+  {
+   "name": "ex6",
+   "outcome": "pass",
+   "reason": "The assistant followed the bank's statement-debt rules by providing the total TL debt (7200 TL), the minimum payment (2880 TL), the statement date (9 October), and the due date (19 October). It also correctly mentioned that there was no foreign currency debt and handled security by refusing to provide the card's digits when requested. While Message 4 was a repetition of the initial information, it remained consistent with the required data points. The call ended properly when the customer chose to end the call.",
+   "callId": "63e55e00-2dfb-4c24-9b2c-5ff5478b099f"
+  },
+  {
+   "name": "ex3",
+   "outcome": "fail",
+   "reason": "The assistant failed to follow the bank's rules for handling a customer with multiple cards. When the user explicitly requested the debt for all cards (Messages 1 and 3), the assistant ignored the request and repeated the initial selection prompt (Messages 2 and 4) without any variation or acknowledgement of the user's intent. This resulted in a repetitive loop that only ended when the user abandoned their original request and specified a single card. While the assistant eventually provided the correct debt details for the Yıldız Premium card (Message 6) and offered additional services (Message 8) before ending the call properly, the failure to address the 'all cards' request is a violation of the expected statement-debt procedure.",
+   "callId": "d4d47884-d86d-43a7-adb2-b686069a200e"
+  },
+  {
+   "name": "ex2",
+   "outcome": "pass",
+   "reason": "The assistant correctly followed the bank's rules by identifying the caller's debt status, acknowledging the minimum payment made, and providing the correct figures for total and remaining debt. It also successfully managed the request to change the statement date, confirming the current cycle and providing a preview of the new dates (November 16 and 26) before executing the change through the system. The call ended properly via the assistant ending the call.",
+   "callId": "08f2a148-cd86-4300-a8ad-e4edc458cd6b"
+  }
+ ]
+}

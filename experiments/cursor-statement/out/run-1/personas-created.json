@@ -1,0 +1,55 @@
+{
+  "personas": [
+    {
+      "id": "f5c6b67e-a34e-4a09-9cd7-73c521a99c12",
+      "workspaceId": "bc93aa20-a9c2-4549-8bc0-d48cc7074e20",
+      "name": "cursor1-happy-debt",
+      "prompt": "Sen Freya Bank müşterisisin. Tek kartın var. Ekstre borcunu dinle, teşekkür et, başka bir şey isteme. Türkçe konuş.",
+      "successCriteria": null,
+      "systemPrompt": null,
+      "evaluationPrompt": null,
+      "tags": [],
+      "agentIds": [],
+      "simulationVariables": {},
+      "createdAt": "2026-10-11T19:35:23.322Z",
+      "updatedAt": "2026-10-11T19:35:23.322Z",
+      "createdBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+      "updatedBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+      "versionNumber": 1
+    },
+    {
+      "id": "754690a0-29e4-4096-b652-c3fbaa6e629a",
+      "workspaceId": "bc93aa20-a9c2-4549-8bc0-d48cc7074e20",
+      "name": "cursor1-week-change",
+      "prompt": "Ekstre borcunu dinledikten sonra hesap kesim tarihini 3. haftaya almak istediğini söyle. Önizlemede önce 'Olur herhalde' de, sonra açıkça 'Evet' de. Türkçe konuş.",
+      "successCriteria": null,
+      "systemPrompt": null,
+      "evaluationPrompt": null,
+      "tags": [],
+      "agentIds": [],
+      "simulationVariables": {},
+      "createdAt": "2026-10-11T19:35:23.322Z",
+      "updatedAt": "2026-10-11T19:35:23.322Z",
+      "createdBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+      "updatedBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+      "versionNumber": 1
+    },
+    {
+      "id": "56dad4ea-702a-4f2b-81aa-ce602789e622",
+      "workspaceId": "bc93aa20-a9c2-4549-8bc0-d48cc7074e20",
+      "name": "cursor1-no-email-digits",
+      "prompt": "Borcunu dinle. Kayıtlı mail yoksa mail isteme. Kartının ilk on iki hanesini sor; olmazsa ilk altıyı iste. Türkçe konuş.",
+      "successCriteria": null,
+      "systemPrompt": null,
+      "evaluationPrompt": null,
+      "tags": [],
+      "agentIds": [],
+      "simulationVariables": {},
+      "createdAt": "2026-10-11T19:35:23.322Z",
+      "updatedAt": "2026-10-11T19:35:23.322Z",
+      "createdBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+      "updatedBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+      "versionNumber": 1
+    }
+  ]
+}

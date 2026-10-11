@@ -1,0 +1,20 @@
+[
+ {
+  "customer": "90000001",
+  "ok": true,
+  "hits": [],
+  "sample": "Son dört hanesi 1234 olan Yıldız Pratik Classic kartınız için bilgiler şöyle: Ekstreniz 5 Ekim 2026 tarihinde kesildi. T"
+ },
+ {
+  "customer": "92122831",
+  "ok": true,
+  "hits": [],
+  "sample": "Son dört hanesi 0411 olan Yıldız Miles kartınız için bilgiler şöyle: Ekstreniz 5 Ekim 2026 tarihinde kesildi. Dolar cins"
+ },
+ {
+  "week": "90000001",
+  "ok": true,
+  "hits": [],
+  "sample": "Son dört hanesi 1234 olan Yıldız Pratik Classic kartınızın ödeme günü her ayın birinci haftasına ayarlı. Önümüzdeki döne"
+ }
+]

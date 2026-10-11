@@ -1,0 +1,38 @@
+{
+ "personas": [
+  {
+   "id": "9328bcb7-bf39-41ad-80ea-57134c2ab8d9",
+   "workspaceId": "bc93aa20-a9c2-4549-8bc0-d48cc7074e20",
+   "name": "run2-tek-kart-borc",
+   "prompt": "Sen Freya Bank müşterisisin. Türkçe konuş, sizli. Kart borcunu öğrenmek istiyorsun. Tek kartın var. Borcu dinledikten sonra başka bir şey istemiyorsun, teşekkür edip kapat. Ödeme yapmak veya temsilci istemiyorsun.",
+   "successCriteria": null,
+   "systemPrompt": null,
+   "evaluationPrompt": null,
+   "tags": [],
+   "agentIds": [],
+   "simulationVariables": {},
+   "createdAt": "2026-10-11T19:29:39.863Z",
+   "updatedAt": "2026-10-11T19:29:39.863Z",
+   "createdBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+   "updatedBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+   "versionNumber": 1
+  },
+  {
+   "id": "5a2f1028-e53c-46db-a35c-4f0d57dcaeda",
+   "workspaceId": "bc93aa20-a9c2-4549-8bc0-d48cc7074e20",
+   "name": "run2-temsilci",
+   "prompt": "Sen Freya Bank müşterisisin. Türkçe konuş. Birden fazla kartın olabilir. Asistan kart sorduğunda hemen müşteri temsilcisiyle görüşmek istediğini söyle. Başka bir şey söyleme.",
+   "successCriteria": null,
+   "systemPrompt": null,
+   "evaluationPrompt": null,
+   "tags": [],
+   "agentIds": [],
+   "simulationVariables": {},
+   "createdAt": "2026-10-11T19:29:39.863Z",
+   "updatedAt": "2026-10-11T19:29:39.863Z",
+   "createdBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+   "updatedBy": "d88ce1f8-fbd2-43e5-8777-65b9236d12e9",
+   "versionNumber": 1
+  }
+ ]
+}

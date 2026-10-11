@@ -1,0 +1,17 @@
+22:01:12 start 2026-10-11T22:01:12+0300
+22:01:12   variant: T-CC (template compiler + Claude Code patcher + decision-model judge)
+22:01:12   slot: final-patch-statement-e2
+22:01:12   briefs: ["experiments/banking-voice/build/ingest/case_brief.md"]
+22:01:12   tool_api: /Users/toprakgundogdu/Downloads/build-the-builder/experiments/banking-voice/build/ingest/tools.openapi.json
+22:01:13   save: none
+22:01:13   audit: off
+22:01:13   self_test: none
+22:01:13   max_minutes: 25.0
+22:01:13   close_form: lifecycle
+22:01:13   models: {"extract": "claude_cli:sonnet", "analyze": "claude_cli:sonnet", "patch": "sonnet", "judge": "claude_cli:sonnet", "judge_threshold": 0.5, "judge_votes": 1, "judge_vendor_model": "", "audit_budget_usd": 3.0, "patch_budget_usd": 3.0}
+22:01:13 inputs: 1 brief part(s), 202898 chars; tool API 'Statement services' with 7 tools; missing kit tools: []
+22:01:13 WARNING judge: vendor decision model NOT available at /Users/toprakgundogdu/Downloads/build-the-builder/vendor/build-the-builder; using LocalDecisionJudge (claude_cli:sonnet)
+22:01:13 extract: brief_prep reordered / marked the brief material
+22:01:13 WARNING claude_cli ignores temperature and max_tokens
+22:11:13 model call claude_cli:sonnet: extract reading A: brief -> policy.json | 600.0s | ERROR claude -p timed out after 600s
+22:21:14 model call claude_cli:sonnet: extract reading A: brief -> policy.json | 600.0s | ERROR claude -p timed out after 600s

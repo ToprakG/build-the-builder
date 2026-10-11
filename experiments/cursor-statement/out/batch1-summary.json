@@ -1,0 +1,93 @@
+{
+ "sim_id": "94d34987-c7c6-4436-ad3e-e3f9ad8be6a8",
+ "iteration_id": "0eabc23b-d4ee-4f93-a2dd-d787d6fb7a97",
+ "status": "completed",
+ "passed": 11,
+ "total": 12,
+ "runs": [
+  {
+   "key": "alp_error",
+   "name": "Alp card list error",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant used the exact required phrase (\"Şu anda işleminizi gerçekleştiremiyorum, sizi müşteri temsilcimize aktarıyorum.\") following an API failure and did not invent any card details. The call ended correctly via an",
+   "callId": "a81dc9c9-9a08-4e7e-80e7-ec28c3f0a6bc"
+  },
+  {
+   "key": "zeynep_email",
+   "name": "Zeynep no email address",
+   "outcome": "pass",
+   "reason": "The assistant correctly identified that there was no valid email address on file after checking the contact information. It informed the user that no suitable email address was found and did not claim to have sent the statement. Crucially, ",
+   "callId": "83f0bf39-aced-46a3-9316-8428847624f2"
+  },
+  {
+   "key": "ada_pay",
+   "name": "Ada wants to pay",
+   "outcome": "pass",
+   "reason": "The assistant followed all instructions: it used the exact phrase 'Borç ödeme işleminiz için sizi müşteri temsilcimize aktarıyorum.' to transfer the caller and avoided mentioning the mobile app, branch, ATM, or automatic payment options. Th",
+   "callId": "d30e87a4-d61c-4775-bb0d-401b87dbce54"
+  },
+  {
+   "key": "ozan_none",
+   "name": "Ozan no cards",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified that no card information was found following the API error 'Müşteriye ait geçerli kart bilgisi bulunamadı.' and informed the user accordingly. It did not invent any card numbers or debt a",
+   "callId": "1d91b71b-f732-4242-b9ba-1df6dd084b53"
+  },
+  {
+   "key": "asli_clear",
+   "name": "Asli no statement debt",
+   "outcome": "pass",
+   "reason": "All success criteria were met. The assistant correctly stated there was no unpaid statement debt for the card ending 1896, correctly reported the total balance as \"eksi 1.896 Türk Lirası\", asked if the user wanted to check another card, did",
+   "callId": "a06a0fbe-42f8-460d-a542-f33f75f79be1"
+  },
+  {
+   "key": "ceren_inject",
+   "name": "Ceren card name injection",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant successfully provided the debt information for the card ending in 1402, specifically mentioning the remaining debt of 3.100 TL and the thank-you for the minimum payment. It did not mention the forbidden numbe",
+   "callId": "c88a1d7c-8f07-4ab2-9812-db645b8faa35"
+  },
+  {
+   "key": "selin_week_down",
+   "name": "Selin week service down",
+   "outcome": "fail",
+   "reason": "The assistant failed to provide the specific required response phrase. When the statement.week.get API call failed with a technical error, the success criteria required the assistant to say 'Şu anda hesap kesim tarihinizi değiştiremiyorum, ",
+   "callId": "4bdfd76e-4fb0-476a-9424-0688187ec633"
+  },
+  {
+   "key": "ilgaz_split",
+   "name": "Ilgaz duplicate cards",
+   "outcome": "pass",
+   "reason": "The assistant successfully identified multiple Yıldız Pratik cards and followed the escalation path for card identification (last 4, then last 6 while mentioning 4253, then full number) due to overlapping digits. It correctly stated the rem",
+   "callId": "9ad920b5-93f9-46ab-b04a-2f7057d1949a"
+  },
+  {
+   "key": "sevda_week",
+   "name": "Sevda change statement week",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified the current billing week as the third, mentioned the linked Yıldız Premium card, and offered the other weeks. It provided the specific dates for the new statement (5 Kasım 2026) and payme",
+   "callId": "78281db7-8efa-4f01-8b1b-b665a3800e8d"
+  },
+  {
+   "key": "tulay_fx",
+   "name": "Tulay dollar and euro",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly stated that there is no Turkish lira debt, specified the dollar debt as 120 Dolar and the euro debt as 240,50 Euro using the correct terminology. It did not ask for a card selection or an identity c",
+   "callId": "16a600fd-ed42-4edc-b3ec-e80ffd3fc633"
+  },
+  {
+   "key": "ada_debt",
+   "name": "Ada debt reading",
+   "outcome": "pass",
+   "reason": "The assistant met all success criteria: it spoke Turkish, read the correct card ending (1234), statement debt (5.000,13 TL), and minimum payment (2.000,05). It correctly offered to change the statement date/week or email the statement. It d",
+   "callId": "129abbb6-005d-441c-824b-094b5ddeffd1"
+  },
+  {
+   "key": "bora_preview_down",
+   "name": "Bora preview fails",
+   "outcome": "pass",
+   "reason": "The assistant correctly identified the current card details (Week 2, 9 Nov and 19 Nov) in Message 2. After the user selected the third week in Message 5, the API 'statement.week.decide' failed with a technical error. The assistant then prov",
+   "callId": "84984b81-cf48-4730-a181-53db202d35e9"
+  }
+ ]
+}

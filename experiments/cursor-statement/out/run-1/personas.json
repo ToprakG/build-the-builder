@@ -1,0 +1,26 @@
+[
+  {
+    "name": "cursor1-happy-debt",
+    "description": "Single-card customer. Listens to statement debt, says teşekkürler, ends.",
+    "prompt": "Sen Freya Bank müşterisisin. Tek kartın var. Ekstre borcunu dinle, teşekkür et, başka bir şey isteme. Türkçe konuş.",
+    "languages": [
+      "tr"
+    ]
+  },
+  {
+    "name": "cursor1-week-change",
+    "description": "Wants to move statement week to 3rd week and confirms with evet.",
+    "prompt": "Ekstre borcunu dinledikten sonra hesap kesim tarihini 3. haftaya almak istediğini söyle. Önizlemede önce 'Olur herhalde' de, sonra açıkça 'Evet' de. Türkçe konuş.",
+    "languages": [
+      "tr"
+    ]
+  },
+  {
+    "name": "cursor1-no-email-digits",
+    "description": "No registered email; asks for first digits of the card.",
+    "prompt": "Borcunu dinle. Kayıtlı mail yoksa mail isteme. Kartının ilk on iki hanesini sor; olmazsa ilk altıyı iste. Türkçe konuş.",
+    "languages": [
+      "tr"
+    ]
+  }
+]

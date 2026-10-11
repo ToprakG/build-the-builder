@@ -1,6 +1,956 @@
-[
- {
-  "user": "Merhaba",
-  "error": "POST /api/v2/chat/message -> 504: error code: 504\n"
- }
-]
+{
+ "run": {
+  "id": "bc01b5c2-a8ad-4e75-ad96-20b167a2fc8a",
+  "callId": "ffb29f2b-ec1f-4700-a258-fa934cbcd56e",
+  "outcome": "pass",
+  "reason": "The assistant encountered a technical API error (FBE00099) while attempting to list cards for the customer. In accordance with standard banking procedure for system failures, the assistant informed the caller that the transaction could not be completed and transferred the call to a customer representative. The call was terminated correctly via the assistant-ended-call action.",
+  "personaId": "f5aaa271-b3dd-47bf-acf4-f2bec5389abc",
+  "personaName": "stmt http500",
+  "personaPrompt": "You are a customer on a phone call with your bank. Speak only the lines in the script, one line per turn, in Turkish unless the script says English. Do not add topics.\n\nSCRIPT:\nSay: Merhaba. Then wait. If the call continues, say thanks.",
+  "personaTags": [
+   "statement-debt",
+   "http500"
+  ],
+  "personaVersionNumber": 1,
+  "agentVersionId": "0cfe20f2-8d4a-427c-8619-dbacc6b5c938",
+  "agentVersionNumber": 1,
+  "agentId": "bc275c9d-9300-4576-b8a6-030841f495d0",
+  "agentName": "case-test-environment 1011-213018",
+  "agentEntityType": "workflow",
+  "agentWorkflowId": "9ef88f95-2a75-40fd-9c06-4f1d05a544b0",
+  "turnCount": 0,
+  "startedAt": "2026-10-11T18:40:46.040Z",
+  "endedAt": "2026-10-11T18:40:56.945Z",
+  "avgLatencyMs": null,
+  "interruptionCount": null,
+  "assertions": [],
+  "customMetrics": [],
+  "attempts": 0,
+  "maxAttempts": 1
+ },
+ "messages": [
+  {
+   "role": "system",
+   "message": "{\"event\":\"node_enter\",\"node\":\"load_cards\"}",
+   "messageId": "msg_1_1791744046395",
+   "secondsFromStart": 0.003506898880004883,
+   "nodeId": "load_cards"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_start\",\"function\":\"api_call\",\"args\":{\"url\":\"https://statement-mock.guntop-mockbank.workers.dev/voice/v1/cards.list\",\"method\":\"POST\",\"headers\":{\"Content-Type\":\"application/json\"},\"body\":{\"data\":{\"customerNo\":\"97073972\"}}}}",
+   "messageId": "msg_2_1791744046402",
+   "secondsFromStart": 0.010097026824951172,
+   "nodeId": "load_cards"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_error\",\"function\":\"api_call\",\"error\":\"API request failed: {'result': {'guid': 'f0e1d2c3b4a5968778695a4b3c2d0001', 'returnCode': 'FBE00099', 'messageText': 'Teknik hata: ABORTED: ', 'code': 'FBE00099', 'message': 'Teknik hata: ABORTED: ', 'type': 'ERROR', 'details': {'guid': 'f0e1d2c3b4a5968778695a4b3c2d0001', 'rootCause': 'TechnicalError', 'errorOrigin': 'ivr-gateway-test:ivr-channel-v0'}}}\"}",
+   "messageId": "msg_3_1791744046453",
+   "secondsFromStart": 0.06156659126281738,
+   "nodeId": "load_cards"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"route_evaluated\",\"matched\":true,\"from_node\":\"load_cards\",\"target\":\"end_service_error\",\"confidence\":1.0,\"reason\":\"always always\",\"branches\":[{\"target\":\"load_balance\",\"description\":\"cards_state == 'one'\",\"result\":false,\"condition_results\":{\"operator\":\"equals\",\"variable\":\"cards_state\",\"operand\":\"one\",\"result\":false}},{\"target\":\"select_prep\",\"description\":\"cards_state == 'multi'\",\"result\":false,\"condition_results\":{\"operator\":\"equals\",\"variable\":\"cards_state\",\"operand\":\"multi\",\"result\":false}},{\"target\":\"end_no_card\",\"description\":\"cards_state == 'none'\",\"result\":false,\"condition_results\":{\"operator\":\"equals\",\"variable\":\"cards_state\",\"operand\":\"none\",\"result\":false}},{\"target\":\"end_service_error\",\"description\":\"always\",\"result\":true,\"condition_results\":{\"operator\":\"always\",\"result\":true}}],\"variable_table\":{\"offer.current_turns\":0,\"offer.total_turns\":0,\"end_pay.current_turns\":0,\"end_pay.total_turns\":0,\"reading.current_turns\":0,\"reading.total_turns\":0,\"after_no.current_turns\":0,\"after_no.total_turns\":0,\"end_menu.current_turns\":0,\"end_menu.total_turns\":0,\"send_pdf.current_turns\":0,\"send_pdf.total_turns\":0,\"week_ask.current_turns\":0,\"week_ask.total_turns\":0,\"end_agent.current_turns\":0,\"end_agent.total_turns\":0,\"end_tries.current_turns\":0,\"end_tries.total_turns\":0,\"load_week.current_turns\":0,\"load_week.total_turns\":0,\"load_cards.current_turns\":0,\"load_cards.total_turns\":0,\"load_email.current_turns\":0,\"load_email.total_turns\":0,\"week_check.current_turns\":0,\"week_check.total_turns\":0,\"card_select.current_turns\":0,\"card_select.total_turns\":0,\"email_route.current_turns\":0,\"email_route.total_turns\":0,\"end_dispute.current_turns\":0,\"end_dispute.total_turns\":0,\"end_no_card.current_turns\":0,\"end_no_card.total_turns\":0,\"select_prep.current_turns\":0,\"select_prep.total_turns\":0,\"week_change.current_turns\":0,\"week_change.total_turns\":0,\"week_choose.current_turns\":0,\"week_choose.total_turns\":0,\"week_decide.current_turns\":0,\"week_decide.total_turns\":0,\"end_security.current_turns\":0,\"end_security.total_turns\":0,\"load_balance.current_turns\":0,\"load_balance.total_turns\":0,\"reading_prep.current_turns\":0,\"reading_prep.total_turns\":0,\"resolve_card.current_turns\":0,\"resolve_card.total_turns\":0,\"week_confirm.current_turns\":0,\"week_confirm.total_turns\":0,\"confirm_count.current_turns\":0,\"confirm_count.total_turns\":0,\"email_confirm.current_turns\":0,\"email_confirm.total_turns\":0,\"end_paper_sms.current_turns\":0,\"end_paper_sms.total_turns\":0,\"end_week_done.current_turns\":0,\"end_week_done.total_turns\":0,\"end_email_sent.current_turns\":0,\"end_email_sent.total_turns\":0,\"end_week_error.current_turns\":0,\"end_week_error.total_turns\":0,\"end_not_turkish.current_turns\":0,\"end_not_turkish.total_turns\":0,\"end_week_refused.current_turns\":0,\"end_week_refused.total_turns\":0,\"end_service_error.current_turns\":0,\"end_service_error.total_turns\":0,\"end_email_not_mine.current_turns\":0,\"end_email_not_mine.total_turns\":0,\"end_other_transaction.current_turns\":0,\"end_other_transaction.total_turns\":0,\"g_pay.current_turns\":0,\"g_pay.total_turns\":0,\"g_agent.current_turns\":0,\"g_agent.total_turns\":0,\"g_angry.current_turns\":0,\"g_angry.total_turns\":0,\"g_dispute.current_turns\":0,\"g_dispute.total_turns\":0,\"g_not_turkish.current_turns\":0,\"g_not_turkish.total_turns\":0,\"g_other_person.current_turns\":0,\"g_other_person.total_turns\":0,\"g_out_of_scope.current_turns\":0,\"g_out_of_scope.total_turns\":0,\"g_switch_transaction.current_turns\":0,\"g_switch_transaction.total_turns\":0,\"now\":\"2026-10-12T10:30:00+03:00\",\"customerNumber\":\"97073972\",\"call.customer_phone_number\":\"\",\"call.phone_number\":\"\",\"call.call_id\":\"\",\"call.direction\":\"web\",\"system.iso_utc_now\":\"2026-10-11T18:40:45.915628Z\",\"system.todays_date_en_cst\":\"11 October 2026 Sunday 12:40\",\"system.todays_date_en_est\":\"11 October 2026 Sunday 13:40\",\"system.todays_date_tr\":\"11 Ekim 2026 Pazar 21:40\",\"system.todays_date_tr.iso_8601\":\"2026-10-11\",\"system.uuid4()\":\"6ce0bda362484254b392f7fd32ea36e7\",\"load_cards_response.status\":\"error\",\"load_cards_response.error\":\"HTTP 500\",\"load_cards_response.message\":\"API request failed: {'result': {'guid': 'f0e1d2c3b4a5968778695a4b3c2d0001', 'returnCode': 'FBE00099', 'messageText': 'Teknik hata: ABORTED: ', 'code': 'FBE00099', 'message': 'Teknik hata: ABORTED: ', 'type': 'ERROR', 'details': {'guid': 'f0e1d2c3b4a5968778695a4b3c2d0001', 'rootCause': 'TechnicalError', 'errorOrigin': 'ivr-gateway-test:ivr-channel-v0'}}}\",\"load_cards_response.status_code\":500,\"load_cards_response.header.Date\":\"Sun, 11 Oct 2026 18:40:46 GMT\",\"load_cards_response.header.Content-Type\":\"application/json; charset=utf-8\",\"load_cards_response.header.Content-Length\":\"316\",\"load_cards_response.header.Connection\":\"keep-alive\",\"load_cards_response.header.Access-Control-Allow-Origin\":\"*\",\"load_cards_response.header.Report-To\":\"{\\\"group\\\":\\\"cf-nel\\\",\\\"max_age\\\":604800,\\\"endpoints\\\":[{\\\"url\\\":\\\"https://a.nel.cloudflare.com/report/v4?s=advUmQf6kJmkVCQgxMOa4QMK7mndY3lggTSwgFWP9%2B2Okxu27%2FdP4u%2FSdf%2FzpvJ%2FDmU%2BVnfRyNBneFaySCiO%2FN%2FN5DYwRMOsbV3fuKBeClDYhUNDYqHvsOb9CSkVB9IBAaqv9RLkl9spd%2FDErz9RgxICKXG9ggCFZJ%2F%2FtwI%3D\\\"}]}\",\"load_cards_response.header.Nel\":\"{\\\"report_to\\\":\\\"cf-nel\\\",\\\"success_fraction\\\":0.0,\\\"max_age\\\":604800}\",\"load_cards_response.header.Server\":\"cloudflare\",\"load_cards_response.header.CF-RAY\":\"a48ffec21813dc6a-FRA\",\"load_cards_response.header.alt-svc\":\"h3=\\\":443\\\"; ma=86400\",\"load_cards_status_code\":500,\"load_cards_failure_count\":1}}",
+   "messageId": "msg_4_1791744046457",
+   "secondsFromStart": 0.06479120254516602,
+   "nodeId": "load_cards"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"node_enter\",\"node\":\"end_service_error\",\"from_node\":\"load_cards\",\"reason\":\"always always\"}",
+   "messageId": "msg_5_1791744046457",
+   "secondsFromStart": 0.0655374526977539,
+   "nodeId": "end_service_error"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_start\",\"function\":\"end_call\",\"args\":{\"message_mode\":\"custom\",\"spoken_message\":\"Şu anda işleminizi gerçekleştiremiyorum, sizi müşteri temsilcimize aktarıyorum.\"}}",
+   "messageId": "msg_6_1791744046458",
+   "secondsFromStart": 0.06644582748413086,
+   "nodeId": "end_service_error"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete_deferred\",\"function\":\"end_call\",\"result\":null,\"deferred\":true}",
+   "messageId": "msg_7_1791744046459",
+   "secondsFromStart": 0.06715607643127441,
+   "nodeId": "end_service_error"
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"call_ended\",\"reason\":\"assistant-ended-call\"}",
+   "messageId": "msg_8_1791744046473",
+   "secondsFromStart": 0.08111834526062012,
+   "nodeId": "end_service_error"
+  },
+  {
+   "role": "assistant",
+   "message": "Şu anda işleminizi gerçekleştiremiyorum, sizi müşteri temsilcimize aktarıyorum.",
+   "messageId": "msg_9_1791744046481",
+   "secondsFromStart": 0.0856928825378418,
+   "nodeId": "end_service_error",
+   "workflowSnapshot": {
+    "currentNode": "end_service_error",
+    "previousNode": "load_cards",
+    "nodeTurnCount": 0,
+    "totalTurnCount": 0,
+    "nodeTotalTurnCounts": {},
+    "transitionHistory": [
+     {
+      "from": "load_cards",
+      "to": "end_service_error",
+      "reason": "always always"
+     }
+    ],
+    "enteredNodes": [
+     "end_service_error",
+     "load_cards"
+    ],
+    "variableTable": {
+     "offer.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369260+00:00"
+     },
+     "offer.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369429+00:00"
+     },
+     "end_pay.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369265+00:00"
+     },
+     "end_pay.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369431+00:00"
+     },
+     "reading.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369269+00:00"
+     },
+     "reading.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369433+00:00"
+     },
+     "after_no.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369272+00:00"
+     },
+     "after_no.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369435+00:00"
+     },
+     "end_menu.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369276+00:00"
+     },
+     "end_menu.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369437+00:00"
+     },
+     "send_pdf.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369279+00:00"
+     },
+     "send_pdf.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369439+00:00"
+     },
+     "week_ask.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369283+00:00"
+     },
+     "week_ask.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369440+00:00"
+     },
+     "end_agent.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369287+00:00"
+     },
+     "end_agent.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369442+00:00"
+     },
+     "end_tries.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369291+00:00"
+     },
+     "end_tries.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369444+00:00"
+     },
+     "load_week.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369295+00:00"
+     },
+     "load_week.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369446+00:00"
+     },
+     "load_cards.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.457284+00:00"
+     },
+     "load_cards.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369447+00:00"
+     },
+     "load_email.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369303+00:00"
+     },
+     "load_email.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369449+00:00"
+     },
+     "week_check.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369307+00:00"
+     },
+     "week_check.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369451+00:00"
+     },
+     "card_select.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369311+00:00"
+     },
+     "card_select.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369453+00:00"
+     },
+     "email_route.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369315+00:00"
+     },
+     "email_route.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369454+00:00"
+     },
+     "end_dispute.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369319+00:00"
+     },
+     "end_dispute.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369456+00:00"
+     },
+     "end_no_card.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369323+00:00"
+     },
+     "end_no_card.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369458+00:00"
+     },
+     "select_prep.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369327+00:00"
+     },
+     "select_prep.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369460+00:00"
+     },
+     "week_change.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369330+00:00"
+     },
+     "week_change.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369461+00:00"
+     },
+     "week_choose.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369334+00:00"
+     },
+     "week_choose.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369463+00:00"
+     },
+     "week_decide.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369338+00:00"
+     },
+     "week_decide.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369465+00:00"
+     },
+     "end_security.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369342+00:00"
+     },
+     "end_security.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369466+00:00"
+     },
+     "load_balance.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369346+00:00"
+     },
+     "load_balance.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369468+00:00"
+     },
+     "reading_prep.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369349+00:00"
+     },
+     "reading_prep.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369470+00:00"
+     },
+     "resolve_card.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369353+00:00"
+     },
+     "resolve_card.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369472+00:00"
+     },
+     "week_confirm.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369357+00:00"
+     },
+     "week_confirm.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369473+00:00"
+     },
+     "confirm_count.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369360+00:00"
+     },
+     "confirm_count.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369475+00:00"
+     },
+     "email_confirm.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369364+00:00"
+     },
+     "email_confirm.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369477+00:00"
+     },
+     "end_paper_sms.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369367+00:00"
+     },
+     "end_paper_sms.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369479+00:00"
+     },
+     "end_week_done.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369371+00:00"
+     },
+     "end_week_done.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369480+00:00"
+     },
+     "end_email_sent.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369374+00:00"
+     },
+     "end_email_sent.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369482+00:00"
+     },
+     "end_week_error.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369378+00:00"
+     },
+     "end_week_error.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369484+00:00"
+     },
+     "end_not_turkish.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369381+00:00"
+     },
+     "end_not_turkish.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369486+00:00"
+     },
+     "end_week_refused.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369384+00:00"
+     },
+     "end_week_refused.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369488+00:00"
+     },
+     "end_service_error.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.457288+00:00"
+     },
+     "end_service_error.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.457292+00:00"
+     },
+     "end_email_not_mine.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369391+00:00"
+     },
+     "end_email_not_mine.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369491+00:00"
+     },
+     "end_other_transaction.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369394+00:00"
+     },
+     "end_other_transaction.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369493+00:00"
+     },
+     "g_pay.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369398+00:00"
+     },
+     "g_pay.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369495+00:00"
+     },
+     "g_agent.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369401+00:00"
+     },
+     "g_agent.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369496+00:00"
+     },
+     "g_angry.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369405+00:00"
+     },
+     "g_angry.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369498+00:00"
+     },
+     "g_dispute.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369408+00:00"
+     },
+     "g_dispute.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369500+00:00"
+     },
+     "g_not_turkish.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369412+00:00"
+     },
+     "g_not_turkish.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369502+00:00"
+     },
+     "g_other_person.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369417+00:00"
+     },
+     "g_other_person.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369503+00:00"
+     },
+     "g_out_of_scope.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369420+00:00"
+     },
+     "g_out_of_scope.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369505+00:00"
+     },
+     "g_switch_transaction.current_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369423+00:00"
+     },
+     "g_switch_transaction.total_turns": {
+      "value": 0,
+      "confidence": 1,
+      "source": "system",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369507+00:00"
+     },
+     "now": {
+      "value": "2026-10-12T10:30:00+03:00",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369510+00:00"
+     },
+     "customerNumber": {
+      "value": "97073972",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369512+00:00"
+     },
+     "call.customer_phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369513+00:00"
+     },
+     "call.phone_number": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369515+00:00"
+     },
+     "call.call_id": {
+      "value": "",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369516+00:00"
+     },
+     "call.direction": {
+      "value": "web",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369518+00:00"
+     },
+     "system.iso_utc_now": {
+      "value": "2026-10-11T18:40:45.915628Z",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369519+00:00"
+     },
+     "system.todays_date_en_cst": {
+      "value": "11 October 2026 Sunday 12:40",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369521+00:00"
+     },
+     "system.todays_date_en_est": {
+      "value": "11 October 2026 Sunday 13:40",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369522+00:00"
+     },
+     "system.todays_date_tr": {
+      "value": "11 Ekim 2026 Pazar 21:40",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369524+00:00"
+     },
+     "system.todays_date_tr.iso_8601": {
+      "value": "2026-10-11",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369525+00:00"
+     },
+     "system.uuid4()": {
+      "value": "6ce0bda362484254b392f7fd32ea36e7",
+      "confidence": 1,
+      "source": "customer",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.369527+00:00"
+     },
+     "load_cards_response.status": {
+      "value": "error",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454113+00:00"
+     },
+     "load_cards_response.error": {
+      "value": "HTTP 500",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454118+00:00"
+     },
+     "load_cards_response.message": {
+      "value": "API request failed: {'result': {'guid': 'f0e1d2c3b4a5968778695a4b3c2d0001', 'returnCode': 'FBE00099', 'messageText': 'Teknik hata: ABORTED: ', 'code': 'FBE00099', 'message': 'Teknik hata: ABORTED: ', 'type': 'ERROR', 'details': {'guid': 'f0e1d2c3b4a5968778695a4b3c2d0001', 'rootCause': 'TechnicalError', 'errorOrigin': 'ivr-gateway-test:ivr-channel-v0'}}}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454120+00:00"
+     },
+     "load_cards_response.status_code": {
+      "value": 500,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454122+00:00"
+     },
+     "load_cards_response.header.Date": {
+      "value": "Sun, 11 Oct 2026 18:40:46 GMT",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454123+00:00"
+     },
+     "load_cards_response.header.Content-Type": {
+      "value": "application/json; charset=utf-8",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454125+00:00"
+     },
+     "load_cards_response.header.Content-Length": {
+      "value": "316",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454126+00:00"
+     },
+     "load_cards_response.header.Connection": {
+      "value": "keep-alive",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454128+00:00"
+     },
+     "load_cards_response.header.Access-Control-Allow-Origin": {
+      "value": "*",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454129+00:00"
+     },
+     "load_cards_response.header.Report-To": {
+      "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=advUmQf6kJmkVCQgxMOa4QMK7mndY3lggTSwgFWP9%2B2Okxu27%2FdP4u%2FSdf%2FzpvJ%2FDmU%2BVnfRyNBneFaySCiO%2FN%2FN5DYwRMOsbV3fuKBeClDYhUNDYqHvsOb9CSkVB9IBAaqv9RLkl9spd%2FDErz9RgxICKXG9ggCFZJ%2F%2FtwI%3D\"}]}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454131+00:00"
+     },
+     "load_cards_response.header.Nel": {
+      "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454133+00:00"
+     },
+     "load_cards_response.header.Server": {
+      "value": "cloudflare",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454134+00:00"
+     },
+     "load_cards_response.header.CF-RAY": {
+      "value": "a48ffec21813dc6a-FRA",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454136+00:00"
+     },
+     "load_cards_response.header.alt-svc": {
+      "value": "h3=\":443\"; ma=86400",
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": "load_cards",
+      "extracted_at": "2026-10-11T18:40:46.454137+00:00"
+     },
+     "load_cards_status_code": {
+      "value": 500,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.454141+00:00"
+     },
+     "load_cards_failure_count": {
+      "value": 1,
+      "confidence": 1,
+      "source": "tool_result",
+      "source_node": null,
+      "extracted_at": "2026-10-11T18:40:46.454145+00:00"
+     }
+    },
+    "identity": {
+     "agentId": "bc275c9d-9300-4576-b8a6-030841f495d0",
+     "entityVersionId": "0cfe20f2-8d4a-427c-8619-dbacc6b5c938"
+    },
+    "controlFlags": {
+     "terminalActionFired": true
+    }
+   }
+  },
+  {
+   "role": "system",
+   "message": "{\"event\":\"function_call_complete\",\"function\":\"end_call\",\"result\":{\"status\":\"success\",\"message\":\"Call ended\"}}",
+   "messageId": "msg_10_1791744046574",
+   "secondsFromStart": 0.18208980560302734,
+   "nodeId": "end_service_error"
+  }
+ ]
+}

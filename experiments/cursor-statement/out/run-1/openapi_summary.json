@@ -1,0 +1,107 @@
+{
+  "server": "https://statement-mock.guntop-mockbank.workers.dev",
+  "operations": [
+    {
+      "operationId": "cards.list",
+      "method": "POST",
+      "path": "/voice/v1/cards.list",
+      "data_required": [
+        "customerNo"
+      ],
+      "data_fields": [
+        "customerNo"
+      ]
+    },
+    {
+      "operationId": "cards.balance",
+      "method": "POST",
+      "path": "/voice/v1/cards.balance",
+      "data_required": [
+        "cardNumber"
+      ],
+      "data_fields": [
+        "cardNumber"
+      ]
+    },
+    {
+      "operationId": "statement.week.get",
+      "method": "POST",
+      "path": "/voice/v1/statement.week.get",
+      "data_required": [
+        "cardNumber"
+      ],
+      "data_fields": [
+        "cardNumber"
+      ]
+    },
+    {
+      "operationId": "statement.week.decide",
+      "method": "POST",
+      "path": "/voice/v1/statement.week.decide",
+      "data_required": [
+        "cardNumber",
+        "newStatementWeek",
+        "statementDay"
+      ],
+      "data_fields": [
+        "cardNumber",
+        "newStatementWeek",
+        "statementDay"
+      ]
+    },
+    {
+      "operationId": "statement.week.change",
+      "method": "POST",
+      "path": "/voice/v1/statement.week.change",
+      "data_required": [
+        "cardNumber",
+        "newStatementWeek",
+        "statementDay"
+      ],
+      "data_fields": [
+        "cardNumber",
+        "newStatementWeek",
+        "statementDay"
+      ]
+    },
+    {
+      "operationId": "contact.email.get",
+      "method": "POST",
+      "path": "/voice/v1/contact.email.get",
+      "data_required": [
+        "customerNo",
+        "intAddressInfoType"
+      ],
+      "data_fields": [
+        "customerNo",
+        "intAddressInfoType"
+      ]
+    },
+    {
+      "operationId": "statement.pdf.send",
+      "method": "POST",
+      "path": "/voice/v1/statement.pdf.send",
+      "data_required": [
+        "customerNo",
+        "cardNumber",
+        "currencyType",
+        "statementDate",
+        "emailAddress"
+      ],
+      "data_fields": [
+        "customerNo",
+        "cardNumber",
+        "currencyType",
+        "statementDate",
+        "emailAddress"
+      ]
+    },
+    {
+      "operationId": "oauth2.token",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "data_required": [],
+      "data_fields": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "sources": 18,
+  "rules": 211,
+  "open": [
+    {
+      "id": "L55",
+      "chosen": "**TBD:** the flow drawing we got from the vendor side has a box \"second factor may be needed\". I don't see why for a read-only step plus two low-risk actions; to confirm with Elçin"
+    },
+    {
+      "id": "L59",
+      "chosen": "5. Remaining auto-payment amount, when there is one (**TBD**, see §9)."
+    },
+    {
+      "id": "L71",
+      "chosen": "3. Statement by e-mail: can the caller give a different address than the one we have on file, e.g. a work address? No. We only send to the e-mail address registered at the bank. If"
+    },
+    {
+      "id": "L90",
+      "chosen": "Q6 - silence: in the menu today we repeat the prompt twice and on the third silence we send the caller to the main menu. Whether the assistant does the same or simply ends the call"
+    },
+    {
+      "id": "L94",
+      "chosen": "Short version of where we are on our side: - Q1-Q5, Q8, Q10, Q11, Q12: clear, we build to these (except the address read-out in Q3, Selin is checking). - Q6, Q7, Q9: still open, we"
+    },
+    {
+      "id": "L203",
+      "chosen": "6. Currencies are always read with their full names, never the codes: Türk Lirası, Dolar, Euro, İngiliz Sterlini. Also where the table in the document says \"TL\". I've left out the "
+    }
+  ],
+  "call_variables": [
+    "customerNumber",
+    "now"
+  ],
+  "later_overrides_earlier": true,
+  "tool_host": "https://statement-mock.guntop-mockbank.workers.dev"
+}

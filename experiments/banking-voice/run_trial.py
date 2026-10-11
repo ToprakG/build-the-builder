@@ -62,7 +62,8 @@ if __name__ == "__main__":
     from builder.agentic.run import BuildOptions, run
     report = run(BuildOptions(
         briefs=[brief], api=api, slot="skilltrial-statement", out_dir=OUT, save="freya",
-        max_minutes=18, review=True, review_minutes=5, fix_minutes=6, unit=False, localsim=False,
+        max_minutes=15, review=True, review_minutes=3, fix_minutes=4, fix_rounds=3, wall_minutes=30,
+        unit=True, localsim=True,
         keep_workspace=True, model="claude-sonnet-5-5",
         extra={"skill_dirs": [str(p) for p in SKILLS], "prompt_append": PROMPT,
                "bind_tools": extra.Bound, "server_fn": extra.build_server},

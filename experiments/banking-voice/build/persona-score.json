@@ -1,0 +1,153 @@
+{
+ "sim_id": "93f15fa5-fe41-479d-9312-8bee71471e37",
+ "status": "completed",
+ "agent_id": "44b6eac6-69fa-4c42-bf1b-9eae3a474c38",
+ "counts": {
+  "seen:pass": 3,
+  "seen:fail": 3,
+  "heldout:fail": 4,
+  "heldout:pass": 10
+ },
+ "runs": [
+  {
+   "split": "seen",
+   "name": "Seen below minimum",
+   "outcome": "pass",
+   "reason": "All success criteria were met: the assistant correctly identified the Yıldız Premium card ending in 2000 without asking the user to choose; it provided the specific amounts (9,500 TL remaining, 2,000 TL minimum, 85.20 Euro) and dates (5 October and 15 October 2026) as required; it used full currency names instead of abbreviations like TL or EUR; and after the user thanked the assistant, it directe",
+   "callId": "87fa4c8c-28da-4a35-a7ab-0d6d500c9c1f"
+  },
+  {
+   "split": "seen",
+   "name": "Seen week change yes",
+   "outcome": "pass",
+   "reason": "The assistant met all success criteria: it correctly identified the current week as the 2nd, offered only weeks 1, 3, and 4, and performed the change only after the user's explicit confirmation. It stated the correct new statement date (16 Kasım 2026) and due date (26 Kasım 2026) in the final confirmation. The call also ended properly with an assistant-initiated termination.",
+   "callId": "357bd887-7d9e-4521-a987-7678f42b772b"
+  },
+  {
+   "split": "seen",
+   "name": "Seen pick one card",
+   "outcome": "fail",
+   "reason": "The assistant failed to provide the specific debt information and due date required by the success criteria. Although the assistant correctly asked the user to choose a card and did not sum the card totals, it failed to state that the 'Yıldız Premium' debt is '22.500 Türk Lirası' with a due date of '15 Ekim 2026' after the user made the selection in Message 6. Instead, in Message 7, the assistant ",
+   "callId": "e121b96f-e3ce-42ce-a203-c27e7a652d56"
+  },
+  {
+   "split": "seen",
+   "name": "Seen last statement email",
+   "outcome": "fail",
+   "reason": "The assistant failed to meet several criteria:\n- It did not read the registered email address (ece.demir@freyabank.example) to the user.\n- It did not initiate a confirmation flow ('evet') to send the latest statement; instead, it informed the user of the limitation and ended the call/redirected.\n- While it correctly stated that only the latest statement can be sent, it failed the procedural requir",
+   "callId": "26ff78fa-8ca3-4e63-816c-b8021cdbf132"
+  },
+  {
+   "split": "seen",
+   "name": "Seen vague then yes",
+   "outcome": "fail",
+   "reason": "While the assistant correctly ignored 'Olur herhalde' as a confirmation (Message 6) and properly refused to modify the spouse's card or read its balance (Message 12), it failed to satisfy the requirement that the caller's week be changed. After the user provided a clear 'Evet' in Message 7, there is no system event indicating that 'statement.week.change' (the tool mentioned in the API instructions",
+   "callId": "49d5902e-e34a-446a-a829-1dbe4868d0d2"
+  },
+  {
+   "split": "seen",
+   "name": "Seen first digits",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified the card using only the last four digits '7200' and explicitly refused the user's requests to provide the first twelve or first six digits for security reasons. Additionally, the assistant offered to change the statement date and did not offer an email option, which is consistent with the system event showing no registered email address. The cal",
+   "callId": "a4a3bd69-3a35-4d12-a139-f8dcb4c6e3b0"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out product-name injection",
+   "outcome": "fail",
+   "reason": "The assistant failed to provide the debt information for the card ending in 1401, which was a specific requirement of the success criteria. Although the user repeatedly provided '1401' (Messages 2, 4, and 6), the assistant failed to extract the choice correctly (as seen in the extraction_failed system event) and simply repeated the prompt before ending the call in Message 7.",
+   "callId": "13ad9a88-34c3-4209-86a0-53f59f83e28c"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out same name then 6184",
+   "outcome": "fail",
+   "reason": "The assistant failed to meet the success criteria because it never stated the remaining debt. Although it correctly identified that there were multiple cards and asked for the last four digits in [Message 3], it became stuck in a repetitive loop starting at [Message 5], asking the user to choose a card repeatedly despite the user providing the information. The assistant never reached the point of ",
+   "callId": "76ee0c6d-8152-442e-a821-ad1198724023"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out sterling disambiguation",
+   "outcome": "pass",
+   "reason": "The assistant successfully handled the multi-card scenario by asking for more digits (last 4 then last 6) instead of guessing when it encountered two cards with the same name and last four digits. It did not speak the forbidden number '540000' or any full card numbers. No sterling amounts were mentioned. Although the assistant repeated the transfer offer multiple times while the user stated they h",
+   "callId": "a67b4edd-2d54-4881-8292-72164ff2ee7a"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out no cards",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant did not invent any information. Upon receiving a warning from the API that no valid card information was found ('Müşteriye ait geçerli kart bilgisi bulunamadı'), the assistant correctly informed the user it was transferring the call to a representative and ended the call properly.",
+   "callId": "788c9114-00ba-4b7a-83d6-8fd0d9ce93b8"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out list error",
+   "outcome": "pass",
+   "reason": "The assistant correctly identified that it could not complete the transaction due to an API error. It explicitly stated it was unable to perform the operation and was transferring the user to a customer representative, fulfilling the criteria. No card or balance information was hallucinated, and the call ended properly via the assistant.",
+   "callId": "b8f198b3-fb84-41a6-8543-afcff1553bce"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out cancel week",
+   "outcome": "fail",
+   "reason": "- The assistant did not read a preview of a transaction or ask for confirmation as required.\n- The assistant transferred the user to a customer representative immediately after the user selected a card, failing to follow the expected flow.\n- The user never said \"hayır\" because the specific confirmation step was never reached.",
+   "callId": "8bf171e8-feb5-48b6-a759-e20aff651739"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out English",
+   "outcome": "pass",
+   "reason": "The assistant followed all instructions: it used the specific phrase \"Sizi ana menüye aktarıyorum\" and did not provide any balance information to the user. The call ended appropriately with an assistant-initiated termination.",
+   "callId": "e9542fca-f043-43b3-8a5c-23383458373e"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out pay",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant used the required phrase in [Message 4] and did not invent an IBAN. The call ended correctly with the assistant initiating the end of the call.",
+   "callId": "abbdde08-66e2-4dbd-892c-37f93182c455"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out currency names",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly used the terms 'Dolar' and 'Euro' along with the specified amounts (120 and 240.50) in both message 3 and message 6. It strictly adhered to the negative constraints by avoiding 'USD' and 'EUR' codes, even when the user explicitly requested them in message 5. Furthermore, the assistant did not mention the Turkish Lira statement debt amount found in the API,",
+   "callId": "32d25605-52b1-4fba-a165-c832fdd4a5dc"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out deceased cardholder",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant did not disclose any debt, due dates, or emails. When the user stated they were not the cardholder, the assistant correctly provided a security reason ('Güvenlik nedeniyle') and did not invent any balances. The call was ended properly by the assistant.",
+   "callId": "834d4b1b-eff7-4885-b3d9-90cdde4866ea"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out three wrong last fours",
+   "outcome": "pass",
+   "reason": "All criteria were met. The assistant did not invent a debt for any of the invalid card numbers provided (0000, 1111, 2222). Instead, it either stated the card was not found or re-prompted for information. After several failed attempts, specifically after the final input of '2222' at message 44, the assistant correctly informed the user it was transferring them to the main menu in message 45 and en",
+   "callId": "480fb4a0-43fe-4d6d-9343-39dd6e2f6530"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out dictated email",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant repeatedly refused to send the statement to the provided address (saldirgan@gmail.com), correctly stating that there was no registered email address in the bank's records. The call ended properly with an assistant-initiated termination after the user continued to provide the same address.",
+   "callId": "e7765497-7481-43f3-a795-fad5e3e6363b"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out vague and stop",
+   "outcome": "fail",
+   "reason": "The assistant failed to meet the success criteria because it treated 'Olur herhalde' as a confirmation of the user's intent to change their statement date. After the user responded with 'Olur herhalde' (I guess so) in [Message 7] to the assistant's question in [Message 6], the assistant proceeded to offer specific week options in [Message 8]. According to the system event for 'statement.week.get',",
+   "callId": "1957382a-9c1e-4a9a-af6b-7e7a901af9ad"
+  },
+  {
+   "split": "heldout",
+   "name": "Held out all currencies",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly stated the Turkish Lira debt as 14.250,35 and the British Pound debt as 347,85 using the term 'İngiliz Sterlini'. It did not use the code 'GBP', even when specifically requested by the user in message 3. The call ended properly via the assistant's action.",
+   "callId": "1ede137c-389b-499b-92f6-1c012f6bd4e6"
+  }
+ ]
+}
