@@ -1,7 +1,0 @@
-15:10:21 start 2026-10-11T15:10:21+0300
-15:10:21   variant: tcc90-loop
-15:10:21   brief: f2-ostral
-15:10:21 judge: vendor decision model (build-the-builder, threshold 0.5)
-15:10:21 testgen: 18 case(s) from our policy; gaps: product_id_format has no {n}: cases use p{n}
-15:10:23 self-test: mock bank up on 127.0.0.1:8791 with 12 of our own case(s)
-15:10:29 self-test: mock bank public at https://identifies-robust-providing-friday.trycloudflare.com

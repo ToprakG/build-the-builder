@@ -1,7 +1,0 @@
-{"type": "start", "t": 0.0, "time": "2026-10-10T23:49:16+0300", "variant": "tcc90"}
-{"type": "model_call", "t": 37.503, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract pass 1: brief -> policy.json", "tokens_in": 9687, "tokens_out": 7161, "cost_usd": null, "seconds": 37.50077486038208, "error": null}
-{"type": "model_call", "t": 76.284, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract pass 2: check every field against the brief", "tokens_in": 15506, "tokens_out": 7906, "cost_usd": null, "seconds": 38.77685594558716, "error": null}
-{"type": "check", "t": 76.339, "name": "policy_check after pass 2", "ok": true, "detail": "0 violation(s)"}
-{"type": "model_call", "t": 114.947, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract pass 1: brief -> policy.json", "tokens_in": 9687, "tokens_out": 7314, "cost_usd": null, "seconds": 38.60576105117798, "error": null}
-{"type": "model_call", "t": 160.921, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract pass 2: check every field against the brief", "tokens_in": 15591, "tokens_out": 9035, "cost_usd": null, "seconds": 45.96924710273743, "error": null}
-{"type": "check", "t": 160.978, "name": "policy_check after pass 2", "ok": true, "detail": "0 violation(s)"}

@@ -1,3 +1,0 @@
-{"type": "start", "t": 0.0, "time": "2026-10-11T09:06:31+0300", "variant": "probe"}
-{"type": "selftest", "t": 1.443, "detail": "mock bank up on 127.0.0.1:8791 with 1 of our own case(s)"}
-{"type": "selftest", "t": 7.157, "detail": "mock bank public at https://properly-previews-those-templates.trycloudflare.com"}

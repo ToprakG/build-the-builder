@@ -1,9 +1,0 @@
-#!/usr/bin/env python3
-import subprocess
-import sys
-
-secs = int(sys.argv[1])
-try:
-    raise SystemExit(subprocess.run(sys.argv[2:], timeout=secs).returncode)
-except subprocess.TimeoutExpired:
-    raise SystemExit(124)

@@ -1,9 +1,0 @@
-{
- "members": [],
- "workflow": {
-  "workflow_id": "b4099d27-1da1-4954-aa92-a1b04168f5c8",
-  "agent_id": "5fdb3a91-b168-4472-acaf-2cb7c7aa4fec"
- },
- "trace": "/Users/toprakgundogdu/Downloads/build-the-builder/traces/agentic-case-freyabank-test-20261011-210044",
- "mock_url": "https://bank-mock.guntop-mockbank.workers.dev/rehearsal-tr"
-}

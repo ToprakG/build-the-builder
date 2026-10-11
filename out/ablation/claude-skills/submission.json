@@ -1,6 +1,0 @@
-{
- "members": [],
- "workflow": "out/ablation/claude-skills/workflow.json",
- "trace": "/Users/toprakgundogdu/Downloads/build-the-builder/traces/agentic-ablation-claude-skills-20261011-211736",
- "mock_url": "https://statement-mock.guntop-mockbank.workers.dev"
-}

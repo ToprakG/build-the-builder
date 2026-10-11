@@ -1,3 +1,0 @@
-{"type": "start", "time": "2026-10-11T20:24:47+0300", "variant": "agentic", "slot": "case-freyabank-test", "model": "claude-opus-5-5", "briefs": ["out/rehearsal-agentic/ingest/case_brief.md"], "tool_api": "out/rehearsal-agentic/ingest/tools.openapi.json", "save": "none", "max_minutes": 15.0, "self_test": "none"}
-{"type": "event", "kind": "error", "time": "2026-10-11T20:24:47+0300", "detail": "builder error: FileNotFoundError(2, 'No such file or directory')"}
-{"type": "end", "time": "2026-10-11T20:24:47+0300", "status": "failed", "saved": null, "fallback_used": null, "lint": {}, "validate": null, "agent": null, "message": "builder error: FileNotFoundError(2, 'No such file or directory')", "review": {}}

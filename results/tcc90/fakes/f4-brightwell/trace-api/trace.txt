@@ -1,7 +1,0 @@
-04:24:29 start 2026-10-11T04:24:29+0300
-04:24:29   variant: tcc90-api
-04:24:29   brief: f4-brightwell
-04:24:29   model: openrouter:anthropic/claude-sonnet-5.5
-04:24:31 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | 2.2s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 400: {"error":{"message":"Provider returned error","code":400,"metadata":{"raw":"{\"type\":\"error\",\"error\":{\"type\":\"invalid_request_erro...
-04:24:31 WARNING extract pass 1: brief -> policy.json: provider rejected the response schema; asking for a JSON object
-05:41:51 end 2026-10-11T05:41:51+0300 status=error wall=4641.6s model_calls=1 tokens_in=0 tokens_out=0 cost=$0.0000

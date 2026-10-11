@@ -1,4 +1,0 @@
-09:06:31 start 2026-10-11T09:06:31+0300
-09:06:31   variant: probe
-09:06:32 self-test: mock bank up on 127.0.0.1:8791 with 1 of our own case(s)
-09:06:38 self-test: mock bank public at https://properly-previews-those-templates.trycloudflare.com

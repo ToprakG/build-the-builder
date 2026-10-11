@@ -1,5 +1,13 @@
 {"type":"system","subtype":"init","apiKeySource":"login","cwd":"/Users/toprakgundogdu/Downloads/build-the-builder","session_id":"8abe4140-d9d9-40d7-9446-08dae56fb387","model":"Auto","permissionMode":"default"}
-{"type":"user","message":{"role":"user","content":[{"type":"text","text":"You have 15 minutes. Follow the skills in experiments/cursor-statement/.cursor/skills, in order: pack-inventory, speech-library, workflow-graph, side-exits, adversarial-checklist.\n\nThe case is /Users/toprakgundogdu/Downloads/test-environment. The mock that stays up is https://statement-mock.guntop-mockbank.workers.dev. Tool URLs must use that host.\n\nIterate on experiments/cursor-statement/latest/workflow.json. Personas are in out/diag/personas20.json and out/statement-debt/personas.json, personas-more.json, and adversarial-personas.json. Run unit tests and persona calls, patch what fails, and publish to the existing Freya workflow b223742a-f636-442d-bd61-3f4098f0c10c. Source /Users/toprakgundogdu/Downloads/build-the-builder/.env before any Freya call. Do not print secrets. If a skill names an mcp__fb__ tool that is not in this session, do that check in code.\n\nExport the published workflow with freya.export_workflow to experiments/cursor-statement/out/final.workflow.json. Stop at 15 minutes with the best version published."}]},"session_id":"8abe4140-d9d9-40d7-9446-08dae56fb387"}
+{"type":"user","message":{"role":"user","content":[{"type":"text","text":"You have 30 minutes. You are a banking phone-agent builder. Build the phone agent.
+
+Follow the skills in experiments/cursor-statement/.cursor/skills, in order: pack-inventory, speech-library, workflow-graph, side-exits, adversarial-checklist. The skills apply to any banking phone agent. The case documents decide the product.
+
+Case folder: ${CASE}
+Mock that stays up: ${MOCK}
+Tool URLs must use that host.
+
+Write this run files under ${OUT_REL}. You may create personas and tests. Publish to Freya slot cursor-bank-${RUN_ID}. Source ${ROOT}/.env before any Freya call. Do not print secrets. If a skill names an mcp__fb__ tool that is not in this session, do that check in code."}]},"session_id":"8abe4140-d9d9-40d7-9446-08dae56fb387"}
 {"type":"thinking","subtype":"delta","text":"Starting the ordered","session_id":"8abe4140-d9d9-40d7-9446-08dae56fb387","timestamp_ms":1791746603174}
 {"type":"thinking","subtype":"delta","text":" skill sequence for ","session_id":"8abe4140-d9d9-40d7-9446-08dae56fb387","timestamp_ms":1791746603176}
 {"type":"thinking","subtype":"delta","text":"the banking voice agent","session_id":"8abe4140-d9d9-40d7-9446-08dae56fb387","timestamp_ms":1791746603347}

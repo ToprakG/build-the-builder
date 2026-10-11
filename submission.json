@@ -3,7 +3,7 @@
   "members": [],
   "repo": "https://github.com/ToprakG/build-the-builder.git",
   "commit": "79869f4",
-  "run_command": "experiments/cursor-statement/run_agent.sh",
+  "run_command": "experiments/cursor-statement/run_normal_agent.sh",
   "workflow": "submission/final.workflow.json",
   "trace": "experiments/cursor-statement/trace/session-20261011-222250.jsonl",
   "mock_url": "https://statement-mock.guntop-mockbank.workers.dev"

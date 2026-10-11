@@ -1,7 +1,0 @@
-{
- "brief": "f2-ostral",
- "status": "skipped",
- "reason": "rep 2 stayed running after every call had finished; skipped so f3 could start",
- "rep1_passes": 5,
- "rep1_total": 10
-}

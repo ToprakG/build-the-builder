@@ -1,8 +1,0 @@
-features: f11_promise_typed,f12_slot_summary,f13_verifier,f15_hardship_terms,f18_side_resume,f19_refusal_rule,f1_id_complete,f20_once_flags,f21_spoken_answers,f24_day_once,f25_dispute_wins,f28_tool_failure,f29_scam_open,f2_question_not_refusal,f3_human_first,f4_discount,f7_router,f8_fixed_lines,f9_number_input
-final vote: 3 independent extractions
-final vote: fewer than 2 extractions finished or the vote failed; extracting again in the final build
-stage extract (readings, verifier, pass 2, fix): 16s
-stage compile + lint:                            ?
-total wall: 501s (exit 1), status failed
-lint: None
-needed a human: the build did not finish ok

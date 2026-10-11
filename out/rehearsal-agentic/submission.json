@@ -1,6 +1,0 @@
-{
- "members": [],
- "workflow": "out/rehearsal-agentic/workflow.json",
- "trace": "/Users/toprakgundogdu/Downloads/build-the-builder/traces/agentic-case-freyabank-test-20261011-202621",
- "mock_url": "https://bank-mock.tccbank2026-yc.workers.dev/rehearsal-tr"
-}

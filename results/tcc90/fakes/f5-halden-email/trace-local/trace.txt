@@ -1,7 +1,0 @@
-02:52:06 start 2026-10-11T02:52:06+0300
-02:52:06   variant: tcc90-local-claude
-02:52:06   brief: f5-halden-email
-02:55:45 model call sonnet: extract pass 1: brief -> policy.json | tokens in=2 out=16674 | cost=$0.2740 | 218.9s
-02:59:28 model call sonnet: extract pass 2: check every field against the brief | tokens in=2 out=16296 | cost=$0.3097 | 223.1s
-02:59:28 check policy_check after pass 2: FAIL 46 violation(s)
-03:09:28 WARNING extract fix round: 46 policy_check violation(s): claude timed out

@@ -1,6 +1,0 @@
-05:41:52 start 2026-10-11T05:41:52+0300
-05:41:52   variant: tcc90-api
-05:41:52   brief: brief-b
-05:41:52   model: openrouter:anthropic/claude-sonnet-5.5
-05:41:53 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | 0.4s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 402: {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 16000 tokens, but can only afford 8621. ...
-05:41:53 end 2026-10-11T05:41:53+0300 status=error wall=0.4s model_calls=1 tokens_in=0 tokens_out=0 cost=$0.0000

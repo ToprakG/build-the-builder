@@ -1,8 +1,0 @@
-Start: 2026-10-11 15:00:31
-Repair: on
-Editor: Claude Code claude-sonnet-5-5
-Play: Freya. Customer: meta-llama/llama-3.1-8b-instruct. Judge: Jev
-Policy source: file
-self-test: mock bank up on 127.0.0.1:8802 with 4 of our own case(s)
-self-test: mock bank public at https://facing-enhanced-aid-roland.trycloudflare.com
-freya save_workflow (self-test slot): {'slot': 'tcc90-repair-f2-freya-selftest', 'workflow_id': '72704495-a350-4030-88bc-3271e071167f', 'agent_id': 'dc993770-f2c5-4357-ae1e-28d77e2ffcc7', 'version': 2}

@@ -1,6 +1,0 @@
-22:29:00 mode patcher_on, budget 30 min, ship at 22:55:00
-22:29:00 final_run: briefs briefs/brief-a.md, window ends 22:59, flags: f11_promise_typed,f12_slot_summary,f13_verifier,f15_hardship_terms,f1_id_complete,f2_question_not_refusal,f3_human_first,f4_discount,f7_router,f8_fixed_lines,f9_number_input,f18_side_resume,f19_refusal_rule,f20_once_flags,f21_spoken_answers,f24_day_once,f25_dispute_wins,f28_tool_failure,f29_scam_open,-f18_opening_fallback
-22:29:04 LLM preflight ok: provider claude_cli, model sonnet, 3.9s
-22:29:05 stage build: start (T-30 in 25 min)
-22:37:26 stage build: 502s, exit 1
-22:37:26 no workflow from the build: nothing to test
