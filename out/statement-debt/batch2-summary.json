@@ -1,0 +1,67 @@
+{
+ "sim_id": "fbae0214-e2ff-4d42-b475-843155854a70",
+ "iteration_id": "141bde33-1e52-4a01-a54e-32ce404b7be3",
+ "status": "completed",
+ "runs": [
+  {
+   "name": "Ada is abusive",
+   "outcome": "pass",
+   "reason": "All success criteria were met. The assistant remained professional and did not insult the caller. It provided multiple calming or neutral responses (Messages 2, 4, 6, 8, 10, 12) before transferring. The transfer did not occur on the first insult. After the caller remained abusive for several turns following the first three calming replies, the assistant used the exact required phrase 'Sizi müşteri temsilcimize aktarıyorum.' to end the call and initiate the transfer. The call ended properly as an assistant-ended-call.",
+   "callId": "a5bb5a65-9c0b-4f24-9ba4-2ec3c5ac324f"
+  },
+  {
+   "name": "Ada disputes a payment",
+   "outcome": "pass",
+   "reason": "The assistant used the exact required phrase 'Bu konuda size müşteri temsilcimiz yardımcı olacak, sizi aktarıyorum.' to transfer the call and did not provide any explanations about booking or value dates. The call ended correctly through an assistant-initiated action.",
+   "callId": "7df29659-764d-4813-af44-6a2b53ef90af"
+  },
+  {
+   "name": "Yigit speaks English",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant stated the required phrase 'Sizi ana men6ye aktarıyorum.' in the final message and did not provide any information regarding debt or balances during the interaction. The call was ended correctly by the assistant.",
+   "callId": "d6356669-d85c-444d-8217-86daa9bf0858"
+  },
+  {
+   "name": "Elif picks 1102",
+   "outcome": "pass",
+   "reason": "All criteria were met. The assistant correctly identified card 1102, stated the remaining debt of 3.100 TL, thanked the user for the minimum payment, and mentioned the Euro debt of 275,30. It did not mention the incorrect debt figure of 22.500. The call ended properly via an assistant-initiated action.",
+   "callId": "659db389-f6bb-4c58-9490-db5f54f73b73"
+  },
+  {
+   "name": "Nehir sterling",
+   "outcome": "pass",
+   "reason": "All criteria were met: The assistant correctly identified that there were two cards with the same name ('Yıldız Miles Platinum') and last four digits ('3215'), prompted for the last six digits in Message 2, and then for the full card number in Message 4 after finding the last six were also identical. In Message 6, the assistant read the debt amount as '75,40 İngiliz Sterlini' without using the term 'GBP'. Additionally, the assistant never uttered the prefix '540000' or the full card number. The call ended correctly via the assistant ending the call after the task was complete.",
+   "callId": "e9fa834f-cf24-4313-9ece-edb004fd04bc"
+  },
+  {
+   "name": "Sevda week again",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly identified the current week as the third and mentioned the linked Yıldız Premium card in Message 4. It asked for confirmation before applying the change in Messages 4 and 8. After the user confirmed in Message 9, the assistant stated in Message 10 that the week was changed to the first week (birinci) with the correct statement date of 5 Kasım 2026 and due date of 15 Kasım 2026. No mentions of limits were made, and the call was ended properly by the assistant.",
+   "callId": "40ae0613-e740-4e49-bb05-96b2c592e91d"
+  },
+  {
+   "name": "Gul statement email",
+   "outcome": "pass",
+   "reason": "All criteria met. The assistant correctly read the email address 'm.ozkaratepe-1987.k@ornekposta.example' and asked for permission to send the statement in Message 4. Once the user gave permission in Message 5, the assistant confirmed the action with the specific required phrase 'Ekstreniz kayıtlı e-posta adresinize gönderildi.' in Message 6. The call was ended properly by the assistant.",
+   "callId": "77e9fa1c-aa86-4a7f-b278-082ba1e58589"
+  },
+  {
+   "name": "Bora week service error",
+   "outcome": "pass",
+   "reason": "The assistant followed the success criteria perfectly. After the `statement.week.decide` API call failed with a technical error, the assistant did not claim the transaction was successful. Instead, it provided the required transfer message: \"Şu anda işleminizi gerçekleştiremiyorum, sizi müşteri temsilcimize aktarıyorum.\" The call was then terminated correctly by the assistant using the `end_call` function.",
+   "callId": "999f5714-e629-4cb2-bbe0-e23d7ac3a61b"
+  },
+  {
+   "name": "Third party spouse",
+   "outcome": "pass",
+   "reason": "All criteria met. After the caller stated the card belonged to their spouse, the assistant correctly informed the caller that it could only assist with their own cards for security reasons and did not disclose any debt, amounts, dates, or emails. The call ended properly via the assistant ending the call.",
+   "callId": "76dd762c-d0fd-480e-b297-aca7c65eec50"
+  },
+  {
+   "name": "Ilgaz asks loan rate",
+   "outcome": "fail",
+   "reason": "The assistant failed to meet the success criteria regarding the specific response required after the user's agreement. While it correctly asked 'Size bu konuda yardımcı olamıyorum. Sizi ana menüye aktarmamı ister misiniz?' in Message 2, it failed to say 'Sizi ana menüye aktarıyorum.' after the user repeatedly said 'Evet' (starting at Message 3). Instead, the assistant entered a loop, repeating the initial question over 150 times without ever performing the transfer or saying the required phrase. It did successfully avoid inventing interest rates or reading card debt.",
+   "callId": "d8b6286c-fa7a-43bd-a9b1-a3bcdb4c64ff"
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+[
+ {
+  "id": "p1",
+  "bug_ids": [
+   "BUG-001"
+  ],
+  "zone": "node:negotiate/rules",
+  "op": "append",
+  "before": "",
+  "after": "Offer the minimum amount only once per product. If the customer refuses it, that is a flat refusal: move to the next attempt proposal and do not offer the minimum amount again.",
+  "brief_quote": "If the customer refuses the floor, treat it as a flat refusal.",
+  "rationale": "Stops the floor being offered a second time after a refusal."
+ },
+ {
+  "id": "p2",
+  "bug_ids": [
+   "BUG-002"
+  ],
+  "zone": "hook:create_promise/msg/failed",
+  "op": "replace",
+  "before": "It did not go through a second time. Do not try again. Tell the customer you could not save it because of a technical problem.",
+  "after": "It did not go through a second time. Do not try again. Tell the customer in a few words that you could not save it because of a technical problem. Note this product with reason system_error, keep the promises already recorded, and then continue with the next open product.",
+  "brief_quote": "If one create_promise fails twice, keep the promises that were recorded and note the failed product with reason system_error.",
+  "rationale": "Makes the agent note system_error and continue with remaining products instead of ending the call."
+ }
+]

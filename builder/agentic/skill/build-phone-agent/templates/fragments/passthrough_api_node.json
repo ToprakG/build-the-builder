@@ -1,0 +1,87 @@
+{
+ "name": "load_account",
+ "node_type": "api_request",
+ "passthrough": true,
+ "passthrough_default_transition": "facts",
+ "on_enter": {
+  "type": "silent"
+ },
+ "disable_inactivity_monitor": true,
+ "pre_actions": [
+  {
+   "type": "function",
+   "config": {
+    "timeoutMs": 12000,
+    "maxRetries": 1
+   },
+   "function": {
+    "name": "load_items",
+    "handler": "__function__:api_call",
+    "description": "Get the late items.",
+    "parameters": {
+     "type": "object",
+     "properties": {
+      "url": {
+       "type": "string",
+       "default": "https://api.example-bank.invalid/v1/load_items"
+      },
+      "method": {
+       "type": "string",
+       "default": "POST"
+      },
+      "headers": {
+       "type": "object",
+       "properties": {
+        "Content-Type": {
+         "type": "string",
+         "default": "application/json"
+        }
+       }
+      },
+      "body": {
+       "type": "object",
+       "properties": {
+        "callerRef": {
+         "type": "string",
+         "default": "{{callerRef}}"
+        }
+       },
+       "required": [
+        "callerRef"
+       ]
+      }
+     }
+    }
+   }
+  }
+ ],
+ "response_mapping": [
+  {
+   "path": "data.ok",
+   "variable": "account_ok"
+  }
+ ],
+ "transitions": [
+  {
+   "target_node": "account_error",
+   "description": "The lookup failed",
+   "condition": {
+    "logic": "or",
+    "conditions": [
+     {
+      "variable": "load_account_failure_count",
+      "operator": "greater_than",
+      "operand": 0
+     }
+    ]
+   }
+  },
+  {
+   "target_node": "facts",
+   "description": "always",
+   "condition": {
+    "operator": "always"
+   }
+  }
+ ]
+}

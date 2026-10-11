@@ -1,0 +1,259 @@
+{
+ "brief": "f4-brightwell",
+ "reps": 1,
+ "limit": 10,
+ "agent_id": "29b5a625-643b-4379-94a6-827c01ea2a82",
+ "workflow_id": "642d72cc-afa9-4d29-aad0-738b3174a03d",
+ "passed": 6,
+ "total": 10,
+ "final": [
+  {
+   "id": "F4-001",
+   "family": "Amounts",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F4-002",
+   "family": "Multi-product",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F4-003",
+   "family": "Multi-product",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F4-004",
+   "family": "Scam question",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('no_promise', 'dispute'), expected ('promise', None)",
+    "promises [], expected [('p1', 650.0, '2026-11-19')]",
+    "notes [('p1', 'dispute')], expected []",
+    "conversation: The agent failed to meet any of the specific success criteria: 1. When the user suspected fraud in [Message 9], the agent did not provide instructions to verify the call via a relationship manager or the website. 2. The agent ended the call immediately in [Message 10] rather than continuing it. 3. No promise for 19 November was recorded; the system events confirm the call was closed with an outcom"
+   ]
+  },
+  {
+   "id": "F4-005",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'declined'), expected ('promise', None)",
+    "promises [], expected [('p1', 1435.0, '2026-11-17'), ('p2', 581.0, '2026-11-17')]",
+    "conversation: The success criteria were not met for the following reasons: - The requirement 'both promises recorded' was not met. No promises were discussed or recorded in the transcript or via tool calls, as the call ended prematurely during the identity verification phase. - The requirement 'the failed call is retried' was not met. The first 'code_exec' function call resulted in a validation error ('variable"
+   ]
+  },
+  {
+   "id": "F4-006",
+   "family": "Happy path",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F4-007",
+   "family": "Human request",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'declined'), expected ('transferred', 'human')",
+    "transfers [], expected [{'queue': 'relationship_manager'}]",
+    "conversation: The agent failed to meet the success criteria because the `transfer_to_agent` function was never called. Although the agent successfully avoided mentioning products, amounts, or debt, and correctly asked once if it could help first in Message 4, it proceeded to end the call in Message 6 instead of transferring the user to a human agent as requested in Messages 3 and 5."
+   ]
+  },
+  {
+   "id": "F4-008",
+   "family": "Multi-product",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F4-009",
+   "family": "Unclear",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F4-010",
+   "family": "Dates",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'declined'), expected ('promise', None)",
+    "promises [], expected [('p1', 230.0, '2026-12-01')]",
+    "conversation: The call ended during the identity verification phase, so the success criteria were not met. Specifically: 1. The agent did not propose the 1 December deadline. 2. No promise was recorded for 1 December. 3. The agent never asked for an exact day. The assistant terminated the call in [Message 10] after the user asked a question instead of answering the verification prompt in [Message 9], preventing"
+   ]
+  }
+ ],
+ "reps_rows": [
+  [
+   {
+    "id": "F4-001",
+    "pass": true,
+    "failed": [],
+    "family": "Amounts",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-002",
+    "pass": true,
+    "failed": [],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-003",
+    "pass": true,
+    "failed": [],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "add_note",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-004",
+    "pass": false,
+    "failed": [
+     "outcome ('no_promise', 'dispute'), expected ('promise', None)",
+     "promises [], expected [('p1', 650.0, '2026-11-19')]",
+     "notes [('p1', 'dispute')], expected []",
+     "conversation: The agent failed to meet any of the specific success criteria: 1. When the user suspected fraud in [Message 9], the agent did not provide instructions to verify the call via a relationship manager or the website. 2. The agent ended the call immediately in [Message 10] rather than continuing it. 3. No promise for 19 November was recorded; the system events confirm the call was closed with an outcom"
+    ],
+    "family": "Scam question",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-005",
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('promise', None)",
+     "promises [], expected [('p1', 1435.0, '2026-11-17'), ('p2', 581.0, '2026-11-17')]",
+     "conversation: The success criteria were not met for the following reasons: - The requirement 'both promises recorded' was not met. No promises were discussed or recorded in the transcript or via tool calls, as the call ended prematurely during the identity verification phase. - The requirement 'the failed call is retried' was not met. The first 'code_exec' function call resulted in a validation error ('variable"
+    ],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-006",
+    "pass": true,
+    "failed": [],
+    "family": "Happy path",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-007",
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('transferred', 'human')",
+     "transfers [], expected [{'queue': 'relationship_manager'}]",
+     "conversation: The agent failed to meet the success criteria because the `transfer_to_agent` function was never called. Although the agent successfully avoided mentioning products, amounts, or debt, and correctly asked once if it could help first in Message 4, it proceeded to end the call in Message 6 instead of transferring the user to a human agent as requested in Messages 3 and 5."
+    ],
+    "family": "Human request",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-008",
+    "pass": true,
+    "failed": [],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "add_note",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-009",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F4-010",
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('promise', None)",
+     "promises [], expected [('p1', 230.0, '2026-12-01')]",
+     "conversation: The call ended during the identity verification phase, so the success criteria were not met. Specifically: 1. The agent did not propose the 1 December deadline. 2. No promise was recorded for 1 December. 3. The agent never asked for an exact day. The assistant terminated the call in [Message 10] after the user asked a question instead of answering the verification prompt in [Message 9], preventing"
+    ],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "close_call"
+    ]
+   }
+  ]
+ ]
+}

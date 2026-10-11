@@ -1,0 +1,15 @@
+{
+ "started": true,
+ "committed": 0,
+ "stop_reason": "no accepted patches",
+ "cases": 17,
+ "iterations": [
+  {
+   "iteration": 1,
+   "failures": 1,
+   "unit_tests": 0,
+   "proposed": 1,
+   "accepted": 0
+  }
+ ]
+}

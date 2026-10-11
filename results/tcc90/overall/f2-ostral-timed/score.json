@@ -1,0 +1,247 @@
+{
+ "brief": "f2-ostral",
+ "reps": 1,
+ "limit": 10,
+ "agent_id": "420f9a3f-1d84-4586-9d26-2f1e390c69a8",
+ "workflow_id": "bfa5a504-0c65-4dbb-8d97-25c8a9f22ba0",
+ "passed": 8,
+ "total": 10,
+ "final": [
+  {
+   "id": "F2-001",
+   "family": "Deceased",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-002",
+   "family": "Dates",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "promises [('p1', 130.0, '2026-11-27')], expected [('p1', 130.0, '2026-11-30')]",
+    "conversation: The agent failed to propose the deadline of 30 November as required by the success criteria, instead proposing 27 November. Consequently, the promise was recorded for 27 November rather than 30 November. All other criteria were met, including asking for the exact day only once and ending the call properly."
+   ]
+  },
+  {
+   "id": "F2-003",
+   "family": "Tool failure",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-004",
+   "family": "Wrong number",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-005",
+   "family": "Third party",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-006",
+   "family": "Dates",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('no_promise', 'refused'), expected ('promise', None)",
+    "promises [], expected [('p1', 1695.0, '2026-11-20')]",
+    "conversation: The call failed to meet the success criteria for several reasons: 1. No promise was recorded for the full amount of 1695 on the deadline of 20 November; instead, the agent repeatedly interrupted the user and eventually marked the call as a 'refused' outcome with 'no_promise' in the final system event. 2. Although the agent initially proposed 20 November in Message 20, they immediately pivoted to a"
+   ]
+  },
+  {
+   "id": "F2-007",
+   "family": "Tool failure",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-008",
+   "family": "Tool failure",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-009",
+   "family": "Refusal",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-010",
+   "family": "Amounts",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  }
+ ],
+ "reps_rows": [
+  [
+   {
+    "id": "F2-001",
+    "pass": true,
+    "failed": [],
+    "family": "Deceased",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-002",
+    "pass": false,
+    "failed": [
+     "promises [('p1', 130.0, '2026-11-27')], expected [('p1', 130.0, '2026-11-30')]",
+     "conversation: The agent failed to propose the deadline of 30 November as required by the success criteria, instead proposing 27 November. Consequently, the promise was recorded for 27 November rather than 30 November. All other criteria were met, including asking for the exact day only once and ending the call properly."
+    ],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-003",
+    "pass": true,
+    "failed": [],
+    "family": "Tool failure",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-004",
+    "pass": true,
+    "failed": [],
+    "family": "Wrong number",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-005",
+    "pass": true,
+    "failed": [],
+    "family": "Third party",
+    "infra": false,
+    "tools": [
+     "schedule_callback",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-006",
+    "pass": false,
+    "failed": [
+     "outcome ('no_promise', 'refused'), expected ('promise', None)",
+     "promises [], expected [('p1', 1695.0, '2026-11-20')]",
+     "conversation: The call failed to meet the success criteria for several reasons: 1. No promise was recorded for the full amount of 1695 on the deadline of 20 November; instead, the agent repeatedly interrupted the user and eventually marked the call as a 'refused' outcome with 'no_promise' in the final system event. 2. Although the agent initially proposed 20 November in Message 20, they immediately pivoted to a"
+    ],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-007",
+    "pass": true,
+    "failed": [],
+    "family": "Tool failure",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-008",
+    "pass": true,
+    "failed": [],
+    "family": "Tool failure",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-009",
+    "pass": true,
+    "failed": [],
+    "family": "Refusal",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-010",
+    "pass": true,
+    "failed": [],
+    "family": "Amounts",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   }
+  ]
+ ]
+}

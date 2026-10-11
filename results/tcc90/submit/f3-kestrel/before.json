@@ -1,0 +1,260 @@
+{
+ "brief": "f3-kestrel",
+ "reps": 1,
+ "limit": 10,
+ "agent_id": "d5d4ff3b-589d-47bc-a64d-171c85db3538",
+ "workflow_id": "70959328-e4d8-4609-aee0-af0479d83ae8",
+ "passed": 7,
+ "total": 10,
+ "final": [
+  {
+   "id": "F3-001",
+   "family": "Multi-product",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F3-002",
+   "family": "Multi-product",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F3-003",
+   "family": "Amounts",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "conversation: The success criteria were not fully met. Specifically: - The floor (minimum payment amount of 157.50) was offered twice, once in [Message 10] and once in [Message 12], which violates the criterion that the floor be offered exactly once. - The other criteria were met: the amount of 60 was explicitly rejected in [Message 10] and not recorded in system events, and no promise was recorded as evidenced"
+   ]
+  },
+  {
+   "id": "F3-004",
+   "family": "Dispute",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'declined'), expected ('no_promise', 'dispute')",
+    "notes [], expected [('acc-1', 'contested')]"
+   ]
+  },
+  {
+   "id": "F3-005",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('no_promise', 'refused'), expected ('promise', None)",
+    "promises [], expected [('acc-2', 135.0, '2026-12-02')]",
+    "notes [('acc-1', 'declined'), ('acc-2', 'declined')], expected [('acc-1', 'system_error')]",
+    "conversation: The agent attempted to create a promise for the first product (acc-1) exactly twice as required. The agent also correctly informed the user that the promise could not be recorded due to a technical issue. However, the success criteria required a 'service-error' note for the first product, but the agent added a note with the reason 'declined' instead. The call ended properly with a deliberate end a"
+   ]
+  },
+  {
+   "id": "F3-006",
+   "family": "Unclear",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F3-007",
+   "family": "Unclear",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F3-008",
+   "family": "Third party",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F3-009",
+   "family": "Multi-product",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F3-010",
+   "family": "Multi-product",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  }
+ ],
+ "reps_rows": [
+  [
+   {
+    "id": "F3-001",
+    "pass": true,
+    "failed": [],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-002",
+    "pass": true,
+    "failed": [],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "add_note",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-003",
+    "pass": false,
+    "failed": [
+     "conversation: The success criteria were not fully met. Specifically: - The floor (minimum payment amount of 157.50) was offered twice, once in [Message 10] and once in [Message 12], which violates the criterion that the floor be offered exactly once. - The other criteria were met: the amount of 60 was explicitly rejected in [Message 10] and not recorded in system events, and no promise was recorded as evidenced"
+    ],
+    "family": "Amounts",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-004",
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'declined'), expected ('no_promise', 'dispute')",
+     "notes [], expected [('acc-1', 'contested')]"
+    ],
+    "family": "Dispute",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-005",
+    "pass": false,
+    "failed": [
+     "outcome ('no_promise', 'refused'), expected ('promise', None)",
+     "promises [], expected [('acc-2', 135.0, '2026-12-02')]",
+     "notes [('acc-1', 'declined'), ('acc-2', 'declined')], expected [('acc-1', 'system_error')]",
+     "conversation: The agent attempted to create a promise for the first product (acc-1) exactly twice as required. The agent also correctly informed the user that the promise could not be recorded due to a technical issue. However, the success criteria required a 'service-error' note for the first product, but the agent added a note with the reason 'declined' instead. The call ended properly with a deliberate end a"
+    ],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "add_note",
+     "add_note",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-006",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-007",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-008",
+    "pass": true,
+    "failed": [],
+    "family": "Third party",
+    "infra": false,
+    "tools": [
+     "schedule_callback",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-009",
+    "pass": true,
+    "failed": [],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-010",
+    "pass": true,
+    "failed": [],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "add_note",
+     "add_note",
+     "close_call"
+    ]
+   }
+  ]
+ ]
+}

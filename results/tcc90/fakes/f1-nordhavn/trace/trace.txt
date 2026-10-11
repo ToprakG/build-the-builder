@@ -1,0 +1,8 @@
+23:49:16 start 2026-10-10T23:49:16+0300
+23:49:16   variant: tcc90
+23:49:54 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | tokens in=9687 out=7161 | 37.5s
+23:50:32 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief | tokens in=15506 out=7906 | 38.8s
+23:50:32 check policy_check after pass 2: ok 0 violation(s)
+23:51:11 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | tokens in=9687 out=7314 | 38.6s
+23:51:57 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief | tokens in=15591 out=9035 | 46.0s
+23:51:57 check policy_check after pass 2: ok 0 violation(s)

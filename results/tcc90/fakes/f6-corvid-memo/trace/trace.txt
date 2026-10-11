@@ -1,0 +1,16 @@
+17:15:14 start 2026-10-11T17:15:14+0300
+17:15:14   variant: tcc90
+17:15:16 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | 1.9s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 400: {"error":{"message":"Provider returned error","code":400,"metadata":{"raw":"{\"type\":\"error\",\"error\":{\"type\":\"invalid_request_erro...
+17:15:16 WARNING extract pass 1: brief -> policy.json: provider rejected the response schema; asking for a JSON object
+17:15:53 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json (retry 1) | tokens in=9992 out=7089 | 37.1s
+17:15:55 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief | 1.9s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 400: {"error":{"message":"Provider returned error","code":400,"metadata":{"raw":"{\"type\":\"error\",\"error\":{\"type\":\"invalid_request_erro...
+17:15:55 WARNING extract pass 2: check every field against the brief: provider rejected the response schema; asking for a JSON object
+17:16:35 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief (retry 1) | tokens in=15694 out=8286 | 40.0s
+17:16:35 check policy_check after pass 2: ok 0 violation(s)
+17:16:36 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | 1.5s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 400: {"error":{"message":"Provider returned error","code":400,"metadata":{"raw":"{\"type\":\"error\",\"error\":{\"type\":\"invalid_request_erro...
+17:16:36 WARNING extract pass 1: brief -> policy.json: provider rejected the response schema; asking for a JSON object
+17:17:14 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json (retry 1) | tokens in=9992 out=7128 | 37.9s
+17:17:16 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief | 1.3s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 400: {"error":{"message":"Provider returned error","code":400,"metadata":{"raw":"{\"type\":\"error\",\"error\":{\"type\":\"invalid_request_erro...
+17:17:16 WARNING extract pass 2: check every field against the brief: provider rejected the response schema; asking for a JSON object
+17:18:01 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief (retry 1) | tokens in=15726 out=9225 | 45.1s
+17:18:01 check policy_check after pass 2: ok 0 violation(s)

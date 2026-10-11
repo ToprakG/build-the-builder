@@ -1,0 +1,47 @@
+{
+ "scenarios": [
+  "repair-1",
+  "repair-2",
+  "repair-3",
+  "repair-4"
+ ],
+ "rounds": [],
+ "committed": 0,
+ "status": "done",
+ "baseline": [
+  {
+   "case_id": "repair-1",
+   "passed": false,
+   "failed_reasons": [
+    "promises [('p1', 480.0, '2031-03-05')], expected []",
+    "conversation: Only \"yes\", \"that's me\", \"speaking\" or the customer's own name counts as confirmation. (answer no, p=0.17)"
+   ],
+   "infra": false
+  },
+  {
+   "case_id": "repair-2",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 503: {\"success\":false,\"data\":{\"message\":\"API key validation is temporarily unavailable. Retry shortly.\",\"result\":null}}')"
+   ],
+   "infra": true
+  },
+  {
+   "case_id": "repair-3",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('openrouter 429: {\"error\":{\"message\":\"OpenRouter could not verify available credits for this request in time. Retry shortly.\",\"code\":429,\"metadata\":{\"limit_source\":\"openrouter_admission_control\",\"remedy_hint\":\"Slow down the request rate for this account, then retry after the reset (see X-RateLimit-Reset).\",\"headers\":{\"Retry-After\":\"10\"},\"provider_name\":null}}}')"
+   ],
+   "infra": false
+  },
+  {
+   "case_id": "repair-4",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 504: error code: 504\\n')"
+   ],
+   "infra": true
+  }
+ ],
+ "stopped": "too close to the deadline"
+}

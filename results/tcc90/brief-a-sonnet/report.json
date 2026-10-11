@@ -1,0 +1,8 @@
+{
+ "export_real_bank": true,
+ "disagreements": 80,
+ "unresolved": 17,
+ "kept": 63,
+ "pass2_violations": 0,
+ "pass2_repairs": []
+}

@@ -1,0 +1,290 @@
+[
+ {
+  "id": "p1",
+  "accepted": true,
+  "checks": [
+   {
+    "name": "shape",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "zone_unlocked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "before_once",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "found 1 time(s)",
+    "critical": true
+   },
+   {
+    "name": "zone_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "545/1200 chars",
+    "critical": true
+   },
+   {
+    "name": "growth_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "22868 vs base 21781 (+15%)",
+    "critical": true
+   },
+   {
+    "name": "quote_in_brief",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "\"I already paid\": say that payments can take one business day to appear, take no promise, and close as `paid`.",
+    "critical": true
+   },
+   {
+    "name": "lint_clean",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_unknown_vars",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "already_in_locked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_forbidden_pre_verification",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_case_tokens",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "necessary",
+    "kind": "decision",
+    "passed": true,
+    "answer": "yes",
+    "evidence": "In both T-006 (hardship) and T-011 (already paid), the agent says \"I cannot continue; please call the number on your statement or visit a branch\" and ends the call — i.e., it closes as not_verified/failed. It never says a word of sympathy, never offers the welfare support team, and never closes as p",
+    "critical": true
+   },
+   {
+    "name": "supported",
+    "kind": "decision",
+    "passed": true,
+    "answer": "yes",
+    "evidence": "The brief states \"If the customer mentions illness, a death in the family or job loss, say one short sentence of sympathy and make no persuasion attempt. Offer to connect them with the support team. If they accept, call `transfer_to_agent` with queue `welfare` and close as `transferred` / `support`.",
+    "critical": false
+   },
+   {
+    "name": "contradicts_brief",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The edit instructs: stop security questions on hardship, say one sentence of sympathy, offer support team, call transfer_to_agent queue welfare — all matching brief §32. For \"already paid\" it instructs: stop security questions, say payments can take one business day to appear, close as paid — matchi",
+    "critical": true
+   },
+   {
+    "name": "case_specific",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The edit replaces a general rule with other general rules (\"If the customer mentions illness, a death in the family or job loss...\" and \"If the customer says they already paid...\") — both are stated as universal conditions with no reference to any specific customer, case ID, or conversation.",
+    "critical": true
+   },
+   {
+    "name": "redundant",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "\"follow the global rules for that\" is a vague pointer, not a concrete instruction. The edit replaces it with explicit steps: stop the security questions, say the sympathy line, offer welfare transfer, or say payments take a day and close as paid.",
+    "critical": true
+   },
+   {
+    "name": "right_place",
+    "kind": "decision",
+    "passed": true,
+    "answer": "yes",
+    "evidence": "The evidence turns show the agent closing with \"I cannot continue; please call the number on your statement or visit a branch\" — the exact phrasing used after identity verification fails (rule 14). The edit targets node:identity/rules, which is the identity step, and the current text of that place (",
+    "critical": true
+   }
+  ],
+  "reasons": []
+ },
+ {
+  "id": "p2",
+  "accepted": false,
+  "checks": [
+   {
+    "name": "shape",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "zone_unlocked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "before_once",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "found 1 time(s)",
+    "critical": true
+   },
+   {
+    "name": "zone_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "219/300 chars",
+    "critical": true
+   },
+   {
+    "name": "growth_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "22997 vs base 21781 (+15%)",
+    "critical": true
+   },
+   {
+    "name": "quote_in_brief",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "A wrong answer may be asked again. Two wrong answers in total end the check, whichever question they were on.",
+    "critical": true
+   },
+   {
+    "name": "lint_clean",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_unknown_vars",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "already_in_locked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_forbidden_pre_verification",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_case_tokens",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "necessary",
+    "kind": "decision",
+    "passed": false,
+    "answer": "no",
+    "evidence": "Every evidence turn shown (T-011 turn 32, T-007 turn 28, T-012 turn 31, T-001 turn 28, T-009 turn 28) is a first verify_identity call for date_of_birth, not a retry following a rejection. No prior failed verify_identity response appears in any of the excerpts, so there is no demonstrated instance of",
+    "critical": true
+   },
+   {
+    "name": "supported",
+    "kind": "decision",
+    "passed": true,
+    "answer": "yes",
+    "evidence": "\"A wrong answer may be asked again.\" — asking again inherently means collecting a new answer from the customer before resubmitting; resubmitting the same already-rejected value is not \"asking again\", so the brief implicitly requires what the patch makes explicit.",
+    "critical": false
+   },
+   {
+    "name": "contradicts_brief",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The edit instructs the agent to wait for a fresh complete answer before re-calling verify_identity and not to resubmit the rejected value. Nothing in the brief forbids waiting for a new answer or prohibits discarding a previously rejected value; the brief simply says \"A wrong answer may be asked aga",
+    "critical": true
+   },
+   {
+    "name": "case_specific",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The edit adds \"wait for the customer to give a new complete answer\" and \"Do not call verify_identity again with the value that was just rejected\" — both are general behavioural rules that apply to any retry of any security question for any customer, not tied to a specific case, customer ID, or date ",
+    "critical": true
+   },
+   {
+    "name": "redundant",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The current text says only \"Ask the same question once more. Never say the correct answer.\" It does not mention waiting for a new complete answer or prohibit resubmitting the same rejected value. The edit adds both of those concrete constraints.",
+    "critical": true
+   },
+   {
+    "name": "right_place",
+    "kind": "decision",
+    "passed": true,
+    "answer": "yes",
+    "evidence": "The bug occurs when the agent, after receiving a wrong-answer result from verify_identity, resubmits the same rejected value as its retry attempt. The zone `hook:verify_identity/msg/retry` is exactly the instruction hook that fires after a wrong answer to guide what the agent does next (ask the same",
+    "critical": true
+   }
+  ],
+  "reasons": [
+   "necessary: Every evidence turn shown (T-011 turn 32, T-007 turn 28, T-012 turn 31, T-001 turn 28, T-009 turn 28) is a first verify_identity call for date_of_birth, not a retry following a rejection. No prior failed verify_identity response appears in any of the excerpts, so there is no demonstrated instance of"
+  ]
+ }
+]

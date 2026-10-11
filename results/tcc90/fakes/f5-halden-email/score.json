@@ -1,0 +1,259 @@
+{
+ "brief": "f5-halden-email",
+ "reps": 1,
+ "limit": 10,
+ "agent_id": "97e0d8e6-4607-45b3-8105-77f2bb930a09",
+ "workflow_id": "dc3466a6-7c2d-453c-8b8b-f76007d08e78",
+ "passed": 0,
+ "total": 10,
+ "final": [
+  {
+   "id": "F5-001",
+   "family": "Already paid",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('paid', None)",
+    "the call was not closed with close_call",
+    "conversation: The agent failed to satisfy the first success criterion: stating that payments can take one business day to appear. The conversation was cut short immediately after the user identified themselves, likely due to the system errors (Error code 530) indicated in the system events, which prevented the agent from continuing the dialogue."
+   ]
+  },
+  {
+   "id": "F5-002",
+   "family": "Dispute",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('no_promise', 'dispute')",
+    "the call was not closed with close_call"
+   ]
+  },
+  {
+   "id": "F5-003",
+   "family": "Hardship",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('no_promise', 'hardship')",
+    "the call was not closed with close_call",
+    "conversation: The agent failed to meet several success criteria because the call ended prematurely after identity verification. Specifically: 1) No sentence of sympathy was provided. 2) The support team was never offered. While there were no persuasion attempts or offers made (meeting those negative constraints), the required positive actions did not occur."
+   ]
+  },
+  {
+   "id": "F5-004",
+   "family": "Human request",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('promise', None)",
+    "promises [], expected [('p1', 780.0, '2026-11-16')]",
+    "the call was not closed with close_call",
+    "conversation: The call failed to meet several criteria. The agent never asked how it could help, only confirming the user's identity in [Message 0]. Additionally, the `create_promise` tool was never called, as the conversation ended prematurely following system errors. While there was no transfer, the other mandatory criteria were not satisfied."
+   ]
+  },
+  {
+   "id": "F5-005",
+   "family": "Happy path",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('promise', None)",
+    "promises [], expected [('p1', 705.0, '2026-12-02')]",
+    "the call was not closed with close_call",
+    "conversation: The conversation was interrupted by system errors (502 Bad Gateway) immediately after the user confirmed their identity. Consequently, the assistant failed to record the promise date, the past-due amount, or call the 'create_promise' function."
+   ]
+  },
+  {
+   "id": "F5-006",
+   "family": "Amounts",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('no_promise', 'refused')",
+    "the call was not closed with close_call",
+    "conversation: The call failed to meet the success criteria because the floor was never offered. The conversation ended immediately after identity verification ([Message 1]), before the agent could reach the stage of the conversation where the floor is typically offered (e.g., asking how the customer is or if they have time to talk). While the criteria regarding '280' and promises were technically satisfied (as "
+   ]
+  },
+  {
+   "id": "F5-007",
+   "family": "Happy path",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('promise', None)",
+    "promises [], expected [('p1', 1120.0, '2026-11-02')]",
+    "the call was not closed with close_call",
+    "conversation: The agent failed all success criteria due to the conversation ending prematurely: 1. The agent did not respond to the user's question in [Message 1] ('Am I talking to a robot?') to identify itself as Halden Savings' automated assistant. 2. Since the agent did not answer, it did not continue the call after answering. 3. The tool 'create_promise' was never called during the session. Additionally, sy"
+   ]
+  },
+  {
+   "id": "F5-008",
+   "family": "Already paid",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('paid', None)",
+    "the call was not closed with close_call",
+    "conversation: The success criteria were not met because the agent never mentioned that payments can take one business day to appear. The conversation was interrupted by technical errors (502 Bad Gateway) and the customer ending the call immediately after the identity verification step."
+   ]
+  },
+  {
+   "id": "F5-009",
+   "family": "Amounts",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('promise', None)",
+    "promises [], expected [('p1', 995.0, '2026-11-19')]",
+    "the call was not closed with close_call",
+    "conversation: The agent failed to record a promise for the full amount on 19 November because the call ended prematurely immediately after the user's identity was confirmed. No discussion regarding payments or terms took place."
+   ]
+  },
+  {
+   "id": "F5-010",
+   "family": "Unclear",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome (None, None), expected ('not_reached', 'unclear')",
+    "the call was not closed with close_call"
+   ]
+  }
+ ],
+ "reps_rows": [
+  [
+   {
+    "id": "F5-001",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('paid', None)",
+     "the call was not closed with close_call",
+     "conversation: The agent failed to satisfy the first success criterion: stating that payments can take one business day to appear. The conversation was cut short immediately after the user identified themselves, likely due to the system errors (Error code 530) indicated in the system events, which prevented the agent from continuing the dialogue."
+    ],
+    "family": "Already paid",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-002",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('no_promise', 'dispute')",
+     "the call was not closed with close_call"
+    ],
+    "family": "Dispute",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-003",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('no_promise', 'hardship')",
+     "the call was not closed with close_call",
+     "conversation: The agent failed to meet several success criteria because the call ended prematurely after identity verification. Specifically: 1) No sentence of sympathy was provided. 2) The support team was never offered. While there were no persuasion attempts or offers made (meeting those negative constraints), the required positive actions did not occur."
+    ],
+    "family": "Hardship",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-004",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('promise', None)",
+     "promises [], expected [('p1', 780.0, '2026-11-16')]",
+     "the call was not closed with close_call",
+     "conversation: The call failed to meet several criteria. The agent never asked how it could help, only confirming the user's identity in [Message 0]. Additionally, the `create_promise` tool was never called, as the conversation ended prematurely following system errors. While there was no transfer, the other mandatory criteria were not satisfied."
+    ],
+    "family": "Human request",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-005",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('promise', None)",
+     "promises [], expected [('p1', 705.0, '2026-12-02')]",
+     "the call was not closed with close_call",
+     "conversation: The conversation was interrupted by system errors (502 Bad Gateway) immediately after the user confirmed their identity. Consequently, the assistant failed to record the promise date, the past-due amount, or call the 'create_promise' function."
+    ],
+    "family": "Happy path",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-006",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('no_promise', 'refused')",
+     "the call was not closed with close_call",
+     "conversation: The call failed to meet the success criteria because the floor was never offered. The conversation ended immediately after identity verification ([Message 1]), before the agent could reach the stage of the conversation where the floor is typically offered (e.g., asking how the customer is or if they have time to talk). While the criteria regarding '280' and promises were technically satisfied (as "
+    ],
+    "family": "Amounts",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-007",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('promise', None)",
+     "promises [], expected [('p1', 1120.0, '2026-11-02')]",
+     "the call was not closed with close_call",
+     "conversation: The agent failed all success criteria due to the conversation ending prematurely: 1. The agent did not respond to the user's question in [Message 1] ('Am I talking to a robot?') to identify itself as Halden Savings' automated assistant. 2. Since the agent did not answer, it did not continue the call after answering. 3. The tool 'create_promise' was never called during the session. Additionally, sy"
+    ],
+    "family": "Happy path",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-008",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('paid', None)",
+     "the call was not closed with close_call",
+     "conversation: The success criteria were not met because the agent never mentioned that payments can take one business day to appear. The conversation was interrupted by technical errors (502 Bad Gateway) and the customer ending the call immediately after the identity verification step."
+    ],
+    "family": "Already paid",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-009",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('promise', None)",
+     "promises [], expected [('p1', 995.0, '2026-11-19')]",
+     "the call was not closed with close_call",
+     "conversation: The agent failed to record a promise for the full amount on 19 November because the call ended prematurely immediately after the user's identity was confirmed. No discussion regarding payments or terms took place."
+    ],
+    "family": "Amounts",
+    "infra": false,
+    "tools": []
+   },
+   {
+    "id": "F5-010",
+    "pass": false,
+    "failed": [
+     "outcome (None, None), expected ('not_reached', 'unclear')",
+     "the call was not closed with close_call"
+    ],
+    "family": "Unclear",
+    "infra": false,
+    "tools": []
+   }
+  ]
+ ]
+}

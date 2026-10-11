@@ -1,0 +1,7 @@
+17:09:22 start 2026-10-11T17:09:22+0300
+17:09:22   variant: tcc90-submit
+17:09:22   brief: brief-a
+17:09:23 cases: 10 given
+17:09:25 self-test: mock bank up on 127.0.0.1:8791 with 7 of our own case(s)
+17:09:31 self-test: mock bank public at https://telephony-temperature-mailed-broadway.trycloudflare.com
+17:13:16 self-test: mock bank up on 127.0.0.1:8791 with 10 of our own case(s)

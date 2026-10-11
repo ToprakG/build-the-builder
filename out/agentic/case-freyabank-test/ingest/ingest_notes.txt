@@ -1,0 +1,9 @@
+BRIEF.md: 10345 chars; date=unknown; type=spec; author=unknown
+README.md: 965 chars; date=unknown; type=spec; author=unknown
+duyuru.docx: 1005 chars; date=unknown; type=spec; author=unknown
+musteriler.xlsx: 1541 chars; date=1992-07-21; type=data; author=unknown
+ornek-gorusme-1.md: 2229 chars; date=2026-10-14; type=spec; author=unknown
+ornek-gorusme-2.md: 2220 chars; date=2026-10-14; type=spec; author=unknown
+servis-sozlesmesi.pdf: 15247 chars; date=unknown; type=spec; author=unknown
+SSS.md: 2828 chars; date=unknown; type=spec; author=unknown
+tool API from: https://bank-mock.guntop-mockbank.workers.dev/rehearsal-tr/openapi.json

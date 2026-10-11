@@ -1,0 +1,462 @@
+{
+ "brief": "f1-nordhavn",
+ "reps": 3,
+ "limit": 10,
+ "agent_id": "aac31fbf-a324-46cd-a760-8d509a1a3f8c",
+ "workflow_id": "f81cb58e-75c1-48d9-8b76-cada6b7cf7b0",
+ "passed": 9,
+ "total": 10,
+ "final": [
+  {
+   "id": "F1-001",
+   "family": "Unclear",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-002",
+   "family": "Third party",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-003",
+   "family": "Declined questions",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-004",
+   "family": "Identity",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-005",
+   "family": "Dates",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-006",
+   "family": "Identity",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-007",
+   "family": "Wrong number",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-008",
+   "family": "Dates",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F1-009",
+   "family": "Dates",
+   "passes": 2,
+   "runs": 3,
+   "pass": false,
+   "failed": []
+  },
+  {
+   "id": "F1-010",
+   "family": "Unclear",
+   "passes": 3,
+   "runs": 3,
+   "pass": true,
+   "failed": []
+  }
+ ],
+ "reps_rows": [
+  [
+   {
+    "id": "F1-001",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-002",
+    "pass": true,
+    "failed": [],
+    "family": "Third party",
+    "infra": false,
+    "tools": [
+     "schedule_callback",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-003",
+    "pass": true,
+    "failed": [],
+    "family": "Declined questions",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-004",
+    "pass": true,
+    "failed": [],
+    "family": "Identity",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-005",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-006",
+    "pass": true,
+    "failed": [],
+    "family": "Identity",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-007",
+    "pass": true,
+    "failed": [],
+    "family": "Wrong number",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-008",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-009",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-010",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   }
+  ],
+  [
+   {
+    "id": "F1-001",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-002",
+    "pass": true,
+    "failed": [],
+    "family": "Third party",
+    "infra": false,
+    "tools": [
+     "schedule_callback",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-003",
+    "pass": true,
+    "failed": [],
+    "family": "Declined questions",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-004",
+    "pass": true,
+    "failed": [],
+    "family": "Identity",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-005",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-006",
+    "pass": true,
+    "failed": [],
+    "family": "Identity",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-007",
+    "pass": true,
+    "failed": [],
+    "family": "Wrong number",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-008",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-009",
+    "pass": false,
+    "failed": [
+     "outcome ('no_promise', 'refused'), expected ('promise', None)",
+     "promises [], expected [('p1', 1515.0, '2026-12-28')]",
+     "conversation: While the agent correctly identified that December 26 was a weekend and proposed the 28th, it failed to record a promise for the 28th or for the full amount. The user repeatedly said \"fifteen\", which the agent interpreted as 15 rather than the required 1515. Consequently, the agent ended the call without recording any promise, as confirmed by the system event 'close_call' with the outcome 'no_prom"
+    ],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-010",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   }
+  ],
+  [
+   {
+    "id": "F1-001",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-002",
+    "pass": true,
+    "failed": [],
+    "family": "Third party",
+    "infra": false,
+    "tools": [
+     "schedule_callback",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-003",
+    "pass": true,
+    "failed": [],
+    "family": "Declined questions",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-004",
+    "pass": true,
+    "failed": [],
+    "family": "Identity",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-005",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-006",
+    "pass": true,
+    "failed": [],
+    "family": "Identity",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-007",
+    "pass": true,
+    "failed": [],
+    "family": "Wrong number",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-008",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-009",
+    "pass": true,
+    "failed": [],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F1-010",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   }
+  ]
+ ]
+}

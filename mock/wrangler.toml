@@ -1,0 +1,13 @@
+name = "bank-mock"
+main = "src/worker.js"
+compatibility_date = "2025-01-15"
+
+[[durable_objects.bindings]]
+name = "BANK"
+class_name = "BankDO"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["BankDO"]
+
+# secrets (wrangler secret put ADMIN_TOKEN / RECORDS_TOKEN): ADMIN_TOKEN enables /admin/*; RECORDS_TOKEN (optional) guards the read side.

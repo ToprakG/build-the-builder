@@ -96,8 +96,30 @@ def start_bank(brief_id):
     return proc
 
 
-def start_tunnel():
+def _stop(proc):
+    if not proc or proc.poll() is not None:
+        return
+    os.killpg(proc.pid, signal.SIGTERM)
+    try:
+        proc.wait(timeout=5)
+    except Exception:
+        os.killpg(proc.pid, signal.SIGKILL)
+        proc.wait(timeout=5)
+
+
+def _read_url(path, pattern, proc, seconds):
     import re
+    deadline = time.time() + seconds
+    while time.time() < deadline and proc.poll() is None:
+        text = path.read_text(errors="replace") if path.exists() else ""
+        match = re.search(pattern, text)
+        if match:
+            return match.group(0)
+        time.sleep(0.5)
+    return None
+
+
+def _cloudflared():
     log = _log("cloudflared.log")
     proc = subprocess.Popen(
         ["cloudflared", "tunnel", "--url", f"http://127.0.0.1:{PORT}"],
@@ -105,47 +127,60 @@ def start_tunnel():
         stderr=subprocess.STDOUT,
         start_new_session=True,
     )
-    url = None
-    deadline = time.time() + 40
-    path = ROOT / "results" / "cloudflared.log"
-    while time.time() < deadline and proc.poll() is None:
-        text = path.read_text() if path.exists() else ""
-        match = re.search(r"https://[a-z0-9-]+\.trycloudflare\.com", text)
-        if match:
-            url = match.group(0)
-            break
-        time.sleep(0.5)
+    url = _read_url(
+        ROOT / "results" / "cloudflared.log",
+        r"https://[a-z0-9-]+\.trycloudflare\.com",
+        proc,
+        40,
+    )
     if not url:
-        proc.kill()
-        raise RuntimeError("cloudflared did not print a public URL")
+        text = (ROOT / "results" / "cloudflared.log").read_text(errors="replace")[-400:] if (ROOT / "results" / "cloudflared.log").exists() else ""
+        _stop(proc)
+        raise RuntimeError(f"cloudflared did not print a public URL. {text}")
     wait_http(url + "/tools/openapi.json", seconds=90)
     return proc, url
 
 
+def _ngrok():
+    log = _log("ngrok.log")
+    proc = subprocess.Popen(
+        ["ngrok", "http", str(PORT), "--log=stdout", "--log-format=logfmt"],
+        stdout=log,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,
+    )
+    url = _read_url(
+        ROOT / "results" / "ngrok.log",
+        r"https://[a-zA-Z0-9-]+\.ngrok[a-z0-9.-]*",
+        proc,
+        40,
+    )
+    if not url:
+        text = (ROOT / "results" / "ngrok.log").read_text(errors="replace")[-400:] if (ROOT / "results" / "ngrok.log").exists() else ""
+        _stop(proc)
+        raise RuntimeError(f"ngrok did not print a public URL. {text}")
+    wait_http(url + "/tools/openapi.json", seconds=90)
+    return proc, url
+
+
+def start_tunnel():
+    """A public URL for the mock bank. Cloudflare first, then ngrok if the quick tunnel is refused."""
+    last = "no attempt"
+    for pause in (0, 25, 60, 120):
+        if pause:
+            time.sleep(pause)
+        try:
+            return _cloudflared()
+        except RuntimeError as error:
+            last = str(error)
+    try:
+        return _ngrok()
+    except RuntimeError as error:
+        raise RuntimeError(f"{last} | {error}") from None
+
+
 def publish(brief_id, config, public_origin):
-    from seed.graph import build_workflow
-    tools_api = json.loads(tools_for(brief_id).read_text())
-    tools_api["servers"] = [{"url": public_origin.rstrip("/") + "/v1"}]
-    workflow = build_workflow(config, tools_api)
-    variables = dict(workflow.get("test_variables") or {})
-    variables.pop("customer_id", None)
-    workflow["test_variables"] = variables
-    state_path = ROOT / ".freya-agents.json"
-    state = json.loads(state_path.read_text()) if state_path.exists() else {}
-    if brief_id in state:
-        workflow_id = state[brief_id]["workflow_id"]
-        freya.api("PUT", f"/api/v2/workflow/{workflow_id}", {"workflow": workflow})
-    else:
-        created = freya.create_workflow(f"{brief_id} {time.strftime('%m%d-%H%M%S')}", workflow)
-        state[brief_id] = {"workflow_id": created["workflow_id"], "agent_id": created["agent_id"]}
-        workflow_id = created["workflow_id"]
-    versions = freya.api("GET", f"/api/v2/versions/workflow/{workflow_id}", workspaceId=freya.workspace_id())["versions"]
-    newest = max(versions, key=lambda item: item["versionNumber"])
-    if not newest.get("isPublished"):
-        freya.api("POST", f"/api/v2/versions/workflow/{workflow_id}/publish", {"versionId": newest["id"]})
-    state[brief_id]["version"] = newest["versionNumber"]
-    state_path.write_text(json.dumps(state, indent=1))
-    return state[brief_id]
+    raise RuntimeError("the seed graph builder has been removed")
 
 
 def personas_for(cases):

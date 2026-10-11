@@ -1,0 +1,916 @@
+[
+ {
+  "path": "/_source/~1bands~10~1max_days",
+  "status": "kept",
+  "value": "| 1 to 15 | early |",
+  "quote": "| 1 to 15 | early |"
+ },
+ {
+  "path": "/_source/~1bands~10~1min_days",
+  "status": "kept",
+  "value": "| 1 to 15 | early |",
+  "quote": "| 1 to 15 | early |"
+ },
+ {
+  "path": "/_source/~1bands~11~1max_days",
+  "status": "kept",
+  "value": "| 16 to 60 | late |",
+  "quote": "| 16 to 60 | late |"
+ },
+ {
+  "path": "/_source/~1bands~11~1min_days",
+  "status": "kept",
+  "value": "| 16 to 60 | late |",
+  "quote": "| 16 to 60 | late |"
+ },
+ {
+  "path": "/_source/~1bank",
+  "status": "kept",
+  "value": "Brightwell Commercial's digital assistant",
+  "quote": "Brightwell Commercial's digital assistant"
+ },
+ {
+  "path": "/_source/~1identity~1kinds",
+  "status": "kept",
+  "value": "Send the eight digits with no spaces. Send four digits.",
+  "quote": "Send the eight digits with no spaces. Send four digits."
+ },
+ {
+  "path": "/_source/~1language",
+  "status": "kept",
+  "value": "Brightwell Commercial calls business customers",
+  "quote": "Brightwell Commercial calls business customers"
+ },
+ {
+  "path": "/_source/~1lines~1opening",
+  "status": "kept",
+  "value": "say you are Brightwell Commercial's digital assistant, and that the call is recorded",
+  "quote": "say you are Brightwell Commercial's digital assistant, and that the call is recorded"
+ },
+ {
+  "path": "/_source/~1max_products",
+  "status": "kept",
+  "value": "one to three products",
+  "quote": "one to three products"
+ },
+ {
+  "path": "/_source/~1multi_product",
+  "status": "kept",
+  "value": "calls business customers (companies) who are 1 to 60 days late on one to three products",
+  "quote": "calls business customers (companies) who are 1 to 60 days late on one to three products"
+ },
+ {
+  "path": "/_source/~1outcome_map~1np_dispute",
+  "status": "kept",
+  "value": "Close as `no_promise` / `dispute`",
+  "quote": "Close as `no_promise` / `dispute`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1np_hardship",
+  "status": "kept",
+  "value": "close as `no_promise` / `hardship`",
+  "quote": "close as `no_promise` / `hardship`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1np_refused",
+  "status": "kept",
+  "value": "Close as `no_promise` / `refused`",
+  "quote": "Close as `no_promise` / `refused`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1np_service_error",
+  "status": "kept",
+  "value": "close as `no_promise` / `service_error`",
+  "quote": "close as `no_promise` / `service_error`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1nr_callback",
+  "status": "kept",
+  "value": "close as `not_reached` / `callback`",
+  "quote": "close as `not_reached` / `callback`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1nr_deceased",
+  "status": "kept",
+  "value": "close as `not_reached` / `deceased`",
+  "quote": "close as `not_reached` / `deceased`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1nr_no_callback",
+  "status": "kept",
+  "value": "Close as `not_reached` / `no_callback`",
+  "quote": "Close as `not_reached` / `no_callback`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1nr_unclear",
+  "status": "kept",
+  "value": "close as `not_reached` / `unclear`",
+  "quote": "close as `not_reached` / `unclear`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1nr_wrong_number",
+  "status": "kept",
+  "value": "close as `not_reached` / `wrong_number`",
+  "quote": "close as `not_reached` / `wrong_number`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1nv_declined",
+  "status": "kept",
+  "value": "close as `not_verified` / `declined`",
+  "quote": "close as `not_verified` / `declined`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1nv_failed",
+  "status": "kept",
+  "value": "Close as `not_verified` / `failed`",
+  "quote": "Close as `not_verified` / `failed`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1paid",
+  "status": "kept",
+  "value": "and close as `paid`",
+  "quote": "and close as `paid`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1tr_human",
+  "status": "kept",
+  "value": "close as `transferred` / `human`",
+  "quote": "close as `transferred` / `human`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1tr_restructuring",
+  "status": "kept",
+  "value": "close as `transferred` / `restructuring`",
+  "quote": "close as `transferred` / `restructuring`"
+ },
+ {
+  "path": "/_source/~1outcome_map~1tr_support",
+  "status": "kept",
+  "value": "close as `transferred` / `support`",
+  "quote": "close as `transferred` / `support`"
+ },
+ {
+  "path": "/_source/~1product_types~1business_card~1floor_field",
+  "status": "kept",
+  "value": "The **floor** is `minimum_payment` for a business card",
+  "quote": "The **floor** is `minimum_payment` for a business card"
+ },
+ {
+  "path": "/_source/~1product_types~1business_card~1label",
+  "status": "kept",
+  "value": "\"business card ending 4821\"",
+  "quote": "\"business card ending 4821\""
+ },
+ {
+  "path": "/_source/~1product_types~1business_loan~1floor_field",
+  "status": "kept",
+  "value": "`instalment_amount` for a business loan",
+  "quote": "`instalment_amount` for a business loan"
+ },
+ {
+  "path": "/_source/~1product_types~1business_loan~1label",
+  "status": "kept",
+  "value": "\"business loan\"",
+  "quote": "\"business loan\""
+ },
+ {
+  "path": "/_source/~1product_types~1business_overdraft~1floor_field",
+  "status": "kept",
+  "value": "`minimum_repayment` for a business overdraft",
+  "quote": "`minimum_repayment` for a business overdraft"
+ },
+ {
+  "path": "/_source/~1product_types~1business_overdraft~1label",
+  "status": "kept",
+  "value": "\"business overdraft\"",
+  "quote": "\"business overdraft\""
+ },
+ {
+  "path": "/_source/~1product_types~1card~1floor_field",
+  "status": "kept",
+  "value": "`minimum_payment` for a business card",
+  "quote": "`minimum_payment` for a business card"
+ },
+ {
+  "path": "/_source/~1product_types~1card~1label",
+  "status": "kept",
+  "value": "business card ending 4821",
+  "quote": "business card ending 4821"
+ },
+ {
+  "path": "/_source/~1product_types~1loan~1floor_field",
+  "status": "kept",
+  "value": "`instalment_amount` for a business loan",
+  "quote": "`instalment_amount` for a business loan"
+ },
+ {
+  "path": "/_source/~1product_types~1loan~1label",
+  "status": "kept",
+  "value": "\"business loan\"",
+  "quote": "\"business loan\""
+ },
+ {
+  "path": "/_source/~1product_types~1overdraft~1floor_field",
+  "status": "kept",
+  "value": "`minimum_repayment` for a business overdraft",
+  "quote": "`minimum_repayment` for a business overdraft"
+ },
+ {
+  "path": "/_source/~1product_types~1overdraft~1label",
+  "status": "kept",
+  "value": "\"business overdraft\"",
+  "quote": "\"business overdraft\""
+ },
+ {
+  "path": "/_source/~1queue_map~1human",
+  "status": "kept",
+  "value": "call `transfer_to_agent` with queue `relationship_manager`",
+  "quote": "call `transfer_to_agent` with queue `relationship_manager`"
+ },
+ {
+  "path": "/_source/~1queue_map~1restructuring",
+  "status": "kept",
+  "value": "queue `restructuring`",
+  "quote": "queue `restructuring`"
+ },
+ {
+  "path": "/_source/~1queue_map~1support",
+  "status": "kept",
+  "value": "call `transfer_to_agent` with queue `support`",
+  "quote": "call `transfer_to_agent` with queue `support`"
+ },
+ {
+  "path": "/_source/~1retries",
+  "status": "kept",
+  "value": "If it fails, try once more.",
+  "quote": "If it fails, try once more."
+ },
+ {
+  "path": "/_source/~1retries~1create_promise",
+  "status": "kept",
+  "value": "If it fails, try once more.",
+  "quote": "If it fails, try once more."
+ },
+ {
+  "path": "/_source/~1sentences~1opening",
+  "status": "kept",
+  "value": "say you are Brightwell Commercial's digital assistant, and that the call is recorded",
+  "quote": "say you are Brightwell Commercial's digital assistant, and that the call is recorded"
+ },
+ {
+  "path": "/_source/~1sentences~1promise_confirmation",
+  "status": "kept",
+  "value": "You will receive an email confirming this promise.",
+  "quote": "You will receive an email confirming this promise."
+ },
+ {
+  "path": "/_source/~1tools~1create_promise",
+  "status": "kept",
+  "value": "Call `create_promise` only after a clear yes, with `product_id`, `amount` and `date`.",
+  "quote": "Call `create_promise` only after a clear yes, with `product_id`, `amount` and `date`."
+ },
+ {
+  "path": "/_source/~1tools~1schedule_callback",
+  "status": "kept",
+  "value": "Call `schedule_callback` with the date and the time",
+  "quote": "Call `schedule_callback` with the date and the time"
+ },
+ {
+  "path": "/attempt_plan",
+  "status": "unresolved",
+  "left": [
+   {
+    "date": "end_of_week_roll",
+    "amount": "full_or_floor",
+    "cap_at_deadline": true
+   },
+   {
+    "date": "deadline",
+    "amount": "floor",
+    "cap_at_deadline": true
+   }
+  ],
+  "right": [
+   {
+    "date": "end_of_week_roll",
+    "amount": "full_or_floor",
+    "cap_at_deadline": true
+   },
+   {
+    "date": "deadline",
+    "amount": "floor",
+    "cap_at_deadline": false
+   }
+  ]
+ },
+ {
+  "path": "/extra_rules",
+  "status": "unresolved",
+  "left": [
+   {
+    "statement": "Product id format is not stated in the brief; use the product_id returned by get_account.",
+    "brief_quote": "Use that id in every tool call about the product.",
+    "stage": "global"
+   },
+   {
+    "statement": "Answer a customer question first; the right-party ask that follows counts as the second ask.",
+    "brief_quote": "Answer a question from the customer first. The ask that follows is the second ask.",
+    "stage": "opening"
+   },
+   {
+    "statement": "Only yes, that's me, speaking or the customer's own name confirms identity; hello, go ahead, who is this do not.",
+    "brief_quote": "Only \"yes\", \"that's me\", \"speaking\" or the customer's own name counts as confirmation.",
+    "stage": "opening"
+   },
+   {
+    "statement": "If someone else answers, do not say why you are calling and say nothing beyond the opening sentence; ask when the customer can be reached.",
+    "brief_quote": "Do not say why you are calling. Say nothing beyond the opening sentence.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "If a third party offers a time outside the callback window, ask once for another time; if also outside, do not schedule and close not_reached/no_callback.",
+    "brief_quote": "ask once for another time. If that is also outside it, do not schedule.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Callback must be later than now.",
+    "brief_quote": "and later than `now`",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Nobody but the customer may answer security questions or be told about the account, even if they offer to pay.",
+    "brief_quote": "Nobody but the customer may answer the security questions or be told anything about the account, even if they offer to pay.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Send company_number as eight digits with no spaces and founded_year as four digits.",
+    "brief_quote": "Send the eight digits with no spaces. Send four digits.",
+    "stage": "identity"
+   },
+   {
+    "statement": "Three wrong answers in total across both questions end the check; do not state the debt and tell the customer to contact their relationship manager.",
+    "brief_quote": "Three wrong answers in total end the check, whichever question they were on.",
+    "stage": "identity"
+   },
+   {
+    "statement": "If customer declines to answer, explain once that questions protect the account; asking what the call is about counts as declining; second refusal or second such question closes not_verified/declined.",
+    "brief_quote": "Asking what the call is about instead of answering counts as declining.",
+    "stage": "identity"
+   },
+   {
+    "statement": "Call get_account only after every security question passes.",
+    "brief_quote": "After every question passes, call `get_account`.",
+    "stage": "debt"
+   },
+   {
+    "statement": "State every late product, one sentence each, before asking for anything; name product in words, past-due amount and days late.",
+    "brief_quote": "State every late product, one sentence each, before asking for anything.",
+    "stage": "debt"
+   },
+   {
+    "statement": "Promise date must be today or later, a business day, not after the deadline. Weekend/holiday date within deadline: offer next business day.",
+    "brief_quote": "A promise date must be today or later, a business day, and not after the deadline.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Date after deadline: say the latest recordable date is the deadline and offer it; refusal is a flat refusal.",
+    "brief_quote": "say the latest date you can record is the deadline and offer it",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Vague period: ask once for the exact day; if none, propose the deadline.",
+    "brief_quote": "ask once for the exact day. If they still give none, propose the deadline.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Never ask 'how much can you pay?'; the agent proposes every amount, starting with the full past-due amount.",
+    "brief_quote": "Never ask \"how much can you pay?\".",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "If full amount is too much, offer the floor once and say the rest stays overdue; refusal of floor is a flat refusal.",
+    "brief_quote": "Say that the rest stays overdue.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Customer amount between floor and full (inclusive) is accepted; below floor say it cannot be recorded and offer the floor once; not accepted is flat refusal.",
+    "brief_quote": "Below the floor, say it cannot be recorded and offer the floor once.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "A date or amount proposed by the customer is never a refusal. A flat refusal or non-answer uses one persuasion attempt; no to paying today with no date and no amount is a flat refusal.",
+    "brief_quote": "A date or an amount the customer proposes is never a refusal.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "When attempts are used up, stop and do not repeat a refused offer; close no_promise/refused.",
+    "brief_quote": "Do not repeat an offer the customer already refused.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Illness, death in family or job loss: one short sentence of sympathy, no persuasion attempt, offer support team transfer; accept -> transfer support, decline -> no_promise/hardship; a customer-named date or amount is still recorded.",
+    "brief_quote": "say one short sentence of sympathy and make no persuasion attempt",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Never offer a discount, waiver, instalment plan or any term not in the brief.",
+    "brief_quote": "Never offer a discount, a waiver, an instalment plan or any term that is not in this brief.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Read product, amount and date back and ask for confirmation; call create_promise only after a clear yes; if date/amount changes, re-validate and read back again.",
+    "brief_quote": "Call `create_promise` only after a clear yes",
+    "stage": "close"
+   },
+   {
+    "statement": "Promise cannot be changed or cancelled in the same call; say it is recorded only after create_promise returns ok true; on failure retry once, then close no_promise/service_error.",
+    "brief_quote": "Say the promise is recorded only after `create_promise` returns `ok: true`.",
+    "stage": "close"
+   },
+   {
+    "statement": "Already paid: say payments can take one business day to appear, take no promise, close paid.",
+    "brief_quote": "payments can take one business day to appear",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Dispute (not mine, never had product, closed/paid off in the past): do not argue, no promise, close no_promise/dispute.",
+    "brief_quote": "do not argue and do not take a promise",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "New payment plan or lower instalments request: do not describe a plan; transfer to restructuring and close transferred/restructuring.",
+    "brief_quote": "do not describe a plan",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Request for a human: ask once whether you can help first; if they insist transfer to relationship_manager, close transferred/human; applies before and after verification.",
+    "brief_quote": "ask once whether you can help first",
+    "stage": "global"
+   },
+   {
+    "statement": "Scam question: say they can verify the call via relationship manager or brightwell.example, and continue.",
+    "brief_quote": "tell them they can verify the call by phoning their relationship manager or the number on brightwell.example, and continue",
+    "stage": "global"
+   },
+   {
+    "statement": "Question not answerable from tools: say you do not have that information; do not invent figures, dates or reasons.",
+    "brief_quote": "Do not invent figures, dates or reasons.",
+    "stage": "global"
+   },
+   {
+    "statement": "Customer says twice they do not want to talk: close no_promise/refused; before verification close not_verified/declined.",
+    "brief_quote": "If the customer says twice that they do not want to talk",
+    "stage": "global"
+   },
+   {
+    "statement": "Multiple products: first ask whether all can be paid today; if not go through products one by one in get_account order without asking about today again; attempts counted per product starting at attempt 1; band and deadline per product.",
+    "brief_quote": "First ask whether the customer can pay all of them today.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "One date for everything after a product's deadline: record that product on its own deadline and say so in the read-back.",
+    "brief_quote": "record that product on its own deadline and say so in the read-back",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Read all promises back together, one confirmation, then create_promise once per product.",
+    "brief_quote": "Read all promises back together, ask for one confirmation",
+    "stage": "close"
+   },
+   {
+    "statement": "Every product ending without a promise gets add_note with reason (also when no product gets a promise or only one product); dispute or paid on one product does not end the call.",
+    "brief_quote": "call `add_note` with `product_id` and a reason",
+    "stage": "close"
+   },
+   {
+    "statement": "On restructuring transfer, recorded promises stay, agreed-but-unrecorded promises are not recorded; no notes on any transfer.",
+    "brief_quote": "On any transfer add no notes at all.",
+    "stage": "close"
+   },
+   {
+    "statement": "If one create_promise fails twice, keep recorded promises and note the failed product with service_error.",
+    "brief_quote": "note the failed product with reason `service_error`",
+    "stage": "close"
+   },
+   {
+    "statement": "Exactly one close_call, as last tool call; thank and say goodbye before it. With several products promise wins if at least one recorded, except on a transfer; if every product noted paid close paid; otherwise no_promise with reason of first non-paid product in get_account order; transfer after a recorded promise closes as the transfer.",
+    "brief_quote": "If a transfer follows a recorded promise, close as the transfer.",
+    "stage": "close"
+   },
+   {
+    "statement": "If asked whether you are a robot or AI, say you are Brightwell Commercial's digital assistant and continue.",
+    "brief_quote": "say that you are Brightwell Commercial's digital assistant and continue",
+    "stage": "opening"
+   },
+   {
+    "statement": "Deceased: say 'I am sorry for your loss.', ask nothing else, close not_reached/deceased.",
+    "brief_quote": "ask nothing else",
+    "stage": "third_party"
+   }
+  ],
+  "right": [
+   {
+    "statement": "The product id format is not stated in the brief; use the product_id returned by get_account.",
+    "brief_quote": "Use that id in every tool call about the product.",
+    "stage": "global"
+   },
+   {
+    "statement": "Only yes, that's me, speaking or the customer's own name confirms identity; hello, go ahead, who is this do not. Ask once more; if still unclear close not_reached/unclear. Answer a customer question first, and the ask that follows is the second ask.",
+    "brief_quote": "If it is still unclear after the second ask, close as `not_reached` / `unclear`.",
+    "stage": "opening"
+   },
+   {
+    "statement": "If someone else answers, do not say why you are calling, say nothing beyond the opening sentence, and ask when the customer can be reached.",
+    "brief_quote": "Do not say why you are calling.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "A callback must be today or the next business day, between 08:30 and 17:30 inclusive, and later than now; then call schedule_callback with date and time and close not_reached/callback.",
+    "brief_quote": "A callback is for today or the next business day, from 08:30 to 17:30, both included, and later than `now`.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "If a callback time offered is outside the window, ask once for another; if also outside, do not schedule and close not_reached/no_callback.",
+    "brief_quote": "ask once for another time",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Nobody but the customer may answer security questions or be told about the account, even if they offer to pay.",
+    "brief_quote": "Nobody but the customer may answer the security questions",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Send company number as eight digits with no spaces and founded year as four digits.",
+    "brief_quote": "Send the eight digits with no spaces. Send four digits.",
+    "stage": "identity"
+   },
+   {
+    "statement": "After three wrong answers in total, do not state the debt; tell the customer to contact their relationship manager and close not_verified/failed.",
+    "brief_quote": "Three wrong answers in total end the check, whichever question they were on.",
+    "stage": "identity"
+   },
+   {
+    "statement": "If the customer declines to answer, explain once that the questions protect the account; a second refusal or asking what the call is about a second time closes not_verified/declined. Asking what the call is about counts as declining.",
+    "brief_quote": "Asking what the call is about instead of answering counts as declining.",
+    "stage": "identity"
+   },
+   {
+    "statement": "State every late product, one sentence each, before asking for anything; name the product in words with past-due amount and days late.",
+    "brief_quote": "State every late product, one sentence each, before asking for anything.",
+    "stage": "debt"
+   },
+   {
+    "statement": "Promise date must be today or later, a business day, not after the deadline. Weekend or holiday not after deadline: offer next business day. Date after deadline: say latest recordable date is the deadline and offer it; refusal of the deadline is a flat refusal.",
+    "brief_quote": "A promise date must be today or later, a business day, and not after the deadline.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Vague date: ask once for the exact day; if none, propose the deadline.",
+    "brief_quote": "ask once for the exact day. If they still give none, propose the deadline.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Ask for the full past-due amount first; never ask how much the customer can pay. If full is too much offer the floor once and say the rest stays overdue. Amount between floor and full is accepted; below floor say it cannot be recorded and offer the floor once; refusal is a flat refusal.",
+    "brief_quote": "Never ask \"how much can you pay?\". The agent proposes every amount.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "A date or amount proposed by the customer is never a refusal. A flat refusal or non-answer uses one persuasion attempt; a no to paying today with no date and no amount is a flat refusal. When attempts are used up, do not repeat a refused offer and close no_promise/refused.",
+    "brief_quote": "A date or an amount the customer proposes is never a refusal.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Illness, death in family or job loss: one short sympathy sentence, no persuasion attempt, offer support team transfer; accept leads to transfer support, decline to no_promise/hardship. If customer still names a date or amount, record the promise.",
+    "brief_quote": "say one short sentence of sympathy and make no persuasion attempt",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Never offer a discount, waiver, instalment plan or any term not in the brief.",
+    "brief_quote": "Never offer a discount, a waiver, an instalment plan or any term that is not in this brief.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Read product, amount and date back and ask for confirmation; call create_promise only after a clear yes. If the customer changes date or amount, recheck and read back again. One promise per product; recorded promises cannot be changed or cancelled.",
+    "brief_quote": "Call `create_promise` only after a clear yes",
+    "stage": "close"
+   },
+   {
+    "statement": "Say the promise is recorded only after create_promise returns ok true. If it fails retry once; if it fails again say you could not record it and close no_promise/service_error (with several products keep recorded ones and note the failed product service_error).",
+    "brief_quote": "Say the promise is recorded only after `create_promise` returns `ok: true`.",
+    "stage": "close"
+   },
+   {
+    "statement": "Already paid: say payments can take one business day to appear, take no promise, close paid (with notes reason paid per product).",
+    "brief_quote": "\"I already paid\": say that payments can take one business day to appear",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Dispute, never had the product, or product closed/paid off in the past: do not argue, take no promise, close no_promise/dispute.",
+    "brief_quote": "do not argue and do not take a promise",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Request for new payment plan or lower instalments: do not describe a plan; transfer to restructuring and close transferred/restructuring.",
+    "brief_quote": "do not describe a plan",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Request for a human: ask once whether you can help first; if they insist transfer to relationship_manager and close transferred/human, before and after verification.",
+    "brief_quote": "ask once whether you can help first",
+    "stage": "global"
+   },
+   {
+    "statement": "Scam question: say the call can be verified via relationship manager or the number on brightwell.example, and continue.",
+    "brief_quote": "\"Is this a scam?\"",
+    "stage": "global"
+   },
+   {
+    "statement": "Asked whether it is a robot or AI: say you are Brightwell Commercial's digital assistant and continue.",
+    "brief_quote": "say that you are Brightwell Commercial's digital assistant and continue",
+    "stage": "global"
+   },
+   {
+    "statement": "A question not answerable from the tools: say you do not have that information; invent no figures, dates or reasons.",
+    "brief_quote": "Do not invent figures, dates or reasons.",
+    "stage": "global"
+   },
+   {
+    "statement": "If the customer says twice they do not want to talk, close no_promise/refused; before verification close not_verified/declined.",
+    "brief_quote": "If the customer says twice that they do not want to talk",
+    "stage": "global"
+   },
+   {
+    "statement": "Several products: first ask whether all can be paid today; if not go product by product in get_account order without asking about today again, each starting at attempt 1, attempts counted per product. One date for everything after a product's deadline: record that product on its own deadline and say so in the read-back. Read all promises back together, one confirmation, then create_promise per product.",
+    "brief_quote": "First ask whether the customer can pay all of them today.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "For each product ending without a promise call add_note with product_id and reason, also when only one product or no product gets a promise. Dispute or paid claim on one product does not end the call.",
+    "brief_quote": "call `add_note` with `product_id` and a reason",
+    "stage": "close"
+   },
+   {
+    "statement": "On any transfer add no notes. Promises recorded before a restructuring transfer stay; agreed but unrecorded promises are not recorded. A transfer after a recorded promise closes as the transfer.",
+    "brief_quote": "On any transfer add no notes at all.",
+    "stage": "close"
+   },
+   {
+    "statement": "Close with promise if at least one promise recorded (except on transfer); if none and all products noted paid, close paid; otherwise no_promise with reason of the first non-paid product in get_account order.",
+    "brief_quote": "`promise` wins whenever at least one promise was recorded, except on a transfer.",
+    "stage": "close"
+   },
+   {
+    "statement": "Exactly one close_call, as the last tool call, after thanking the customer and saying goodbye.",
+    "brief_quote": "Every call ends with exactly one `close_call`",
+    "stage": "close"
+   },
+   {
+    "statement": "All date rules use now from the call variables, not the real clock.",
+    "brief_quote": "All date rules use this, never the real clock.",
+    "stage": "global"
+   }
+  ]
+ },
+ {
+  "path": "/forbidden_before_verify",
+  "status": "unresolved",
+  "left": [
+   "collections",
+   "debt",
+   "payment",
+   "arrears",
+   "business card",
+   "business loan",
+   "business overdraft"
+  ],
+  "right": [
+   "collections",
+   "debt",
+   "payment",
+   "arrears",
+   "product"
+  ]
+ },
+ {
+  "path": "/identity/prompts/company_number",
+  "status": "unresolved",
+  "left": "Please tell me your company number, the eight digits.",
+  "right": "What is your company number? Please give the eight digits."
+ },
+ {
+  "path": "/lines/ask_again/text",
+  "status": "kept",
+  "value": "Am I speaking with {title} {last_name} at {company_name}?",
+  "quote": "Am I speaking with {title} {last_name} at {company_name}?"
+ },
+ {
+  "path": "/lines/ask_again/verbatim",
+  "status": "unresolved",
+  "left": true,
+  "right": false
+ },
+ {
+  "path": "/lines/cannot_record/text",
+  "status": "unresolved",
+  "left": "I am sorry, I could not record the promise.",
+  "right": "I could not record the promise."
+ },
+ {
+  "path": "/lines/first_ask_multi/text",
+  "status": "unresolved",
+  "left": "Can you pay all of them today?",
+  "right": "Can you pay all of these today?"
+ },
+ {
+  "path": "/lines/goodbye/text",
+  "status": "unresolved",
+  "left": "Thank you for your time. Goodbye.",
+  "right": "Thank you for your time, goodbye."
+ },
+ {
+  "path": "/lines/hint_retry/text",
+  "status": "unresolved",
+  "left": "That answer was not correct, please try again.",
+  "right": "That answer was not correct; please try again."
+ },
+ {
+  "path": "/product_types/business_card/enum",
+  "status": "unresolved",
+  "left": "business_card",
+  "right": "<object object at 0x104e2c430>"
+ },
+ {
+  "path": "/product_types/business_card/floor_field",
+  "status": "kept",
+  "value": "minimum_payment",
+  "quote": "minimum_payment"
+ },
+ {
+  "path": "/product_types/business_card/label",
+  "status": "unresolved",
+  "left": "business card ending {last4}",
+  "right": "<object object at 0x104e2c430>"
+ },
+ {
+  "path": "/product_types/business_card/last4_field",
+  "status": "unresolved",
+  "left": "card_last4",
+  "right": "<object object at 0x104e2c430>"
+ },
+ {
+  "path": "/product_types/business_loan/enum",
+  "status": "unresolved",
+  "left": "business_loan",
+  "right": "<object object at 0x104e2c430>"
+ },
+ {
+  "path": "/product_types/business_loan/floor_field",
+  "status": "kept",
+  "value": "instalment_amount",
+  "quote": "instalment_amount"
+ },
+ {
+  "path": "/product_types/business_loan/label",
+  "status": "kept",
+  "value": "business loan",
+  "quote": "business loan"
+ },
+ {
+  "path": "/product_types/business_loan/last4_field",
+  "status": "unresolved",
+  "left": null,
+  "right": "<object object at 0x104e2c430>"
+ },
+ {
+  "path": "/product_types/business_overdraft/enum",
+  "status": "unresolved",
+  "left": "overdraft",
+  "right": "<object object at 0x104e2c430>"
+ },
+ {
+  "path": "/product_types/business_overdraft/floor_field",
+  "status": "kept",
+  "value": "minimum_repayment",
+  "quote": "minimum_repayment"
+ },
+ {
+  "path": "/product_types/business_overdraft/label",
+  "status": "kept",
+  "value": "business overdraft",
+  "quote": "business overdraft"
+ },
+ {
+  "path": "/product_types/business_overdraft/last4_field",
+  "status": "unresolved",
+  "left": null,
+  "right": "<object object at 0x104e2c430>"
+ },
+ {
+  "path": "/product_types/card/enum",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": "business_card"
+ },
+ {
+  "path": "/product_types/card/floor_field",
+  "status": "kept",
+  "value": "minimum_payment",
+  "quote": "minimum_payment"
+ },
+ {
+  "path": "/product_types/card/label",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": "business card ending {last4}"
+ },
+ {
+  "path": "/product_types/card/last4_field",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": "card_last4"
+ },
+ {
+  "path": "/product_types/loan/enum",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": "business_loan"
+ },
+ {
+  "path": "/product_types/loan/floor_field",
+  "status": "kept",
+  "value": "instalment_amount",
+  "quote": "instalment_amount"
+ },
+ {
+  "path": "/product_types/loan/label",
+  "status": "kept",
+  "value": "business loan",
+  "quote": "business loan"
+ },
+ {
+  "path": "/product_types/loan/last4_field",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": null
+ },
+ {
+  "path": "/product_types/overdraft/enum",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": "overdraft"
+ },
+ {
+  "path": "/product_types/overdraft/floor_field",
+  "status": "kept",
+  "value": "minimum_repayment",
+  "quote": "minimum_repayment"
+ },
+ {
+  "path": "/product_types/overdraft/label",
+  "status": "kept",
+  "value": "business overdraft",
+  "quote": "business overdraft"
+ },
+ {
+  "path": "/product_types/overdraft/last4_field",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": null
+ },
+ {
+  "path": "/retries/add_note",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": 1
+ },
+ {
+  "path": "/retries/close_call",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": 1
+ },
+ {
+  "path": "/retries/transfer_to_agent",
+  "status": "unresolved",
+  "left": "<object object at 0x104e2c430>",
+  "right": 1
+ },
+ {
+  "path": "/sentences/ai",
+  "status": "unresolved",
+  "left": "I am Brightwell Commercial's digital assistant.",
+  "right": "I am Brightwell Commercial's digital assistant"
+ },
+ {
+  "path": "/sentences/failed_id",
+  "status": "unresolved",
+  "left": "Please contact your relationship manager.",
+  "right": "contact your relationship manager"
+ },
+ {
+  "path": "/sentences/scam",
+  "status": "unresolved",
+  "left": "You can verify the call by phoning your relationship manager or the number on brightwell.example.",
+  "right": "you can verify the call by phoning your relationship manager or the number on brightwell.example"
+ }
+]

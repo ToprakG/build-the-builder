@@ -1,0 +1,7 @@
+{"type": "start", "t": 0.0, "time": "2026-10-10T22:59:41+0300", "variant": "tcc90"}
+{"type": "model_call", "t": 41.982, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract pass 1: brief -> policy.json", "tokens_in": 9748, "tokens_out": 7811, "cost_usd": null, "seconds": 41.97944927215576, "error": null}
+{"type": "model_call", "t": 82.541, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract pass 2: check every field against the brief", "tokens_in": 15561, "tokens_out": 8305, "cost_usd": null, "seconds": 40.55314588546753, "error": null}
+{"type": "check", "t": 82.605, "name": "policy_check after pass 2", "ok": false, "detail": "2 violation(s)"}
+{"type": "model_call", "t": 117.765, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract fix round: 2 policy_check violation(s)", "tokens_in": 17394, "tokens_out": 7569, "cost_usd": null, "seconds": 35.15790915489197, "error": null}
+{"type": "check", "t": 117.825, "name": "policy_check after fix round", "ok": true, "detail": "0 violation(s)"}
+{"type": "model_call", "t": 152.821, "model": "openrouter:anthropic/claude-sonnet-5.5", "purpose": "extract pass 1: brief -> policy.json", "tokens_in": 9748, "tokens_out": 6349, "cost_usd": null, "seconds": 34.99332404136658, "error": null}

@@ -1,0 +1,29 @@
+{
+ "name": "goodbye_short",
+ "node_type": "end_call",
+ "on_enter": {
+  "type": "silent"
+ },
+ "disable_inactivity_monitor": true,
+ "transitions": [],
+ "terminal": {
+  "type": "function",
+  "function": {
+   "name": "not_reached_end",
+   "handler": "__function__:end_call",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "message_mode": {
+      "type": "string",
+      "default": "custom"
+     },
+     "spoken_message": {
+      "type": "string",
+      "default": "Thank you for your time. Goodbye."
+     }
+    }
+   }
+  }
+ }
+}

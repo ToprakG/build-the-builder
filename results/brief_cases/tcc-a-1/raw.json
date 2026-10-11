@@ -1,0 +1,387 @@
+{
+ "cases": [
+  {
+   "title": "Named day is a bank holiday inside the window",
+   "scene": "Ms Hale confirms her identity and passes both questions. She is 3 days late on a credit card. She says she will pay the full amount on Monday 2026-10-26 and accepts the next business day when it is offered.",
+   "now": "2026-10-23T11:00",
+   "products": [
+    {
+     "days_late": 3,
+     "past_due": 300.0,
+     "floor": 50.0
+    }
+   ],
+   "situation": {
+    "kind": "named_date",
+    "said_date": {
+     "kind": "iso",
+     "date": "2026-10-26"
+    },
+    "said_amount": null,
+    "accepts_correction": true,
+    "wrong_answers": 0
+   },
+   "expected": {
+    "outcome": "promise",
+    "reason": null,
+    "promises": [
+     {
+      "amount": 300.0,
+      "date": "2026-10-27"
+     }
+    ],
+    "notes": [],
+    "callbacks": [],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "promises[0].date",
+     "quote": "If the customer names a weekend day or a holiday that is not after the deadline, offer the next business day."
+    },
+    {
+     "field": "promises[0].amount",
+     "quote": "Ask for the full past-due amount first."
+    },
+    {
+     "field": "outcome",
+     "quote": "| `promise` | none | at least one promise was recorded |"
+    }
+   ]
+  },
+  {
+   "title": "Early band, date exactly on the deadline across a holiday",
+   "scene": "Mr Ortiz is verified and is 7 days late. He agrees to pay the full past-due amount on 2026-11-02. That is the 12th business day after today, because 2026-10-26 is a bank holiday and does not count.",
+   "now": "2026-10-14T11:00",
+   "products": [
+    {
+     "days_late": 7,
+     "past_due": 250.0,
+     "floor": 50.0
+    }
+   ],
+   "situation": {
+    "kind": "named_date",
+    "said_date": {
+     "kind": "iso",
+     "date": "2026-11-02"
+    },
+    "said_amount": null,
+    "accepts_correction": false,
+    "wrong_answers": 0
+   },
+   "expected": {
+    "outcome": "promise",
+    "reason": null,
+    "promises": [
+     {
+      "amount": 250.0,
+      "date": "2026-11-02"
+     }
+    ],
+    "notes": [],
+    "callbacks": [],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "promises[0].date",
+     "quote": "| 1 to 7 | early | the 12th business day after today | 1 |"
+    },
+    {
+     "field": "promises[0].date",
+     "quote": "Business days are Monday to Friday, except Freya Bank holidays: 2026-10-26, 2026-11-11, 2026-11-26, 2026-12-25, 2027-01-01."
+    },
+    {
+     "field": "promises[0].amount",
+     "quote": "Ask for the full past-due amount first."
+    },
+    {
+     "field": "outcome",
+     "quote": "| `promise` | none | at least one promise was recorded |"
+    }
+   ]
+  },
+  {
+   "title": "Late band, date after the deadline, customer accepts the deadline",
+   "scene": "Ms Brandt is verified and is 8 days late, which puts her in the late band. She asks to pay in full on 2026-11-02. The agent says the latest recordable date is 2026-10-23 and she accepts it.",
+   "now": "2026-10-14T11:00",
+   "products": [
+    {
+     "days_late": 8,
+     "past_due": 250.0,
+     "floor": 50.0
+    }
+   ],
+   "situation": {
+    "kind": "named_date",
+    "said_date": {
+     "kind": "iso",
+     "date": "2026-11-02"
+    },
+    "said_amount": null,
+    "accepts_correction": true,
+    "wrong_answers": 0
+   },
+   "expected": {
+    "outcome": "promise",
+    "reason": null,
+    "promises": [
+     {
+      "amount": 250.0,
+      "date": "2026-10-23"
+     }
+    ],
+    "notes": [],
+    "callbacks": [],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "promises[0].date",
+     "quote": "If the customer asks for a date after the deadline, say the latest date you can record is the deadline and offer it."
+    },
+    {
+     "field": "promises[0].date",
+     "quote": "| 8 to 45 | late | the 7th business day after today | 2 |"
+    },
+    {
+     "field": "promises[0].amount",
+     "quote": "Ask for the full past-due amount first."
+    },
+    {
+     "field": "outcome",
+     "quote": "| `promise` | none | at least one promise was recorded |"
+    }
+   ]
+  },
+  {
+   "title": "\"Next Friday\" said on a Friday",
+   "scene": "Mr Lund is verified and is 3 days late. Today is Friday. He says he will pay the full amount \"next Friday\".",
+   "now": "2026-10-16T10:30",
+   "products": [
+    {
+     "days_late": 3,
+     "past_due": 180.0,
+     "floor": 30.0
+    }
+   ],
+   "situation": {
+    "kind": "named_date",
+    "said_date": {
+     "kind": "next_weekday",
+     "weekday": "Friday"
+    },
+    "said_amount": null,
+    "accepts_correction": false,
+    "wrong_answers": 0
+   },
+   "expected": {
+    "outcome": "promise",
+    "reason": null,
+    "promises": [
+     {
+      "amount": 180.0,
+      "date": "2026-10-23"
+     }
+    ],
+    "notes": [],
+    "callbacks": [],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "promises[0].date",
+     "quote": "\"Next <weekday>\" means that weekday in the following calendar week."
+    },
+    {
+     "field": "promises[0].date",
+     "quote": "So \"next Friday\" said on a Friday is the Friday of the following week."
+    },
+    {
+     "field": "promises[0].amount",
+     "quote": "Ask for the full past-due amount first."
+    },
+    {
+     "field": "outcome",
+     "quote": "| `promise` | none | at least one promise was recorded |"
+    }
+   ]
+  },
+  {
+   "title": "Third party asks for a callback at 19:00 on the next business day after a holiday weekend",
+   "scene": "A relative answers on Friday afternoon, not the customer. Monday is a bank holiday. The relative says the customer can be reached on Tuesday 2026-10-27 at 19:00, the last minute of the allowed window.",
+   "now": "2026-10-23T15:00",
+   "products": [
+    {
+     "days_late": 12,
+     "past_due": 400.0,
+     "floor": 60.0
+    }
+   ],
+   "situation": {
+    "kind": "callback",
+    "callback_date": "2026-10-27",
+    "callback_time": "19:00",
+    "wrong_answers": 0
+   },
+   "expected": {
+    "outcome": "not_reached",
+    "reason": "callback",
+    "promises": [],
+    "notes": [],
+    "callbacks": [
+     {
+      "date": "2026-10-27",
+      "time": "19:00"
+     }
+    ],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "callbacks[0].date",
+     "quote": "A callback is for today or the next business day, from 10:00 to 19:00, both included, and later than `now`."
+    },
+    {
+     "field": "callbacks[0].time",
+     "quote": "A callback is for today or the next business day, from 10:00 to 19:00, both included, and later than `now`."
+    },
+    {
+     "field": "outcome",
+     "quote": "Call `schedule_callback` with the date and the time, then close as `not_reached` / `callback`."
+    },
+    {
+     "field": "reason",
+     "quote": "Call `schedule_callback` with the date and the time, then close as `not_reached` / `callback`."
+    }
+   ]
+  },
+  {
+   "title": "Third party offers callback times outside the window twice",
+   "scene": "A housemate answers and not the customer. Asked when the customer can be reached, they say 20:00 today. Asked once more, they say 09:00 tomorrow. Both are outside 10:00 to 19:00.",
+   "now": "2026-10-14T18:30",
+   "products": [
+    {
+     "days_late": 20,
+     "past_due": 500.0,
+     "floor": 70.0
+    }
+   ],
+   "situation": {
+    "kind": "callback",
+    "callback_date": "2026-10-15",
+    "callback_time": "09:00",
+    "wrong_answers": 0
+   },
+   "expected": {
+    "outcome": "not_reached",
+    "reason": "no_callback",
+    "promises": [],
+    "notes": [],
+    "callbacks": [],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "outcome",
+     "quote": "If the person offers a day or a time outside that window, ask once for another time. If that is also outside it, do not schedule. Close as `not_reached` / `no_callback`."
+    },
+    {
+     "field": "reason",
+     "quote": "If the person offers a day or a time outside that window, ask once for another time. If that is also outside it, do not schedule. Close as `not_reached` / `no_callback`."
+    }
+   ]
+  },
+  {
+   "title": "Three wrong identity answers across both questions",
+   "scene": "The customer confirms the name. They give a wrong date of birth, then a second wrong date of birth, then a wrong last four digits of the phone number. That is three wrong answers in total.",
+   "now": "2026-10-14T11:00",
+   "products": [
+    {
+     "days_late": 15,
+     "past_due": 350.0,
+     "floor": 55.0
+    }
+   ],
+   "situation": {
+    "kind": "identity_failed",
+    "wrong_answers": 3
+   },
+   "expected": {
+    "outcome": "not_verified",
+    "reason": "failed",
+    "promises": [],
+    "notes": [],
+    "callbacks": [],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "outcome",
+     "quote": "Three wrong answers in total end the check, whichever question they were on."
+    },
+    {
+     "field": "outcome",
+     "quote": "Close as `not_verified` / `failed`."
+    },
+    {
+     "field": "reason",
+     "quote": "Close as `not_verified` / `failed`."
+    }
+   ]
+  },
+  {
+   "title": "Amount one unit below the floor, customer accepts the floor",
+   "scene": "Ms Varga is verified and is 10 days late on a personal loan. The instalment amount is 120. She offers 119 today. The agent says it cannot be recorded and offers the floor, and she accepts.",
+   "now": "2026-10-14T11:00",
+   "products": [
+    {
+     "days_late": 10,
+     "past_due": 600.0,
+     "floor": 120.0
+    }
+   ],
+   "situation": {
+    "kind": "below_floor",
+    "said_date": {
+     "kind": "today"
+    },
+    "said_amount": 119.0,
+    "accepts_correction": true,
+    "wrong_answers": 0
+   },
+   "expected": {
+    "outcome": "promise",
+    "reason": null,
+    "promises": [
+     {
+      "amount": 120.0,
+      "date": "2026-10-14"
+     }
+    ],
+    "notes": [],
+    "callbacks": [],
+    "transfers": []
+   },
+   "quotes": [
+    {
+     "field": "promises[0].amount",
+     "quote": "Below the floor, say it cannot be recorded and offer the floor once."
+    },
+    {
+     "field": "promises[0].amount",
+     "quote": "The **floor** is `minimum_payment` for a credit card and `instalment_amount` for a personal loan or a car loan."
+    },
+    {
+     "field": "promises[0].date",
+     "quote": "A promise date must be today or later, a business day, and not after the deadline."
+    },
+    {
+     "field": "outcome",
+     "quote": "| `promise` | none | at least one promise was recorded |"
+    }
+   ]
+  }
+ ]
+}

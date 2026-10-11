@@ -1,7 +1,7 @@
 """A local copy of the seven bank tools, plus the practice session and ledger routes, for ANY
 brief: which field each tool uses, how identity and closing are shaped, and the business-day-free
-bookkeeping rules are all read from a config (the same canonical schema as seed/policy_ab.py and
-testbed/*/config.json). The response text matches the hosted bank for Brief A/B's own field names
+bookkeeping rules are all read from a config (the same canonical schema as
+testbed/*/config.json). The no-argument default is testbed/configs/brief-a.config.json. The response text matches the hosted bank for Brief A/B's own field names
 (the default config); for a fake or final brief, request/response bodies use that brief's own
 field names instead, read straight from its tools.openapi.json at /tools/openapi.json.
 
@@ -28,7 +28,7 @@ from fastapi.responses import JSONResponse
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from seed.policy_ab import POLICY_A as DEFAULT_CONFIG
+DEFAULT_CONFIG = json.loads((ROOT / "testbed" / "configs" / "brief-a.config.json").read_text())
 
 TESTBED = ROOT / "testbed"
 TOOLS = ("verify_identity", "get_account", "create_promise", "add_note", "schedule_callback", "transfer_to_agent", "close_call")

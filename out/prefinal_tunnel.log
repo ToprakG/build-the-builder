@@ -1,0 +1,24 @@
+19:56:14 fresh origin: 
+19:56:15 check 1/10: HTTP 000
+19:56:18 check 2/10: HTTP 000
+19:56:21 check 3/10: HTTP 000
+19:56:24 check 4/10: HTTP 000
+19:56:27 check 5/10: HTTP 000
+19:56:30 check 6/10: HTTP 000
+19:56:33 check 7/10: HTTP 000
+19:56:36 check 8/10: HTTP 000
+19:56:39 check 9/10: HTTP 000
+19:56:42 check 10/10: HTTP 000
+19:56:45 PREFINAL TUNNEL PROBLEM: 0/10 answered 200
+19:59:06 fresh origin: https://writer-tahoe-normal-halloween.trycloudflare.com
+19:59:06 check 1/10: HTTP 200
+19:59:10 check 2/10: HTTP 200
+19:59:13 check 3/10: HTTP 200
+19:59:16 check 4/10: HTTP 200
+19:59:20 check 5/10: HTTP 200
+19:59:23 check 6/10: HTTP 200
+19:59:26 check 7/10: HTTP 200
+19:59:30 check 8/10: HTTP 200
+19:59:33 check 9/10: HTTP 200
+19:59:36 check 10/10: HTTP 200
+19:59:39 PREFINAL TUNNEL OK (10/10)

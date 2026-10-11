@@ -1,0 +1,14 @@
+{
+ "_doc": "File-scoped exceptions to the no-leak blacklist. Each entry needs a justification. A bank name, a date, a code or a brief sentence never belongs here.",
+ "allow": {
+  "testgen.py": {
+   "deceased": "the generic case generator's family name 'Deceased' (a key of testbed/generator/assemble.py's plan tables): testgen must name the generator's families to plan and drop them; it is the generator's code API, not a brief value",
+   "declined": "the generic case generator's family name 'Declined questions' (same reason as above)"
+  },
+  "rulecov.py": {
+   "deceased": "rule-type vocabulary of the coverage analyser (rulecov.py): it names the side-intent kinds it looks for in any brief; it builds nothing from them",
+   "wrong_number": "rule-type vocabulary of the coverage analyser (rulecov.py): it names the side-intent kinds it looks for in any brief; it builds nothing from them",
+   "already_paid": "rule-type vocabulary of the coverage analyser (rulecov.py): it names the side-intent kinds it looks for in any brief; it builds nothing from them"
+  }
+ }
+}

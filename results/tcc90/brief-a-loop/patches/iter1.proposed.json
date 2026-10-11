@@ -1,0 +1,26 @@
+[
+ {
+  "id": "p1",
+  "bug_ids": [
+   "BUG-01"
+  ],
+  "zone": "hook:verify_identity/msg/next",
+  "op": "replace",
+  "before": "Correct. Now ask the next question:",
+  "after": "Correct. The call goes on. Ask the second question now: the last four digits of the phone number on file. Do not end the call.",
+  "brief_quote": "Ask two security questions, one at a time: first the date of birth, then the last four digits of the phone number on file.",
+  "rationale": "After the first answer passes, the agent must ask the second question instead of closing."
+ },
+ {
+  "id": "p2",
+  "bug_ids": [
+   "BUG-01"
+  ],
+  "zone": "node:identity/rules",
+  "op": "append",
+  "before": "",
+  "after": "Read each answer back to the customer first and ask them to confirm it. Call verify_identity only after that read-back.",
+  "brief_quote": "Call `verify_identity` with the answer.",
+  "rationale": "The answer is read back before verify_identity is called."
+ }
+]

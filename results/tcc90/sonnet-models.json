@@ -1,0 +1,6 @@
+{
+  "extract": "openrouter:anthropic/claude-sonnet-5.5",
+  "analyze": "openrouter:anthropic/claude-sonnet-5.5",
+  "judge": "openrouter:anthropic/claude-sonnet-5.5",
+  "patch": "claude-sonnet-5-5"
+}

@@ -1,0 +1,20 @@
+{
+ "bugs": [
+  {
+   "bug_id": "BUG-001",
+   "behaviour": "When a customer asks for a reduction in the total amount owed (a discount or waiver), the agent misclassifies this as a request for a new payment plan or lower instalments and immediately transfers the call to the restructuring queue, abandoning the negotiation.",
+   "expected_per_brief": "The agent must not offer a discount or waiver (rule 33), but a request for one is not a restructuring request. The agent should decline the request and continue the negotiation flow (offer the floor amount, use remaining persuasion attempts, and record a promise if one is reached). Only an explicit request for a new payment plan or lower instalments triggers a restructuring transfer (rule 41).",
+   "brief_quote": "A request for a new payment plan or lower instalments: do not describe a plan. Call transfer_to_agent with queue restructuring … Never offer a discount, a waiver, an instalment plan or any term that is not in this brief.",
+   "evidence": [
+    {
+     "case_id": "T-007",
+     "rep": 1,
+     "turn": 50
+    }
+   ],
+   "suspected_zone": "transition:refused_1/intent",
+   "severity": "high"
+  }
+ ],
+ "dropped": []
+}

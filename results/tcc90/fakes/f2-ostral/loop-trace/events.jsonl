@@ -1,0 +1,3 @@
+{"type": "start", "t": 0.0, "time": "2026-10-11T15:10:21+0300", "variant": "tcc90-loop", "brief": "f2-ostral"}
+{"type": "selftest", "t": 1.653, "detail": "mock bank up on 127.0.0.1:8791 with 12 of our own case(s)"}
+{"type": "selftest", "t": 7.44, "detail": "mock bank public at https://identifies-robust-providing-friday.trycloudflare.com"}

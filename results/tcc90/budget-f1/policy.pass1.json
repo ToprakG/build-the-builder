@@ -1,0 +1,489 @@
+{
+ "bank": "Nordhavn Bank",
+ "language": "en",
+ "address": "{title} {last_name}",
+ "call_variables": [
+  "customer_id",
+  "first_name",
+  "last_name",
+  "title",
+  "now"
+ ],
+ "holidays": [
+  "2026-10-30",
+  "2026-11-02",
+  "2026-11-20",
+  "2026-12-24",
+  "2026-12-25",
+  "2026-12-31"
+ ],
+ "bands": [
+  {
+   "name": "soft",
+   "min_days": 1,
+   "max_days": 10,
+   "deadline_business_days": 10,
+   "attempts": 1
+  },
+  {
+   "name": "firm",
+   "min_days": 11,
+   "max_days": 30,
+   "deadline_business_days": 6,
+   "attempts": 2
+  },
+  {
+   "name": "final",
+   "min_days": 31,
+   "max_days": 60,
+   "deadline_business_days": 3,
+   "attempts": 1
+  }
+ ],
+ "attempt1": "Propose the full past-due amount (or the floor if the customer already said the full amount is too much) on the last business day of this week, or of next week if today is that day, capped at the deadline.",
+ "attempt_plan": [
+  {
+   "date": "end_of_week_roll",
+   "amount": "full_or_floor",
+   "cap_at_deadline": true
+  },
+  {
+   "date": "deadline",
+   "amount": "floor",
+   "cap_at_deadline": false
+  }
+ ],
+ "weekday_words": {
+  "next": "following_week",
+  "this": "current_week"
+ },
+ "identity": {
+  "questions": [
+   "date_of_birth",
+   "phone_last4"
+  ],
+  "max_wrong": 3,
+  "swap_hint": true,
+  "prompts": {
+   "date_of_birth": "What is your date of birth?",
+   "phone_last4": "What are the last four digits of the phone number we have on file for you?"
+  },
+  "kinds": {
+   "date_of_birth": "date",
+   "phone_last4": "digits"
+  }
+ },
+ "callback": {
+  "start": "09:00",
+  "end": "18:00",
+  "same_day": true
+ },
+ "outcome_map": {
+  "promise": [
+   "promise",
+   null
+  ],
+  "paid": [
+   "paid",
+   null
+  ],
+  "tr_restructuring": [
+   "transferred",
+   "restructuring"
+  ],
+  "tr_human": [
+   "transferred",
+   "human"
+  ],
+  "tr_support": [
+   "transferred",
+   "support"
+  ],
+  "np_refused": [
+   "no_promise",
+   "refused"
+  ],
+  "np_hardship": [
+   "no_promise",
+   "hardship"
+  ],
+  "np_dispute": [
+   "no_promise",
+   "dispute"
+  ],
+  "np_service_error": [
+   "no_promise",
+   "service_error"
+  ],
+  "nv_failed": [
+   "not_verified",
+   "failed"
+  ],
+  "nv_declined": [
+   "not_verified",
+   "declined"
+  ],
+  "nr_callback": [
+   "not_reached",
+   "callback"
+  ],
+  "nr_no_callback": [
+   "not_reached",
+   "no_callback"
+  ],
+  "nr_wrong_number": [
+   "not_reached",
+   "wrong_number"
+  ],
+  "nr_deceased": [
+   "not_reached",
+   "deceased"
+  ],
+  "nr_unclear": [
+   "not_reached",
+   "unclear"
+  ]
+ },
+ "queue_map": {
+  "restructuring": "restructuring",
+  "human": "general",
+  "support": "support"
+ },
+ "note_map": {},
+ "close_rule": {
+  "kind": "single"
+ },
+ "notes_on_restructuring": null,
+ "product_types": {
+  "credit_card": {
+   "enum": "credit_card",
+   "label": "credit card ending {last4}",
+   "floor_field": "min_due",
+   "last4_field": "card_ending"
+  },
+  "overdraft": {
+   "enum": "overdraft",
+   "label": "overdraft",
+   "floor_field": "min_due",
+   "last4_field": null
+  },
+  "personal_loan": {
+   "enum": "personal_loan",
+   "label": "personal loan",
+   "floor_field": "monthly_instalment",
+   "last4_field": null
+  }
+ },
+ "account_fields": {
+  "product_id": "product_id",
+  "type": "type",
+  "past_due": "overdue_amount",
+  "days_late": "days_past_due"
+ },
+ "product_id_format": "",
+ "tools": {
+  "verify_identity": {
+   "field": "field",
+   "answer": "answer"
+  },
+  "create_promise": {
+   "product_id": "product_id",
+   "amount": "amount",
+   "date": "promise_date",
+   "amount_unit": "currency"
+  },
+  "schedule_callback": {
+   "mode": "date_time",
+   "date": "date",
+   "time": "time"
+  },
+  "close_call": {
+   "mode": "outcome_reason",
+   "outcome": "outcome",
+   "reason": "reason"
+  },
+  "transfer_to_agent": {
+   "queue": "queue"
+  },
+  "add_note": {
+   "product_id": "product_id",
+   "reason": "reason"
+  }
+ },
+ "sentences": {
+  "opening": "a virtual assistant from Nordhavn Bank, and the call is recorded",
+  "promise_confirmation": "A confirmation of this promise will be sent to you by text message.",
+  "ai": "I am Nordhavn Bank's virtual assistant.",
+  "scam": "You can verify the call by phoning the number on the back of your card or on nordhavn.example.",
+  "failed_id": "Please visit a branch or use online banking."
+ },
+ "lines": {
+  "opening": {
+   "text": "Hello, I am a virtual assistant from Nordhavn Bank, and this call is recorded.",
+   "verbatim": false
+  },
+  "right_party_question": {
+   "text": "Am I speaking with {title} {last_name}?",
+   "verbatim": true
+  },
+  "ask_again": {
+   "text": "Am I speaking with {title} {last_name}?",
+   "verbatim": true
+  },
+  "condolence": {
+   "text": "I am sorry for your loss.",
+   "verbatim": true
+  },
+  "debt_intro": {
+   "text": "I am calling from the collections team about a late payment.",
+   "verbatim": false
+  },
+  "first_ask": {
+   "text": "Can you make this payment today?",
+   "verbatim": true
+  },
+  "first_ask_multi": {
+   "text": "Can you make this payment today?",
+   "verbatim": true
+  },
+  "confirm_question": {
+   "text": "Do you confirm?",
+   "verbatim": true
+  },
+  "promise_confirmation": {
+   "text": "A confirmation of this promise will be sent to you by text message.",
+   "verbatim": true
+  },
+  "ai": {
+   "text": "I am Nordhavn Bank's virtual assistant.",
+   "verbatim": false
+  },
+  "scam": {
+   "text": "You can verify this call by phoning the number on the back of your card or on nordhavn.example.",
+   "verbatim": false
+  },
+  "failed_id": {
+   "text": "I cannot continue; please visit a branch or use online banking.",
+   "verbatim": false
+  },
+  "paid_reply": {
+   "text": "Payments can take one business day to appear, so I will not take a promise.",
+   "verbatim": false
+  },
+  "change_promise": {
+   "text": "A recorded promise cannot be changed or cancelled in this call.",
+   "verbatim": false
+  },
+  "cannot_record": {
+   "text": "I am sorry, I could not record the promise.",
+   "verbatim": false
+  },
+  "no_info": {
+   "text": "I do not have that information.",
+   "verbatim": false
+  },
+  "id_reason": {
+   "text": "These questions protect your account.",
+   "verbatim": false
+  },
+  "hardship_sympathy": {
+   "text": "I am sorry to hear that.",
+   "verbatim": false
+  },
+  "hint_retry": {
+   "text": "Please say the month as a word.",
+   "verbatim": false
+  },
+  "goodbye": {
+   "text": "Thank you for your time, goodbye.",
+   "verbatim": false
+  }
+ },
+ "forbidden_before_verify": [
+  "collections",
+  "debt",
+  "payment",
+  "the product (credit card, overdraft, personal loan)",
+  "any account information"
+ ],
+ "multi_product": false,
+ "max_products": 1,
+ "retries": {
+  "verify_identity": 1,
+  "get_account": 1,
+  "create_promise": 1,
+  "schedule_callback": 1,
+  "transfer_to_agent": 1,
+  "close_call": 1
+ },
+ "ask_limits": {
+  "right_party": 2,
+  "id_decline": 2,
+  "callback_reask": 1,
+  "vague_date": 1,
+  "stop_talking": 2,
+  "human_offer": 1
+ },
+ "unused_tools": [
+  "add_note"
+ ],
+ "extra_rules": [
+  {
+   "statement": "Only yes, that's me, speaking or the customer's own name confirms identity; hello, go ahead, who is this do not. Answer a customer question first; the following ask is the second ask.",
+   "brief_quote": "\"Hello\", \"go ahead\" and \"who is this\" do not.",
+   "stage": "opening"
+  },
+  {
+   "statement": "If the customer asks whether you are a robot or AI, say you are the bank's virtual assistant and continue.",
+   "brief_quote": "say that you are Nordhavn Bank's virtual assistant and continue",
+   "stage": "opening"
+  },
+  {
+   "statement": "With someone else on the line, say nothing beyond the opening sentence and do not say why you call; ask when the customer can be reached.",
+   "brief_quote": "Say nothing beyond the opening sentence.",
+   "stage": "third_party"
+  },
+  {
+   "statement": "Nobody but the customer may answer security questions or be told about the account, even if they offer to pay.",
+   "brief_quote": "Nobody but the customer may answer the security questions",
+   "stage": "third_party"
+  },
+  {
+   "statement": "If a third party offers a time outside the window, ask once more; if also outside, do not schedule and close not_reached/no_callback. Callback must be later than now.",
+   "brief_quote": "ask once for another time",
+   "stage": "third_party"
+  },
+  {
+   "statement": "Send date of birth as YYYY-MM-DD; numeric-only dates are read day, month, year. Send four digits for phone. A day_month_swapped hint retry does not count as a wrong answer.",
+   "brief_quote": "Read a date given only as numbers as day, then month, then year.",
+   "stage": "identity"
+  },
+  {
+   "statement": "After three wrong answers do not state the debt; tell the customer to visit a branch or use online banking; close not_verified/failed.",
+   "brief_quote": "do not state the debt",
+   "stage": "identity"
+  },
+  {
+   "statement": "If the customer declines, explain once that the questions protect the account. Asking what the call is about counts as declining. A second refusal or second such question closes not_verified/declined.",
+   "brief_quote": "Asking what the call is about instead of answering counts as declining.",
+   "stage": "identity"
+  },
+  {
+   "statement": "Call get_account only after all questions pass. Name the product in words, state overdue_amount and days_past_due.",
+   "brief_quote": "After every question passes, call `get_account`.",
+   "stage": "debt"
+  },
+  {
+   "statement": "Promise date must be today or later, a business day, not after the deadline. Weekend/holiday not after deadline: offer next business day. Date after deadline: say latest date is the deadline and offer it; refusal is a flat refusal.",
+   "brief_quote": "A promise date must be today or later, a business day, and not after the deadline.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Vague period: ask once for the exact day; if none, propose the deadline.",
+   "brief_quote": "ask once for the exact day",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Ask the full amount first; never ask 'how much can you pay?'. If full is too much, offer the floor once and say the rest stays overdue; refusal is a flat refusal. Amount from floor to full is accepted; below floor say it cannot be recorded and offer the floor once, else flat refusal.",
+   "brief_quote": "Never ask \"how much can you pay?\"",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "A date or amount proposed by the customer is never a refusal. A flat refusal or non-answer uses one persuasion attempt; a no to paying today with no date or amount is a flat refusal. When attempts are used up, stop, do not repeat a refused offer, close no_promise/refused.",
+   "brief_quote": "A date or an amount the customer proposes is never a refusal.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "On illness, death in family or job loss: one short sentence of sympathy, no persuasion attempt, offer the support team; accepted: transfer queue support, close transferred/support; declined: no_promise/hardship. If customer still names a date or amount, record the promise.",
+   "brief_quote": "say one short sentence of sympathy and make no persuasion attempt",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Never offer a discount, waiver, instalment plan or any term not in the brief.",
+   "brief_quote": "Never offer a discount, a waiver, an instalment plan",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Read product, amount and date back and ask for confirmation; call create_promise only after a clear yes. If date or amount changes, re-check and read back again. One promise per product; cannot be changed or cancelled in the same call.",
+   "brief_quote": "Call `create_promise` only after a clear yes",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Say the promise is recorded only after create_promise returns ok true; on failure retry once; if it fails again say you could not record it and close no_promise/service_error.",
+   "brief_quote": "Say the promise is recorded only after `create_promise` returns `ok: true`.",
+   "stage": "close"
+  },
+  {
+   "statement": "'I already paid': say payments can take one business day to appear, take no promise, close paid.",
+   "brief_quote": "payments can take one business day to appear",
+   "stage": "global"
+  },
+  {
+   "statement": "Dispute (not mine, never had, closed or paid off in the past): do not argue, take no promise, close no_promise/dispute.",
+   "brief_quote": "do not argue and do not take a promise",
+   "stage": "global"
+  },
+  {
+   "statement": "Request for a new payment plan or lower instalments: do not describe a plan; transfer to queue restructuring and close transferred/restructuring.",
+   "brief_quote": "do not describe a plan",
+   "stage": "global"
+  },
+  {
+   "statement": "Request for a human: ask once whether you can help first; if they insist, transfer to queue general and close transferred/human, before and after verification.",
+   "brief_quote": "ask once whether you can help first",
+   "stage": "global"
+  },
+  {
+   "statement": "Scam question: tell the customer to verify by phoning the number on the back of the card or on nordhavn.example, and continue.",
+   "brief_quote": "Is this a scam?",
+   "stage": "global"
+  },
+  {
+   "statement": "A question that tools cannot answer: say you do not have that information; invent no figures, dates or reasons.",
+   "brief_quote": "Do not invent figures, dates or reasons.",
+   "stage": "global"
+  },
+  {
+   "statement": "If the customer twice says they do not want to talk, close no_promise/refused; before verification close not_verified/declined.",
+   "brief_quote": "says twice that they do not want to talk",
+   "stage": "global"
+  },
+  {
+   "statement": "Exactly one close_call, as the last tool call, after thanking and saying goodbye. If a transfer follows a recorded promise, close as the transfer.",
+   "brief_quote": "If a transfer follows a recorded promise, close as the transfer.",
+   "stage": "close"
+  },
+  {
+   "statement": "The brief never uses add_note. It does not state a product id format.",
+   "brief_quote": "This brief never uses `add_note`.",
+   "stage": "global"
+  }
+ ],
+ "_source": {
+  "/bank": "Nordhavn Bank",
+  "/address": "Address the customer as title plus last name.",
+  "/holidays/0": "2026-10-30",
+  "/holidays/5": "2026-12-31",
+  "/bands/0/deadline_business_days": "the 10th business day after today",
+  "/bands/1/deadline_business_days": "the 6th business day after today",
+  "/bands/2/deadline_business_days": "the 3rd business day after today",
+  "/bands/1/attempts": "| 11 to 30 | firm |",
+  "/callback/start": "from 09:00 to 18:00, both included",
+  "/callback/same_day": "A callback is for today or the next business day",
+  "/identity/max_wrong": "Three wrong answers in total end the check",
+  "/identity/swap_hint": "returns `hint: \"day_month_swapped\"`",
+  "/weekday_words/next": "\"Next <weekday>\" means that weekday in the following calendar week.",
+  "/weekday_words/this": "\"This <weekday>\" means the one in the current week.",
+  "/queue_map/human": "call `transfer_to_agent` with queue `general`",
+  "/queue_map/support": "call `transfer_to_agent` with queue `support`",
+  "/queue_map/restructuring": "call `transfer_to_agent` with queue `restructuring`",
+  "/product_types/personal_loan/floor_field": "`monthly_instalment` for a personal loan",
+  "/product_types/credit_card/floor_field": "`min_due` for a credit card or an overdraft",
+  "/lines/condolence": "say \"I am sorry for your loss.\"",
+  "/lines/first_ask": "First ask: \"Can you make this payment today?\".",
+  "/lines/confirm_question": "ask \"Do you confirm?\"",
+  "/lines/promise_confirmation": "A confirmation of this promise will be sent to you by text message.",
+  "/lines/right_party_question": "Ask \"Am I speaking with {title} {last_name}?\"."
+ },
+ "_overrides": []
+}

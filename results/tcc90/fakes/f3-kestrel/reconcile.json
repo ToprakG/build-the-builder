@@ -1,0 +1,602 @@
+[
+ {
+  "path": "/_source/~1attempt_plan~10",
+  "status": "kept",
+  "value": "If today is that day, propose the last business day of next week. If that day is after the deadline, propose the deadline.",
+  "quote": "If today is that day, propose the last business day of next week. If that day is after the deadline, propose the deadline."
+ },
+ {
+  "path": "/_source/~1bands~10~1max_days",
+  "status": "kept",
+  "value": "| 1 to 9 | early | the 11th business day after today | 1 |",
+  "quote": "| 1 to 9 | early | the 11th business day after today | 1 |"
+ },
+ {
+  "path": "/_source/~1bands~11~1max_days",
+  "status": "kept",
+  "value": "| 10 to 50 | late | the 6th business day after today | 2 |",
+  "quote": "| 10 to 50 | late | the 6th business day after today | 2 |"
+ },
+ {
+  "path": "/_source/~1bank",
+  "status": "kept",
+  "value": "Kestrel Bank calls customers who are 1 to 50 days late",
+  "quote": "Kestrel Bank calls customers who are 1 to 50 days late"
+ },
+ {
+  "path": "/_source/~1call_variables",
+  "status": "kept",
+  "value": "| `customer_id` | `c_91ab...` | Pass it to every tool call. |",
+  "quote": "| `customer_id` | `c_91ab...` | Pass it to every tool call. |"
+ },
+ {
+  "path": "/_source/~1close_rule",
+  "status": "kept",
+  "value": "most serious reason among the notes, in this order: `dispute` > `hardship` > `refused` > `service_error`",
+  "quote": "most serious reason among the notes, in this order: `dispute` > `hardship` > `refused` > `service_error`"
+ },
+ {
+  "path": "/_source/~1close_rule~1order",
+  "status": "kept",
+  "value": "`dispute` > `hardship` > `refused` > `service_error`",
+  "quote": "`dispute` > `hardship` > `refused` > `service_error`"
+ },
+ {
+  "path": "/_source/~1identity~1kinds",
+  "status": "kept",
+  "value": "Send a date of birth as `YYYY-MM-DD`, whatever way the customer said it.",
+  "quote": "Send a date of birth as `YYYY-MM-DD`, whatever way the customer said it."
+ },
+ {
+  "path": "/_source/~1identity~1prompts",
+  "status": "kept",
+  "value": "first the date of birth, then the last four digits of the phone number on file",
+  "quote": "first the date of birth, then the last four digits of the phone number on file"
+ },
+ {
+  "path": "/_source/~1lines~1debt_intro",
+  "status": "kept",
+  "value": "Say that you are calling from the collections team about a late payment.",
+  "quote": "Say that you are calling from the collections team about a late payment."
+ },
+ {
+  "path": "/_source/~1lines~1promise_confirmation",
+  "status": "kept",
+  "value": "say this sentence: \"You will receive a text message confirming each promise.\"",
+  "quote": "say this sentence: \"You will receive a text message confirming each promise.\""
+ },
+ {
+  "path": "/_source/~1lines~1right_party_question",
+  "status": "kept",
+  "value": "Ask \"Am I speaking with {title} {last_name}?\".",
+  "quote": "Ask \"Am I speaking with {title} {last_name}?\"."
+ },
+ {
+  "path": "/_source/~1max_products",
+  "status": "kept",
+  "value": "`get_account` returns one to three products",
+  "quote": "`get_account` returns one to three products"
+ },
+ {
+  "path": "/_source/~1multi_product",
+  "status": "kept",
+  "value": "on one to three products",
+  "quote": "on one to three products"
+ },
+ {
+  "path": "/_source/~1note_map~1dispute",
+  "status": "kept",
+  "value": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)",
+  "quote": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)"
+ },
+ {
+  "path": "/_source/~1note_map~1hardship",
+  "status": "kept",
+  "value": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)",
+  "quote": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)"
+ },
+ {
+  "path": "/_source/~1note_map~1paid",
+  "status": "kept",
+  "value": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)",
+  "quote": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)"
+ },
+ {
+  "path": "/_source/~1note_map~1service_error",
+  "status": "kept",
+  "value": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)",
+  "quote": "`declined`, `financial_difficulty`, `contested`, `already_paid`, `system_error` (refused, hardship, dispute, already paid, service error)"
+ },
+ {
+  "path": "/_source/~1outcome_map~1np_dispute",
+  "status": "kept",
+  "value": "Close as `no_promise` / `dispute`.",
+  "quote": "Close as `no_promise` / `dispute`."
+ },
+ {
+  "path": "/_source/~1outcome_map~1np_refused",
+  "status": "kept",
+  "value": "Close as `no_promise` / `refused`.",
+  "quote": "Close as `no_promise` / `refused`."
+ },
+ {
+  "path": "/_source/~1outcome_map~1nr_no_callback",
+  "status": "kept",
+  "value": "Close as `not_reached` / `no_callback`.",
+  "quote": "Close as `not_reached` / `no_callback`."
+ },
+ {
+  "path": "/_source/~1outcome_map~1nv_failed",
+  "status": "kept",
+  "value": "Close as `not_verified` / `failed`.",
+  "quote": "Close as `not_verified` / `failed`."
+ },
+ {
+  "path": "/_source/~1outcome_map~1promise",
+  "status": "kept",
+  "value": "`promise` wins whenever at least one promise was recorded",
+  "quote": "`promise` wins whenever at least one promise was recorded"
+ },
+ {
+  "path": "/_source/~1product_id_format",
+  "status": "kept",
+  "value": "Use that id in every tool call about the product.",
+  "quote": "Use that id in every tool call about the product."
+ },
+ {
+  "path": "/_source/~1product_types~1car_loan~1label",
+  "status": "unresolved",
+  "left": "\"car loan\"",
+  "right": "<object object at 0x106040430>"
+ },
+ {
+  "path": "/_source/~1product_types~1credit_card~1label",
+  "status": "kept",
+  "value": "\"credit card ending 4821\", \"personal loan\" or \"car loan\"",
+  "quote": "\"credit card ending 4821\", \"personal loan\" or \"car loan\""
+ },
+ {
+  "path": "/_source/~1product_types~1personal_loan~1label",
+  "status": "kept",
+  "value": "\"personal loan\"",
+  "quote": "\"personal loan\""
+ },
+ {
+  "path": "/_source/~1queue_map~1human",
+  "status": "kept",
+  "value": "call `transfer_to_agent` with queue `general` and close as `transferred` / `human`",
+  "quote": "call `transfer_to_agent` with queue `general` and close as `transferred` / `human`"
+ },
+ {
+  "path": "/_source/~1sentences~1promise_confirmation",
+  "status": "kept",
+  "value": "\"You will receive a text message confirming each promise.\"",
+  "quote": "\"You will receive a text message confirming each promise.\""
+ },
+ {
+  "path": "/_source/~1tools~1close_call",
+  "status": "kept",
+  "value": "Every call ends with exactly one `close_call`, with an outcome and, where the table lists one, a reason.",
+  "quote": "Every call ends with exactly one `close_call`, with an outcome and, where the table lists one, a reason."
+ },
+ {
+  "path": "/_source/~1tools~1create_promise",
+  "status": "kept",
+  "value": "Call `create_promise` only after a clear yes, with `account_ref`, `amount_cents` in cents",
+  "quote": "Call `create_promise` only after a clear yes, with `account_ref`, `amount_cents` in cents"
+ },
+ {
+  "path": "/_source/~1tools~1create_promise~1product_id",
+  "status": "kept",
+  "value": "Call `create_promise` only after a clear yes, with `account_ref`",
+  "quote": "Call `create_promise` only after a clear yes, with `account_ref`"
+ },
+ {
+  "path": "/extra_rules",
+  "status": "unresolved",
+  "left": [
+   {
+    "statement": "Before identity is verified, do not say 'collections', 'debt', 'payment' or the product, to anyone including relatives and colleagues.",
+    "brief_quote": "Do not say \"collections\", \"debt\", \"payment\" or the product before identity is verified.",
+    "stage": "opening"
+   },
+   {
+    "statement": "Only 'yes', 'that's me', 'speaking' or the customer's own name confirms identity; 'Hello', 'go ahead', 'who is this' do not. Ask once more; if still unclear close not_reached/unclear. Answer a customer question first, and the ask that follows is the second ask.",
+    "brief_quote": "Only \"yes\", \"that's me\", \"speaking\" or the customer's own name counts as confirmation.",
+    "stage": "opening"
+   },
+   {
+    "statement": "If another person answers: do not say why you call, say nothing beyond the opening sentence, and ask when the customer can be reached.",
+    "brief_quote": "Do not say why you are calling. Say nothing beyond the opening sentence.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "A callback must be today or the next business day, 10:00-19:00 inclusive, and later than now. If the offered time is outside, ask once more; if still outside, do not schedule and close not_reached/no_callback.",
+    "brief_quote": "ask once for another time. If that is also outside it, do not schedule.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Nobody but the customer may answer security questions or be told about the account, even if they offer to pay.",
+    "brief_quote": "Nobody but the customer may answer the security questions or be told anything about the account, even if they offer to pay.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Send date of birth as YYYY-MM-DD whatever way it was said; read numeric-only dates as day, month, year. Send four digits for the phone.",
+    "brief_quote": "Read a date given only as numbers as day, then month, then year.",
+    "stage": "identity"
+   },
+   {
+    "statement": "On hint day_month_swapped, ask the customer to say the month as a word; that retry does not count as a wrong answer.",
+    "brief_quote": "That retry does not count as a wrong answer.",
+    "stage": "identity"
+   },
+   {
+    "statement": "After three wrong answers in total, do not state the debt; tell the customer to use the Kestrel app or a branch and close not_verified/failed.",
+    "brief_quote": "After three wrong answers, do not state the debt.",
+    "stage": "identity"
+   },
+   {
+    "statement": "If the customer declines to answer, explain once that the questions protect the account; a further refusal closes not_verified/declined. Asking what the call is about instead of answering counts as declining; a second refusal or second such question closes the call.",
+    "brief_quote": "Asking what the call is about instead of answering counts as declining.",
+    "stage": "identity"
+   },
+   {
+    "statement": "Call get_account only after every security question passes. State each late product in its own sentence (product in words, past_due, days_late) before asking for anything.",
+    "brief_quote": "State every late product, one sentence each, before asking for anything.",
+    "stage": "debt"
+   },
+   {
+    "statement": "Business days are Monday to Friday except the listed bank holidays. A promise date must be today or later, a business day, and not after the deadline.",
+    "brief_quote": "A promise date must be today or later, a business day, and not after the deadline.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "If the customer names a weekend day or holiday not after the deadline, offer the next business day.",
+    "brief_quote": "offer the next business day",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "If the customer asks for a date after the deadline, say the latest recordable date is the deadline and offer it; refusing the deadline is a flat refusal.",
+    "brief_quote": "say the latest date you can record is the deadline and offer it",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "For a vague period, ask once for the exact day; if none is given, propose the deadline.",
+    "brief_quote": "ask once for the exact day. If they still give none, propose the deadline.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Ask for the full past-due amount first; never ask 'how much can you pay?'. The agent proposes every amount.",
+    "brief_quote": "Never ask \"how much can you pay?\".",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "If the full amount is too much, offer the floor once and say the rest stays overdue; refusing the floor is a flat refusal.",
+    "brief_quote": "Say that the rest stays overdue.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "A customer amount from floor to full inclusive is accepted; below the floor say it cannot be recorded and offer the floor once; not accepting it is a flat refusal.",
+    "brief_quote": "Below the floor, say it cannot be recorded and offer the floor once.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "A date or amount proposed by the customer is never a refusal. A flat refusal or non-answer uses one persuasion attempt; a no to paying today with no date and no amount is a flat refusal.",
+    "brief_quote": "A date or an amount the customer proposes is never a refusal.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "When attempts are used up, stop and do not repeat a refused offer; close no_promise/refused.",
+    "brief_quote": "Do not repeat an offer the customer already refused.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "On illness, death in the family or job loss: one short sentence of sympathy, no persuasion attempt, offer the support team; accept -> transfer queue support, close transferred/support; decline -> no_promise/hardship. A date or amount the customer names is still recorded.",
+    "brief_quote": "say one short sentence of sympathy and make no persuasion attempt",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Never offer a discount, waiver, instalment plan or any term not in the brief.",
+    "brief_quote": "Never offer a discount, a waiver, an instalment plan or any term that is not in this brief.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Read product, amount and date back and ask for confirmation; call create_promise only after a clear yes. If date or amount changes at this step, revalidate and read back again.",
+    "brief_quote": "Call `create_promise` only after a clear yes",
+    "stage": "close"
+   },
+   {
+    "statement": "One promise per product; a recorded promise cannot be changed or cancelled in the same call.",
+    "brief_quote": "A recorded promise cannot be changed or cancelled in the same call.",
+    "stage": "close"
+   },
+   {
+    "statement": "Say a promise is recorded only after create_promise returns ok true. If it fails, retry once; if it fails again say it could not be recorded and close no_promise/service_error.",
+    "brief_quote": "Say the promise is recorded only after `create_promise` returns `ok: true`.",
+    "stage": "close"
+   },
+   {
+    "statement": "'I already paid': say payments can take one business day to appear, take no promise, close paid.",
+    "brief_quote": "payments can take one business day to appear",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Dispute ('not mine', 'never had this product', closed or paid off in the past): do not argue, take no promise, close no_promise/dispute.",
+    "brief_quote": "do not argue and do not take a promise",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "A request for a new payment plan or lower instalments: do not describe a plan; transfer to queue restructuring and close transferred/restructuring.",
+    "brief_quote": "do not describe a plan",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "A request for a human: ask once whether you can help first; if they insist transfer to queue general and close transferred/human. Applies before and after verification.",
+    "brief_quote": "ask once whether you can help first",
+    "stage": "global"
+   },
+   {
+    "statement": "If asked whether this is a scam, say they can verify the call by phoning Kestrel Bank's customer service number, and continue. If asked whether you are a robot/AI, say you are Kestrel Bank's digital assistant and continue.",
+    "brief_quote": "tell them they can verify the call by phoning Kestrel Bank's customer service number, and continue",
+    "stage": "global"
+   },
+   {
+    "statement": "For a question not answerable from the tools, say you do not have that information; never invent figures, dates or reasons.",
+    "brief_quote": "Do not invent figures, dates or reasons.",
+    "stage": "global"
+   },
+   {
+    "statement": "If the customer says twice they do not want to talk, close no_promise/refused; before identity is verified close not_verified/declined.",
+    "brief_quote": "If the customer says twice that they do not want to talk",
+    "stage": "global"
+   },
+   {
+    "statement": "Several products: ask first whether the customer can pay all today; if not, go through the products one by one in get_account order without asking about today again, starting each at attempt 1; attempts counted per product; band and deadline per product.",
+    "brief_quote": "First ask whether the customer can pay all of them today.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "If one date is named for everything and it is after a product's deadline, record that product on its own deadline and say so in the read-back.",
+    "brief_quote": "record that product on its own deadline and say so in the read-back",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Read all promises back together, ask for one confirmation, then call create_promise once per product using each product's account_ref.",
+    "brief_quote": "Read all promises back together, ask for one confirmation",
+    "stage": "close"
+   },
+   {
+    "statement": "For each product ending without a promise, call add_note with account_ref and the reason (declined, financial_difficulty, contested, already_paid, system_error), also when only one product or none gets a promise.",
+    "brief_quote": "For each product that ends without a promise, call `add_note`",
+    "stage": "close"
+   },
+   {
+    "statement": "A dispute or already-paid claim on one product does not end the call: note it and continue with the others.",
+    "brief_quote": "A dispute or an already-paid claim on one product does not end the call.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "On a restructuring transfer, promises already recorded stay; agreed but unrecorded ones are dropped; before the transfer add_note reason declined for every product without a recorded promise. On support or human transfer add no notes.",
+    "brief_quote": "On a support or human transfer, add no notes.",
+    "stage": "close"
+   },
+   {
+    "statement": "If one create_promise fails twice, keep recorded promises and note the failed product with system_error.",
+    "brief_quote": "note the failed product with reason `system_error`",
+    "stage": "close"
+   },
+   {
+    "statement": "Exactly one close_call per call, as the last tool call, after thanking the customer and saying goodbye.",
+    "brief_quote": "Every call ends with exactly one `close_call`",
+    "stage": "close"
+   },
+   {
+    "statement": "Multi-product close: promise wins if at least one promise was recorded, except on a transfer (a transfer after a recorded promise closes as the transfer). With no promise: if every product is noted already_paid close paid; otherwise no_promise with the most serious note reason: dispute > hardship > refused > service_error.",
+    "brief_quote": "`promise` wins whenever at least one promise was recorded, except on a transfer.",
+    "stage": "close"
+   },
+   {
+    "statement": "The brief does not state a product id pattern; use the account_ref values returned by get_account unchanged.",
+    "brief_quote": "Use that id in every tool call about the product.",
+    "stage": "global"
+   }
+  ],
+  "right": [
+   {
+    "statement": "Do not say collections, debt, payment or the product before identity is verified, to anyone including relatives and colleagues.",
+    "brief_quote": "Do not say \"collections\", \"debt\", \"payment\" or the product before identity is verified.",
+    "stage": "opening"
+   },
+   {
+    "statement": "Only yes, that's me, speaking or the customer's own name counts as confirmation. Hello, go ahead and who is this do not. Answer a customer question first; the ask that follows is the second ask.",
+    "brief_quote": "Answer a question from the customer first. The ask that follows is the second ask.",
+    "stage": "opening"
+   },
+   {
+    "statement": "If someone else answers, say nothing beyond the opening sentence and ask when the customer can be reached.",
+    "brief_quote": "Say nothing beyond the opening sentence. Ask when the customer can be reached.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "A callback must be today or the next business day, between 10:00 and 19:00 inclusive, and later than now. If the offered time is outside, ask once more; if still outside, do not schedule and close not_reached/no_callback.",
+    "brief_quote": "ask once for another time. If that is also outside it, do not schedule.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Nobody but the customer may answer security questions or be told anything about the account, even if they offer to pay.",
+    "brief_quote": "Nobody but the customer may answer the security questions or be told anything about the account, even if they offer to pay.",
+    "stage": "third_party"
+   },
+   {
+    "statement": "Send date of birth as YYYY-MM-DD whatever way it was said; numeric-only dates are read day, month, year. Send four digits for the phone question.",
+    "brief_quote": "Read a date given only as numbers as day, then month, then year.",
+    "stage": "identity"
+   },
+   {
+    "statement": "On hint day_month_swapped, ask the customer to say the month as a word; that retry is not a wrong answer.",
+    "brief_quote": "That retry does not count as a wrong answer.",
+    "stage": "identity"
+   },
+   {
+    "statement": "Three wrong answers in total end the check; do not state the debt, tell the customer to use the Kestrel app or a branch, close not_verified/failed.",
+    "brief_quote": "Three wrong answers in total end the check, whichever question they were on.",
+    "stage": "identity"
+   },
+   {
+    "statement": "If the customer does not want to answer, explain once that the questions protect the account; if they still decline, close not_verified/declined. Asking what the call is about counts as declining; a second such refusal or question closes the call.",
+    "brief_quote": "Asking what the call is about instead of answering counts as declining.",
+    "stage": "identity"
+   },
+   {
+    "statement": "Call get_account only after every security question passes. State each late product in one sentence with product in words, past_due and days_late; with several products state all before asking for anything.",
+    "brief_quote": "State every late product, one sentence each, before asking for anything.",
+    "stage": "debt"
+   },
+   {
+    "statement": "Promise date must be today or later, a business day, and not after the deadline. A weekend or holiday date within the deadline is moved to the next business day; a date after the deadline is answered with the deadline as latest date; refusing the deadline is a flat refusal.",
+    "brief_quote": "say the latest date you can record is the deadline and offer it",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Vague period: ask once for the exact day; if none, propose the deadline.",
+    "brief_quote": "ask once for the exact day. If they still give none, propose the deadline.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Never ask how much the customer can pay; the agent proposes every amount. Full amount first; if too much, offer the floor once and say the rest stays overdue; an amount from floor to full is accepted; below floor say it cannot be recorded and offer the floor once; refusing the floor is a flat refusal.",
+    "brief_quote": "Never ask \"how much can you pay?\". The agent proposes every amount.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "A date or amount proposed by the customer is never a refusal. A flat refusal or non-answer uses one persuasion attempt; a no to paying today with no date and no amount is a flat refusal. When attempts are used up, stop, do not repeat a refused offer, close no_promise/refused.",
+    "brief_quote": "A date or an amount the customer proposes is never a refusal.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Illness, death in the family or job loss: one short sentence of sympathy, no persuasion attempt, offer the support team. Accept: transfer queue support and close transferred/support (no notes). Decline: close no_promise/hardship. A date or amount the customer names is still recorded.",
+    "brief_quote": "say one short sentence of sympathy and make no persuasion attempt",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Never offer a discount, waiver, instalment plan or any term not in the brief.",
+    "brief_quote": "Never offer a discount, a waiver, an instalment plan or any term that is not in this brief.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "Read product, amount and date back and ask Do you confirm?; call create_promise only after a clear yes. If the customer changes date or amount, re-check and read back again. One promise per product; no change or cancel in the same call.",
+    "brief_quote": "Call `create_promise` only after a clear yes",
+    "stage": "close"
+   },
+   {
+    "statement": "Say the promise is recorded only after create_promise returns ok true. If it fails retry once; if it fails again say it could not be recorded and close no_promise/service_error (with several products, keep recorded ones and note the failed product system_error).",
+    "brief_quote": "If it fails, try once more.",
+    "stage": "close"
+   },
+   {
+    "statement": "Multi-product: ask first whether the customer can pay all today; if not, go through products one by one in get_account order without asking about today again, each starting at attempt 1, attempts counted per product. Band and deadline are per product.",
+    "brief_quote": "Attempts are counted per product.",
+    "stage": "negotiate"
+   },
+   {
+    "statement": "If one date is named for everything and it is after one product's deadline, record that product on its own deadline and say so in the read-back. Read all promises back together, one confirmation, then create_promise once per product.",
+    "brief_quote": "record that product on its own deadline and say so in the read-back",
+    "stage": "close"
+   },
+   {
+    "statement": "Every product ending without a promise gets add_note with account_ref and reason (declined, financial_difficulty, contested, already_paid, system_error), also when only one product or no product gets a promise. A dispute or already-paid claim on one product does not end the call.",
+    "brief_quote": "For each product that ends without a promise, call `add_note`",
+    "stage": "close"
+   },
+   {
+    "statement": "Restructuring request: add_note declined for every product without a recorded promise, transfer to restructuring, close transferred/restructuring. Promises already recorded stay; agreed but unrecorded promises are not recorded. On support or human transfers add no notes.",
+    "brief_quote": "On a support or human transfer, add no notes.",
+    "stage": "close"
+   },
+   {
+    "statement": "Human request: ask once whether you can help first; if they insist transfer to queue general and close transferred/human. Applies before and after verification.",
+    "brief_quote": "ask once whether you can help first",
+    "stage": "global"
+   },
+   {
+    "statement": "I already paid: say payments can take one business day to appear, take no promise, close paid.",
+    "brief_quote": "payments can take one business day to appear",
+    "stage": "global"
+   },
+   {
+    "statement": "Dispute (not mine, never had product, product closed or paid off in the past): do not argue, take no promise, close no_promise/dispute.",
+    "brief_quote": "do not argue and do not take a promise",
+    "stage": "global"
+   },
+   {
+    "statement": "Question that tools cannot answer: say you do not have that information; never invent figures, dates or reasons. Asked if a robot or AI: say you are Kestrel Bank's digital assistant and continue. Scam question: say they can verify by phoning customer service and continue.",
+    "brief_quote": "say you do not have that information",
+    "stage": "global"
+   },
+   {
+    "statement": "If the customer says twice they do not want to talk, close no_promise/refused; before identity is verified close not_verified/declined.",
+    "brief_quote": "If the customer says twice that they do not want to talk",
+    "stage": "global"
+   },
+   {
+    "statement": "Final close with several products: promise wins if at least one promise recorded, except on a transfer (close as the transfer). With no promise: if every product is noted already_paid close paid; otherwise no_promise with the most serious reason dispute > hardship > refused > service_error.",
+    "brief_quote": "`promise` wins whenever at least one promise was recorded, except on a transfer.",
+    "stage": "close"
+   },
+   {
+    "statement": "Exactly one close_call per call, as the last tool call; thank the customer and say goodbye before it. After a recorded promise say the text message sentence.",
+    "brief_quote": "Every call ends with exactly one `close_call`",
+    "stage": "close"
+   },
+   {
+    "statement": "The brief gives no product id format; account_ref is used as returned by get_account.",
+    "brief_quote": "each with its own `account_ref`",
+    "stage": "global"
+   }
+  ]
+ },
+ {
+  "path": "/forbidden_before_verify",
+  "status": "unresolved",
+  "left": [
+   "collections",
+   "debt",
+   "payment",
+   "credit card",
+   "personal loan",
+   "car loan",
+   "product"
+  ],
+  "right": [
+   "collections",
+   "debt",
+   "payment",
+   "credit card",
+   "personal loan",
+   "car loan"
+  ]
+ },
+ {
+  "path": "/lines/failed_id/text",
+  "status": "unresolved",
+  "left": "I cannot continue; please use the Kestrel app or a branch.",
+  "right": "I cannot continue with the call; please use the Kestrel app or a branch."
+ },
+ {
+  "path": "/lines/scam/text",
+  "status": "unresolved",
+  "left": "You can verify this call by phoning Kestrel Bank's customer service number.",
+  "right": "You can verify the call by phoning Kestrel Bank's customer service number."
+ },
+ {
+  "path": "/sentences/opening",
+  "status": "unresolved",
+  "left": "I am Kestrel Bank's digital assistant and this call is recorded.",
+  "right": "Kestrel Bank's digital assistant, and the call is recorded"
+ },
+ {
+  "path": "/sentences/scam",
+  "status": "unresolved",
+  "left": "You can verify this call by phoning Kestrel Bank's customer service number.",
+  "right": "You can verify the call by phoning Kestrel Bank's customer service number."
+ }
+]

@@ -1,0 +1,29 @@
+16:12:03 start 2026-10-11T16:12:03+0300
+16:12:03   variant: tcc90-patch-local
+16:12:03   brief: f2-ostral
+16:12:04 testgen: 17 case(s) from our policy; gaps: product_id_format has no {n}: cases use p{n}
+16:12:05 self-test: mock bank up on 127.0.0.1:8791 with 12 of our own case(s)
+16:12:10 self-test: mock bank public at https://gathered-speaking-medal-boxed.trycloudflare.com
+16:22:01 self-test: mock bank up on 127.0.0.1:8791 with 17 of our own case(s)
+16:27:24 self-test: baseline: train 11/12, heldout 3/5 (12+5 cases x 1)
+16:27:39 model call sonnet: analyzer: 1 failed call(s) -> generalized bugs | tokens in=3 out=545 | cost=$0.0732 | 14.9s
+16:27:39 analyzer: 1 bug(s), 0 dropped
+16:27:49 self-test: baseline unit replay unscored, retry once
+16:28:01 self-test: iteration 1: 0 unit test(s) reproduce on the baseline, 0 already pass, 1 unscored
+16:28:02 patcher iter 1: Claude Code session (sonnet), 240s, max_turns 40, workspace /var/folders/8g/t_1gk85s4m70jtjyvhs3xc5h0000gn/T/tcc-ws-96bq96ya
+16:28:08 model call claude-sonnet-5-5: patcher iter 1 turn 1: Read({"file_path": "/private/var/folders/8g/t_1gk85s4m70jtjyvhs3xc5h0000gn/T/tcc-w...)
+16:28:08 model call claude-sonnet-5-5: patcher iter 1 turn 2: mcp__tcc__zones({})
+16:28:08 model call claude-sonnet-5-5: patcher iter 1 turn 3: Glob({"pattern": "input/**"})
+16:28:12 model call claude-sonnet-5-5: patcher iter 1 turn 4: 
+16:28:14 model call claude-sonnet-5-5: patcher iter 1 turn 5: Write({"file_path": "/private/var/folders/8g/t_1gk85s4m70jtjyvhs3xc5h0000gn/T/tcc-w...)
+16:28:14 model call claude-sonnet-5-5: patcher iter 1 turn 6: mcp__tcc__preview_patches({})
+16:28:16 model call claude-sonnet-5-5: patcher iter 1 turn 7: Need ≤300.
+16:28:19 model call claude-sonnet-5-5: patcher iter 1 turn 8: Write({"file_path": "/private/var/folders/8g/t_1gk85s4m70jtjyvhs3xc5h0000gn/T/tcc-w...)
+16:28:19 model call claude-sonnet-5-5: patcher iter 1 turn 9: mcp__tcc__preview_patches({})
+16:28:23 model call claude-sonnet-5-5: patcher iter 1 turn 10: Write({"file_path": "/private/var/folders/8g/t_1gk85s4m70jtjyvhs3xc5h0000gn/T/tcc-w...)
+16:28:23 model call claude-sonnet-5-5: patcher iter 1 turn 11: mcp__tcc__preview_patches({})
+16:28:28 model call claude-sonnet-5-5: patcher iter 1 turn 12: I wrote `out/patches.json` with one patch (p1), for BUG-001. `preview_patches` shows it applied w...
+16:28:28 patcher iter 1 result: {"subtype": "success", "turns": 10, "cost_usd": 0.1265131, "usage": {"input_tokens": 10, "cache_creation_input_tokens": 21846, "cache_read_input_tokens": 63638, "output_tokens": 2625, "output_tokens_details": {"thinking_tokens": 188}, "server_tool_use": {"web_search_requests": 0, "web_fetch_reque...
+16:28:28 patcher iter 1: 1 patch(es) proposed
+16:28:29 judge prompt patch p1: REJECT already_in_locked: for a new payment plan or lower instalments
+16:28:30 end 2026-10-11T16:28:30+0300 status=ok wall=986.2s model_calls=13 tokens_in=3 tokens_out=545 cost=$0.1997

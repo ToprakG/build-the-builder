@@ -1,0 +1,272 @@
+{
+ "brief": "f3-kestrel",
+ "reps": 1,
+ "limit": 10,
+ "agent_id": "d5d4ff3b-589d-47bc-a64d-171c85db3538",
+ "workflow_id": "70959328-e4d8-4609-aee0-af0479d83ae8",
+ "passed": 1,
+ "total": 10,
+ "final": [
+  {
+   "id": "F3-001",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "promises [('acc-1', 365.0, '2026-11-17')], expected [('acc-1', 365.0, '2026-11-17'), ('acc-2', 170.0, '2026-11-13'), ('acc-3', 262.0, '2026-11-17')]",
+    "conversation: The assistant failed to record the promises for the car loan and the personal loan. Although the assistant mentioned the correct dates in the read-back in Message 12, the system events (which are ground truth) show that the 'create_promise' tool was only called once for the credit card (acc-1). No tool calls were made to record the car loan on November 13th or the personal loan on November 17th."
+   ]
+  },
+  {
+   "id": "F3-002",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+    "promises [], expected [('acc-1', 441.0, '2026-11-19'), ('acc-3', 1290.0, '2026-11-19')]",
+    "notes [], expected [('acc-2', 'contested')]",
+    "conversation: The assistant failed all success criteria: - No 'dispute' note was recorded for the credit card ending 4469. - The call ended prematurely after identity verification (as seen in the 'close_call' system event) without discussing other products. - No promises for 19 November were recorded. The agent triggered a call closure with a reason of 'unclear' despite the user providing the requested identifi"
+   ]
+  },
+  {
+   "id": "F3-003",
+   "family": "Amounts",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('no_promise', 'refused')",
+    "notes [], expected [('acc-1', 'declined')]",
+    "conversation: The floor was never offered to the user (0 times), failing the requirement that it be offered exactly once. The agent proceeded with identity verification but the call ended prematurely due to a service failure (service-failure-llm) triggered by a code execution error."
+   ]
+  },
+  {
+   "id": "F3-004",
+   "family": "Dispute",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('no_promise', 'dispute')",
+    "notes [], expected [('acc-1', 'contested')]"
+   ]
+  },
+  {
+   "id": "F3-005",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+    "promises [], expected [('acc-2', 135.0, '2026-12-02')]",
+    "notes [], expected [('acc-1', 'system_error')]",
+    "conversation: The conversation failed to meet the success criteria because it ended prematurely. 1) The 'create_promise' function was never called, failing the requirement that it be tried exactly twice. 2) No 'service-error' note was created for any product. 3) Although the agent never stated a promise was recorded, this was only because the conversation did not progress past the initial identity verification "
+   ]
+  },
+  {
+   "id": "F3-006",
+   "family": "Unclear",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+    "promises [], expected [('acc-1', 1000.0, '2026-11-04')]",
+    "conversation: - The agent failed to answer the user's question 'Who is this?' at message 1 before the call ended. - The function 'create_promise' was never called, failing the requirement that it be called exactly once. - The user did not say 'speaking', and the conversation terminated before the agent could take any words as confirmation."
+   ]
+  },
+  {
+   "id": "F3-007",
+   "family": "Unclear",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F3-008",
+   "family": "Third party",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('not_reached', 'callback')",
+    "callbacks [], expected [{'date': '2026-11-17', 'time': '10:30'}]",
+    "conversation: The conversation ended prematurely after the user's first response, meaning several success criteria were not met. Specifically, the agent never negotiated a callback time, never rejected a 'too far ahead' time, and did not schedule a callback for 17 November at 10:30 as required."
+   ]
+  },
+  {
+   "id": "F3-009",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+    "promises [], expected [('acc-1', 211.5, '2026-11-25'), ('acc-2', 245.0, '2026-11-25')]",
+    "conversation: The agent failed to meet any of the success criteria because the call was terminated immediately after the user identified themselves. 1. There was no discussion regarding the full amount on the car loan. 2. There was no mention of the 245 floor for the personal loan. 3. The agent did not state that the rest stays overdue."
+   ]
+  },
+  {
+   "id": "F3-010",
+   "family": "Multi-product",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('no_promise', 'hardship')",
+    "notes [], expected [('acc-1', 'financial_difficulty'), ('acc-2', 'financial_difficulty')]",
+    "conversation: The call failed to meet the success criteria for several reasons. First, there was no hardship note created for any product, as the conversation was interrupted by a technical error. Second, while the agent said 'I understand' in response to the user's busy day, the primary objective of addressing product-related hardships was not reached. Finally, the call ended due to a service failure ('service"
+   ]
+  }
+ ],
+ "reps_rows": [
+  [
+   {
+    "id": "F3-001",
+    "pass": false,
+    "failed": [
+     "promises [('acc-1', 365.0, '2026-11-17')], expected [('acc-1', 365.0, '2026-11-17'), ('acc-2', 170.0, '2026-11-13'), ('acc-3', 262.0, '2026-11-17')]",
+     "conversation: The assistant failed to record the promises for the car loan and the personal loan. Although the assistant mentioned the correct dates in the read-back in Message 12, the system events (which are ground truth) show that the 'create_promise' tool was only called once for the credit card (acc-1). No tool calls were made to record the car loan on November 13th or the personal loan on November 17th."
+    ],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-002",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+     "promises [], expected [('acc-1', 441.0, '2026-11-19'), ('acc-3', 1290.0, '2026-11-19')]",
+     "notes [], expected [('acc-2', 'contested')]",
+     "conversation: The assistant failed all success criteria: - No 'dispute' note was recorded for the credit card ending 4469. - The call ended prematurely after identity verification (as seen in the 'close_call' system event) without discussing other products. - No promises for 19 November were recorded. The agent triggered a call closure with a reason of 'unclear' despite the user providing the requested identifi"
+    ],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-003",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('no_promise', 'refused')",
+     "notes [], expected [('acc-1', 'declined')]",
+     "conversation: The floor was never offered to the user (0 times), failing the requirement that it be offered exactly once. The agent proceeded with identity verification but the call ended prematurely due to a service failure (service-failure-llm) triggered by a code execution error."
+    ],
+    "family": "Amounts",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-004",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('no_promise', 'dispute')",
+     "notes [], expected [('acc-1', 'contested')]"
+    ],
+    "family": "Dispute",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-005",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+     "promises [], expected [('acc-2', 135.0, '2026-12-02')]",
+     "notes [], expected [('acc-1', 'system_error')]",
+     "conversation: The conversation failed to meet the success criteria because it ended prematurely. 1) The 'create_promise' function was never called, failing the requirement that it be tried exactly twice. 2) No 'service-error' note was created for any product. 3) Although the agent never stated a promise was recorded, this was only because the conversation did not progress past the initial identity verification "
+    ],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-006",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+     "promises [], expected [('acc-1', 1000.0, '2026-11-04')]",
+     "conversation: - The agent failed to answer the user's question 'Who is this?' at message 1 before the call ended. - The function 'create_promise' was never called, failing the requirement that it be called exactly once. - The user did not say 'speaking', and the conversation terminated before the agent could take any words as confirmation."
+    ],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-007",
+    "pass": true,
+    "failed": [],
+    "family": "Unclear",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-008",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('not_reached', 'callback')",
+     "callbacks [], expected [{'date': '2026-11-17', 'time': '10:30'}]",
+     "conversation: The conversation ended prematurely after the user's first response, meaning several success criteria were not met. Specifically, the agent never negotiated a callback time, never rejected a 'too far ahead' time, and did not schedule a callback for 17 November at 10:30 as required."
+    ],
+    "family": "Third party",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-009",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('promise', None)",
+     "promises [], expected [('acc-1', 211.5, '2026-11-25'), ('acc-2', 245.0, '2026-11-25')]",
+     "conversation: The agent failed to meet any of the success criteria because the call was terminated immediately after the user identified themselves. 1. There was no discussion regarding the full amount on the car loan. 2. There was no mention of the 245 floor for the personal loan. 3. The agent did not state that the rest stays overdue."
+    ],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F3-010",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('no_promise', 'hardship')",
+     "notes [], expected [('acc-1', 'financial_difficulty'), ('acc-2', 'financial_difficulty')]",
+     "conversation: The call failed to meet the success criteria for several reasons. First, there was no hardship note created for any product, as the conversation was interrupted by a technical error. Second, while the agent said 'I understand' in response to the user's busy day, the primary objective of addressing product-related hardships was not reached. Finally, the call ended due to a service failure ('service"
+    ],
+    "family": "Multi-product",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   }
+  ]
+ ]
+}

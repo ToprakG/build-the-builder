@@ -53,7 +53,7 @@ def main():
     if a.unit_gate:
         report_path = ROOT / "results" / "unit-tests.json"
         if not report_path.exists():
-            print("unit gate: no results/unit-tests.json. Run python3 seed/unit_tests.py --slot <brief> first.")
+            print("unit gate: no results/unit-tests.json.")
             sys.exit(1)
         report = json.loads(report_path.read_text())
         if report.get("agent_id") != a.agent_id or report.get("passed") != report.get("total") or not report.get("total"):

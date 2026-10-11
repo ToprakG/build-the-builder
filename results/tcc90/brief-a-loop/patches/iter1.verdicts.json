@@ -1,0 +1,252 @@
+[
+ {
+  "id": "p1",
+  "accepted": false,
+  "checks": [
+   {
+    "name": "shape",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "zone_unlocked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "before_once",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "found 1 time(s)",
+    "critical": true
+   },
+   {
+    "name": "zone_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "126/300 chars",
+    "critical": true
+   },
+   {
+    "name": "growth_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "23046 vs base 22955 (+15%)",
+    "critical": true
+   },
+   {
+    "name": "quote_in_brief",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "Ask two security questions, one at a time: first the date of birth, then the last four digits of the phone number on fil",
+    "critical": true
+   },
+   {
+    "name": "lint_clean",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_unknown_vars",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "already_in_locked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_forbidden_pre_verification",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_case_tokens",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "fights_locked_close",
+    "kind": "deterministic",
+    "passed": false,
+    "answer": null,
+    "evidence": "the identity graph ends the call after a failed check; a prompt may not forbid that",
+    "critical": true
+   }
+  ],
+  "reasons": [
+   "fights_locked_close: the identity graph ends the call after a failed check; a prompt may not forbid that"
+  ]
+ },
+ {
+  "id": "p2",
+  "accepted": false,
+  "checks": [
+   {
+    "name": "shape",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "zone_unlocked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "zone_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "119/1200 chars",
+    "critical": true
+   },
+   {
+    "name": "growth_budget",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "23074 vs base 22955 (+15%)",
+    "critical": true
+   },
+   {
+    "name": "quote_in_brief",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "Call `verify_identity` with the answer.",
+    "critical": true
+   },
+   {
+    "name": "lint_clean",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_unknown_vars",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "already_in_locked",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_forbidden_pre_verification",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "no_case_tokens",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "fights_locked_close",
+    "kind": "deterministic",
+    "passed": true,
+    "answer": null,
+    "evidence": "",
+    "critical": true
+   },
+   {
+    "name": "necessary",
+    "kind": "decision",
+    "passed": true,
+    "answer": "yes",
+    "evidence": "T-011 turn 16: \"That is January 2nd, 1972. One moment please.\" — answer is read back but no confirmation is sought before verify_identity is called at turn 17. T-007 turn 16: \"Your date of birth is November 15, 1981.\" — same pattern, no confirmation request before the tool call at turn 17. The patch",
+    "critical": true
+   },
+   {
+    "name": "supported",
+    "kind": "decision",
+    "passed": false,
+    "answer": "no",
+    "evidence": "The quoted brief text is \"Call `verify_identity` with the answer.\" This says only to call the tool with the answer; it does not require reading the answer back to the customer and asking for confirmation before calling verify_identity. The patch introduces a read-back step that the quoted text does ",
+    "critical": false
+   },
+   {
+    "name": "contradicts_brief",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The brief contains no rule forbidding reading an answer back to the customer before calling verify_identity, and no other brief rule conflicts with doing so. The edit adds a step the brief is silent on; silence is not prohibition.",
+    "critical": true
+   },
+   {
+    "name": "case_specific",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The edit appends a general rule — \"Read each answer back to the customer first and ask them to confirm it. Call verify_identity only after that read-back.\" — with no reference to any specific customer, product, or conversation. It applies to every identity verification interaction.",
+    "critical": true
+   },
+   {
+    "name": "redundant",
+    "kind": "decision",
+    "passed": true,
+    "answer": "no",
+    "evidence": "The current text of the edited place is explicitly \"(empty)\". There is no existing rule there, so the zone cannot already state this rule as concretely or at all.",
+    "critical": true
+   },
+   {
+    "name": "right_place",
+    "kind": "decision",
+    "passed": false,
+    "answer": "no",
+    "evidence": "Turns 18→19 show the bug fires after verify_identity returns (all_verified=false → route_evaluated matched=false → close_call). The edit inserts a read-back before verify_identity is called, which is a different step and cannot affect the post-return routing failure.",
+    "critical": true
+   }
+  ],
+  "reasons": [
+   "right_place: Turns 18→19 show the bug fires after verify_identity returns (all_verified=false → route_evaluated matched=false → close_call). The edit inserts a read-back before verify_identity is called, which is a different step and cannot affect the post-return routing failure."
+  ]
+ }
+]

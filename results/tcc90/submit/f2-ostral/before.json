@@ -1,0 +1,266 @@
+{
+ "brief": "f2-ostral",
+ "reps": 1,
+ "limit": 10,
+ "agent_id": "420f9a3f-1d84-4586-9d26-2f1e390c69a8",
+ "workflow_id": "bfa5a504-0c65-4dbb-8d97-25c8a9f22ba0",
+ "passed": 5,
+ "total": 10,
+ "final": [
+  {
+   "id": "F2-001",
+   "family": "Deceased",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-002",
+   "family": "Dates",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "promises [('p1', 130.0, '2026-11-27')], expected [('p1', 130.0, '2026-11-30')]",
+    "conversation: The agent failed to meet two out of the three success criteria. While the agent correctly asked for the exact payment date only once (Message 13), it proposed a deadline of 27 November (Message 15) instead of the required 30 November. As a result, the promise was recorded in the system for 27 November (as seen in the create_promise system event), failing the requirement for a 30 November recording"
+   ]
+  },
+  {
+   "id": "F2-003",
+   "family": "Tool failure",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'failed'), expected ('promise', None)",
+    "promises [], expected [('p1', 1711.5, '2026-12-07')]",
+    "conversation: - The `verify_identity` function was correctly called again after an initial API failure for the date of birth field, as shown in the system events. - The agent did not invent any account details. - The success criterion 'promise recorded for 7 December' was not met because the user failed the postcode verification check twice, resulting in the agent terminating the call for security reasons befor"
+   ]
+  },
+  {
+   "id": "F2-004",
+   "family": "Wrong number",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-005",
+   "family": "Third party",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_reached', 'unclear'), expected ('not_reached', 'callback')",
+    "callbacks [], expected [{'date': '2026-12-09', 'time': '11:00'}]",
+    "conversation: The agent successfully met the first three criteria: it did not mention the purpose of the call or any debt/products in its introduction (Message 0), it did not call identity verification or account tools (System Events), and it correctly rejected the first proposed time (20:15) as too late and asked for an alternative (Message 4). However, the final criterion was not met: no callback was schedule"
+   ]
+  },
+  {
+   "id": "F2-006",
+   "family": "Dates",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('no_promise', 'refused'), expected ('promise', None)",
+    "promises [], expected [('p1', 1695.0, '2026-11-20')]",
+    "conversation: The agent failed to meet the success criteria regarding the promise date and amount recording. Specifically, the agent offered a payment date of 6 November in Message 17 instead of the required deadline of 20 November. Furthermore, the agent abruptly ended the call in Message 18 immediately after asking the question in Message 17 without waiting for a response from the user. Consequently, no promi"
+   ]
+  },
+  {
+   "id": "F2-007",
+   "family": "Tool failure",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-008",
+   "family": "Tool failure",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  },
+  {
+   "id": "F2-009",
+   "family": "Refusal",
+   "passes": 0,
+   "runs": 1,
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'failed'), expected ('promise', None)",
+    "promises [], expected [('p1', 262.5, '2026-12-14')]",
+    "conversation: The call failed identity verification at the postcode check, leading the assistant to terminate the call before any payment negotiations could take place. As a result, none of the success criteria were met: - Attempt 1 (full amount on 11 December) was never proposed. - Attempt 2 (floor 262.50 on 14 December) was never proposed. - No promise was recorded for the floor or any other amount."
+   ]
+  },
+  {
+   "id": "F2-010",
+   "family": "Amounts",
+   "passes": 1,
+   "runs": 1,
+   "pass": true,
+   "failed": []
+  }
+ ],
+ "reps_rows": [
+  [
+   {
+    "id": "F2-001",
+    "pass": true,
+    "failed": [],
+    "family": "Deceased",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-002",
+    "pass": false,
+    "failed": [
+     "promises [('p1', 130.0, '2026-11-27')], expected [('p1', 130.0, '2026-11-30')]",
+     "conversation: The agent failed to meet two out of the three success criteria. While the agent correctly asked for the exact payment date only once (Message 13), it proposed a deadline of 27 November (Message 15) instead of the required 30 November. As a result, the promise was recorded in the system for 27 November (as seen in the create_promise system event), failing the requirement for a 30 November recording"
+    ],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-003",
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'failed'), expected ('promise', None)",
+     "promises [], expected [('p1', 1711.5, '2026-12-07')]",
+     "conversation: - The `verify_identity` function was correctly called again after an initial API failure for the date of birth field, as shown in the system events. - The agent did not invent any account details. - The success criterion 'promise recorded for 7 December' was not met because the user failed the postcode verification check twice, resulting in the agent terminating the call for security reasons befor"
+    ],
+    "family": "Tool failure",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-004",
+    "pass": true,
+    "failed": [],
+    "family": "Wrong number",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-005",
+    "pass": false,
+    "failed": [
+     "outcome ('not_reached', 'unclear'), expected ('not_reached', 'callback')",
+     "callbacks [], expected [{'date': '2026-12-09', 'time': '11:00'}]",
+     "conversation: The agent successfully met the first three criteria: it did not mention the purpose of the call or any debt/products in its introduction (Message 0), it did not call identity verification or account tools (System Events), and it correctly rejected the first proposed time (20:15) as too late and asked for an alternative (Message 4). However, the final criterion was not met: no callback was schedule"
+    ],
+    "family": "Third party",
+    "infra": false,
+    "tools": [
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-006",
+    "pass": false,
+    "failed": [
+     "outcome ('no_promise', 'refused'), expected ('promise', None)",
+     "promises [], expected [('p1', 1695.0, '2026-11-20')]",
+     "conversation: The agent failed to meet the success criteria regarding the promise date and amount recording. Specifically, the agent offered a payment date of 6 November in Message 17 instead of the required deadline of 20 November. Furthermore, the agent abruptly ended the call in Message 18 immediately after asking the question in Message 17 without waiting for a response from the user. Consequently, no promi"
+    ],
+    "family": "Dates",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-007",
+    "pass": true,
+    "failed": [],
+    "family": "Tool failure",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-008",
+    "pass": true,
+    "failed": [],
+    "family": "Tool failure",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-009",
+    "pass": false,
+    "failed": [
+     "outcome ('not_verified', 'failed'), expected ('promise', None)",
+     "promises [], expected [('p1', 262.5, '2026-12-14')]",
+     "conversation: The call failed identity verification at the postcode check, leading the assistant to terminate the call before any payment negotiations could take place. As a result, none of the success criteria were met: - Attempt 1 (full amount on 11 December) was never proposed. - Attempt 2 (floor 262.50 on 14 December) was never proposed. - No promise was recorded for the floor or any other amount."
+    ],
+    "family": "Refusal",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "close_call"
+    ]
+   },
+   {
+    "id": "F2-010",
+    "pass": true,
+    "failed": [],
+    "family": "Amounts",
+    "infra": false,
+    "tools": [
+     "verify_identity",
+     "verify_identity",
+     "verify_identity",
+     "get_account",
+     "create_promise",
+     "close_call"
+    ]
+   }
+  ]
+ ]
+}

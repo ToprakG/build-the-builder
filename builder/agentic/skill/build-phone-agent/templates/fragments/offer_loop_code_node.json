@@ -1,0 +1,83 @@
+{
+ "name": "next_offer",
+ "node_type": "code",
+ "passthrough": true,
+ "passthrough_default_transition": "offer",
+ "on_enter": {
+  "type": "silent"
+ },
+ "disable_inactivity_monitor": true,
+ "pre_actions": [
+  {
+   "type": "function",
+   "function": {
+    "name": "code_exec",
+    "handler": "__function__:code_exec",
+    "parameters": {
+     "type": "object",
+     "properties": {
+      "code": {
+       "type": "string",
+       "default": "import datetime\nimport json\nimport re\n\nWEEKDAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']\nMONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']\n\ndef spoken_date(d):\n    \"\"\"'Friday 7 March'. Adapt the words to the brief's language.\"\"\"\n    return WEEKDAYS[d.weekday()].title() + ' ' + str(d.day) + ' ' + MONTHS[d.month - 1].title()\n\ndef money(amount, symbol=''):\n    \"\"\"1234.5 -> '1,234.50' (with an optional symbol in front). 1234.0 -> '1,234'.\"\"\"\n    v = round(float(amount), 2)\n    text = '{:,.0f}'.format(v) if v == int(v) else '{:,.2f}'.format(v)\n    return symbol + text\n\ntry:\n    offers = json.loads(vars.get('offers_json') or '[]')\n    item = int(vars.get('offer_item') or 0)\n    step = int(vars.get('offer_step') or 0)\n    event = vars.get('loop_event') or 'none'\n    if event == 'start':\n        item, step = 0, 0\n    elif event in ('agreed', 'noted'):\n        item, step = item + 1, 0\n    elif vars.get('offer_answer') == 'refused':\n        step += 1\n    vars['loop_event'] = 'none'\n    vars['offer_answer'] = 'stay'\n    agreements = json.loads(vars.get('agreements_json') or '[]')\n    if item >= len(offers):\n        if agreements:\n            parts = ['for your ' + a['name'] + ', ' + money(a['amount']) + ' on ' +\n                     spoken_date(datetime.date.fromisoformat(a['date'])) for a in agreements]\n            vars['readback_text'] = 'To confirm: ' + '; '.join(parts) + '. Do you confirm?'\n            vars['offer_state'] = 'readback'\n        else:\n            vars['offer_state'] = 'done'\n    elif step >= len(offers[item]['steps']):\n        vars['offer_state'] = 'note'\n        vars['note_ref'] = offers[item]['ref']\n        vars['loop_event'] = 'noted'\n    else:\n        s = offers[item]['steps'][step]\n        vars['offer_state'] = 'offer'\n        vars['offer_text'] = s['text']\n        vars['offer_amount'] = str(s['amount'])\n        vars['offer_date'] = s['date']\n        vars['offer_ref'] = offers[item]['ref']\n    vars['offer_item'] = str(item)\n    vars['offer_step'] = str(step)\nexcept Exception:\n    vars['offer_state'] = 'done'\n"
+      },
+      "timeout_ms": {
+       "type": "number",
+       "default": 10000
+      }
+     }
+    }
+   }
+  }
+ ],
+ "transitions": [
+  {
+   "target_node": "note_one",
+   "description": "Out of proposals on this item: note it",
+   "condition": {
+    "logic": "or",
+    "conditions": [
+     {
+      "variable": "offer_state",
+      "operator": "equals",
+      "operand": "note"
+     }
+    ]
+   }
+  },
+  {
+   "target_node": "confirm",
+   "description": "Every item handled: read back",
+   "condition": {
+    "logic": "or",
+    "conditions": [
+     {
+      "variable": "offer_state",
+      "operator": "equals",
+      "operand": "readback"
+     }
+    ]
+   }
+  },
+  {
+   "target_node": "goodbye_short",
+   "description": "Every item handled, nothing agreed",
+   "condition": {
+    "logic": "or",
+    "conditions": [
+     {
+      "variable": "offer_state",
+      "operator": "equals",
+      "operand": "done"
+     }
+    ]
+   }
+  },
+  {
+   "target_node": "offer",
+   "description": "always",
+   "condition": {
+    "operator": "always"
+   }
+  }
+ ]
+}

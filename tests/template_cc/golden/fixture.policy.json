@@ -1,0 +1,251 @@
+{
+ "bank": "Quillmoor Credit Union",
+ "language": "en",
+ "address": "{honorific} {family_name}",
+ "call_variables": [
+  "customer_id",
+  "given_name",
+  "family_name",
+  "honorific",
+  "now"
+ ],
+ "identity": {
+  "questions": [
+   "birth_date",
+   "pin_last3"
+  ],
+  "max_wrong": 2,
+  "swap_hint": true,
+  "prompts": {
+   "birth_date": "What is your date of birth?",
+   "pin_last3": "What are the last three digits of your PIN?"
+  },
+  "kinds": {
+   "birth_date": "date",
+   "pin_last3": "digits"
+  }
+ },
+ "callback": {
+  "start": "09:30",
+  "end": "16:30",
+  "same_day": false
+ },
+ "outcome_map": {
+  "promise": [
+   "kept",
+   null
+  ],
+  "paid": [
+   "settled",
+   null
+  ],
+  "tr_restructuring": [
+   "handed_over",
+   "rework"
+  ],
+  "tr_human": [
+   "handed_over",
+   "person"
+  ],
+  "tr_support": [
+   "handed_over",
+   "care"
+  ],
+  "np_refused": [
+   "no_deal",
+   "said_no"
+  ],
+  "np_hardship": [
+   "no_deal",
+   "hard_times"
+  ],
+  "np_dispute": [
+   "no_deal",
+   "contested"
+  ],
+  "np_service_error": [
+   "no_deal",
+   "fault"
+  ],
+  "nv_failed": [
+   "unverified",
+   "wrong_answers"
+  ],
+  "nv_declined": [
+   "unverified",
+   "would_not_answer"
+  ],
+  "nr_callback": [
+   "unreached",
+   "later"
+  ],
+  "nr_no_callback": [
+   "unreached",
+   "no_later"
+  ],
+  "nr_wrong_number": [
+   "unreached",
+   "not_theirs"
+  ],
+  "nr_deceased": [
+   "unreached",
+   "passed_away"
+  ],
+  "nr_unclear": [
+   "unreached",
+   "unsure"
+  ]
+ },
+ "queue_map": {
+  "restructuring": "desk_rework",
+  "human": "desk_person",
+  "support": "desk_care"
+ },
+ "note_map": {
+  "refused": "nx_refused",
+  "hardship": "nx_hard",
+  "dispute": "nx_dispute",
+  "paid": "nx_paid",
+  "service_error": "nx_error"
+ },
+ "close_rule": {
+  "kind": "priority",
+  "order": [
+   "dispute",
+   "hardship",
+   "refused",
+   "service_error"
+  ]
+ },
+ "notes_on_restructuring": "refused",
+ "product_types": {
+  "a": {
+   "enum": "kind_a",
+   "label": "item ending {last4}",
+   "floor_field": "floor_amount",
+   "last4_field": "ending"
+  },
+  "b": {
+   "enum": "kind_b",
+   "label": "second item",
+   "floor_field": "floor_amount",
+   "last4_field": null
+  }
+ },
+ "account_fields": {
+  "product_id": "item_ref",
+  "type": "kind",
+  "past_due": "overdue",
+  "days_late": "days_over"
+ },
+ "product_id_format": "q{n}",
+ "tools": {
+  "verify_identity": {
+   "field": "question",
+   "answer": "reply"
+  },
+  "create_promise": {
+   "product_id": "item_ref",
+   "amount": "amount_minor",
+   "date": "pay_on",
+   "amount_unit": "cents"
+  },
+  "schedule_callback": {
+   "mode": "datetime",
+   "datetime": "slot"
+  },
+  "close_call": {
+   "mode": "outcome_reason",
+   "outcome": "result",
+   "reason": "detail"
+  },
+  "transfer_to_agent": {
+   "queue": "desk"
+  },
+  "add_note": {
+   "product_id": "item_ref",
+   "reason": "code"
+  }
+ },
+ "sentences": {
+  "opening": "the automated helper of Quillmoor Credit Union; this line is recorded",
+  "promise_confirmation": "A letter will confirm your promise.",
+  "ai": "the automated helper of Quillmoor Credit Union",
+  "scam": "check the number on your member card",
+  "failed_id": "visit a Quillmoor office"
+ },
+ "lines": {
+  "opening": {
+   "text": "Good day, this is the automated helper of Quillmoor Credit Union, and this line is recorded.",
+   "verbatim": true
+  },
+  "right_party_question": {
+   "text": "Is this {honorific} {family_name}?",
+   "verbatim": true
+  },
+  "first_ask": {
+   "text": "Could you settle this today?",
+   "verbatim": true
+  },
+  "confirm_question": {
+   "text": "Shall I record that?",
+   "verbatim": true
+  },
+  "promise_confirmation": {
+   "text": "A letter will confirm your promise.",
+   "verbatim": true
+  }
+ },
+ "forbidden_before_verify": [
+  "money",
+  "overdue",
+  "items"
+ ],
+ "multi_product": true,
+ "max_products": 2,
+ "attempt1": "last business day of this week, or next week's when today is that day; never after the deadline",
+ "attempt_plan": [
+  {
+   "date": "end_of_week_roll",
+   "amount": "full_or_floor",
+   "cap_at_deadline": true
+  },
+  {
+   "date": "deadline",
+   "amount": "floor",
+   "cap_at_deadline": true
+  }
+ ],
+ "holidays": [
+  "2031-03-14",
+  "2031-04-02"
+ ],
+ "bands": [
+  {
+   "name": "first",
+   "min_days": 1,
+   "max_days": 20,
+   "deadline_business_days": 5,
+   "attempts": 1
+  },
+  {
+   "name": "second",
+   "min_days": 21,
+   "max_days": 90,
+   "deadline_business_days": 3,
+   "attempts": 2
+  }
+ ],
+ "unused_tools": [],
+ "extra_rules": [
+  {
+   "statement": "Read every promise back together.",
+   "brief_quote": "read every promise back together",
+   "stage": "negotiate"
+  }
+ ],
+ "_source": {
+  "/callback/start": "09:30 to 16:30",
+  "/identity/max_wrong": "Two wrong replies end the checks"
+ }
+}

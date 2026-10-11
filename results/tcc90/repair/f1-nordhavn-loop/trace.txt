@@ -1,0 +1,8 @@
+Start: 2026-10-11 14:04:54
+Repair: on
+Editor: Claude Code claude-sonnet-5-5
+Play: local. Customer meta-llama/llama-3.1-8b-instruct. Judge: Jev
+Policy source: file
+Repair status: done committed 0 scenarios 2
+Elapsed seconds: 421
+End: 2026-10-11 14:11:55

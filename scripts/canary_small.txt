@@ -1,0 +1,11 @@
+# 10 of the 20 canary cases (1-2 per brief): per-cluster regression checks; the full canary.txt only at the 12:00 merge
+A-001
+A-002
+B-011
+F1-005
+F2-001
+F3-004
+F4-001
+F5-001
+F6-001
+F7-001

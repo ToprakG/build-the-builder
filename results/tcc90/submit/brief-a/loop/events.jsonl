@@ -1,0 +1,4 @@
+{"type": "start", "t": 0.0, "time": "2026-10-11T17:09:22+0300", "variant": "tcc90-submit", "brief": "brief-a"}
+{"type": "selftest", "t": 2.544, "detail": "mock bank up on 127.0.0.1:8791 with 7 of our own case(s)"}
+{"type": "selftest", "t": 8.836, "detail": "mock bank public at https://telephony-temperature-mailed-broadway.trycloudflare.com"}
+{"type": "selftest", "t": 233.56, "detail": "mock bank up on 127.0.0.1:8791 with 10 of our own case(s)"}

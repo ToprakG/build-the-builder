@@ -1,0 +1,553 @@
+{
+ "bank": "Lumen Bank",
+ "language": "en",
+ "address": "{title} {last_name}",
+ "call_variables": [
+  "customer_id",
+  "first_name",
+  "last_name",
+  "title",
+  "now"
+ ],
+ "holidays": [
+  "2026-10-23",
+  "2026-11-11",
+  "2026-11-26",
+  "2026-12-25",
+  "2026-12-28"
+ ],
+ "bands": [
+  {
+   "name": "B1",
+   "min_days": 1,
+   "max_days": 5,
+   "deadline_business_days": 12,
+   "attempts": 1
+  },
+  {
+   "name": "B2",
+   "min_days": 6,
+   "max_days": 20,
+   "deadline_business_days": 8,
+   "attempts": 2
+  },
+  {
+   "name": "B3",
+   "min_days": 21,
+   "max_days": 45,
+   "deadline_business_days": 4,
+   "attempts": 2
+  }
+ ],
+ "attempt1": "Propose the full past-due amount (or the floor if the customer already said the full amount is too much) on the last business day of this week, or of next week if today is that day, capped at the deadline.",
+ "attempt_plan": [
+  {
+   "date": "end_of_week_roll",
+   "amount": "full_or_floor",
+   "cap_at_deadline": true
+  },
+  {
+   "date": "deadline",
+   "amount": "floor",
+   "cap_at_deadline": false
+  }
+ ],
+ "weekday_words": {
+  "next": "following_week",
+  "this": "current_week"
+ },
+ "identity": {
+  "questions": [
+   "date_of_birth",
+   "phone_last4"
+  ],
+  "max_wrong": 3,
+  "swap_hint": true,
+  "prompts": {
+   "date_of_birth": "Please tell me your date of birth.",
+   "phone_last4": "Please tell me the last 4 digits of the phone number we have on file for you."
+  },
+  "kinds": {
+   "date_of_birth": "date",
+   "phone_last4": "digits"
+  }
+ },
+ "callback": {
+  "start": "10:00",
+  "end": "19:00",
+  "same_day": true
+ },
+ "outcome_map": {
+  "promise": [
+   "10-PTP",
+   null
+  ],
+  "paid": [
+   "20-PAID",
+   null
+  ],
+  "tr_restructuring": [
+   "31-TRF-RS",
+   null
+  ],
+  "tr_human": [
+   "32-TRF-HU",
+   null
+  ],
+  "tr_support": [
+   "33-TRF-SU",
+   null
+  ],
+  "np_refused": [
+   "41-NP-REF",
+   null
+  ],
+  "np_hardship": [
+   "42-NP-HS",
+   null
+  ],
+  "np_dispute": [
+   "43-NP-DSP",
+   null
+  ],
+  "np_service_error": [
+   "44-NP-ERR",
+   null
+  ],
+  "nv_failed": [
+   "51-NV-FAIL",
+   null
+  ],
+  "nv_declined": [
+   "52-NV-DEC",
+   null
+  ],
+  "nr_callback": [
+   "61-NR-CB",
+   null
+  ],
+  "nr_no_callback": [
+   "62-NR-NOCB",
+   null
+  ],
+  "nr_wrong_number": [
+   "63-NR-WN",
+   null
+  ],
+  "nr_deceased": [
+   "64-NR-RIP",
+   null
+  ],
+  "nr_unclear": [
+   "65-NR-UNC",
+   null
+  ]
+ },
+ "queue_map": {
+  "restructuring": "restructuring",
+  "human": "general",
+  "support": "support"
+ },
+ "note_map": {},
+ "close_rule": {
+  "kind": "single"
+ },
+ "notes_on_restructuring": null,
+ "product_types": {
+  "CC": {
+   "enum": "CC",
+   "label": "credit card ending {last4}",
+   "floor_field": "minimum_payment",
+   "last4_field": "card_last4"
+  },
+  "PL": {
+   "enum": "PL",
+   "label": "personal loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  },
+  "AL": {
+   "enum": "AL",
+   "label": "car loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  }
+ },
+ "account_fields": {
+  "product_id": "product_id",
+  "type": "type",
+  "past_due": "past_due",
+  "days_late": "days_late"
+ },
+ "product_id_format": "{product_id}",
+ "tools": {
+  "verify_identity": {
+   "field": "field",
+   "answer": "answer"
+  },
+  "create_promise": {
+   "product_id": "product_id",
+   "amount": "amount",
+   "date": "date",
+   "amount_unit": "currency"
+  },
+  "schedule_callback": {
+   "mode": "date_time",
+   "date": "date",
+   "time": "time"
+  },
+  "close_call": {
+   "mode": "code",
+   "code": "code"
+  },
+  "transfer_to_agent": {
+   "queue": "queue"
+  },
+  "add_note": {
+   "product_id": "product_id",
+   "reason": "reason"
+  }
+ },
+ "sentences": {
+  "opening": "digital assistant calling from Lumen Bank; this call is recorded",
+  "promise_confirmation": "You will receive a text message confirming this promise.",
+  "ai": "Lumen Bank's digital assistant",
+  "scam": "verify by phoning Lumen Bank's customer service number",
+  "failed_id": "use the mobile app or a branch"
+ },
+ "lines": {
+  "opening": {
+   "text": "Hello, this is a digital assistant calling from Lumen Bank; this call is recorded. Am I speaking with {title} {last_name}?",
+   "verbatim": false
+  },
+  "right_party_question": {
+   "text": "Am I speaking with {title} {last_name}?",
+   "verbatim": true
+  },
+  "condolence": {
+   "text": "I am sorry for your loss.",
+   "verbatim": true
+  },
+  "debt_intro": {
+   "text": "I am calling from the collections team about a late payment.",
+   "verbatim": false
+  },
+  "first_ask": {
+   "text": "Would you be able to pay the full overdue amount?",
+   "verbatim": false
+  },
+  "first_ask_multi": {
+   "text": "Let us start with the first product: would you be able to pay the full overdue amount?",
+   "verbatim": false
+  },
+  "confirm_question": {
+   "text": "Do you confirm?",
+   "verbatim": true
+  },
+  "ai": {
+   "text": "I am Lumen Bank's digital assistant.",
+   "verbatim": false
+  },
+  "scam": {
+   "text": "You can verify this call by phoning Lumen Bank's customer service number.",
+   "verbatim": false
+  },
+  "failed_id": {
+   "text": "I cannot continue; please use the mobile app or a branch.",
+   "verbatim": false
+  },
+  "paid_reply": {
+   "text": "A payment can take one business day to show; I will not record a promise.",
+   "verbatim": false
+  },
+  "change_promise": {
+   "text": "I am sorry, a recorded promise cannot be changed during this call.",
+   "verbatim": false
+  },
+  "cannot_record": {
+   "text": "I cannot record an amount below the minimum amount.",
+   "verbatim": false
+  },
+  "no_info": {
+   "text": "I am sorry, I do not have that information.",
+   "verbatim": false
+  },
+  "id_reason": {
+   "text": "These security questions protect your account.",
+   "verbatim": false
+  },
+  "hardship_sympathy": {
+   "text": "I am very sorry to hear that.",
+   "verbatim": false
+  },
+  "hint_retry": {
+   "text": "Could you tell me the month as a word, please?",
+   "verbatim": false
+  },
+  "goodbye": {
+   "text": "Thank you for your time, goodbye.",
+   "verbatim": false
+  },
+  "ask_again": {
+   "text": "Sorry, could you confirm whether I am speaking with {title} {last_name}?",
+   "verbatim": false
+  },
+  "promise_confirmation": {
+   "text": "You will receive a text message confirming this promise.",
+   "verbatim": true
+  }
+ },
+ "forbidden_before_verify": [
+  "collections",
+  "debt",
+  "late payment",
+  "payment",
+  "product",
+  "amount owed",
+  "account details"
+ ],
+ "multi_product": true,
+ "max_products": 3,
+ "retries": {
+  "verify_identity": 1,
+  "get_account": 1,
+  "create_promise": 1,
+  "schedule_callback": 1
+ },
+ "ask_limits": {
+  "right_party": 2,
+  "id_decline": 2,
+  "callback_reask": 1,
+  "vague_date": 1,
+  "stop_talking": 2,
+  "human_offer": 1
+ },
+ "unused_tools": [
+  "add_note"
+ ],
+ "extra_rules": [
+  {
+   "statement": "Only yes / that's me / speaking / own name counts as confirmed identity; 'hello', 'go ahead', 'who is this' do not. Answer a question first.",
+   "brief_quote": "Only yes / that's me / speaking / own name = confirmed.",
+   "stage": "opening"
+  },
+  {
+   "statement": "Ask whether you are speaking with the customer at most twice; if still unclear, close 65-NR-UNC.",
+   "brief_quote": "Answer a question first; ask max twice; still unclear -> 65-NR-UNC.",
+   "stage": "opening"
+  },
+  {
+   "statement": "No mention of collections, debt, payment or the product before security passes, to anyone.",
+   "brief_quote": "No mention of collections, debt, payment or the product before security passes - to anyone.",
+   "stage": "opening"
+  },
+  {
+   "statement": "If asked whether it is a robot/AI, say it is Lumen Bank's digital assistant and continue.",
+   "brief_quote": "Robot/AI question -> \"Lumen Bank's digital assistant\", continue.",
+   "stage": "global"
+  },
+  {
+   "statement": "Third party: say nothing about why you call; ask when the customer can be reached. Callback must be today or the next business day, 10:00-19:00 inclusive, later than now; if outside, ask once more, then 62-NR-NOCB.",
+   "brief_quote": "Outside window -> ask once more; outside again -> 62-NR-NOCB.",
+   "stage": "third_party"
+  },
+  {
+   "statement": "Wrong number -> 63-NR-WN. Deceased -> say only 'I am sorry for your loss.' then 64-NR-RIP.",
+   "brief_quote": "Wrong number -> 63-NR-WN. Deceased -> \"I am sorry for your loss.\" only -> 64-NR-RIP.",
+   "stage": "third_party"
+  },
+  {
+   "statement": "Relatives may not answer security or hear anything about the account.",
+   "brief_quote": "Relatives may not answer security or hear anything about the account.",
+   "stage": "third_party"
+  },
+  {
+   "statement": "Date of birth is sent as YYYY-MM-DD; a numbers-only date is read as day/month/year. verify_identity is called after each answer.",
+   "brief_quote": "send YYYY-MM-DD; numbers-only = day/month/year",
+   "stage": "identity"
+  },
+  {
+   "statement": "On hint=day_month_swapped ask for the month as a word; this is not a wrong answer.",
+   "brief_quote": "hint=day_month_swapped -> ask month as a word; not a wrong answer.",
+   "stage": "identity"
+  },
+  {
+   "statement": "After 3 wrong answers in total, end the check, say to use the mobile app or a branch, say nothing about the account, close 51-NV-FAIL.",
+   "brief_quote": "3 wrong answers in total = end; say \"use the mobile app or a branch\"",
+   "stage": "identity"
+  },
+  {
+   "statement": "If the customer won't answer, explain once that it protects the account; a second refusal or second 'what's this about?' gives 52-NV-DEC.",
+   "brief_quote": "second refusal or second \"what's this about?\" -> 52-NV-DEC.",
+   "stage": "identity"
+  },
+  {
+   "statement": "After security call get_account, then say the collections team calls about a late payment, with the product in words, past_due and days_late.",
+   "brief_quote": "\"Calling from the collections team about a late payment\", product in words (table B), past_due, days_late.",
+   "stage": "debt"
+  },
+  {
+   "statement": "Promise date must be >= today, a business day and <= deadline. A weekend/holiday date within the deadline: offer the next business day. After the deadline: offer the deadline; refusal counts as a flat refusal.",
+   "brief_quote": "Weekend/holiday (<= deadline) -> offer next business day. After deadline -> offer the deadline; refused = flat refusal.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "A vague date: ask once for an exact day, otherwise propose the deadline.",
+   "brief_quote": "Vague -> ask once for exact day, else propose deadline.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Ask for the full past_due first; never ask 'how much can you pay'. If too much, offer the floor once, saying the rest stays overdue; refusal is a flat refusal.",
+   "brief_quote": "Ask full past_due first; never \"how much can you pay\".",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "A customer amount between floor and full is accepted; below the floor it cannot be recorded and the floor is offered once.",
+   "brief_quote": "Customer amount floor..full -> accept; below floor -> cannot record, offer floor once.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Before recording, ask 'Can you make this payment today?' first. Then read back product, amount and date and ask 'Do you confirm?'; create_promise only on a clear yes.",
+   "brief_quote": "\"Can you make this payment today?\" first.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "One promise per product, no changes in-call. Say it is recorded only on ok:true. If create_promise fails, retry once; if it fails again say it was not recorded and close 44-NP-ERR.",
+   "brief_quote": "Fail -> retry once; fail again -> say not recorded -> 44-NP-ERR.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Persuasion: the customer's own date/amount is never a refusal. A flat no or no answer counts as one attempt. Never repeat a refused offer; when attempts are used, stop and close 41-NP-REF.",
+   "brief_quote": "Attempts used -> stop, never repeat a refused offer -> 41-NP-REF.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Hardship (illness, death in family, job loss): one sentence of sympathy, no persuasion, offer the support team. Accept -> transfer support, 33-TRF-SU; decline -> 42-NP-HS. If the customer names their own date/amount anyway, record normally.",
+   "brief_quote": "one sentence of sympathy, NO persuasion, offer support team.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "'Already paid': say it may take one business day to show; no promise; 20-PAID. 'Not mine / never had it / closed it': no argument, no promise; 43-NP-DSP.",
+   "brief_quote": "\"ALREADY PAID\" -> may take one business day to show; no promise -> 20-PAID.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "New plan / lower instalments: give no plan details, transfer to the restructuring queue, 31-TRF-RS.",
+   "brief_quote": "NEW PLAN / LOWER INSTALMENTS -> no plan details -> transfer_to_agent(restructuring) -> 31-TRF-RS.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Human requested: ask once if you can help; if the customer insists, transfer to general, 32-TRF-HU (before or after security).",
+   "brief_quote": "HUMAN -> ask once if you can help; insists -> transfer_to_agent(general) -> 32-TRF-HU",
+   "stage": "global"
+  },
+  {
+   "statement": "If the customer says twice they don't want to talk: 41-NP-REF (before security: 52-NV-DEC).",
+   "brief_quote": "SAYS TWICE \"DON'T WANT TO TALK\" -> 41-NP-REF (before security: 52-NV-DEC).",
+   "stage": "global"
+  },
+  {
+   "statement": "If the customer asks whether this is a scam, say they can verify by phoning Lumen Bank's customer service number, and continue.",
+   "brief_quote": "SCAM? -> verify by phoning Lumen Bank's customer service number; continue.",
+   "stage": "global"
+  },
+  {
+   "statement": "Unknown information: say you don't have it; never invent. No discounts, waivers or plans.",
+   "brief_quote": "Unknown info -> say you don't have it; never invent. No discounts / waivers / plans.",
+   "stage": "global"
+  },
+  {
+   "statement": "End with thanks and goodbye, then exactly one close_call(code) as the last tool call. A transfer after a recorded promise uses the transfer code. add_note is not used.",
+   "brief_quote": "Transfer after a recorded promise -> use the transfer code.",
+   "stage": "close"
+  },
+  {
+   "statement": "Pass customer_id to every tool; 'now' is the current date/time, never the real clock.",
+   "brief_quote": "customer_id (pass to every tool)",
+   "stage": "global"
+  },
+  {
+   "statement": "The brief gives no product id format; use the product_id exactly as get_account returns it (opaque string). The brief gives no maximum number of products; max_products 3 is the number of listed product codes.",
+   "brief_quote": "",
+   "stage": "global"
+  }
+ ],
+ "_source": {
+  "/bank": "LUMEN BANK :: COLLECTIONS DIALLER CONFIGURATION",
+  "/language": "Ask \"Am I speaking with <title> <last_name>?\"",
+  "/call_variables": "customer_id (pass to every tool), first_name, last_name, title (Mr|Ms), now",
+  "/address": "Am I speaking with <title> <last_name>?",
+  "/holidays/0": "FRI 23.10.26   BANK CLOSED",
+  "/holidays/1": "WED 11.11.26   BANK CLOSED",
+  "/holidays/2": "THU 26.11.26   BANK CLOSED",
+  "/holidays/3": "FRI 25.12.26   BANK CLOSED",
+  "/holidays/4": "MON 28.12.26   BANK CLOSED",
+  "/bands/0/deadline_business_days": "N=12",
+  "/bands/0/attempts": "B1   1-5",
+  "/bands/1/deadline_business_days": "N=8",
+  "/bands/2/deadline_business_days": "N=4",
+  "/attempt1": "ATT1: full (or floor if already \"too much\") on last business day of this week (next week's if today is that day; capped at the deadline).",
+  "/attempt_plan/0": "ATT1: full (or floor if already \"too much\") on last business day of this week",
+  "/attempt_plan/1": "ATT2 (bands with 2 attempts): floor on the deadline.",
+  "/weekday_words/next": "\"next <weekday>\" = following calendar week",
+  "/weekday_words/this": "\"this <weekday>\" = current week",
+  "/identity/max_wrong": "3 wrong answers in total = end",
+  "/identity/questions": "Q1 date of birth (send YYYY-MM-DD; numbers-only = day/month/year), Q2 last 4 digits of phone on file",
+  "/identity/swap_hint": "hint=day_month_swapped -> ask month as a word",
+  "/callback/start": "10:00-19:00 incl.",
+  "/callback/end": "10:00-19:00 incl.",
+  "/callback/same_day": "Callback = today or next business day",
+  "/outcome_map/promise": "10-PTP       promise to pay recorded",
+  "/outcome_map/paid": "20-PAID      customer says already paid",
+  "/outcome_map/tr_restructuring": "31-TRF-RS    transferred - restructuring",
+  "/outcome_map/tr_human": "32-TRF-HU    transferred - human requested",
+  "/outcome_map/tr_support": "33-TRF-SU    transferred - support (hardship accepted)",
+  "/outcome_map/np_refused": "41-NP-REF    no promise - refused / out of attempts",
+  "/outcome_map/np_hardship": "42-NP-HS     no promise - hardship, support declined",
+  "/outcome_map/np_dispute": "43-NP-DSP    no promise - debt disputed",
+  "/outcome_map/np_service_error": "44-NP-ERR    no promise - promise service failed twice",
+  "/outcome_map/nv_failed": "51-NV-FAIL   not verified - failed security",
+  "/outcome_map/nv_declined": "52-NV-DEC    not verified - declined security",
+  "/outcome_map/nr_callback": "61-NR-CB     not reached - callback booked",
+  "/outcome_map/nr_no_callback": "62-NR-NOCB   not reached - no valid callback time",
+  "/outcome_map/nr_wrong_number": "63-NR-WN     not reached - wrong number",
+  "/outcome_map/nr_deceased": "64-NR-RIP    not reached - customer deceased",
+  "/outcome_map/nr_unclear": "65-NR-UNC    not reached - identity of speaker unclear",
+  "/queue_map/restructuring": "transfer_to_agent(restructuring) -> 31-TRF-RS",
+  "/queue_map/human": "transfer_to_agent(general) -> 32-TRF-HU",
+  "/queue_map/support": "transfer_to_agent(support) -> 33-TRF-SU",
+  "/note_map": "add_note is not used.",
+  "/close_rule": "then exactly one close_call(code)",
+  "/tools/close_call": "close_call takes ONE field: code",
+  "/tools/schedule_callback": "schedule_callback(date, time)",
+  "/tools/create_promise": "create_promise(product_id, amount, date)",
+  "/tools/verify_identity": "verify_identity(field, answer)",
+  "/product_types/CC/label": "\"credit card ending <last4>\"",
+  "/product_types/CC/floor_field": "minimum_payment",
+  "/product_types/PL/label": "\"personal loan\"",
+  "/product_types/PL/floor_field": "instalment_amount",
+  "/product_types/AL/label": "\"car loan\"",
+  "/product_types/AL/floor_field": "instalment_amount",
+  "/account_fields": "past_due, days_late",
+  "/sentences/opening": "digital assistant calling from Lumen Bank; this call is recorded",
+  "/sentences/promise_confirmation": "You will receive a text message confirming this promise.",
+  "/sentences/ai": "Lumen Bank's digital assistant",
+  "/sentences/scam": "verify by phoning Lumen Bank's customer service number",
+  "/sentences/failed_id": "use the mobile app or a branch",
+  "/lines/condolence": "\"I am sorry for your loss.\" only",
+  "/lines/confirm_question": "\"Do you confirm?\"",
+  "/lines/right_party_question": "Am I speaking with <title> <last_name>?",
+  "/lines/debt_intro": "Calling from the collections team about a late payment",
+  "/forbidden_before_verify": "No mention of collections, debt, payment or the product before security passes",
+  "/multi_product": "One per product",
+  "/retries/create_promise": "Fail -> retry once",
+  "/ask_limits/right_party": "ask max twice",
+  "/ask_limits/id_decline": "second refusal or second \"what's this about?\" -> 52-NV-DEC",
+  "/ask_limits/callback_reask": "Outside window -> ask once more",
+  "/ask_limits/vague_date": "Vague -> ask once for exact day",
+  "/ask_limits/stop_talking": "SAYS TWICE \"DON'T WANT TO TALK\"",
+  "/ask_limits/human_offer": "HUMAN -> ask once if you can help",
+  "/unused_tools": "add_note is not used."
+ },
+ "_overrides": []
+}

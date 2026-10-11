@@ -1,0 +1,46 @@
+{
+ "scenarios": [
+  "repair-1",
+  "repair-2",
+  "repair-3",
+  "repair-4"
+ ],
+ "rounds": [],
+ "committed": 0,
+ "status": "unscored",
+ "baseline": [
+  {
+   "case_id": "repair-1",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 502: error code: 502\\n')"
+   ],
+   "infra": true
+  },
+  {
+   "case_id": "repair-2",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 504: error code: 504\\n')"
+   ],
+   "infra": true
+  },
+  {
+   "case_id": "repair-3",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 504: error code: 504\\n')"
+   ],
+   "infra": true
+  },
+  {
+   "case_id": "repair-4",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 504: error code: 504\\n')"
+   ],
+   "infra": true
+  }
+ ],
+ "stopped": "too close to the deadline"
+}

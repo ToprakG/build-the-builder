@@ -1,0 +1,11 @@
+Start: 2026-10-11 12:25:22
+Repair: on
+Policy source: file
+self-test: mock bank up on 127.0.0.1:8787 with 4 of our own case(s)
+self-test: mock bank public at https://journey-acres-harder-vegetation.trycloudflare.com
+freya save_workflow (self-test slot): {'slot': 'tcc90-repair-f1-selftest', 'workflow_id': 'bb7c35d7-0af1-4cc5-8163-6d7896068087', 'agent_id': '5ec49924-24df-4dc9-a00b-f5ffd088e4e6', 'version': 8}
+self-test: 2 run(s) hit an infrastructure error; retrying them one at a time
+self-test: 4 case(s) x 1 rep(s) via the vendor chat driver: 0/2 passed, 2 unscored (infrastructure), in 1108s (customer: vendor LLM persona; judge: vendor decision model)
+Repair status: done committed 0 scenarios 4
+Elapsed seconds: 1121
+End: 2026-10-11 12:44:03

@@ -1,0 +1,267 @@
+[
+ {
+  "kind": "defect",
+  "review_id": "V3",
+  "quote": "İkinci sorudan sonra da belirsizse görüşmeyi `not_reached` / `unclear` olarak kapatın.",
+  "rule": "Only clear confirmations count; ask once more; after the second ask still unclear close not_reached/unclear.",
+  "verdict": "wrong",
+  "node_ids": [
+   "opening"
+  ],
+  "defect": "The ask count is not kept in code: the model decides via the extraction value 'unclear_again' (\"the agent already asked twice\") whether two asks happened, and max_node_turns 4 is a loose backstop. The model may close after one ask or keep asking.",
+  "fix": "Add a code node after each non-confirming answer that increments an ask counter (e.g. vars['id_asks']) and routes to goodbye_short (unclear) when it reaches 2, re-asking with a fixed tts '{{addr}} ile mi görüşüyorum?' otherwise; do not count a turn where the agent only answered a question."
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V11",
+  "quote": "Müşteri nasıl söylerse söylesin, doğum tarihini `YYYY-MM-DD` biçiminde gönderin.",
+  "rule": "Two questions one at a time (DOB then phone last4); DOB sent as YYYY-MM-DD, digits read day-month-year.",
+  "verdict": "ok",
+  "node_ids": [
+   "identity",
+   "id_explain"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "defect",
+  "review_id": "V15",
+  "quote": "İkinci bir ret veya bu türden ikinci bir soru görüşmeyi kapatır.",
+  "rule": "Refusal to answer: explain once; second refusal (or second 'what is this about') -> not_verified/declined.",
+  "verdict": "wrong",
+  "node_ids": [
+   "identity",
+   "id_explain",
+   "mark_declined"
+  ],
+  "defect": "The identity node's max_node_turns (12) goes straight to goodbye_short while close_outcome/close_reason are still the setup defaults not_reached/unclear, so a confirmed customer who stalls in identity is closed as not_reached/unclear instead of not_verified/declined. The end_call tool in identity also lets the model end with that stale not_reached/unclear.",
+  "fix": "Set close_outcome='not_verified', close_reason='declined' when entering identity (e.g. in a code node between opening and identity), and point identity.max_turn_transition to mark_declined."
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V18",
+  "quote": "1 ila 7 | early | bugünden sonraki 12. iş günü | 1",
+  "rule": "Early band (1-7 days): deadline 12th business day after today, 1 persuasion attempt.",
+  "verdict": "ok",
+  "node_ids": [
+   "facts",
+   "decide"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V19",
+  "quote": "8 ila 45 | late | bugünden sonraki 7. iş günü | 2",
+  "rule": "Late band (8-45 days): deadline 7th business day after today, 2 attempts.",
+  "verdict": "ok",
+  "node_ids": [
+   "facts",
+   "decide"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V23",
+  "quote": "Yani Cuma günü söylenen \"gelecek Cuma\", takip eden haftanın Cuması'dır.",
+  "rule": "'Gelecek <day>' = that day next calendar week; 'bu <day>' = this week.",
+  "verdict": "ok",
+  "node_ids": [
+   "decide"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V31",
+  "quote": "Deneme 1: bu haftanın son iş gününü önerin. Bugün o gün ise, gelecek haftanın son iş gününü önerin.",
+  "rule": "Attempt 1: last business day of this week (next week's if today), full or floor if too_much already said; attempt 2 (late only): floor on deadline.",
+  "verdict": "ok",
+  "node_ids": [
+   "facts",
+   "decide"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "defect",
+  "review_id": "V32",
+  "quote": "Denemeler tükendiğinde durun. Müşterinin zaten reddettiği bir teklifi tekrarlamayın. `no_promise` / `refused` olarak kapatın.",
+  "rule": "Stop when attempts are used up; close no_promise/refused.",
+  "verdict": "wrong",
+  "node_ids": [
+   "talk",
+   "decide",
+   "goodbye_refused"
+  ],
+  "defect": "The talk node exposes end_call to the model ('end_call right after a goodbye'), and close_outcome is preset to no_promise/refused in facts. The model can end the call after any refusal before the counted attempts in decide are used, so the attempt limit is not enforced by code.",
+  "fix": "Remove end_call from talk (and hardship); let only the code-routed end_call nodes (goodbye_*) end the call."
+ },
+ {
+  "kind": "unlisted_rule_and_defect",
+  "review_id": "V33",
+  "quote": "kısa bir başsağlığı/geçmiş olsun cümlesi söyleyin ve ikna denemesi yapmayın.",
+  "rule": "Hardship: sympathy, no persuasion, offer support transfer; accept -> transfer support; decline -> no_promise/hardship; own date/amount still recorded.",
+  "verdict": "wrong",
+  "node_ids": [
+   "hardship_prep",
+   "hardship",
+   "decide"
+  ],
+  "defect": "When the hardship customer names a date/amount, the hardship node goes to decide, which keeps the refusals counter and the persuasion logic. A later 'no' calls refuse(), which makes attempt 1/2 offers to a hardship customer and then closes as no_promise/refused instead of hardship.",
+  "fix": "Set a hardship flag in hardship_prep; in decide, when the flag is set, never call refuse(): on 'no'/'stop' set dstate to end with close_reason 'hardship' (route to goodbye_hardship)."
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V37",
+  "quote": "Ürün başına bir söz. Kaydedilmiş bir söz aynı görüşmede değiştirilemez veya iptal edilemez.",
+  "rule": "One promise per product; no change/cancel; refer to mobile app.",
+  "verdict": "ok",
+  "node_ids": [
+   "record_one",
+   "goodbye_promise",
+   "talk"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "defect",
+  "review_id": "V42",
+  "quote": "Queue `restructuring` ile `transfer_to_agent` çağırın ve `transferred` / `restructuring` olarak kapatın.",
+  "rule": "New plan / lower instalment -> transfer restructuring, close transferred/restructuring.",
+  "verdict": "wrong",
+  "node_ids": [
+   "transfer_restructuring",
+   "goodbye_short"
+  ],
+  "defect": "If transfer_to_agent fails, the route falls to goodbye_short with close_outcome still no_promise/refused (set in facts), a reason the brief does not give for this case.",
+  "fix": "On transfer failure, retry once (maxRetries 1) and route to a node that tells the customer the transfer could not be made and sets an explicit close outcome (e.g. no_promise/service_error) before ending."
+ },
+ {
+  "kind": "defect",
+  "review_id": "V43",
+  "quote": "önce yardımcı olup olamayacağınızı bir kez sorun. Ayrıca ısrar ederse, queue `general` ile `transfer_to_agent` çağırın",
+  "rule": "Person request: ask once if you can help; on insistence transfer general, close transferred/human (before and after verification).",
+  "verdict": "wrong",
+  "node_ids": [
+   "wants_human",
+   "transfer_human",
+   "goodbye_short"
+  ],
+  "defect": "The 'ask once' is not counted: every new request re-enters wants_human and asks 'Size ben yardımcı olabilir miyim?' again instead of transferring. Also max_node_turns 3 sends to transfer_human even without insistence. If the transfer fails, goodbye_short closes with whatever stale outcome is set (e.g. not_reached/unclear in opening/identity, no_promise/refused in talk).",
+  "fix": "Keep a code counter vars['human_asked']; on the second request go straight to transfer_human. Set max_turn_transition to __previous__. On transfer failure, set an explicit close outcome before ending."
+ },
+ {
+  "kind": "defect",
+  "review_id": "V46",
+  "quote": "Müşteri görüşmek istemediğini iki kez söylerse, `no_promise` / `refused` olarak kapatın. Kimlik doğrulanmadan önce aynı müşteri `not_verified` / `declined` olarak kapatılır.",
+  "rule": "Twice 'don't want to talk' -> no_promise/refused; before verification -> not_verified/declined.",
+  "verdict": "wrong",
+  "node_ids": [
+   "opening",
+   "identity",
+   "talk",
+   "decide"
+  ],
+  "defect": "After verification it is counted (stop_count). Before verification there is no 'stop' extraction in opening: a confirmed-or-not caller who says twice they don't want to talk runs to max_node_turns and closes as not_reached/unclear, and in identity, after the 12-turn limit, the close falls to the stale not_reached/unclear.",
+  "fix": "Add a 'stop' value to the opening/identity extractions, count it in code, and route the second one to mark_declined (not_verified/declined)."
+ },
+ {
+  "kind": "defect",
+  "review_id": "V47",
+  "quote": "Her görüşme, bir sonuçla ve tabloda listelenmişse bir nedenle, tam olarak bir `close_call` ile biter. Bu, son araç çağrısıdır.",
+  "rule": "Exactly one close_call, last tool call, with correct outcome/reason.",
+  "verdict": "wrong",
+  "node_ids": [
+   "close_call",
+   "opening",
+   "identity",
+   "id_explain",
+   "third_party",
+   "talk",
+   "hardship"
+  ],
+  "defect": "close_call runs at end_of_call with whatever close_outcome/close_reason is in vars. Conversation nodes give the model an end_call tool, so the model can end at any point with a stale pair (e.g. not_reached/unclear inside identity after confirmation, no_promise/refused in talk before attempts are used).",
+  "fix": "Remove end_call from conversation nodes. End calls only through code-routed goodbye_* nodes, each set by a mark_* node that writes the outcome/reason."
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V48",
+  "quote": "| `promise` | yok | en az bir söz kaydedildi |",
+  "rule": "promise outcome without reason when a promise is recorded.",
+  "verdict": "ok",
+  "node_ids": [
+   "record_one",
+   "record_two",
+   "close_call"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V49",
+  "quote": "| `paid` | yok | kural 39 |",
+  "rule": "paid outcome without reason.",
+  "verdict": "ok",
+  "node_ids": [
+   "mark_paid",
+   "close_call"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V50",
+  "quote": "| `transferred` | `restructuring`, `human`, `support` | kural 41, 42, 32 |",
+  "rule": "transferred with matching reason.",
+  "verdict": "ok",
+  "node_ids": [
+   "transfer_restructuring",
+   "transfer_human",
+   "transfer_support"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V51",
+  "quote": "| `no_promise` | `refused`, `hardship`, `dispute`, `service_error` | kural 31 ve 45, 32, 40, 37 |",
+  "rule": "no_promise reasons mapped to rules.",
+  "verdict": "ok",
+  "node_ids": [
+   "facts",
+   "decide",
+   "hardship_prep",
+   "mark_dispute",
+   "mark_record_failed"
+  ],
+  "defect": "",
+  "fix": ""
+ },
+ {
+  "kind": "unlisted_rule",
+  "review_id": "V53",
+  "quote": "| `not_reached` | `callback`, `no_callback`, `wrong_number`, `deceased`, `unclear` | kural 6, 7, 8, 9, 3 |",
+  "rule": "not_reached reasons mapped.",
+  "verdict": "ok",
+  "node_ids": [
+   "setup",
+   "third_party_prep",
+   "book_callback",
+   "mark_wrong_number",
+   "mark_deceased"
+  ],
+  "defect": "",
+  "fix": ""
+ }
+]

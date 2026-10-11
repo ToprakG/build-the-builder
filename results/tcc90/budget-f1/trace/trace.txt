@@ -1,0 +1,35 @@
+03:17:19 start 2026-10-11T03:17:19+0300
+03:17:19   variant: tcc90-budget
+03:17:19   slot: budget-f1-nordhavn
+03:17:19   save: freya
+03:17:21 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | 1.7s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 400: {"error":{"message":"Provider returned error","code":400,"metadata":{"raw":"{\"type\":\"error\",\"error\":{\"type\":\"invalid_request_erro...
+03:17:21 WARNING extract pass 1: brief -> policy.json: provider rejected the response schema; asking for a JSON object
+03:17:56 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json (retry 1) | tokens in=9687 out=6809 | 35.2s
+03:17:56 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief | 0.4s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 402: {"error":{"message":"This request would exceed your available credits given your current in-flight requests. Retry after in-flight request...
+03:17:56 WARNING extraction stopped (LLMError 402): POST https://openrouter.ai/api/v1/chat/completions -> 402: {"error":{"message":"This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.","code":402,"metadata":{"reason":"in_flight_budget_exhausted","limit_source":
+03:17:56 kept the first extraction pass
+03:17:56 policy source: pass1
+03:17:56 step extract: 37.3s
+03:17:56 step compile: 0.0s
+03:17:56 check export real bank: FAIL compiled tool URLs
+03:17:56 testgen: 17 case(s), screen uses 12; gaps: product_id_format has no {n}: cases use p{n}
+03:17:57 confirm driver: chat. Ledger failures are sure. Judge-only failures are candidates.
+03:17:57 judge: vendor decision model (build-the-builder, threshold 0.5)
+03:17:59 freya save_workflow: {"slot": "budget-f1-nordhavn", "workflow_id": "92d3fbb3-1707-4bbb-b918-6dd2e8a2a0f8", "agent_id": "f221b098-6929-462a-bb19-473ce2928119"}
+03:17:59 step publish: 1.5s baseline
+03:17:59 step review: skipped
+03:18:00 self-test: mock bank up on 127.0.0.1:8787 with 12 of our own case(s)
+03:18:06 self-test: mock bank public at https://peak-anime-presented-relations.trycloudflare.com
+03:18:07 freya save_workflow (self-test slot): {"slot": "budget-f1-nordhavn-selftest", "workflow_id": "b3f64c5b-cf92-4375-baaa-eaf257586034", "agent_id": "86fd942d-42a0-4f26-b242-35f4b991ab24"}
+03:18:08 self-test: 12 case(s) x 1 rep(s) via the vendor chat driver: 0/12 passed, 0 unscored (infrastructure), in 1s (customer: vendor LLM persona; judge: vendor decision model)
+03:18:08 step screen: 9.6s 12 case(s), 1 rep
+03:18:08 screen split: 12 ledger, 0 judge-only, 0 passed, 0 unscored
+03:18:11 self-test: 12 case(s) x 3 rep(s) via the vendor chat driver: 0/36 passed, 0 unscored (infrastructure), in 3s (customer: vendor LLM persona; judge: vendor decision model)
+03:18:11 step confirm: 3.3s 12 case(s) x 3 reps
+03:18:11 freya confirm: 12 still failing, 0 dropped
+03:18:12 model call openrouter:anthropic/claude-sonnet-5.5: analyzer: 12 failed call(s) -> generalized bugs | 0.4s | ERROR POST https://openrouter.ai/api/v1/chat/completions -> 402: {"error":{"message":"This request would exceed your available credits given your current in-flight requests. Retry after in-flight request...
+03:18:12 WARNING patch failed: LLMError('POST https://openrouter.ai/api/v1/chat/completions -> 402: {"error":{"message":"This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.","code":402,"metadata":{"reason":"in_flight_budget_exhausted","limit_source":"openrouter_in_flight_budget","remedy_hint":"Retry after your in-flight requests settle (see the Retry-After header). Adding credits at https://openrouter.ai/settings/credits raises your in-flight budget, up to a capped ceiling.","headers":{"Retry-After":"120"},"provider_name":null}},"user_id":"user_3GlubIYRCLsf6VAl0gd5W4atDCD"}'); keeping the baseline
+03:18:12 stop: patch failed source=baseline committed=0
+03:18:12 check export urls unchanged: ok
+03:18:12 elapsed: 53.4s
+03:18:12 end 2026-10-11T03:18:12+0300 status=ok wall=53.4s model_calls=4 tokens_in=9687 tokens_out=6809 cost=$0.0000

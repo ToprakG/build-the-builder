@@ -1,0 +1,79 @@
+{
+ "bugs": [
+  {
+   "bug_id": "BUG-001",
+   "behaviour": "When a customer mentions hardship (illness, job loss, bereavement) before identity verification is complete, the agent ignores the disclosure, continues the identity check, and closes as not_verified / failed. It never offers the one-sentence of sympathy, never offers the welfare support team, and never calls transfer_to_agent with queue 'welfare'.",
+   "expected_per_brief": "Whenever a customer mentions illness, a death in the family or job loss, the agent must say one short sentence of sympathy, make no persuasion attempt, and offer to connect them with the support team. If the customer accepts, the agent calls transfer_to_agent (queue: welfare) and closes as transferred / support.",
+   "brief_quote": "If the customer mentions illness, a death in the family or job loss, say one short sentence of sympathy and make no persuasion attempt. Offer to connect them with the support team. If they accept, call `transfer_to_agent` with queue `welfare` and close as `transferred` / `support`.",
+   "evidence": [
+    {
+     "case_id": "T-006",
+     "rep": 1,
+     "turn": 48
+    }
+   ],
+   "suspected_zone": "system/global_rules",
+   "severity": "high"
+  },
+  {
+   "bug_id": "BUG-002",
+   "behaviour": "When a customer states 'I already paid' (or equivalent) before identity verification is complete, the agent ignores the claim, proceeds with security questions, fails verification, and closes as not_verified / failed instead of closing as paid.",
+   "expected_per_brief": "Whenever the customer says they have already paid, the agent should say that payments can take one business day to appear, take no promise, and close as paid. This rule is stated without any prerequisite of completed identity verification.",
+   "brief_quote": "\"I already paid\": say that payments can take one business day to appear, take no promise, and close as `paid`.",
+   "evidence": [
+    {
+     "case_id": "T-011",
+     "rep": 1,
+     "turn": 48
+    }
+   ],
+   "suspected_zone": "system/global_rules",
+   "severity": "high"
+  },
+  {
+   "bug_id": "BUG-003",
+   "behaviour": "During the date-of-birth retry, when the customer's speech is cut off across multiple turns (e.g. month/day said first, year in a subsequent turn), the agent re-assembles the same date that already failed and submits it unchanged as the second verify_identity attempt, consuming the last allowed wrong-answer slot with an identical value rather than waiting for a genuinely new complete answer from the customer.",
+   "expected_per_brief": "A wrong answer may be asked again. The agent should collect a fresh, complete answer before calling verify_identity a second time; submitting the same value that was already rejected does not constitute a meaningful retry and wastes the customer's remaining attempt.",
+   "brief_quote": "A wrong answer may be asked again. Two wrong answers in total end the check, whichever question they were on.",
+   "evidence": [
+    {
+     "case_id": "T-011",
+     "rep": 1,
+     "turn": 32
+    },
+    {
+     "case_id": "T-007",
+     "rep": 1,
+     "turn": 28
+    },
+    {
+     "case_id": "T-012",
+     "rep": 1,
+     "turn": 31
+    },
+    {
+     "case_id": "T-001",
+     "rep": 1,
+     "turn": 28
+    },
+    {
+     "case_id": "T-009",
+     "rep": 1,
+     "turn": 28
+    }
+   ],
+   "suspected_zone": "hook:verify_identity/msg/retry",
+   "severity": "high"
+  },
+  {
+   "bug_id": "UNIT-REPLAY",
+   "behaviour": "The unit replay rejected this workflow. T-007-r1: RuntimeError('PUT /api/v2/workflow/8dadf6a0-abe4-4af5-8cbe-7185d189e650 -> 504: error code: 504\\n'); T-012-r1: RuntimeError('PUT /api/v2/workflow/8dadf6a0-abe4-4af5-8cbe-7185d189e650 -> 504: error code: 504\\n'); T-006-r1: RuntimeError('PUT /api/v2/workflow/8dadf6a0-abe4-4af5-8cbe-7185d189e650 -> 504: error code: 504\\n'); T-001-r1: RuntimeError('PUT /api/v2/workflow/8dadf6a0-abe4-4af5-8cbe-7185d189e650 -> 504: error code: 504\\n'); T-009-r1: RuntimeError('PUT /api/v2/workflow/8dadf6a0-abe4-4af5-8cbe-7185d189e650 -> 504: error code: 504\\n'); T-015-r1: RuntimeError('PUT /api/v2/workflow/8dadf6a0-abe4-4af5-8cbe-7185d189e650 -> 504: error code: 504\\n'); T-004-r1: RuntimeError('PUT /api/v2/workflow/8dadf6a0-abe4-4af5-8cbe-7185d189e650 -> 504: error code: 504\\n')",
+   "expected_per_brief": "The training turns pass, and the workflow validates.",
+   "brief_quote": "If the customer mentions illness, a death in the family or job loss, say one short sentence of sympathy and make no persuasion attempt. Offer to connect them with the support team. If they accept, call `transfer_to_agent` with queue `welfare` and close as `transferred` / `support`.",
+   "evidence": [],
+   "suspected_zone": "",
+   "severity": "high"
+  }
+ ],
+ "dropped": []
+}

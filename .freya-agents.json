@@ -2,16 +2,83 @@
  "brief-a": {
   "workflow_id": "2f56aa1e-8fc7-42ba-90bb-617419183e0f",
   "agent_id": "98311de2-1472-4f95-aeb9-59d8ec154a87",
-  "version": 6
+  "version": 11
  },
  "brief-a+brief-b": {
   "workflow_id": "377dbf9f-822b-4a95-8625-f7f7a96ef847",
   "agent_id": "30467fe2-1b3e-4101-938a-696a09f02f3c",
-  "version": 4
+  "version": 10
  },
  "f1-nordhavn": {
   "workflow_id": "f73b299a-ab3e-4c65-8545-066e820dc591",
   "agent_id": "4e4b71c6-4770-43b4-b440-51c8a4d48353",
+  "version": 2
+ },
+ "f2-ostral": {
+  "workflow_id": "8294e7bb-5167-4e13-bddb-a02f7ae6699e",
+  "agent_id": "a80cbe12-ff63-431c-acd9-bdc0d115fd0c",
   "version": 1
+ },
+ "f5-halden-email": {
+  "workflow_id": "c35b9fea-8538-4fc4-bfa7-434bf8176c5e",
+  "agent_id": "46c651ab-f6a3-49dd-a28f-9e8c81bf4b16",
+  "version": 2
+ },
+ "builder-test-a": {
+  "workflow_id": "3edb71ef-3568-4ec1-9d3d-9e35bb07db7f",
+  "agent_id": "6295cef0-8e9d-4e2d-a239-f3072e5a33ba"
+ },
+ "arm2-a": {
+  "workflow_id": "70b6ea53-ac0e-400b-ae67-399eaae41e23",
+  "agent_id": "307238c0-8257-4627-a726-23940cf1227b",
+  "version": 7
+ },
+ "arm2-b": {
+  "workflow_id": "b3de9f96-5d62-420c-b863-c8d828a5df2a",
+  "agent_id": "58d8f9e8-73a9-4a17-baf6-0a788c959c11",
+  "version": 7
+ },
+ "arm2-f1-nordhavn": {
+  "workflow_id": "2d7d7a72-a002-4f41-9519-e5e0ead54e2b",
+  "agent_id": "467525f8-fe58-46d3-92ba-6f45ef8654a0",
+  "version": 5
+ },
+ "arm2-f2-ostral": {
+  "workflow_id": "6fc23e8f-5638-45bb-984f-5a7a5f7f0f8f",
+  "agent_id": "32407d15-e340-472c-82ba-a6410e0c7cb2",
+  "version": 1
+ },
+ "arm2-f3-kestrel": {
+  "workflow_id": "7d896013-cac0-4482-8a44-64dc66fe6fdb",
+  "agent_id": "95d813f6-93f3-422e-8606-0b32dc3ed7c5",
+  "version": 1
+ },
+ "arm2-f4-brightwell": {
+  "workflow_id": "f64ffdfc-20d6-4ec6-b0eb-3c291e2ac8e4",
+  "agent_id": "3daf7bf5-62f9-4434-972c-194f75532260",
+  "version": 3
+ },
+ "arm2-f5-halden-email": {
+  "workflow_id": "fd4de341-e60f-44c3-bcc0-169e34b36258",
+  "agent_id": "dc94259b-d141-42e2-b9c1-e64d40b9fd4f",
+  "version": 1
+ },
+ "arm2-f6-corvid-memo": {
+  "workflow_id": "08aebf15-ced0-4fb7-9e49-d31a4d0a02f4",
+  "agent_id": "187e2b6e-b25e-4b05-86d4-5cd2dac6b789",
+  "version": 1
+ },
+ "arm2-f7-lumen-codes": {
+  "workflow_id": "f5c586f4-777c-47e6-a384-6d2eff8dbda1",
+  "agent_id": "adf59fde-194d-4c38-966b-bc6be34d2aa8",
+  "version": 1
+ },
+ "budget-f1-nordhavn": {
+  "workflow_id": "92d3fbb3-1707-4bbb-b918-6dd2e8a2a0f8",
+  "agent_id": "f221b098-6929-462a-bb19-473ce2928119"
+ },
+ "case-freyabank-test": {
+  "workflow_id": "b4099d27-1da1-4954-aa92-a1b04168f5c8",
+  "agent_id": "5fdb3a91-b168-4472-acaf-2cb7c7aa4fec"
  }
 }

@@ -1,0 +1,12 @@
+Start: 2026-10-11 13:10:56
+Repair: on
+Customer: Claude Code
+Policy source: file
+self-test: mock bank up on 127.0.0.1:8802 with 4 of our own case(s)
+self-test: mock bank public at https://gorgeous-pointer-reid-barnes.trycloudflare.com
+freya save_workflow (self-test slot): {'slot': 'tcc90-repair-f1-cc-selftest', 'workflow_id': '5f804cd7-bea9-452d-8ff0-daf5034b7fec', 'agent_id': 'c4f6efac-fee2-49db-a5e1-8cf9eeac49bb'}
+self-test: 4 run(s) hit an infrastructure error; retrying them one at a time
+self-test: 4 case(s) x 1 rep(s) via the vendor chat driver: 0/0 passed, 4 unscored (infrastructure), in 2254s (customer: vendor LLM persona; judge: vendor decision model)
+Repair status: unscored committed 0 scenarios 4
+Elapsed seconds: 2265
+End: 2026-10-11 13:48:41

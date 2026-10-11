@@ -1,0 +1,56 @@
+{
+ "brief": "f2-ostral",
+ "reps": 1,
+ "note": "clamp only; a legal named day is kept",
+ "agent_id": "dcbcdf1a-f411-4f69-8725-83f9fb7c6808",
+ "workflow_id": "7ac12c5b-3b4c-4232-9b51-0f12c0acf35f",
+ "passed": 1,
+ "total": 3,
+ "rows": [
+  {
+   "id": "F2-002",
+   "family": "Dates",
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'declined'), expected ('promise', None)",
+    "promises [], expected [('p1', 130.0, '2026-11-30')]",
+    "conversation: - The agent never proposed the deadline of 30 November. - No promise was recorded for 30 November as the call was terminated during the verification process. - The agent asked for the user's date of birth twice (Messages 2 and 4), which may violate the 'exact day only once' criterion if it refers to identity verification, or it failed to ask for a payment date entirely. - The agent ended the call abruptly after the user asked a clarifying question about the account."
+   ],
+   "tools": [
+    "verify_identity",
+    "verify_identity",
+    "close_call"
+   ]
+  },
+  {
+   "id": "F2-009",
+   "family": "Refusal",
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'failed'), expected ('promise', None)",
+    "promises [], expected [('p1', 262.5, '2026-12-14')]",
+    "conversation: The user failed identity verification, which prevented the agent from starting the negotiation process. As a result, no payment proposals were made, and no promise was recorded. The assistant correctly ended the call after the security failure."
+   ],
+   "tools": [
+    "verify_identity",
+    "verify_identity",
+    "verify_identity",
+    "close_call"
+   ]
+  },
+  {
+   "id": "F2-010",
+   "family": "Amounts",
+   "pass": true,
+   "failed": [],
+   "tools": [
+    "verify_identity",
+    "verify_identity",
+    "verify_identity",
+    "get_account",
+    "create_promise",
+    "close_call"
+   ]
+  }
+ ]
+}

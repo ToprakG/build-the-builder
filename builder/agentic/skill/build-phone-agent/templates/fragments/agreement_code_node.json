@@ -1,0 +1,55 @@
+{
+ "name": "store_agreement",
+ "node_type": "code",
+ "passthrough": true,
+ "passthrough_default_transition": "offer",
+ "on_enter": {
+  "type": "silent"
+ },
+ "disable_inactivity_monitor": true,
+ "pre_actions": [
+  {
+   "type": "function",
+   "function": {
+    "name": "code_exec",
+    "handler": "__function__:code_exec",
+    "parameters": {
+     "type": "object",
+     "properties": {
+      "code": {
+       "type": "string",
+       "default": "import datetime\nimport json\nimport re\n\nWEEKDAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']\nMONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']\n\nORDINAL_WORDS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth',\n                 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth',\n                 'eighteenth', 'nineteenth', 'twentieth']\n\ndef parse_now(value):\n    \"\"\"'2031-03-07T11:00', '2031-03-07 11:00:00', '2031-03-07T11:00:00Z' or '2031-03-07' -> datetime.\"\"\"\n    s = str(value or '').strip().replace(' ', 'T').rstrip('Z')\n    for fmt, size in (('%Y-%m-%dT%H:%M:%S', 19), ('%Y-%m-%dT%H:%M', 16), ('%Y-%m-%d', 10)):\n        try:\n            return datetime.datetime.strptime(s[:size], fmt)\n        except ValueError:\n            pass\n    raise ValueError('cannot read now: ' + s)\n\ndef parse_holidays(values):\n    \"\"\"ISO strings -> set of dates. Unreadable entries are skipped.\"\"\"\n    out = set()\n    for v in values or []:\n        try:\n            out.add(datetime.date.fromisoformat(str(v)[:10]))\n        except ValueError:\n            pass\n    return out\n\ndef is_business_day(d, holidays):\n    return d.weekday() < 5 and d not in holidays\n\ndef next_business_day(d, holidays, include_today=False):\n    \"\"\"The first business day after d (or d itself when include_today and d is one).\"\"\"\n    if include_today and is_business_day(d, holidays):\n        return d\n    d = d + datetime.timedelta(days=1)\n    while not is_business_day(d, holidays):\n        d = d + datetime.timedelta(days=1)\n    return d\n\ndef week_monday(d):\n    return d - datetime.timedelta(days=d.weekday())\n\ndef weekday_in_week(d, weekday_name, weeks_ahead=0):\n    \"\"\"The named weekday in d's week (weeks_ahead=0) or a later calendar week (1 = the following week).\"\"\"\n    idx = WEEKDAYS.index(str(weekday_name).strip().lower())\n    return week_monday(d) + datetime.timedelta(days=7 * int(weeks_ahead) + idx)\n\ndef parse_date_words(text, today):\n    \"\"\"'2031-03-07', '07/03/2031' (day first), '7 March', 'March 7th' -> date, or None. The year defaults to the\n    next occurrence on or after today. Weekday words are not handled here: use weekday_in_week.\"\"\"\n    s = str(text or '').strip().lower()\n    m = re.search(r'(\\d{4})-(\\d{1,2})-(\\d{1,2})', s)\n    if m:\n        return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))\n    m = re.search(r'\\b(\\d{1,2})[./](\\d{1,2})[./](\\d{2,4})\\b', s)\n    if m:\n        y = int(m.group(3))\n        return datetime.date(y + 2000 if y < 100 else y, int(m.group(2)), int(m.group(1)))\n    for i, name in enumerate(MONTHS):\n        m = re.search(r'\\b(\\d{1,2})(st|nd|rd|th)?\\s+(of\\s+)?' + name[:3] + r'[a-z]*\\b', s) or \\\n            re.search(r'\\b' + name[:3] + r'[a-z]*\\s+(the\\s+)?(\\d{1,2})(st|nd|rd|th)?\\b', s)\n        if m:\n            day = int(m.group(1) if m.group(1) and m.group(1).isdigit() else m.group(2))\n            cand = datetime.date(today.year, i + 1, day)\n            return cand if cand >= today else datetime.date(today.year + 1, i + 1, day)\n    return None\n\ndef ordinals_to_digits(text):\n    \"\"\"'the thirtieth', 'twenty-first', 'twenty first' -> '30th', '21th' (digits + th), so the date rules can read them.\"\"\"\n    s = str(text or '').lower()\n    s = re.sub(r'\\bthirty[\\s-]+first\\b', '31th', s)\n    s = re.sub(r'\\bthirtieth\\b', '30th', s)\n    for i, w in enumerate(ORDINAL_WORDS[:9], 1):\n        s = re.sub(r'\\btwenty[\\s-]+' + w + r'\\b', str(20 + i) + 'th', s)\n    for i, w in enumerate(ORDINAL_WORDS, 1):\n        s = re.sub(r'\\b' + w + r'\\b', str(i) + 'th', s)\n    return s\n\ndef resolve_date_words(text, today, next_weekday_weeks=1):\n    \"\"\"The customer's date words -> date, or None when vague. Handles ISO and numeric dates, '7 March',\n    'the thirtieth of October', 'Monday the 26th', 'the 26th', 'today', 'tomorrow', 'day after tomorrow', '<weekday>',\n    'this <weekday>', 'next <weekday>'. An explicit day of the month always wins over a weekday name. A bare weekday\n    is the next one on or after today. next_weekday_weeks sets what 'next <weekday>' means: 1 = that weekday in the\n    following calendar week. Set it from the brief; if the brief defines it otherwise, change it.\"\"\"\n    s = ordinals_to_digits(str(text or '').strip().lower())\n    if not s:\n        return None\n    explicit = parse_date_words(s, today)\n    if explicit is not None:\n        return explicit\n    m = re.search(r'\\b(\\d{1,2})(st|nd|rd|th)\\b', s)\n    if m:  # a day of the month without a month: this month if still ahead, else next month\n        day = int(m.group(1))\n        for k in range(0, 3):\n            y, mo = today.year + (today.month - 1 + k) // 12, (today.month - 1 + k) % 12 + 1\n            try:\n                cand = datetime.date(y, mo, day)\n            except ValueError:\n                continue\n            if cand >= today:\n                return cand\n        return None\n    if 'day after tomorrow' in s:\n        return today + datetime.timedelta(days=2)\n    if 'tomorrow' in s:\n        return today + datetime.timedelta(days=1)\n    if re.search(r'\\btoday\\b|\\bnow\\b', s):\n        return today\n    for i, name in enumerate(WEEKDAYS):\n        if re.search(r'\\b' + name + r'\\b', s):\n            if re.search(r'\\bnext\\s+' + name, s):\n                return weekday_in_week(today, name, next_weekday_weeks)\n            if re.search(r'\\bthis\\s+' + name, s):\n                return weekday_in_week(today, name, 0)\n            d = weekday_in_week(today, name, 0)\n            return d if d >= today else d + datetime.timedelta(days=7)\n    return parse_date_words(s, today)\n\ndef spoken_date(d):\n    \"\"\"'Friday 7 March'. Adapt the words to the brief's language.\"\"\"\n    return WEEKDAYS[d.weekday()].title() + ' ' + str(d.day) + ' ' + MONTHS[d.month - 1].title()\n\ndef money(amount, symbol=''):\n    \"\"\"1234.5 -> '1,234.50' (with an optional symbol in front). 1234.0 -> '1,234'.\"\"\"\n    v = round(float(amount), 2)\n    text = '{:,.0f}'.format(v) if v == int(v) else '{:,.2f}'.format(v)\n    return symbol + text\n\ntry:\n    now = parse_now(vars.get('now'))\n    today = now.date()\n    hol = parse_holidays(['2031-03-14', '2031-04-02'])\n    facts = json.loads(vars.get('facts_json') or '[]')\n    item = int(vars.get('offer_item') or 0)\n    f = facts[item]\n    words = str(vars.get('agreed_date_words') or '').strip()\n    raw_amount = str(vars.get('agreed_amount') or '').strip()\n    amount = float(raw_amount) if raw_amount else float(vars.get('offer_amount') or f['overdue'])\n    day = resolve_date_words(words, today) if words else datetime.date.fromisoformat(vars.get('offer_date'))\n    deadline = datetime.date.fromisoformat(f['deadline'])\n    vars['store_state'] = 'corrected'\n    if day is None:\n        vars['offer_text'] = 'Which day exactly could you pay?'\n    elif day < today or day > deadline:\n        vars['offer_text'] = 'The latest date I can record is ' + spoken_date(deadline) + '. Could you pay by then?'\n        vars['offer_date'] = deadline.isoformat()\n    elif not is_business_day(day, hol):\n        nb = min(next_business_day(day, hol), deadline)\n        vars['offer_text'] = 'That is not a business day. Could you pay on ' + spoken_date(nb) + '?'\n        vars['offer_date'] = nb.isoformat()\n    elif amount < float(f['floor'] or 0):\n        vars['offer_text'] = 'The lowest amount I can record is ' + money(f['floor']) + '. Could you pay that by ' + spoken_date(day) + '?'\n        vars['offer_amount'] = str(f['floor'])\n        vars['offer_date'] = day.isoformat()\n    else:\n        agreements = json.loads(vars.get('agreements_json') or '[]')\n        agreements.append(dict(ref=f['ref'], name=f['name'], amount=min(amount, float(f['overdue'] or amount)), date=day.isoformat()))\n        vars['agreements_json'] = json.dumps(agreements)\n        vars['loop_event'] = 'agreed'\n        vars['store_state'] = 'stored'\nexcept Exception:\n    vars['offer_text'] = 'Which day exactly could you pay?'\n    vars['store_state'] = 'corrected'\nvars['agreed_amount'] = ''\nvars['agreed_date_words'] = ''\nvars['offer_answer'] = 'stay'\n"
+      },
+      "timeout_ms": {
+       "type": "number",
+       "default": 10000
+      }
+     }
+    }
+   }
+  }
+ ],
+ "transitions": [
+  {
+   "target_node": "next_offer",
+   "description": "Stored: next item",
+   "condition": {
+    "logic": "or",
+    "conditions": [
+     {
+      "variable": "store_state",
+      "operator": "equals",
+      "operand": "stored"
+     }
+    ]
+   }
+  },
+  {
+   "target_node": "offer",
+   "description": "always",
+   "condition": {
+    "operator": "always"
+   }
+  }
+ ]
+}

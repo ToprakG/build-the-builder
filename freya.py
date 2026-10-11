@@ -133,13 +133,31 @@ def get_unit_test_run(run_id):
 AGENT_LLM = {"provider": os.environ.get("FREYA_AGENT_PROVIDER", "experimental-5"), "model": os.environ.get("FREYA_AGENT_MODEL", "experimental-5")}
 SIM_LLM = {"provider": "google", "model": "gemini-3-flash-preview"}        # plays the customer and judges
 
+def _simulation_settled(sim_id, expected):
+    """True when every persona run already has a verdict and the parent status is still running."""
+    its = api("GET", f"/api/v2/simulations/{sim_id}/iterations")
+    items = its.get("iterations") or its.get("items") or its
+    if not isinstance(items, list) or not items:
+        return False
+    runs = (get_iteration(sim_id, items[0]["id"]).get("runs") or [])
+    if len(runs) < expected:
+        return False
+    done = {"pass", "fail", "inconclusive", "error", "completed"}
+    return all((run.get("outcome") or run.get("status")) in done for run in runs)
+
+
 def run_simulation(agent_id, name, variables_by_persona, max_seconds=420, concurrency=int(os.environ.get("FREYA_SIM_CONCURRENCY", "5"))):
-    """Start a text simulation, wait for it, return (simulation_id, iteration_id)."""
+    """Start a text simulation, wait for it, return (simulation_id, iteration_id).
+
+    maxRetries is 0. A retry reuses the same customer_id after end-of-call close_call,
+    and every later tool answer is "the call is already closed".
+    """
     while True:                      # a workspace runs one simulation at a time: wait for the running one instead of failing
         try:
             sim = api("POST", "/api/v2/simulations", {
                 "agentId": agent_id, "name": name, "mode": "chat", "selectedPersonaIds": list(variables_by_persona),
-                "customerVariablesMap": variables_by_persona, "maxConcurrentCalls": concurrency, "runsPerPersona": 1, "maxCallDurationSeconds": max_seconds,
+                "customerVariablesMap": variables_by_persona, "maxConcurrentCalls": concurrency, "runsPerPersona": 1,
+                "maxRetries": 0, "maxCallDurationSeconds": max_seconds,
                 "assistantLlmOverride": AGENT_LLM, "routingLlmOverride": AGENT_LLM, "extractionLlmOverride": AGENT_LLM,
                 "personaLlmOverride": SIM_LLM, "analysisLlmOverride": SIM_LLM})
             break
@@ -147,9 +165,15 @@ def run_simulation(agent_id, name, variables_by_persona, max_seconds=420, concur
             if "concurrent simulations" not in str(e): raise
             print("another simulation is running in this workspace, waiting 30 s", flush=True); time.sleep(30)
     sim_id = (sim.get("simulation") or sim)["id"]
+    expected = len(variables_by_persona)
     while True:
         time.sleep(10)
         s = api("GET", f"/api/v2/simulations/{sim_id}"); s = s.get("simulation") or s
         if s.get("status") in ("completed", "failed", "paused"): break
+        if _simulation_settled(sim_id, expected):
+            api("PUT", f"/api/v2/simulations/{sim_id}", {"status": "paused"})
+            print(f"paused {sim_id}: every call had an outcome while the simulation stayed running", flush=True)
+            s["status"] = "paused"
+            break
     its = api("GET", f"/api/v2/simulations/{sim_id}/iterations"); its = its.get("iterations") or its.get("items") or its
     return sim_id, its[0]["id"], s.get("status")

@@ -1,193 +1,195 @@
-"""The shared builder entrypoint. Every brief, including ones never seen before, runs through
-the same six stages:
+"""Our hackathon builder: brief material + a tool API file -> a Freya workflow phone agent.
 
-    python3 builder/build.py <brief_file> <tool_api_file> [options]
-    python3 builder/build.py briefs/brief-a.md tools/openapi.json --dry-run
-    python3 builder/build.py briefs/brief-a.md briefs/brief-b.md tools/openapi.json   # later briefs override earlier ones
+    python3 builder/build.py <case_folder> <mock_url> [--members "A,B"] [options]      (the final format: ONE case folder + the mock tool API URL)
+    python3 builder/build.py <brief> [<more briefs> ...] <tools.openapi.json> [options]
 
-  1. extract     brief text + tool API -> canonical config      extractor/extract.py
-  2. graph       config + tool API -> workflow JSON              seed/graph.py
-  3. check       workflow_check (local) + validate_workflow (Freya dry run)
-  4. publish     save_workflow, unless --dry-run or a check failed
-  5. self-test   local checks, then after publish: unit tests, slot repair, and a second run
-  6. export      freya.export_workflow, when --export is given
+The tool API is the one argument whose JSON has a top-level `openapi` key; every other argument is brief material in
+override order (Brief B: `brief-a.md brief-b.md`). Variants register in VARIANTS; `tcc` (the template compiler + self-test + repair pipeline,
+scripts/final_run.sh) is the default and the official run command; `agentic` is the earlier Claude Code builder;
+`plan` compiles a procedure plan (steps, tool branches, spoken lines, money) extracted from the documents.
+Exit code 0 when a lint-clean workflow was produced (and saved, with --save freya).
 
-Options:
-  --dry-run          stop after the dry-run validation; do not publish
-  --print            print the workflow JSON and stop, before any check
-  --print-config     print the extracted config JSON and stop, before the graph is built
-  --config PATH      skip extraction; use this config JSON file instead (for comparing extractors)
-  --model NAME       override the extraction model (sets EXTRACTOR_MODEL; see extractor/llm.py)
-  --no-self-test     skip stage 5
-  --export PATH      write the published workflow to this file (stage 6)
-  --slot NAME        save_workflow slot (default: the brief file names, joined with "+")
-
-Every run writes a trace to results/traces/<slot>.txt: start and end time, every model call this
-build made and why, what it checked, what it published.
-
-Each extraction strategy is a variant of this file: point --config at a different extractor's
-output (e.g. extractor's own --static mode, code-only, no model), or swap the import of
-extractor.extract.extract for another module with the same extract(paths, tools_path) -> {"config":
-...} signature. Everything after stage 1 -- the graph, the checks, the publish, the trace shape --
-stays identical, so builds from different strategies are directly comparable.
+The tcc variant needs: `python3 -m venv .venv310` with the packages of README_RUN.md, the Claude login (claude_cli), FREYA_API_KEY in the environment or .env,
+cloudflared. A brief that builds on another ("Brief B builds on Brief A") is built together with it: the referenced brief is taken from the call or from briefs/.
+Results: <out>/workflow.json (last-green), the Freya export workflows/<slot>.workflow.json (committed path), the trace under traces/.
 """
+
+from __future__ import annotations
+
 import argparse
 import json
 import os
-import pathlib
+import shutil
 import subprocess
 import sys
+from pathlib import Path
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
-import freya
-from extractor.extract import extract
-from extractor.tools_api import load as load_tools_api
-from seed.graph import build_workflow
-from seed.trace import Trace
-from seed.workflow_check import check_workflow, iter_snippets
+REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+from builder.common.io import InputError, slot_name, split_inputs  # noqa: E402
 
 
-def _python():
-    venv = ROOT / ".venv" / "bin" / "python"
-    return str(venv if venv.exists() else pathlib.Path(sys.executable))
+def run_agentic(args, briefs, api) -> dict:
+    from builder.agentic.run import BuildOptions, run  # noqa: PLC0415
+
+    extra = {}
+    led = Path(args.out) / "conflict_ledger.json"
+    if led.exists():
+        extra["ledger"] = str(led)
+    return run(BuildOptions(briefs=briefs, api=api, slot=args.slot, out_dir=Path(args.out), save=args.save,
+                            max_minutes=args.max_minutes, model=args.model, max_usd=args.max_usd,
+                            review=args.review == "on", review_minutes=args.review_minutes, fix_minutes=args.fix_minutes,
+                            unit=args.unit == "on", localsim=args.localsim == "on",
+                            keep_workspace=args.keep_workspace, self_test=args.self_test, extra=extra))
 
 
-def _run_test(trace, name, args):
-    result = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
-    detail = (result.stdout or result.stderr or "").strip().splitlines()
-    tail = detail[-1] if detail else "no output"
-    mark = "pass" if result.returncode == 0 else "fail"
-    trace.line(f"- {name}: {mark}. {tail}")
-    return result.returncode == 0
+def tcc_command(args, briefs, api) -> tuple[list[str], dict]:
+    """The final_run.sh command line and environment for this build (pure; unit-tested)."""
+    env = dict(os.environ)
+    mode = (REPO / "FINAL_MODE.txt")
+    env.setdefault("FINAL_MODE", mode.read_text().strip() if mode.exists() else "patcher_on")
+    env.setdefault("FINAL_VOTES", "3")
+    budget = int(args.max_minutes)
+    cmd = ["bash", str(REPO / "scripts" / "final_run.sh"), "--budget-min", str(budget), "--ship-min", str(max(1, budget - 4))]
+    if args.save == "none":
+        cmd.append("--offline")
+    cmd += [str(b) for b in briefs] + [str(api), str(args.out)]
+    return cmd, env
 
 
-def self_tests(trace, workflow, config):
-    trace.section("Self-tests")
-    ok = True
-    problems = check_workflow(workflow, config)
-    snippets = list(iter_snippets(workflow))
-    if problems:
-        ok = False
-        trace.line(f"- workflow check: fail. {len(problems)} problem(s). First: {problems[0]}")
-    else:
-        trace.line(f"- workflow check: pass. {len(workflow['nodes'])} nodes, {len(snippets)} code snippets ran.")
-    py = _python()
-    ok = _run_test(trace, "seed/test_datefns.py", [py, str(ROOT / "seed" / "test_datefns.py")]) and ok
-    ok = _run_test(trace, "mockbank.py --self-test", [py, str(ROOT / "tools" / "driver" / "mockbank.py"), "--self-test"]) and ok
-    return ok
-
-
-def parse_args(argv):
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("files", nargs="+", help="one or more brief files, then the tool API file last")
-    parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--print", dest="print_workflow", action="store_true")
-    parser.add_argument("--print-config", action="store_true")
-    parser.add_argument("--config", help="skip extraction; use this config JSON file instead")
-    parser.add_argument("--model", help="override the extraction model")
-    parser.add_argument("--no-self-test", action="store_true")
-    parser.add_argument("--export", help="write the published workflow to this file")
-    parser.add_argument("--slot", help="save_workflow slot name")
-    args = parser.parse_args(argv)
-    *brief_args, tool_api_arg = args.files
-    if not brief_args:
-        parser.error("need at least one brief file and a tool API file")
-    args.briefs = [pathlib.Path(p) for p in brief_args]
-    args.tool_api = pathlib.Path(tool_api_arg)
-    return args
-
-
-def main(argv=None):
-    args = parse_args(sys.argv[1:] if argv is None else argv)
-    for p in [*args.briefs, args.tool_api]:
-        if not p.exists():
-            print(f"no such file: {p}", file=sys.stderr)
-            sys.exit(1)
-
-    if args.model:
-        os.environ["EXTRACTOR_MODEL"] = args.model
-
-    api = load_tools_api(args.tool_api)
-    slot = args.slot or "+".join(p.stem for p in args.briefs)
-    trace = Trace(ROOT / "results" / "traces" / f"{slot}.txt", slot)
+def run_tcc(args, briefs, api) -> dict:
+    cmd, env = tcc_command(args, briefs, api)
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    rc = subprocess.run(cmd, cwd=REPO, env=env).returncode
+    report = {}
     try:
-        trace.section("Extract")
-        if args.config:
-            config = json.loads(pathlib.Path(args.config).read_text())
-            trace.line(f"- config read from {args.config}, no model call")
-        else:
-            result = extract(args.briefs, args.tool_api)
-            config = result["config"]
-            for row in result.get("trace") or []:
-                trace.model(row.get("model", "?"), f"{row.get('purpose', '?')} ({row.get('seconds', '?')}s)")
-            if result.get("checks"):
-                trace.line(f"- checks after extraction: {len(result['checks'])} remaining. First: {result['checks'][0]}")
-            else:
-                trace.line("- checks after extraction: pass")
-            if result.get("conflicts"):
-                trace.line(f"- conflicts resolved (a later document overrode an earlier rule): {len(result['conflicts'])}")
-            if result.get("unmapped"):
-                trace.line(f"- brief rules the verifier could not map to a field: {len(result['unmapped'])}")
-            trace.line(f"- config extracted from {', '.join(p.name for p in args.briefs)} and {args.tool_api.name}")
-        if args.print_config:
-            print(json.dumps(config, indent=1))
-            return
+        report = json.loads((out / "build_report.json").read_text())
+    except (OSError, ValueError):
+        pass
+    exports = sorted(out.glob("*.workflow.json"))
+    saved = None
+    if exports:   # the Freya export, copied to a committed path
+        dest = REPO / "workflows"
+        dest.mkdir(exist_ok=True)
+        saved = dest / f"{args.slot}.workflow.json"
+        shutil.copyfile(exports[-1], saved)
+    ok = rc == 0 and (out / "workflow.json").exists() and (report.get("status") in (None, "ok"))
+    return {"status": "ok" if ok else "failed", "slot": args.slot, "saved": str(saved) if saved else None, "fallback_used": None,
+            "message": None if ok else f"final_run.sh exit {rc}; see {out}/final_run.log", "trace": report.get("trace"), "out": str(out)}
 
-        trace.section("Graph")
-        workflow = build_workflow(config, api)
-        trace.line(f"- {len(workflow['nodes'])} nodes built from the config")
-        if args.print_workflow:
-            print(json.dumps(workflow, indent=1))
-            return
 
-        if args.no_self_test:
-            trace.section("Self-tests")
-            trace.line("- skipped (--no-self-test)")
-            tests_ok = True
-        else:
-            tests_ok = self_tests(trace, workflow, config)
+def run_plan(args, briefs, api) -> dict:
+    from builder.plan.run import build  # noqa: PLC0415
 
-        trace.section("Freya")
-        trace.line(f"- agent model: {freya.AGENT_LLM['provider']} / {freya.AGENT_LLM['model']} (set in freya.py; this build does not call it)")
-        if not tests_ok:
-            trace.line("- not published. A self-test failed.")
-            print(f"self-tests failed. Trace: {trace.path}")
-            sys.exit(1)
+    text = "\n\n".join(Path(b).read_text(encoding="utf-8") for b in briefs)
+    out = Path(args.out)
+    report = build(text, Path(api), out)
+    saved = None
+    wf = out / "workflow.json"
+    if report.get("status") == "ok" and wf.exists():
+        dest = REPO / "workflows"
+        dest.mkdir(exist_ok=True)
+        saved = dest / f"{args.slot}.workflow.json"
+        shutil.copyfile(wf, saved)
+    report["saved"] = str(saved) if saved else None
+    report["slot"] = args.slot
+    report["fallback_used"] = None
+    return report
 
-        dry = freya.validate_workflow(slot, workflow)
-        trace.line(f"- dry-run valid: {bool(dry.get('valid'))}")
-        if not dry.get("valid"):
-            trace.line("- not published. The dry run was invalid.")
-            print(json.dumps(dry, indent=1))
-            sys.exit(1)
-        if args.dry_run:
-            print(json.dumps(dry, indent=1))
-            return
 
-        saved = freya.save_workflow(slot, workflow)
-        trace.line(f"- slot: {slot}")
-        trace.line(f"- workflow_id: {saved.get('workflow_id')}")
-        trace.line(f"- agent_id: {saved.get('agent_id')}")
-        trace.line(f"- version: {saved.get('version')}")
-        print(json.dumps(saved))
+VARIANTS = {"tcc": run_tcc, "agentic": run_agentic, "plan": run_plan}
 
-        if not args.no_self_test:
-            from selftest.loop import run_loop
-            try:
-                workflow = run_loop(workflow, config, saved["workflow_id"], args.briefs, args.tool_api, trace)
-            except Exception as error:
-                trace.line(f"- unit self-test error: {error}")
-                print(f"unit self-test error: {error}. Trace: {trace.path}")
 
-        if args.export:
-            path = freya.export_workflow(saved["workflow_id"], args.export)
-            trace.line(f"- exported: {path}")
-            print(f"exported: {path}")
-        print(f"trace: {trace.path}")
-    finally:
-        trace.finish()
+def parse(argv=None):
+    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("inputs", nargs="+", help="brief files (any text format) and exactly one tool API file")
+    p.add_argument("--variant", default="tcc", choices=sorted(VARIANTS))
+    p.add_argument("--save", default="freya", choices=["freya", "none"], help="none: write files only, touch nothing on Freya")
+    p.add_argument("--slot", help="Freya slot name; default <variant>-<last brief stem>")
+    p.add_argument("--max-minutes", type=float, default=None, help="hard wall clock (tcc: 30, shipped at minute -4; agentic: 15)")
+    p.add_argument("--unit", default="on", choices=["on", "off"], help="run the builder's own unit tests on Freya (a -unit copy)")
+    p.add_argument("--localsim", default="on", choices=["on", "off"], help="hard local simulations from the builder's own policy; failures join the fix round")
+    p.add_argument("--review", default="on", choices=["on", "off"], help="fresh-context review + one fix round")
+    p.add_argument("--review-minutes", type=float, default=5.0)
+    p.add_argument("--fix-minutes", type=float, default=6.0)
+    p.add_argument("--model", default=os.environ.get("BUILDER_MODEL", "claude-opus-5-5"))
+    p.add_argument("--max-usd", type=float, default=None, help="optional cost cap for the agent run")
+    p.add_argument("--members", default="", help="team members for submission.json, comma separated (default: MEMBERS.txt)")
+    p.add_argument("--out", help="output directory; default out/<variant>/<slot>/")
+    p.add_argument("--self-test", default="none", choices=["none"], help="later: local, freya")
+    p.add_argument("--keep-workspace", action="store_true", help="keep the temp workspace for inspection")
+    return p.parse_args(argv)
+
+
+def write_submission(args, report: dict, mock_url: str) -> Path:
+    """submission.json: members[], workflow (the exported Freya workflow, else the last-green file), trace, mock_url. In <out>/ and at the repo root."""
+    members = [m.strip() for m in (args.members or "").split(",") if m.strip()]
+    mf = REPO / "MEMBERS.txt"
+    if not members and mf.exists():
+        members = [m.strip() for m in mf.read_text().replace("\n", ",").split(",") if m.strip()]
+    wf = report.get("saved") or str(Path(args.out) / "workflow.json")
+    sub = {"members": members, "workflow": wf, "trace": report.get("trace"), "mock_url": mock_url}
+    (Path(args.out) / "submission.json").write_text(json.dumps(sub, indent=1, ensure_ascii=False))
+    (REPO / "submission.json").write_text(json.dumps(sub, indent=1, ensure_ascii=False))
+    return REPO / "submission.json"
+
+
+def _reexec_in_venv():
+    """`python3 builder/build.py ...` may run on a Python without the converters (python-docx, openpyxl, pypdf): run under .venv310 when it exists."""
+    venv = REPO / ".venv310"
+    py = venv / "bin" / "python"
+    if py.exists() and Path(sys.prefix).resolve() != venv.resolve() and not os.environ.get("BUILD_PY_REEXEC"):
+        os.environ["BUILD_PY_REEXEC"] = "1"
+        os.execv(str(py), [str(py), *sys.argv])
+
+
+def main(argv=None) -> int:
+    if argv is None:
+        _reexec_in_venv()
+    args = parse(argv)
+    mock_url = ""
+    ing = None
+    if Path(args.inputs[0]).is_dir():   # final format: <case_folder> <mock_url>
+        from builder.ingest import ingest  # noqa: PLC0415
+        if len(args.inputs) != 2 or not args.inputs[1].startswith("http"):
+            print("error: usage: builder/build.py <case_folder> <mock_url>", file=sys.stderr)
+            return 2
+        folder, mock_url = Path(args.inputs[0]), args.inputs[1]
+        args.slot = args.slot or "case-" + "".join(c if c.isalnum() else "-" for c in folder.resolve().name.lower()).strip("-")[:40]
+        args.out = args.out or str(REPO / "out" / args.variant / args.slot)
+        try:
+            ing = ingest(folder, mock_url, Path(args.out) / "ingest")
+        except Exception as e:  # noqa: BLE001
+            print(f"error: ingest failed: {e}", file=sys.stderr)
+            return 2
+        for n in ing["notes"]:
+            if "FAILED" in n:
+                print(f"WARNING ingest: {n}", file=sys.stderr)
+        print(f"ingest: {ing['files']} file(s), {ing['chars']} chars, tool API from {ing['api_source']}", file=sys.stderr)
+        briefs, api = [Path(ing["brief"])], Path(ing["api"])
+    else:
+        try:
+            briefs, api = split_inputs(args.inputs)
+        except InputError as e:
+            print(f"error: {e}", file=sys.stderr)
+            return 2
+    args.max_minutes = args.max_minutes if args.max_minutes is not None else (30.0 if args.variant == "tcc" else 15.0)
+    args.slot = args.slot or slot_name(briefs, args.variant)
+    args.out = args.out or str(REPO / "out" / args.variant / args.slot)
+    from builder.ledger import sources_from_paths, write_ledger  # noqa: PLC0415
+    sources = ing["sources"] if ing else sources_from_paths(briefs)
+    ledger = write_ledger(sources, Path(args.out) / "conflict_ledger.json")
+    open_n = sum(1 for r in ledger["rules"] if r.get("open"))
+    print(f"ledger: {len(ledger['rules'])} rule(s), {open_n} open", file=sys.stderr)
+    report = VARIANTS[args.variant](args, briefs, api)
+    if mock_url:
+        report["submission"] = str(write_submission(args, report, mock_url))
+    print(json.dumps({k: report.get(k) for k in ("status", "slot", "saved", "fallback_used", "message", "trace", "submission")}, default=str))
+    return 0 if report.get("status") == "ok" else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

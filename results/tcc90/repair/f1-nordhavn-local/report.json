@@ -1,0 +1,83 @@
+{
+ "model": "google/gemini-3-flash-preview",
+ "customer_model": "meta-llama/llama-3.1-8b-instruct",
+ "judge": "jev",
+ "rows": [
+  {
+   "id": "repair-1",
+   "pass": false,
+   "failed": [
+    "outcome ('not_verified', 'failed'), expected ('promise', None)",
+    "conversation: Only \"yes\", \"that's me\", \"speaking\" or the customer's own name counts as confirmation."
+   ],
+   "transcript": [
+    [
+     "AGENT",
+     "Hello, this is Nordhavn Bank. Am I speaking with Ms Ada Quill?"
+    ],
+    [
+     "CUSTOMER",
+     "Yes, that's me."
+    ],
+    [
+     "AGENT",
+     "Hello, Ms Quill. Before we continue, I need to ask you a couple of security questions to protect your account. First, what is your date of birth?"
+    ],
+    [
+     "CUSTOMER",
+     "Fourteen March nineteen eighty-eight."
+    ],
+    [
+     "TOOL",
+     "verify_identity 200 {\"ok\": true, \"verified\": true, \"wrong_answers_left\": 3, \"all_verified\": false}"
+    ],
+    [
+     "AGENT",
+     "Thank you. And for the second question: what are the last four digits of the phone number we have on file for you?"
+    ],
+    [
+     "CUSTOMER",
+     "Eight, four, two, one."
+    ],
+    [
+     "TOOL",
+     "verify_identity 200 {\"ok\": true, \"verified\": false, \"wrong_answers_left\": 2, \"all_verified\": false}"
+    ],
+    [
+     "AGENT",
+     "I'm sorry, that doesn't match our records. Let's try again. What are the last four digits of the phone number we have on file for you?"
+    ],
+    [
+     "CUSTOMER",
+     "Eight, two, eight, one."
+    ],
+    [
+     "TOOL",
+     "verify_identity 200 {\"ok\": true, \"verified\": false, \"wrong_answers_left\": 1, \"all_verified\": false}"
+    ],
+    [
+     "AGENT",
+     "I'm sorry, that also doesn't match our records. We can try one last time. What are the last four digits of the phone number we have on file for you?"
+    ],
+    [
+     "CUSTOMER",
+     "Seven, eight, one, two."
+    ],
+    [
+     "TOOL",
+     "verify_identity 200 {\"ok\": true, \"verified\": false, \"wrong_answers_left\": 0, \"all_verified\": false}"
+    ],
+    [
+     "TOOL",
+     "close_call 200 {\"ok\": true}"
+    ]
+   ],
+   "judge": {
+    "pass": false,
+    "min_p": 0.27,
+    "status": "ok"
+   },
+   "ledger_pass": false
+  }
+ ]
+}

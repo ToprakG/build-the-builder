@@ -11,6 +11,8 @@ The ledger score is score.score_ledger. The conversation score is judge.judge_tr
 It compares both ledgers with the ledger lines in results/*.json. It does not call a model.
 The customer model is gemini-3-flash-preview. A Gemini key is used when it is set.
 Otherwise the same model is called through OpenRouter.
+--customer-model deepseek sends the customer through OpenRouter as deepseek/deepseek-v4.1-flash,
+even when a Gemini key is set. A full OpenRouter id is accepted too.
 A case style, when the case has one, is the same HOW YOU TALK block run_cases.py uses.
 """
 import argparse, json, os, pathlib, re, sys, urllib.error, urllib.request
@@ -31,6 +33,12 @@ from bank_url import origin
 
 GEMINI_MODEL = "gemini-3-flash-preview"
 OPENROUTER_CUSTOMER = "google/gemini-3-flash-preview"
+# Short names for --customer-model. Anything with a slash is used as an OpenRouter id.
+CUSTOMER_MODELS = {
+    "gemini": "google/gemini-3-flash-preview",
+    "deepseek": "deepseek/deepseek-v4.1-flash",
+    "deepseek-v4.1-flash": "deepseek/deepseek-v4.1-flash",
+}
 MAX_TURNS = 30
 # The chat route needs one user message before it will speak the opener. That line is not
 # the customer. Saved simulations start with the agent, so the judge must not see it.
@@ -47,7 +55,8 @@ def _spoken(text):
     text = text.strip('"').strip()
     text = re.sub(r"^(Customer|User)\s*:\s*", "", text, flags=re.I)
     text = re.sub(r"\[[^\]]*\]", "", text)
-    return " ".join(text.split())
+    lines = [line for line in text.splitlines() if line.strip() and not line.strip().startswith("#")]
+    return " ".join(" ".join(lines).split())
 
 def for_judge(messages):
     rows = list(messages or [])
@@ -86,16 +95,28 @@ def _customer_gemini(prompt, contents):
     parts = (((body.get("candidates") or [{}])[0].get("content") or {}).get("parts") or [{}])
     return "\n".join(part.get("text") or "" for part in parts).strip()
 
-def _customer_openrouter(prompt, agent_lines, customer_lines):
+def resolve_customer_model(name):
+    """A short name, or an OpenRouter id such as deepseek/deepseek-v4.1-flash."""
+    name = (name or "").strip()
+    if not name:
+        return OPENROUTER_CUSTOMER
+    if "/" in name:
+        return name
+    if name not in CUSTOMER_MODELS:
+        known = ", ".join(sorted(CUSTOMER_MODELS))
+        raise RuntimeError(f"unknown customer model {name}. Use one of {known}, or a full OpenRouter id.")
+    return CUSTOMER_MODELS[name]
+
+def _customer_openrouter(prompt, agent_lines, customer_lines, model=None):
     key = os.environ.get("OPENROUTER_API_KEY") or ""
     if not key:
-        raise RuntimeError("GEMINI_API_KEY and OPENROUTER_API_KEY are empty. The customer model needs one.")
+        raise RuntimeError("OPENROUTER_API_KEY is empty. The customer model needs it.")
     messages = [{"role": "system", "content": prompt}]
     for index, line in enumerate(agent_lines):
         messages.append({"role": "user", "content": line})
         if index < len(customer_lines):
             messages.append({"role": "assistant", "content": customer_lines[index]})
-    payload = {"model": OPENROUTER_CUSTOMER, "temperature": 0.4, "messages": messages}
+    payload = {"model": model or OPENROUTER_CUSTOMER, "temperature": 0.4, "messages": messages, "max_tokens": 600}
     request = urllib.request.Request(
         "https://openrouter.ai/api/v1/chat/completions",
         data=json.dumps(payload).encode(),
@@ -110,8 +131,14 @@ def _customer_openrouter(prompt, agent_lines, customer_lines):
     choice = ((body.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
     return choice.strip()
 
-def customer_reply(prompt, agent_lines, customer_lines):
-    if _gemini_key():
+def customer_reply(prompt, agent_lines, customer_lines, model=None):
+    """model forces OpenRouter. Without it, a Gemini key is used when one is set."""
+    chosen = model or os.environ.get("OPENROUTER_CUSTOMER_MODEL") or ""
+    if chosen:
+        raw = _customer_openrouter(prompt, agent_lines, customer_lines, resolve_customer_model(chosen))
+        if not _spoken(raw):
+            raw = _customer_openrouter(prompt, agent_lines, customer_lines, resolve_customer_model(chosen))
+    elif _gemini_key():
         contents = []
         for index, line in enumerate(agent_lines):
             contents.append({"role": "user", "parts": [{"text": line}]})
@@ -142,7 +169,7 @@ def chat_turn(workflow_id, message, variables, call_id=None):
             time.sleep(2 * (attempt + 1))
     raise last
 
-def run_case(workflow_id, case, host, style=None):
+def run_case(workflow_id, case, host, style=None, customer_model=None):
     status, opened = bank_call(host, "/v1/practice/sessions", {"case": case["id"]})
     if status != 200:
         raise RuntimeError(f"session {case['id']} -> {status} {opened}")
@@ -156,7 +183,7 @@ def run_case(workflow_id, case, host, style=None):
     for _ in range(MAX_TURNS):
         if not agent_lines:
             break
-        reply = customer_reply(prompt, agent_lines, customer_lines)
+        reply = customer_reply(prompt, agent_lines, customer_lines, customer_model)
         customer_lines.append(reply)
         call_id, agent, _ = chat_turn(workflow_id, reply, variables, call_id)
         if agent:
@@ -265,6 +292,7 @@ def main():
     parser.add_argument("--cases", default=str(ROOT / "public-test-set.json"))
     parser.add_argument("--only")
     parser.add_argument("--style", choices=["pieces", "corrects", "talkative", "asks_back", "in_words"])
+    parser.add_argument("--customer-model", help="deepseek (deepseek/deepseek-v4.1-flash), gemini, or an OpenRouter id")
     parser.add_argument("--compare-banks", action="store_true")
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--out")
@@ -275,10 +303,12 @@ def main():
         parser.error("--workflow-id is required for a chat run")
     cases = [case for case in json.loads(pathlib.Path(args.cases).read_text()) if (not args.brief or case["brief"] == args.brief) and (not args.only or case["id"] in args.only.split(","))]
     host = origin()
+    if args.customer_model:
+        print("customer", resolve_customer_model(args.customer_model), "via OpenRouter")
     workers = max(1, min(args.workers, 4))
     rows = []
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {pool.submit(run_case, args.workflow_id, case, host, args.style): case for case in cases}
+        futures = {pool.submit(run_case, args.workflow_id, case, host, args.style, args.customer_model): case for case in cases}
         for future in as_completed(futures):
             case = futures[future]
             try:

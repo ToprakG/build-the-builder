@@ -1,0 +1,45 @@
+{
+ "scenarios": [
+  "repair-1",
+  "repair-2",
+  "repair-3",
+  "repair-4"
+ ],
+ "rounds": [],
+ "committed": 0,
+ "status": "unscored",
+ "baseline": [
+  {
+   "case_id": "repair-1",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 500: {\"success\":false,\"data\":{\"message\":\"Internal server error\",\"result\":{\"requestId\":\"3431e30e-7b37-43ae-b86b-b43bf031e5ca\"}}}')"
+   ],
+   "infra": true
+  },
+  {
+   "case_id": "repair-2",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 500: {\"success\":false,\"data\":{\"message\":\"Internal server error\",\"result\":{\"requestId\":\"dfd890a2-e6e5-4925-8059-25ac8c10a09e\"}}}')"
+   ],
+   "infra": true
+  },
+  {
+   "case_id": "repair-3",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 500: {\"success\":false,\"data\":{\"message\":\"Internal server error\",\"result\":{\"requestId\":\"4d18e8d3-160a-4fd3-ae99-2137f6536a98\"}}}')"
+   ],
+   "infra": true
+  },
+  {
+   "case_id": "repair-4",
+   "passed": false,
+   "failed_reasons": [
+    "runner error: RuntimeError('POST /api/v2/chat/message -> 500: {\"success\":false,\"data\":{\"message\":\"Internal server error\",\"result\":{\"requestId\":\"18568453-68d3-4396-9aa7-d79169510638\"}}}')"
+   ],
+   "infra": true
+  }
+ ]
+}

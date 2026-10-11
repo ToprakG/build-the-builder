@@ -1,0 +1,133 @@
+{
+ "name": "difficulty",
+ "node_type": "conversation",
+ "on_enter": {
+  "type": "llm",
+  "prompt": "Say one short sentence of sympathy, then offer to put the customer through to a colleague who can help. Make no payment request."
+ },
+ "on_enter_first_entry_only": true,
+ "task_message": "The customer has a difficulty. Do not ask for any payment. If they accept the offer of a colleague, call hand_off with desk desk_y. If they decline, thank them and say goodbye. After every tool result, either speak to the customer or call the next tool: never end a turn with nothing. Call one tool per message. Follow what_to_do_next in a tool result.",
+ "tools": [
+  {
+   "type": "function",
+   "config": {
+    "timeoutMs": 12000,
+    "maxRetries": 0
+   },
+   "function": {
+    "name": "hand_off",
+    "handler": "__function__:api_call",
+    "description": "Hand over to the help desk. CALL it when the customer accepts the offer.",
+    "parameters": {
+     "type": "object",
+     "properties": {
+      "url": {
+       "type": "string",
+       "default": "https://api.example-bank.invalid/v1/hand_off"
+      },
+      "method": {
+       "type": "string",
+       "default": "POST"
+      },
+      "headers": {
+       "type": "object",
+       "properties": {
+        "Content-Type": {
+         "type": "string",
+         "default": "application/json"
+        }
+       }
+      },
+      "body": {
+       "type": "object",
+       "properties": {
+        "callerRef": {
+         "type": "string",
+         "default": "{{callerRef}}"
+        },
+        "desk": {
+         "type": "string",
+         "enum": [
+          "desk_y"
+         ],
+         "description": "desk_y: the help desk.",
+         "default": "{{desk}}"
+        }
+       },
+       "required": [
+        "callerRef",
+        "desk"
+       ]
+      }
+     }
+    }
+   },
+   "post_process_code": "try:\n    result.pop('header', None)\n    d = result.get('data')\n    ok = isinstance(d, dict) and str(d.get('ok')).lower() == 'true'\n    if ok:\n        vars['call_state'] = 'transferred'\n        vars['close_outcome'] = 'outcome_y'\n        vars['close_detail'] = 'detail_a' if vars.get('transfer_desk_wanted') != 'desk_y' else 'detail_b'\n    if isinstance(d, dict):\n        d['what_to_do_next'] = 'Say a colleague will take over, then say goodbye.' if ok else 'The transfer failed. Say so and offer to continue.'\nexcept Exception:\n    pass\n"
+  },
+  {
+   "type": "function",
+   "config": {
+    "timeoutMs": 10000
+   },
+   "function": {
+    "name": "end_call",
+    "handler": "__function__:end_call",
+    "description": "Ends the call. CALL it right after you said goodbye, with no other text.",
+    "parameters": {
+     "type": "object",
+     "properties": {
+      "message_mode": {
+       "type": "string",
+       "default": "none"
+      }
+     }
+    }
+   }
+  }
+ ],
+ "extraction_schema": [
+  {
+   "name": "help_answer",
+   "type": "string",
+   "enum_values": [
+    "stay",
+    "accepted",
+    "declined"
+   ],
+   "description": "The answer to the offer of a colleague: accepted, declined, or stay while unclear.",
+   "min_confidence": 0.7
+  }
+ ],
+ "max_node_turns": 6,
+ "max_turn_transition": "goodbye_short",
+ "transitions": [
+  {
+   "target_node": "goodbye_transfer",
+   "description": "Transferred",
+   "condition": {
+    "logic": "or",
+    "conditions": [
+     {
+      "variable": "call_state",
+      "operator": "equals",
+      "operand": "transferred"
+     }
+    ]
+   }
+  },
+  {
+   "target_node": "goodbye_short",
+   "description": "Declined the offer",
+   "condition": {
+    "logic": "or",
+    "conditions": [
+     {
+      "variable": "help_answer",
+      "operator": "equals",
+      "operand": "declined"
+     }
+    ]
+   }
+  }
+ ]
+}

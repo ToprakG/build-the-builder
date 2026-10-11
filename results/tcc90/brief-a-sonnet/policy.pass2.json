@@ -1,0 +1,494 @@
+{
+ "bank": "Freya Bank",
+ "language": "en",
+ "address": "{title} {last_name}",
+ "call_variables": [
+  "customer_id",
+  "first_name",
+  "last_name",
+  "title",
+  "now"
+ ],
+ "holidays": [
+  "2026-10-26",
+  "2026-11-11",
+  "2026-11-26",
+  "2026-12-25",
+  "2027-01-01"
+ ],
+ "bands": [
+  {
+   "name": "early",
+   "min_days": 1,
+   "max_days": 7,
+   "deadline_business_days": 12,
+   "attempts": 1
+  },
+  {
+   "name": "late",
+   "min_days": 8,
+   "max_days": 45,
+   "deadline_business_days": 7,
+   "attempts": 2
+  }
+ ],
+ "attempt1": "Propose the full past-due amount (or the floor if the customer already said the full amount is too much) on the last business day of this week, or of next week if today is that day.",
+ "attempt_plan": [
+  {
+   "date": "end_of_week_roll",
+   "amount": "full_or_floor",
+   "cap_at_deadline": true
+  },
+  {
+   "date": "deadline",
+   "amount": "floor",
+   "cap_at_deadline": false
+  }
+ ],
+ "weekday_words": {
+  "next": "following_week",
+  "this": "current_week"
+ },
+ "identity": {
+  "questions": [
+   "date_of_birth",
+   "phone_last4"
+  ],
+  "max_wrong": 3,
+  "swap_hint": true,
+  "prompts": {
+   "date_of_birth": "What is your date of birth?",
+   "phone_last4": "What are the last four digits of the phone number we have on file?"
+  },
+  "kinds": {
+   "date_of_birth": "date",
+   "phone_last4": "digits"
+  }
+ },
+ "callback": {
+  "start": "10:00",
+  "end": "19:00",
+  "same_day": true
+ },
+ "outcome_map": {
+  "promise": [
+   "promise",
+   null
+  ],
+  "paid": [
+   "paid",
+   null
+  ],
+  "tr_restructuring": [
+   "transferred",
+   "restructuring"
+  ],
+  "tr_human": [
+   "transferred",
+   "human"
+  ],
+  "tr_support": [
+   "transferred",
+   "support"
+  ],
+  "np_refused": [
+   "no_promise",
+   "refused"
+  ],
+  "np_hardship": [
+   "no_promise",
+   "hardship"
+  ],
+  "np_dispute": [
+   "no_promise",
+   "dispute"
+  ],
+  "np_service_error": [
+   "no_promise",
+   "service_error"
+  ],
+  "nv_failed": [
+   "not_verified",
+   "failed"
+  ],
+  "nv_declined": [
+   "not_verified",
+   "declined"
+  ],
+  "nr_callback": [
+   "not_reached",
+   "callback"
+  ],
+  "nr_no_callback": [
+   "not_reached",
+   "no_callback"
+  ],
+  "nr_wrong_number": [
+   "not_reached",
+   "wrong_number"
+  ],
+  "nr_deceased": [
+   "not_reached",
+   "deceased"
+  ],
+  "nr_unclear": [
+   "not_reached",
+   "unclear"
+  ]
+ },
+ "queue_map": {
+  "restructuring": "restructuring",
+  "human": "general",
+  "support": "support"
+ },
+ "note_map": {},
+ "close_rule": {
+  "kind": "single"
+ },
+ "notes_on_restructuring": null,
+ "product_types": {
+  "credit_card": {
+   "enum": "credit_card",
+   "label": "credit card ending {last4}",
+   "floor_field": "minimum_payment",
+   "last4_field": "card_last4"
+  },
+  "personal_loan": {
+   "enum": "personal_loan",
+   "label": "personal loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  },
+  "car_loan": {
+   "enum": "car_loan",
+   "label": "car loan",
+   "floor_field": "instalment_amount",
+   "last4_field": null
+  }
+ },
+ "account_fields": {
+  "product_id": "product_id",
+  "type": "type",
+  "past_due": "past_due",
+  "days_late": "days_late"
+ },
+ "product_id_format": "",
+ "tools": {
+  "verify_identity": {
+   "field": "field",
+   "answer": "answer"
+  },
+  "create_promise": {
+   "product_id": "product_id",
+   "amount": "amount",
+   "date": "date",
+   "amount_unit": "currency"
+  },
+  "schedule_callback": {
+   "mode": "date_time",
+   "date": "date",
+   "time": "time"
+  },
+  "close_call": {
+   "mode": "outcome_reason",
+   "outcome": "outcome",
+   "reason": "reason"
+  },
+  "transfer_to_agent": {
+   "queue": "queue"
+  },
+  "add_note": {
+   "product_id": "product_id",
+   "reason": "reason"
+  }
+ },
+ "sentences": {
+  "opening": "a digital assistant calling from Freya Bank, and the call is recorded",
+  "promise_confirmation": "You will receive a text message confirming this promise.",
+  "ai": "I am Freya Bank's digital assistant.",
+  "scam": "you can verify the call by phoning Freya Bank's customer service number",
+  "failed_id": "use the mobile app or a branch"
+ },
+ "lines": {
+  "opening": {
+   "text": "Hello, I am a digital assistant calling from Freya Bank, and this call is recorded.",
+   "verbatim": false
+  },
+  "right_party_question": {
+   "text": "Am I speaking with {title} {last_name}?",
+   "verbatim": true
+  },
+  "condolence": {
+   "text": "I am sorry for your loss.",
+   "verbatim": true
+  },
+  "debt_intro": {
+   "text": "I am calling from the collections team about a late payment.",
+   "verbatim": false
+  },
+  "first_ask": {
+   "text": "Can you make this payment today?",
+   "verbatim": true
+  },
+  "first_ask_multi": {
+   "text": "Can you make this payment today?",
+   "verbatim": true
+  },
+  "confirm_question": {
+   "text": "Do you confirm?",
+   "verbatim": true
+  },
+  "ai": {
+   "text": "I am Freya Bank's digital assistant.",
+   "verbatim": false
+  },
+  "scam": {
+   "text": "You can verify this call by phoning Freya Bank's customer service number.",
+   "verbatim": false
+  },
+  "failed_id": {
+   "text": "I cannot continue with the check; please use the mobile app or a branch.",
+   "verbatim": false
+  },
+  "paid_reply": {
+   "text": "Payments can take one business day to appear.",
+   "verbatim": false
+  },
+  "change_promise": {
+   "text": "A recorded promise cannot be changed in this call; you can change it in the mobile app.",
+   "verbatim": false
+  },
+  "cannot_record": {
+   "text": "I am sorry, I could not record the promise.",
+   "verbatim": false
+  },
+  "no_info": {
+   "text": "I do not have that information.",
+   "verbatim": false
+  },
+  "id_reason": {
+   "text": "These questions protect your account.",
+   "verbatim": false
+  },
+  "hardship_sympathy": {
+   "text": "I am sorry to hear that.",
+   "verbatim": false
+  },
+  "hint_retry": {
+   "text": "Could you please say the month as a word?",
+   "verbatim": false
+  },
+  "goodbye": {
+   "text": "Thank you, goodbye.",
+   "verbatim": false
+  },
+  "ask_again": {
+   "text": "Sorry, just to be sure: am I speaking with {title} {last_name}?",
+   "verbatim": false
+  },
+  "promise_confirmation": {
+   "text": "You will receive a text message confirming this promise.",
+   "verbatim": true
+  }
+ },
+ "forbidden_before_verify": [
+  "collections",
+  "debt",
+  "payment",
+  "credit card",
+  "personal loan",
+  "car loan",
+  "account details"
+ ],
+ "multi_product": false,
+ "max_products": 1,
+ "retries": {
+  "verify_identity": 1,
+  "get_account": 1,
+  "create_promise": 1,
+  "schedule_callback": 1,
+  "transfer_to_agent": 1,
+  "close_call": 1
+ },
+ "ask_limits": {
+  "right_party": 2,
+  "id_decline": 2,
+  "callback_reask": 1,
+  "vague_date": 1,
+  "stop_talking": 2,
+  "human_offer": 1
+ },
+ "unused_tools": [
+  "add_note"
+ ],
+ "extra_rules": [
+  {
+   "statement": "A relative or third party may not answer security questions nor be told anything about the account, even if they offer to pay.",
+   "brief_quote": "A relative may not answer the security questions and may not be told anything about the account, even if they offer to pay.",
+   "stage": "third_party"
+  },
+  {
+   "statement": "Before identity is verified do not say collections, debt, payment or the product, including to relatives.",
+   "brief_quote": "Do not say \"collections\", \"debt\", \"payment\" or the product before identity is verified.",
+   "stage": "opening"
+  },
+  {
+   "statement": "Only yes, that's me, speaking or the customer's own name confirms identity; hello, go ahead, who is this do not. Ask once more, then close not_reached/unclear.",
+   "brief_quote": "Only \"yes\", \"that's me\", \"speaking\" or the customer's own name counts as confirmation.",
+   "stage": "opening"
+  },
+  {
+   "statement": "Day-month swap hint retry does not count as a wrong answer; dates given only as numbers are read day, month, year; dates sent as YYYY-MM-DD.",
+   "brief_quote": "That retry does not count as a wrong answer.",
+   "stage": "identity"
+  },
+  {
+   "statement": "Asking what the call is about instead of answering counts as declining; a second refusal or second such question closes the call as not_verified/declined.",
+   "brief_quote": "Asking what the call is about instead of answering counts as declining.",
+   "stage": "identity"
+  },
+  {
+   "statement": "After three wrong answers do not state the debt.",
+   "brief_quote": "After three wrong answers, do not state the debt.",
+   "stage": "identity"
+  },
+  {
+   "statement": "Callback must be today or next business day, 10:00-19:00 inclusive, later than now; if the person's second offer is also outside, do not schedule and close no_callback.",
+   "brief_quote": "A callback is for today or the next business day, from 10:00 to 19:00, both included, and later than `now`.",
+   "stage": "third_party"
+  },
+  {
+   "statement": "Promise date must be today or later, a business day, not after the deadline; weekend/holiday within the deadline gets the next business day; date after the deadline gets the deadline offered, refusal is a flat refusal.",
+   "brief_quote": "A promise date must be today or later, a business day, and not after the deadline.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Vague date: ask once for the exact day; if none, propose the deadline.",
+   "brief_quote": "ask once for the exact day. If they still give none, propose the deadline.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Never ask 'how much can you pay?'; agent proposes every amount. Offer the floor once if full is too much, saying the rest stays overdue. Amount between floor and full accepted; below floor offer floor once.",
+   "brief_quote": "Never ask \"how much can you pay?\". The agent proposes every amount.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "A date or amount proposed by the customer is never a refusal. A flat refusal or non-answer uses one attempt; when attempts are used up close no_promise/refused without repeating a refused offer.",
+   "brief_quote": "A date or an amount the customer proposes is never a refusal.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Illness, death in family or job loss: one sentence of sympathy, no persuasion attempt, offer support team transfer; accepted -> transferred/support, declined -> no_promise/hardship. Customer-named date or amount still recorded.",
+   "brief_quote": "say one short sentence of sympathy and make no persuasion attempt.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Never offer a discount, waiver, instalment plan or any term not in the brief.",
+   "brief_quote": "Never offer a discount, a waiver, an instalment plan or any term that is not in this brief.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Read product, amount and date back and ask for confirmation; create_promise only after a clear yes; re-check and re-read if customer changes date/amount.",
+   "brief_quote": "Call `create_promise` only after a clear yes.",
+   "stage": "close"
+  },
+  {
+   "statement": "One promise per product; recorded promise cannot be changed or cancelled in the call (mobile app instead). Say recorded only after ok true; retry once on failure, then close no_promise/service_error.",
+   "brief_quote": "A recorded promise cannot be changed or cancelled in the same call.",
+   "stage": "close"
+  },
+  {
+   "statement": "'I already paid' (this past-due amount): say payments can take one business day, take no promise, close paid. Product closed/paid off in the past or not theirs is a dispute: no promise, close no_promise/dispute.",
+   "brief_quote": "Rule 39 covers only a payment of this past-due amount.",
+   "stage": "debt"
+  },
+  {
+   "statement": "Request for new payment plan or lower instalments: do not describe a plan, transfer to restructuring and close transferred/restructuring.",
+   "brief_quote": "do not describe a plan.",
+   "stage": "negotiate"
+  },
+  {
+   "statement": "Request for a human: ask once whether you can help first; if they insist transfer to general, close transferred/human. Applies before and after verification.",
+   "brief_quote": "ask once whether you can help first.",
+   "stage": "global"
+  },
+  {
+   "statement": "Customer saying twice they do not want to talk: close no_promise/refused; before verification not_verified/declined.",
+   "brief_quote": "If the customer says twice that they do not want to talk",
+   "stage": "global"
+  },
+  {
+   "statement": "Questions that cannot be answered from tools: say you do not have that information; never invent figures, dates or reasons.",
+   "brief_quote": "Do not invent figures, dates or reasons.",
+   "stage": "global"
+  },
+  {
+   "statement": "Answer an AI/robot or scam question first, then continue; the following ask counts as the second ask.",
+   "brief_quote": "Answer a question from the customer first (rules 4 and 43).",
+   "stage": "opening"
+  },
+  {
+   "statement": "Thank the customer and say goodbye before close_call; close_call is the single, last tool call. If a transfer follows a recorded promise, close as transferred with the transfer reason.",
+   "brief_quote": "Thank the customer and say goodbye before `close_call`.",
+   "stage": "close"
+  },
+  {
+   "statement": "State the product by name (credit card ending last4, personal loan, car loan), the past-due amount and days late after verification.",
+   "brief_quote": "State the past-due amount and how many days late it is.",
+   "stage": "debt"
+  },
+  {
+   "statement": "Product id format is not stated in the brief.",
+   "brief_quote": "",
+   "stage": "global"
+  }
+ ],
+ "_source": {
+  "/bank": "Freya Bank",
+  "/address": "Address the customer as title plus last name.",
+  "/call_variables": "Every call starts with these.",
+  "/holidays/0": "2026-10-26",
+  "/holidays/1": "2026-11-11",
+  "/holidays/2": "2026-11-26",
+  "/holidays/3": "2026-12-25",
+  "/holidays/4": "2027-01-01",
+  "/bands/0/min_days": "| 1 to 7 | early | the 12th business day after today | 1 |",
+  "/bands/0/max_days": "| 1 to 7 | early | the 12th business day after today | 1 |",
+  "/bands/0/deadline_business_days": "the 12th business day after today",
+  "/bands/0/attempts": "| 1 to 7 | early | the 12th business day after today | 1 |",
+  "/bands/1/min_days": "| 8 to 45 | late | the 7th business day after today | 2 |",
+  "/bands/1/max_days": "| 8 to 45 | late | the 7th business day after today | 2 |",
+  "/bands/1/deadline_business_days": "the 7th business day after today",
+  "/bands/1/attempts": "| 8 to 45 | late | the 7th business day after today | 2 |",
+  "/attempt1": "Attempt 1: propose the last business day of this week. If today is that day, propose the last business day of next week.",
+  "/attempt_plan/1": "Attempt 2, late band only: propose the floor amount on the deadline.",
+  "/identity/max_wrong": "Three wrong answers in total end the check",
+  "/identity/questions": "first the date of birth, then the last four digits of the phone number on file",
+  "/identity/swap_hint": "`verify_identity` returns `hint: \"day_month_swapped\"`",
+  "/callback/start": "from 10:00 to 19:00, both included",
+  "/callback/end": "from 10:00 to 19:00, both included",
+  "/callback/same_day": "A callback is for today or the next business day",
+  "/weekday_words/next": "\"Next <weekday>\" means that weekday in the following calendar week.",
+  "/weekday_words/this": "\"This <weekday>\" means the one in the current week.",
+  "/queue_map/human": "call `transfer_to_agent` with queue `general`",
+  "/queue_map/support": "call `transfer_to_agent` with queue `support`",
+  "/queue_map/restructuring": "call `transfer_to_agent` with queue `restructuring`",
+  "/note_map": "Brief A never uses `add_note`.",
+  "/product_types/credit_card/floor_field": "The **floor** is `minimum_payment` for a credit card",
+  "/product_types/personal_loan/floor_field": "`instalment_amount` for a personal loan or a car loan",
+  "/product_types/credit_card/label": "\"credit card ending 4821\"",
+  "/sentences/promise_confirmation": "You will receive a text message confirming this promise.",
+  "/sentences/opening": "say you are a digital assistant calling from Freya Bank, and that the call is recorded",
+  "/sentences/ai": "say that you are Freya Bank's digital assistant and continue",
+  "/sentences/scam": "say they can verify the call by phoning Freya Bank's customer service number",
+  "/sentences/failed_id": "Tell the customer to use the mobile app or a branch.",
+  "/lines/condolence": "I am sorry for your loss.",
+  "/lines/first_ask": "Can you make this payment today?",
+  "/lines/confirm_question": "Do you confirm?",
+  "/lines/right_party_question": "Am I speaking with {title} {last_name}?",
+  "/lines/promise_confirmation": "You will receive a text message confirming this promise.",
+  "/retries/create_promise": "If it fails, try once more.",
+  "/unused_tools/0": "Brief A never uses `add_note`."
+ },
+ "_overrides": []
+}

@@ -1,0 +1,83 @@
+{
+ "name": "record_one",
+ "node_type": "api_request",
+ "passthrough": true,
+ "passthrough_default_transition": "record_next",
+ "on_enter": {
+  "type": "silent"
+ },
+ "disable_inactivity_monitor": true,
+ "pre_actions": [
+  {
+   "type": "function",
+   "config": {
+    "timeoutMs": 12000,
+    "maxRetries": 0
+   },
+   "function": {
+    "name": "store_agreement",
+    "handler": "__function__:api_call",
+    "description": "Record one promise.",
+    "parameters": {
+     "type": "object",
+     "properties": {
+      "url": {
+       "type": "string",
+       "default": "https://api.example-bank.invalid/v1/store_agreement"
+      },
+      "method": {
+       "type": "string",
+       "default": "POST"
+      },
+      "headers": {
+       "type": "object",
+       "properties": {
+        "Content-Type": {
+         "type": "string",
+         "default": "application/json"
+        }
+       }
+      },
+      "body": {
+       "type": "object",
+       "properties": {
+        "callerRef": {
+         "type": "string",
+         "default": "{{callerRef}}"
+        },
+        "item_ref": {
+         "type": "string",
+         "default": "{{current_ref}}"
+        },
+        "amount_minor": {
+         "type": "integer",
+         "default": "{{current_amount_minor}}"
+        },
+        "pay_on": {
+         "type": "string",
+         "default": "{{current_date}}"
+        }
+       },
+       "required": [
+        "callerRef",
+        "item_ref",
+        "amount_minor",
+        "pay_on"
+       ]
+      }
+     }
+    }
+   },
+   "post_process_code": "try:\n    result.pop('header', None)\n    d = result.get('data')\n    if isinstance(d, dict) and str(d.get('ok')).lower() == 'true':\n        vars['promise_count'] = str(int(vars.get('promise_count') or 0) + 1)\n        vars['close_outcome'] = 'outcome_x'\n        vars['close_detail'] = ''\n        vars['record_result'] = 'ok'\n    else:\n        vars['record_result'] = 'failed'\nexcept Exception:\n    vars['record_result'] = 'failed'\n"
+  }
+ ],
+ "transitions": [
+  {
+   "target_node": "record_next",
+   "description": "always",
+   "condition": {
+    "operator": "always"
+   }
+  }
+ ]
+}

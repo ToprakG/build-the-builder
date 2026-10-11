@@ -1,0 +1,43 @@
+{
+ "committed": 0,
+ "stop_reason": "max iterations",
+ "cases": 10,
+ "iterations": [
+  {
+   "iteration": 1,
+   "failures": 2,
+   "unit_tests": 0,
+   "proposed": 2,
+   "accepted": 2,
+   "gate": {
+    "commit": false,
+    "p_value": 0.5,
+    "direction": -2,
+    "wins": 0,
+    "losses": 2,
+    "ties": 1,
+    "broken": [
+     "F3-006",
+     "F3-009"
+    ],
+    "slipped": [],
+    "reasons": [
+     "heldout: 0 better, 2 worse, 1 equal; sign test p=0.500 (threshold 0.1), direction -2",
+     "pass total best 2 vs candidate 0 of 3",
+     "no significant improvement",
+     "cases that passed every rep now fail every rep: ['F3-006', 'F3-009']"
+    ],
+    "best": {
+     "F3-001": 0,
+     "F3-009": 1,
+     "F3-006": 1
+    },
+    "candidate": {
+     "F3-001": 0,
+     "F3-009": 0,
+     "F3-006": 0
+    }
+   }
+  }
+ ]
+}

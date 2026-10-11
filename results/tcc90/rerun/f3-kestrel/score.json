@@ -1,0 +1,30 @@
+{
+ "brief": "f3-kestrel",
+ "reps": 1,
+ "agent_id": "d5d4ff3b-589d-47bc-a64d-171c85db3538",
+ "workflow_id": "70959328-e4d8-4609-aee0-af0479d83ae8",
+ "passed": 0,
+ "total": 1,
+ "rows": [
+  {
+   "id": "F3-005",
+   "family": "Multi-product",
+   "pass": false,
+   "failed": [
+    "promises [('acc-1', 240.0, '2026-12-02'), ('acc-2', 135.0, '2026-12-02')], expected [('acc-2', 135.0, '2026-12-02')]",
+    "notes [], expected [('acc-1', 'system_error')]",
+    "conversation: - The agent failed the requirement to not say the first promise was recorded; in Message 12, it stated 'Both promises have been recorded.' - There is no evidence in the system events that a 'service-error note' was created for the first product (no add_note or similar tool was called). - The call ended correctly with the assistant ending the call."
+   ],
+   "tools": [
+    "verify_identity",
+    "verify_identity",
+    "get_account",
+    "create_promise",
+    "create_promise",
+    "create_promise",
+    "create_promise",
+    "close_call"
+   ]
+  }
+ ]
+}

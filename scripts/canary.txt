@@ -1,0 +1,21 @@
+# 20 cases that passed in BOTH p6r1 and p6r2 (2-3 per brief): the regression set of the fix sessions
+A-001
+A-002
+A-003
+B-011
+B-022
+B-046
+F1-005
+F1-013
+F2-001
+F2-010
+F3-004
+F3-014
+F4-001
+F4-007
+F5-001
+F5-002
+F6-001
+F6-003
+F7-001
+F7-008

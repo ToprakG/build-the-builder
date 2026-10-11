@@ -1,0 +1,2343 @@
+{
+ "sources": [
+  {
+   "path": "BRIEF.md",
+   "date": null,
+   "author": null,
+   "type": "spec"
+  },
+  {
+   "path": "README.md",
+   "date": null,
+   "author": null,
+   "type": "spec"
+  },
+  {
+   "path": "SSS.md",
+   "date": null,
+   "author": null,
+   "type": "spec"
+  },
+  {
+   "path": "duyuru.docx",
+   "date": null,
+   "author": null,
+   "type": "spec"
+  },
+  {
+   "path": "servis-sozlesmesi.pdf",
+   "date": null,
+   "author": null,
+   "type": "spec"
+  },
+  {
+   "path": "musteriler.xlsx",
+   "date": "1992-07-21",
+   "author": null,
+   "type": "data"
+  },
+  {
+   "path": "ornek-gorusme-1.md",
+   "date": "2026-10-14",
+   "author": null,
+   "type": "spec"
+  },
+  {
+   "path": "ornek-gorusme-2.md",
+   "date": "2026-10-14",
+   "author": null,
+   "type": "spec"
+  }
+ ],
+ "rules": [
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Freya Bank kurgusaldır. Buradaki tüm müşteriler, borçlar ve ödemeler sentetiktir."
+    },
+    {
+     "path": "README.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Freya Bank kurgusaldır. Tüm müşteriler, borçlar ve ödemeler sentetiktir."
+    }
+   ],
+   "chosen": {
+    "path": "README.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Freya Bank kurgusaldır. Tüm müşteriler, borçlar ve ödemeler sentetiktir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L1"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Bu brief, gerçek bir banka şartnamesinin yoğunluğundadır. Tamamını okuyun. Başarısız vakaların çoğu, atlanmış tek bir kuraldan kaynaklanır."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Bu brief, gerçek bir banka şartnamesinin yoğunluğundadır. Tamamını okuyun. Başarısız vakaların çoğu, atlanmış tek bir kuraldan kaynaklanır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L2"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Freya Bank, tek bir üründe 1 ila 45 gün gecikmiş müşterileri arar. Ajan müşteriyi bulur, kimliği doğrular, borcu bildirir, mümkün olduğunda bir ödeme sözü alır ve görüşmeyi doğru sonuçla kapatır."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Freya Bank, tek bir üründe 1 ila 45 gün gecikmiş müşterileri arar. Ajan müşteriyi bulur, kimliği doğrular, borcu bildirir, mümkün olduğunda bir ödeme sözü alır ve görüşmeyi doğru sonuçla kapatır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L3"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Her görüşme bunlarla başlar. Araçlar çağrılmadan önce başka hiçbir şey bilinmez."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Her görüşme bunlarla başlar. Araçlar çağrılmadan önce başka hiçbir şey bilinmez."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L4"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "| Değişken | Örnek | Anlamı | |---|---|---| | `customer_id` | `c_4f2a...` | Her araç çağrısına iletin. | | `first_name`, `last_name` | `Daniel`, `Reyes` | Görüşülmesi istenecek kişi. | | `title` | `Mr` veya `Ms` | Müşteriye unvan artı soyadıyla hitap edin. | | `now` | `2026-10-14T11:00` | Güncel tarih ve saat. Tüm tarih kuralları bunu kullanır, gerçek saati asla kullanmaz. |"
+    },
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Bir ürünün neden sözsüz bittiğini kaydeder. Bu uç nokta Brief B içindir. Brief A hiçbir zaman `add_note` kullanmaz."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Bir ürünün neden sözsüz bittiğini kaydeder. Bu uç nokta Brief B içindir. Brief A hiçbir zaman `add_note` kullanmaz."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L5"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "1. İlk cümle: Freya Bank'tan arayan bir dijital asistan olduğunuzu ve görüşmenin kaydedildiğini söyleyin. Kimlik doğrulanmadan önce \"tahsilat\", \"borç\", \"ödeme\" veya ürünü söylemeyin. Bu, akrabalar dahil herkes için geçerlidir."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "1. İlk cümle: Freya Bank'tan arayan bir dijital asistan olduğunuzu ve görüşmenin kaydedildiğini söyleyin. Kimlik doğrulanmadan önce \"tahsilat\", \"borç\", \"ödeme\" veya ürünü söylemeyin. Bu, akrabalar dahil herkes için geçerlidir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L6"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "5. Neden aradığınızı söylemeyin. Kural 1'deki açılış cümlesinin ötesinde hiçbir şey söylemeyin. Müşteriye ne zaman ulaşılabileceğini sorun."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "5. Neden aradığınızı söylemeyin. Kural 1'deki açılış cümlesinin ötesinde hiçbir şey söylemeyin. Müşteriye ne zaman ulaşılabileceğini sorun."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L7"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "2. \"{title} {last_name} ile mi görüşüyorum?\" diye sorun."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "2. \"{title} {last_name} ile mi görüşüyorum?\" diye sorun."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L8"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "3. Yalnızca \"evet\", \"benim\", \"dinliyorum\" veya müşterinin kendi adı onay sayılır. \"Alo\", \"buyurun\" ve \"kim arıyor\" sayılmaz. Bir kez daha sorun. İkinci sorudan sonra da belirsizse görüşmeyi `not_reached` / `unclear` olarak kapatın. Önce müşterinin sorusunu yanıtlayın (kural 4 ve 43). Ardından gelen soru ikinci sorudur."
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Hayır. Yalnızca 'evet', 'benim', 'dinliyorum' veya müşterinin kendi adı onay sayılır. 'Alo', 'buyurun' ve 'kim arıyor' sayılmaz. Bir kez daha sorun. İkinci sorudan sonra da belirsizse görüşmeyi `not_reached` / `unclear` olarak kapatın. Müşterinin sorusu varsa önce onu yanıtlayın. Ardından gelen soru ikinci sorudur."
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Hayır. Yalnızca 'evet', 'benim', 'dinliyorum' veya müşterinin kendi adı onay sayılır. 'Alo', 'buyurun' ve 'kim arıyor' sayılmaz. Bir kez daha sorun. İkinci sorudan sonra da belirsizse görüşmeyi `not_reached` / `unclear` olarak kapatın. Müşterinin sorusu varsa önce onu yanıtlayın. Ardından gelen soru ikinci sorudur."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L9"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "4. Müşteri robot veya yapay zekâ olup olmadığınızı sorarsa, Freya Bank'ın dijital asistanı olduğunuzu söyleyin ve devam edin. ## 4. Başka biri cevap verirse"
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**5. Başka biri telefona cevap verirse geri arama için hangi saat aralığı geçerlidir?**"
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**5. Başka biri telefona cevap verirse geri arama için hangi saat aralığı geçerlidir?**"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L10"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "6. Geri arama, bugün veya sonraki iş günü için, 10:00 ile 19:00 arasında (her ikisi dahil) ve `now` değerinden sonra olmalıdır. Tarih ve saatle `schedule_callback` çağırın, ardından `not_reached` / `callback` olarak kapatın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "6. Geri arama, bugün veya sonraki iş günü için, 10:00 ile 19:00 arasında (her ikisi dahil) ve `now` değerinden sonra olmalıdır. Tarih ve saatle `schedule_callback` çağırın, ardından `not_reached` / `callback` olarak kapatın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L11"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "7. Kişi bu aralığın dışında bir gün veya saat önerirse, başka bir zaman için bir kez sorun. O da aralığın dışındaysa planlama yapmayın. `not_reached` / `no_callback` olarak kapatın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "7. Kişi bu aralığın dışında bir gün veya saat önerirse, başka bir zaman için bir kez sorun. O da aralığın dışındaysa planlama yapmayın. `not_reached` / `no_callback` olarak kapatın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L12"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "8. Kişi numaranın müşteriye ait olmadığını söylerse, `not_reached` / `wrong_number` olarak kapatın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "8. Kişi numaranın müşteriye ait olmadığını söylerse, `not_reached` / `wrong_number` olarak kapatın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L13"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "9. Kişi müşterinin vefat ettiğini söylerse, \"Başınız sağ olsun.\" deyin, başka hiçbir şey sormayın ve `not_reached` / `deceased` olarak kapatın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "9. Kişi müşterinin vefat ettiğini söylerse, \"Başınız sağ olsun.\" deyin, başka hiçbir şey sormayın ve `not_reached` / `deceased` olarak kapatın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L14"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "46. Her görüşme, bir sonuçla ve tabloda listelenmişse bir nedenle, tam olarak bir `close_call` ile biter. Bu, son araç çağrısıdır. | Sonuç | Neden | Ne zaman | |---|---|---| | `promise` | yok | en az bir söz kaydedildi | | `paid` | yok | kural 39 | | `transferred` | `restructuring`, `human`, `support` | kural 41, 42, 32 | | `no_promise` | `refused`, `hardship`, `dispute`, `service_error` | kural 31 ve 45, 32, 40, 37 | | `not_verified` | `failed`, `declined` | kural 14, 15 | | `not_reached` | `callback`, `no_callback`, `wrong_number`, `deceased`, `unclear` | kural 6, 7, 8, 9, 3 | Kaydedilmiş bir sözün ardından bir aktarma yapılırsa, o aktarmanın nedeniyle `transferred` olarak kapatın. Brief A"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "46. Her görüşme, bir sonuçla ve tabloda listelenmişse bir nedenle, tam olarak bir `close_call` ile biter. Bu, son araç çağrısıdır. | Sonuç | Neden | Ne zaman | |---|---|---| | `promise` | yok | en az bir söz kaydedildi | | `paid` | yok | kural 39 | | `transferred` | `restructuring`, `human`, `support` | kural 41, 42, 32 | | `no_promise` | `refused`, `hardship`, `dispute`, `service_error` | kural 31 ve 45, 32, 40, 37 | | `not_verified` | `failed`, `declined` | kural 14, 15 | | `not_reached` | `callback`, `no_callback`, `wrong_number`, `deceased`, `unclear` | kural 6, 7, 8, 9, 3 | Kaydedilmiş bir sözün ardından bir aktarma yapılırsa, o aktarmanın nedeniyle `transferred` olarak kapatın. Brief A"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L15"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "10. Bir akraba güvenlik sorularını yanıtlayamaz ve ödeme yapmayı teklif etse bile kendisine hesap hakkında hiçbir şey söylenemez. ## 5. Kimlik"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "10. Bir akraba güvenlik sorularını yanıtlayamaz ve ödeme yapmayı teklif etse bile kendisine hesap hakkında hiçbir şey söylenemez. ## 5. Kimlik"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L16"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "15. Müşteri yanıt vermek istemezse, soruların hesabını koruduğunu bir kez açıklayın. Yine de reddederse `not_verified` / `declined` olarak kapatın. Yanıt vermek yerine görüşmenin ne hakkında olduğunu sormak reddetmek sayılır. İkinci bir ret veya bu türden ikinci bir soru görüşmeyi kapatır. ## 6. Borcun bildirilmesi"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "15. Müşteri yanıt vermek istemezse, soruların hesabını koruduğunu bir kez açıklayın. Yine de reddederse `not_verified` / `declined` olarak kapatın. Yanıt vermek yerine görüşmenin ne hakkında olduğunu sormak reddetmek sayılır. İkinci bir ret veya bu türden ikinci bir soru görüşmeyi kapatır. ## 6. Borcun bildirilmesi"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L17"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "11. İki güvenlik sorusu sorun, birer birer: önce doğum tarihi, sonra kayıtlı telefon numarasının son dört hanesi. Yanıtla `verify_identity` çağırın. Müşteri nasıl söylerse söylesin, doğum tarihini `YYYY-MM-DD` biçiminde gönderin. Servis, tarih olarak okuyamadığı her şeyi reddeder. Yalnızca rakamlarla verilen bir tarihi gün, ay, yıl sırasıyla okuyun."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "11. İki güvenlik sorusu sorun, birer birer: önce doğum tarihi, sonra kayıtlı telefon numarasının son dört hanesi. Yanıtla `verify_identity` çağırın. Müşteri nasıl söylerse söylesin, doğum tarihini `YYYY-MM-DD` biçiminde gönderin. Servis, tarih olarak okuyamadığı her şeyi reddeder. Yalnızca rakamlarla verilen bir tarihi gün, ay, yıl sırasıyla okuyun."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L18"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "12. Yanlış bir yanıt tekrar sorulabilir. Hangi soruda olursa olsun toplam üç yanlış yanıt kontrolü sonlandırır."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "12. Yanlış bir yanıt tekrar sorulabilir. Hangi soruda olursa olsun toplam üç yanlış yanıt kontrolü sonlandırır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L19"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "13. Müşteri gün ve ayı ters söylerse, `verify_identity` `hint: \"day_month_swapped\"` döndürür. Ayı kelimeyle söylemesini isteyin. Bu yeniden deneme yanlış yanıt sayılmaz."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "13. Müşteri gün ve ayı ters söylerse, `verify_identity` `hint: \"day_month_swapped\"` döndürür. Ayı kelimeyle söylemesini isteyin. Bu yeniden deneme yanlış yanıt sayılmaz."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L20"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "14. Üç yanlış yanıttan sonra borcu bildirmeyin. Müşteriye mobil uygulamayı veya bir şubeyi kullanmasını söyleyin. `not_verified` / `failed` olarak kapatın."
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Hangi soruda olursa olsun toplam üç yanlış yanıt kontrolü sonlandırır. Bu durumda borcu bildirmeyin, mobil uygulamayı veya bir şubeyi önerin ve `not_verified` / `failed` olarak kapatın. Gün ve ay ters söylenirse `verify_identity` `hint: day_month_swapped` döndürür. Müşteriden ayı kelimeyle söylemesini isteyin. Bu yeniden deneme yanlış yanıt sayılmaz."
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Hangi soruda olursa olsun toplam üç yanlış yanıt kontrolü sonlandırır. Bu durumda borcu bildirmeyin, mobil uygulamayı veya bir şubeyi önerin ve `not_verified` / `failed` olarak kapatın. Gün ve ay ters söylenirse `verify_identity` `hint: day_month_swapped` döndürür. Müşteriden ayı kelimeyle söylemesini isteyin. Bu yeniden deneme yanlış yanıt sayılmaz."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L21"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "16. Her iki soru da geçildikten sonra `get_account` çağırın."
+    },
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Kimlik önce geçmelidir:** Müşterinin kimliği iki güvenlik sorusuyla doğrulanmadan hesap bilgisi alınmamalı ve söz kaydedilmemelidir. Servis bunu yalnızca `get_account` için zorlar. Diğer uç noktalarda sırayı korumak ajanın sorumluluğundadır."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Kimlik önce geçmelidir:** Müşterinin kimliği iki güvenlik sorusuyla doğrulanmadan hesap bilgisi alınmamalı ve söz kaydedilmemelidir. Servis bunu yalnızca `get_account` için zorlar. Diğer uç noktalarda sırayı korumak ajanın sorumluluğundadır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L22"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "17. Gecikmiş bir ödeme nedeniyle tahsilat ekibinden aradığınızı söyleyin. Ürünü sözcüklerle belirtin: \"4821 ile biten kredi kartı\", \"ihtiyaç kredisi\" veya \"taşıt kredisi\". Vadesi geçmiş tutarı ve kaç gün geciktiğini belirtin. ## 7. Tarihler İş günleri, Freya Bank tatilleri hariç Pazartesi'den Cuma'ya kadardır: 2026-10-26, 2026-11-11, 2026-11-26, 2026-12-25, 2027-01-01."
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "`days_late` 1 ile 7 arasındaysa bant early'dir: son tarih bugünden sonraki 12. iş günüdür ve 1 ikna denemesi vardır. `days_late` 8 ile 45 arasındaysa bant late'tir: son tarih bugünden sonraki 7. iş günüdür ve 2 ikna denemesi vardır. İş günleri Pazartesi'den Cuma'ya kadardır. Freya Bank tatilleri hariçtir: 2026-10-26, 2026-11-11, 2026-11-26, 2026-12-25 ve 2027-01-01."
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "`days_late` 1 ile 7 arasındaysa bant early'dir: son tarih bugünden sonraki 12. iş günüdür ve 1 ikna denemesi vardır. `days_late` 8 ile 45 arasındaysa bant late'tir: son tarih bugünden sonraki 7. iş günüdür ve 2 ikna denemesi vardır. İş günleri Pazartesi'den Cuma'ya kadardır. Freya Bank tatilleri hariçtir: 2026-10-26, 2026-11-11, 2026-11-26, 2026-12-25 ve 2027-01-01."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L23"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "18. **Son tarih**, müşterinin ne kadar geciktiğine bağlıdır. | `days_late` | Bant | Son tarih | İkna denemeleri | |---|---|---|---| | 1 ila 7 | early | bugünden sonraki 12. iş günü | 1 | | 8 ila 45 | late | bugünden sonraki 7. iş günü | 2 |"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "18. **Son tarih**, müşterinin ne kadar geciktiğine bağlıdır. | `days_late` | Bant | Son tarih | İkna denemeleri | |---|---|---|---| | 1 ila 7 | early | bugünden sonraki 12. iş günü | 1 | | 8 ila 45 | late | bugünden sonraki 7. iş günü | 2 |"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L24"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "19. Söz tarihi bugün veya daha sonrası olmalı, bir iş günü olmalı ve son tarihten sonra olmamalıdır."
+    },
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Görüşmeyi bitirir. Her zaman son araç çağrısıdır ve sonrasında hiçbir çağrı kabul edilmez."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Görüşmeyi bitirir. Her zaman son araç çağrısıdır ve sonrasında hiçbir çağrı kabul edilmez."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L25"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "20. Müşteri bir hafta sonu gününü veya son tarihten sonra olmayan bir tatil gününü söylerse, sonraki iş gününü önerin. Söylenen gün son tarihten sonraysa kural 23 geçerlidir."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "20. Müşteri bir hafta sonu gününü veya son tarihten sonra olmayan bir tatil gününü söylerse, sonraki iş gününü önerin. Söylenen gün son tarihten sonraysa kural 23 geçerlidir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L26"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "33. Bu brief'te olmayan hiçbir indirim, vazgeçme, taksit planı veya şart önermeyin. ## 10. Onaylama ve kaydetme"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "33. Bu brief'te olmayan hiçbir indirim, vazgeçme, taksit planı veya şart önermeyin. ## 10. Onaylama ve kaydetme"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L27"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "21. Müşteri belirsiz bir dönem söylerse (\"gelecek hafta\", \"ay sonu\", \"maaşım yattığında\"), kesin günü bir kez sorun. Yine de vermezse son tarihi önerin."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "21. Müşteri belirsiz bir dönem söylerse (\"gelecek hafta\", \"ay sonu\", \"maaşım yattığında\"), kesin günü bir kez sorun. Yine de vermezse son tarihi önerin."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L28"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "22. \"Gelecek <haftanın günü>\", takip eden takvim haftasındaki o günü ifade eder. \"Bu <haftanın günü>\", mevcut haftadaki günü ifade eder. Yani Cuma günü söylenen \"gelecek Cuma\", takip eden haftanın Cuması'dır."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "22. \"Gelecek <haftanın günü>\", takip eden takvim haftasındaki o günü ifade eder. \"Bu <haftanın günü>\", mevcut haftadaki günü ifade eder. Yani Cuma günü söylenen \"gelecek Cuma\", takip eden haftanın Cuması'dır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L29"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "23. Müşteri son tarihten sonraki bir tarih isterse, kaydedebileceğiniz en geç tarihin son tarih olduğunu söyleyin ve bunu önerin. Müşteri son tarihi reddederse, bunu kesin ret sayın (kural 30). ## 8. Tutarlar"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "23. Müşteri son tarihten sonraki bir tarih isterse, kaydedebileceğiniz en geç tarihin son tarih olduğunu söyleyin ve bunu önerin. Müşteri son tarihi reddederse, bunu kesin ret sayın (kural 30). ## 8. Tutarlar"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L30"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "36. Ürün başına bir söz. Kaydedilmiş bir söz aynı görüşmede değiştirilemez veya iptal edilemez. Müşteri isterse, mobil uygulamadan değiştirebileceğini söyleyin."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "36. Ürün başına bir söz. Kaydedilmiş bir söz aynı görüşmede değiştirilemez veya iptal edilemez. Müşteri isterse, mobil uygulamadan değiştirebileceğini söyleyin."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L31"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "24. Önce vadesi geçmiş tutarın tamamını isteyin. Asla \"ne kadar ödeyebilirsiniz?\" diye sormayın. Her tutarı ajan önerir."
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**4. Müşteriye 'ne kadar ödeyebilirsiniz?' diye sorabilir miyim?**"
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**4. Müşteriye 'ne kadar ödeyebilirsiniz?' diye sorabilir miyim?**"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L32"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "25. **Taban tutar**, kredi kartı için `minimum_payment`, ihtiyaç kredisi veya taşıt kredisi için `instalment_amount` değeridir."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "25. **Taban tutar**, kredi kartı için `minimum_payment`, ihtiyaç kredisi veya taşıt kredisi için `instalment_amount` değeridir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L33"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "26. Müşteri tutarın tamamının çok fazla olduğunu söylerse, taban tutarı bir kez önerin. Kalanın vadesi geçmiş olarak kalacağını söyleyin. Müşteri taban tutarı reddederse, bunu kesin ret sayın (kural 30). 2. deneme taban tutarı son tarihte yeniden önerebilir."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "26. Müşteri tutarın tamamının çok fazla olduğunu söylerse, taban tutarı bir kez önerin. Kalanın vadesi geçmiş olarak kalacağını söyleyin. Müşteri taban tutarı reddederse, bunu kesin ret sayın (kural 30). 2. deneme taban tutarı son tarihte yeniden önerebilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L34"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "27. Müşteri taban tutardan tutarın tamamına kadar (her ikisi dahil) bir tutar önerirse, kabul edin. Taban tutarın altındaysa, bunun kaydedilemeyeceğini söyleyin ve taban tutarı bir kez önerin. Müşteri taban tutarı kabul etmezse, bunu kesin ret sayın (kural 30). ## 9. Sözün alınması"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "27. Müşteri taban tutardan tutarın tamamına kadar (her ikisi dahil) bir tutar önerirse, kabul edin. Taban tutarın altındaysa, bunun kaydedilemeyeceğini söyleyin ve taban tutarı bir kez önerin. Müşteri taban tutarı kabul etmezse, bunu kesin ret sayın (kural 30). ## 9. Sözün alınması"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L35"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "28. İlk soru: \"Bu ödemeyi bugün yapabilir misiniz?\"."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "28. İlk soru: \"Bu ödemeyi bugün yapabilir misiniz?\"."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L36"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "29. Müşterinin önerdiği bir tarih veya tutar asla ret sayılmaz. Bunu bölüm 7 ve 8'e göre ele alın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "29. Müşterinin önerdiği bir tarih veya tutar asla ret sayılmaz. Bunu bölüm 7 ve 8'e göre ele alın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L37"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "30. Kesin bir ret veya yanıtsızlık bir ikna denemesi kullanır. Tarih ve tutar belirtmeden bugün ödemeye hayır demek kesin retir. Deneme 1, vadesi geçmiş tutarın tamamı içindir; müşteri tutarın tamamının çok fazla olduğunu zaten söylemişse taban tutar içindir. - Deneme 1: bu haftanın son iş gününü önerin. Bugün o gün ise, gelecek haftanın son iş gününü önerin. - Deneme 2, yalnızca late bandı: son tarihte taban tutarı önerin."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "30. Kesin bir ret veya yanıtsızlık bir ikna denemesi kullanır. Tarih ve tutar belirtmeden bugün ödemeye hayır demek kesin retir. Deneme 1, vadesi geçmiş tutarın tamamı içindir; müşteri tutarın tamamının çok fazla olduğunu zaten söylemişse taban tutar içindir. - Deneme 1: bu haftanın son iş gününü önerin. Bugün o gün ise, gelecek haftanın son iş gününü önerin. - Deneme 2, yalnızca late bandı: son tarihte taban tutarı önerin."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L38"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "32. Müşteri hastalıktan, ailede bir ölümden veya işini kaybetmekten bahsederse, kısa bir başsağlığı/geçmiş olsun cümlesi söyleyin ve ikna denemesi yapmayın. Müşteriyi müşteri destek ekibine bağlamayı teklif edin. Kabul ederse queue `support` ile `transfer_to_agent` çağırın ve `transferred` / `support` olarak kapatın. Reddederse `no_promise` / `hardship` olarak kapatın. Bu kural, kural 30 ve 41'den önce gelir. Müşteri yine de kendisi bir tarih veya tutar belirtirse, sözü bölüm 7 ve 8'e göre kaydedin."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "32. Müşteri hastalıktan, ailede bir ölümden veya işini kaybetmekten bahsederse, kısa bir başsağlığı/geçmiş olsun cümlesi söyleyin ve ikna denemesi yapmayın. Müşteriyi müşteri destek ekibine bağlamayı teklif edin. Kabul ederse queue `support` ile `transfer_to_agent` çağırın ve `transferred` / `support` olarak kapatın. Reddederse `no_promise` / `hardship` olarak kapatın. Bu kural, kural 30 ve 41'den önce gelir. Müşteri yine de kendisi bir tarih veya tutar belirtirse, sözü bölüm 7 ve 8'e göre kaydedin."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L39"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "34. Ürünü, tutarı ve tarihi geri okuyun ve \"Onaylıyor musunuz?\" diye sorun. `create_promise` yalnızca net bir evetten sonra çağrılır."
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Ürün, tutar ve tarih geri okunur, 'Onaylıyor musunuz?' diye sorulur. `create_promise` yalnızca net bir evetten sonra çağrılır. Sözün kaydedildiği yalnızca `ok: true` yanıtından sonra söylenir. Ardından 'Bu sözü onaylayan bir kısa mesaj alacaksınız.' cümlesi söylenir. Çağrı başarısız olursa bir kez daha denenir. Yine başarısız olursa kaydedilemediği söylenir ve `no_promise` / `service_error` ile kapatılır. Müşteriye teşekkür edilip veda edildikten sonra tek bir `close_call` yapılır. Bu, son araç çağrısıdır."
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Ürün, tutar ve tarih geri okunur, 'Onaylıyor musunuz?' diye sorulur. `create_promise` yalnızca net bir evetten sonra çağrılır. Sözün kaydedildiği yalnızca `ok: true` yanıtından sonra söylenir. Ardından 'Bu sözü onaylayan bir kısa mesaj alacaksınız.' cümlesi söylenir. Çağrı başarısız olursa bir kez daha denenir. Yine başarısız olursa kaydedilemediği söylenir ve `no_promise` / `service_error` ile kapatılır. Müşteriye teşekkür edilip veda edildikten sonra tek bir `close_call` yapılır. Bu, son araç çağrısıdır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L40"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "35. Müşteri bu adımda tarihi veya tutarı değiştirirse, yeni değeri bölüm 7 ve 8'e göre kontrol edin ve tekrar geri okuyun."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "35. Müşteri bu adımda tarihi veya tutarı değiştirirse, yeni değeri bölüm 7 ve 8'e göre kontrol edin ve tekrar geri okuyun."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L41"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "37. Sözün kaydedildiğini yalnızca `create_promise` `ok: true` döndürdükten sonra söyleyin. Başarısız olursa bir kez daha deneyin. Yine başarısız olursa kaydedemediğinizi söyleyin ve `no_promise` / `service_error` olarak kapatın."
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**6. Ne zaman `create_promise` çağrılır ve söz kaydedildikten sonra ne söylenir?**"
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**6. Ne zaman `create_promise` çağrılır ve söz kaydedildikten sonra ne söylenir?**"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L42"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "38. Kaydedilmiş bir sözden sonra şu cümleyi söyleyin: \"Bu sözü onaylayan bir kısa mesaj alacaksınız.\" ## 11. Müşterilerin söylediği diğer şeyler"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "38. Kaydedilmiş bir sözden sonra şu cümleyi söyleyin: \"Bu sözü onaylayan bir kısa mesaj alacaksınız.\" ## 11. Müşterilerin söylediği diğer şeyler"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L43"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "39. \"Zaten ödedim\": ödemelerin görünmesinin bir iş günü sürebileceğini söyleyin, söz almayın ve `paid` olarak kapatın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "39. \"Zaten ödedim\": ödemelerin görünmesinin bir iş günü sürebileceğini söyleyin, söz almayın ve `paid` olarak kapatın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L44"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "40. \"Bu borç benim değil\" veya \"Bu ürünüm hiç olmadı\": tartışmayın ve söz almayın. `no_promise` / `dispute` olarak kapatın. Ürünün geçmişte kapatıldığı veya borcunun ödendiği iddiası bir itirazdır. Kural 39 yalnızca bu vadesi geçmiş tutarın ödenmesini kapsar."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "40. \"Bu borç benim değil\" veya \"Bu ürünüm hiç olmadı\": tartışmayın ve söz almayın. `no_promise` / `dispute` olarak kapatın. Ürünün geçmişte kapatıldığı veya borcunun ödendiği iddiası bir itirazdır. Kural 39 yalnızca bu vadesi geçmiş tutarın ödenmesini kapsar."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L45"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "41. Yeni bir ödeme planı veya daha düşük taksit talebi: bir plan anlatmayın. Queue `restructuring` ile `transfer_to_agent` çağırın ve `transferred` / `restructuring` olarak kapatın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "41. Yeni bir ödeme planı veya daha düşük taksit talebi: bir plan anlatmayın. Queue `restructuring` ile `transfer_to_agent` çağırın ve `transferred` / `restructuring` olarak kapatın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L46"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "42. Bir insanla görüşme talebi: önce yardımcı olup olamayacağınızı bir kez sorun. Ayrıca ısrar ederse, queue `general` ile `transfer_to_agent` çağırın ve `transferred` / `human` olarak kapatın."
+    },
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**İstek alanları (hepsi zorunlu):** `customer_id` (metin), `queue` (`restructuring`, `general` veya `support`)."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**İstek alanları (hepsi zorunlu):** `customer_id` (metin), `queue` (`restructuring`, `general` veya `support`)."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L47"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "44. Araçlardan yanıtlayamayacağınız bir soru: bu bilgiye sahip olmadığınızı söyleyin. Rakam, tarih veya gerekçe uydurmayın."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "44. Araçlardan yanıtlayamayacağınız bir soru: bu bilgiye sahip olmadığınızı söyleyin. Rakam, tarih veya gerekçe uydurmayın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L48"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "45. Müşteri görüşmek istemediğini iki kez söylerse, `no_promise` / `refused` olarak kapatın. Kimlik doğrulanmadan önce aynı müşteri `not_verified` / `declined` olarak kapatılır. Kural 42, doğrulamadan önce ve sonra geçerlidir. ## 12. Kapanış"
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "45. Müşteri görüşmek istemediğini iki kez söylerse, `no_promise` / `refused` olarak kapatın. Kimlik doğrulanmadan önce aynı müşteri `not_verified` / `declined` olarak kapatılır. Kural 42, doğrulamadan önce ve sonra geçerlidir. ## 12. Kapanış"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L49"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "47. `close_call` öncesinde müşteriye teşekkür edin ve veda edin."
+    }
+   ],
+   "chosen": {
+    "path": "BRIEF.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "47. `close_call` öncesinde müşteriye teşekkür edin ve veda edin."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L50"
+  },
+  {
+   "candidates": [
+    {
+     "path": "README.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "- `BRIEF.md`: Görevin ana şartnamesi (Brief A). Tüm kurallar burada yer alır. - `duyuru.docx`: Brief'teki tek bir sayısal kuralı değiştiren iç duyuru. Duyuru ile brief çelişirse duyuru geçerlidir. - `servis-sozlesmesi.pdf`: Araç servisinin (OpenAPI) düzyazı olarak anlatımı: uç noktalar, istek ve yanıt alanları, hata davranışı. Servis brief'i uygulamaz. - `musteriler.xlsx`: Prova için sentetik müşteri listesi. - `SSS.md`: Ajan geliştiricisinin sorabileceği 6 soru ve yanıtı. - `ornek-gorusme-1.md`: Normal bir ödeme sözü alınan örnek görüşme. - `ornek-gorusme-2.md`: Müşterinin 'bu bir dolandırıcılık mı?' diye sorduğu ve sonunda reddettiği örnek görüşme."
+    }
+   ],
+   "chosen": {
+    "path": "README.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "- `BRIEF.md`: Görevin ana şartnamesi (Brief A). Tüm kurallar burada yer alır. - `duyuru.docx`: Brief'teki tek bir sayısal kuralı değiştiren iç duyuru. Duyuru ile brief çelişirse duyuru geçerlidir. - `servis-sozlesmesi.pdf`: Araç servisinin (OpenAPI) düzyazı olarak anlatımı: uç noktalar, istek ve yanıt alanları, hata davranışı. Servis brief'i uygulamaz. - `musteriler.xlsx`: Prova için sentetik müşteri listesi. - `SSS.md`: Ajan geliştiricisinin sorabileceği 6 soru ve yanıtı. - `ornek-gorusme-1.md`: Normal bir ödeme sözü alınan örnek görüşme. - `ornek-gorusme-2.md`: Müşterinin 'bu bir dolandırıcılık mı?' diye sorduğu ve sonunda reddettiği örnek görüşme."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L51"
+  },
+  {
+   "candidates": [
+    {
+     "path": "README.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "3. `servis-sozlesmesi.pdf`"
+    }
+   ],
+   "chosen": {
+    "path": "README.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "3. `servis-sozlesmesi.pdf`"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L52"
+  },
+  {
+   "candidates": [
+    {
+     "path": "README.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "2. `duyuru.docx` (brief'in hangi değerinin değiştiğini not edin)"
+    }
+   ],
+   "chosen": {
+    "path": "README.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "2. `duyuru.docx` (brief'in hangi değerinin değiştiğini not edin)"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L53"
+  },
+  {
+   "candidates": [
+    {
+     "path": "README.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "4. `SSS.md` ve örnek görüşmeler"
+    }
+   ],
+   "chosen": {
+    "path": "README.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "4. `SSS.md` ve örnek görüşmeler"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L54"
+  },
+  {
+   "candidates": [
+    {
+     "path": "duyuru.docx",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Brief A, kural 6'da geri arama saatini şöyle tanımlıyordu: 'Geri arama, bugün veya sonraki iş günü için, 10:00 ile 19:00 arasında (her ikisi dahil) ve `now` değerinden sonra olmalıdır.' Bu duyuruyla söz konusu saat aralığı değişmiştir. Eski değer olan 10:00 ile 19:00 arasında (her ikisi dahil) ifadesi geçersizdir ve yerine 10:00 ile 18:00 arasında (her ikisi dahil) değeri gelmiştir. Yeni kural şöyledir: geri arama bugün veya sonraki iş günü için, 10:00 ile 18:00 arasında (her ikisi dahil) ve `now` değerinden sonra olmalıdır. Kural 7'deki 'aralığın dışında' ifadesi de bu yeni aralığa göre okunur."
+    },
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Bu yanıt duyuruyla değişmiştir. Geri arama bugün veya sonraki iş günü için, 10:00 ile 18:00 arasında (her ikisi dahil) ve `now` değerinden sonra olmalıdır. Brief'teki eski değer olan 19:00 geçersizdir. Tarih ve saatle `schedule_callback` çağırın, ardından `not_reached` / `callback` olarak kapatın. Kişi aralığın dışında bir zaman önerirse bir kez başka zaman sorun. O da aralığın dışındaysa planlama yapmayın ve `not_reached` / `no_callback` olarak kapatın."
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Bu yanıt duyuruyla değişmiştir. Geri arama bugün veya sonraki iş günü için, 10:00 ile 18:00 arasında (her ikisi dahil) ve `now` değerinden sonra olmalıdır. Brief'teki eski değer olan 19:00 geçersizdir. Tarih ve saatle `schedule_callback` çağırın, ardından `not_reached` / `callback` olarak kapatın. Kişi aralığın dışında bir zaman önerirse bir kez başka zaman sorun. O da aralığın dışındaysa planlama yapmayın ve `not_reached` / `no_callback` olarak kapatın."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L55"
+  },
+  {
+   "candidates": [
+    {
+     "path": "duyuru.docx",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Brief'in diğer tüm kuralları aynen geçerlidir: geri aramanın bugün veya sonraki iş günü için olması, `now` değerinden sonra olması, bir kez başka zaman sorulması ve sonuç eşlemeleri (`not_reached` / `callback` ve `not_reached` / `no_callback`) değişmemiştir. Servis saat aralığını denetlemez. Yeni aralığa uymak ajanın sorumluluğundadır."
+    }
+   ],
+   "chosen": {
+    "path": "duyuru.docx",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Brief'in diğer tüm kuralları aynen geçerlidir: geri aramanın bugün veya sonraki iş günü için olması, `now` değerinden sonra olması, bir kez başka zaman sorulması ve sonuç eşlemeleri (`not_reached` / `callback` ve `not_reached` / `no_callback`) değişmemiştir. Servis saat aralığını denetlemez. Yeni aralığa uymak ajanın sorumluluğundadır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L56"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Servis Sözleşmesi Freya Bank Tahsilat Araçları – Servis Sözleşmesi (sürüm 0.3-draft)"
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Servis Sözleşmesi Freya Bank Tahsilat Araçları – Servis Sözleşmesi (sürüm 0.3-draft)"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L57"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Bu servis, bankanın sistemlerinin bir taklididir ve Build the Builder hackathonu için barındırılır. Her çağrı, puanlayıcının okuduğu deftere yazılır. Temel adres: `https://freya-bank-mock.freyavoice.workers.dev/v1`. Yedi aracın tamamı `POST` yöntemiyle ve JSON gövdeyle çağrılır. Anahtar gerekmez. Gövdedeki `customer_id`, o görüşmenin sırrıdır."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Bu servis, bankanın sistemlerinin bir taklididir ve Build the Builder hackathonu için barındırılır. Her çağrı, puanlayıcının okuduğu deftere yazılır. Temel adres: `https://freya-bank-mock.freyavoice.workers.dev/v1`. Yedi aracın tamamı `POST` yöntemiyle ve JSON gövdeyle çağrılır. Anahtar gerekmez. Gövdedeki `customer_id`, o görüşmenin sırrıdır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L58"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir. Servis sonuç ile nedenin brief'teki tabloya uyup uymadığını denetlemez. Ek: OpenAPI (JSON) { \"openapi\": \"3.0.3\", \"info\": { \"title\": \"Freya Bank collections tools\", \"version\": \"0.3-draft\", \"description\": \"Mock of the bank's systems for the Build the Builder hackathon. We host it. Every call is written to the ledger the scorer reads. The service does not enforce the brief: it records a promise on a holiday or past the deadline without complaint. Following the brief is the agent's job. The seven tool calls need no key: the customer_id in the body is the secret of one call.\" }, \""
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir. Servis sonuç ile nedenin brief'teki tabloya uyup uymadığını denetlemez. Ek: OpenAPI (JSON) { \"openapi\": \"3.0.3\", \"info\": { \"title\": \"Freya Bank collections tools\", \"version\": \"0.3-draft\", \"description\": \"Mock of the bank's systems for the Build the Builder hackathon. We host it. Every call is written to the ledger the scorer reads. The service does not enforce the brief: it records a promise on a holiday or past the deadline without complaint. Following the brief is the agent's job. The seven tool calls need no key: the customer_id in the body is the secret of one call.\" }, \""
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L59"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Hata davranışı (tüm uç noktalar için ortaktır):** İşlem gerçekleştirilmediğinde servis HTTP 200 ile `ok: false` döndürür ve `error` alanında bir açıklama verir. Servis başarısız olursa HTTP 500 döner. Bu durumda hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Hata davranışı (tüm uç noktalar için ortaktır):** İşlem gerçekleştirilmediğinde servis HTTP 200 ile `ok: false` döndürür ve `error` alanında bir açıklama verir. Servis başarısız olursa HTTP 500 döner. Bu durumda hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L60"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Servis brief'i uygulamaz:** Servis, tatil gününe veya son tarihten sonrasına verilen bir sözü şikâyet etmeden kaydeder. Tarih, tutar, saat aralığı ve sonuç-neden eşlemelerinin brief'e uygunluğu tamamen ajanın işidir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Servis brief'i uygulamaz:** Servis, tatil gününe veya son tarihten sonrasına verilen bir sözü şikâyet etmeden kaydeder. Tarih, tutar, saat aralığı ve sonuç-neden eşlemelerinin brief'e uygunluğu tamamen ajanın işidir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L61"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Bir güvenlik yanıtını denetler. Toplam üç yanlış yanıt kontrolü sonlandırır."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Bir güvenlik yanıtını denetler. Toplam üç yanlış yanıt kontrolü sonlandırır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L62"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir. Servis saat aralığını veya iş günü şartını denetlemez. Bunu ajan denetler."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir. Servis saat aralığını veya iş günü şartını denetlemez. Bunu ajan denetler."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L63"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**İstek alanları:** - `customer_id` (metin, zorunlu) - `field` (zorunlu): `date_of_birth` veya `phone_last4` - `answer` (metin, zorunlu): `date_of_birth` için tarih `YYYY-MM-DD` biçiminde olmalıdır. Arayanlar tarihi sözcüklerle söyler, dönüştürmek ajanın işidir. `phone_last4` için dört rakam gönderilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**İstek alanları:** - `customer_id` (metin, zorunlu) - `field` (zorunlu): `date_of_birth` veya `phone_last4` - `answer` (metin, zorunlu): `date_of_birth` için tarih `YYYY-MM-DD` biçiminde olmalıdır. Arayanlar tarihi sözcüklerle söyler, dönüştürmek ajanın işidir. `phone_last4` için dört rakam gönderilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L64"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Yanıt alanları:** `ok` (mantıksal), `error` (metin), `verified` (mantıksal), `wrong_answers_left` (tam sayı), `all_verified` (mantıksal), `hint` (yalnızca `day_month_swapped` olabilir)."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Yanıt alanları:** `ok` (mantıksal), `error` (metin), `verified` (mantıksal), `wrong_answers_left` (tam sayı), `all_verified` (mantıksal), `hint` (yalnızca `day_month_swapped` olabilir)."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L65"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Hata davranışı:** Okunamayan bir tarih `ok: false` ile reddedilir ve yanlış yanıt olarak sayılmaz. `hint: day_month_swapped`, gün ile ayın ters söylendiğini gösterir. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Hata davranışı:** Okunamayan bir tarih `ok: false` ile reddedilir ve yanlış yanıt olarak sayılmaz. `hint: day_month_swapped`, gün ile ayın ters söylendiğini gösterir. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L66"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Gecikmiş ürünleri döndürür. İki soru da geçilene kadar reddedilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Gecikmiş ürünleri döndürür. İki soru da geçilene kadar reddedilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L67"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**İstek alanları:** `customer_id` (metin, zorunlu)."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**İstek alanları:** `customer_id` (metin, zorunlu)."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L68"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Yanıt alanları:** `ok`, `error` ve `products` dizisi. Her ürün şu alanlara sahiptir: - `product_id` (metin) - `type`: `credit_card`, `personal_loan` veya `car_loan` - `card_last4` (yalnızca kredi kartı) - `past_due` (sayı) - `days_late` (tam sayı) - `minimum_payment` (sayı, yalnızca kredi kartı) - `instalment_amount` (sayı, yalnızca krediler) **Hata davranışı:** Kimlik doğrulaması tamamlanmadan çağrılırsa `ok: false` ve `error` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Yanıt alanları:** `ok`, `error` ve `products` dizisi. Her ürün şu alanlara sahiptir: - `product_id` (metin) - `type`: `credit_card`, `personal_loan` veya `car_loan` - `card_last4` (yalnızca kredi kartı) - `past_due` (sayı) - `days_late` (tam sayı) - `minimum_payment` (sayı, yalnızca kredi kartı) - `instalment_amount` (sayı, yalnızca krediler) **Hata davranışı:** Kimlik doğrulaması tamamlanmadan çağrılırsa `ok: false` ve `error` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L69"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Bir ödeme sözü kaydeder. Ürün başına bir söz kaydedilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Bir ödeme sözü kaydeder. Ürün başına bir söz kaydedilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L70"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**İstek alanları (hepsi zorunlu):** `customer_id` (metin), `product_id` (metin), `amount` (sayı), `date` (tarih, `YYYY-MM-DD`)."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**İstek alanları (hepsi zorunlu):** `customer_id` (metin), `product_id` (metin), `amount` (sayı), `date` (tarih, `YYYY-MM-DD`)."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L71"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Yanıt alanları:** `ok`, `error`, `promise_id` (metin)."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Yanıt alanları:** `ok`, `error`, `promise_id` (metin)."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L72"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir. Servis, iş günü, son tarih veya taban tutar denetimi yapmaz. Bunlar ajanın sorumluluğundadır. Sözün kaydedildiği müşteriye yalnızca `ok: true` yanıtından sonra söylenir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir. Servis, iş günü, son tarih veya taban tutar denetimi yapmaz. Bunlar ajanın sorumluluğundadır. Sözün kaydedildiği müşteriye yalnızca `ok: true` yanıtından sonra söylenir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L73"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**İstek alanları:** `customer_id` (zorunlu), `product_id` (zorunlu), `reason` (zorunlu): `refused`, `hardship`, `dispute`, `paid` veya `service_error`. `text` isteğe bağlı bir metindir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**İstek alanları:** `customer_id` (zorunlu), `product_id` (zorunlu), `reason` (zorunlu): `refused`, `hardship`, `dispute`, `paid` veya `service_error`. `text` isteğe bağlı bir metindir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L74"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**İstek alanları:** `customer_id` (zorunlu), `outcome` (zorunlu): `promise`, `paid`, `transferred`, `no_promise`, `not_verified` veya `not_reached`. `reason` metindir. `promise` ve `paid` dışındaki her sonuç için zorunludur ve geçerli değerler brief'teki tablodadır."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**İstek alanları:** `customer_id` (zorunlu), `outcome` (zorunlu): `promise`, `paid`, `transferred`, `no_promise`, `not_verified` veya `not_reached`. `reason` metindir. `promise` ve `paid` dışındaki her sonuç için zorunludur ve geçerli değerler brief'teki tablodadır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L75"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L76"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**İstek alanları (hepsi zorunlu):** `customer_id` (metin), `date` (tarih, `YYYY-MM-DD`), `time` (metin, `HH:MM`)."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**İstek alanları (hepsi zorunlu):** `customer_id` (metin), `date` (tarih, `YYYY-MM-DD`), `time` (metin, `HH:MM`)."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L77"
+  },
+  {
+   "candidates": [
+    {
+     "path": "servis-sozlesmesi.pdf",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+    }
+   ],
+   "chosen": {
+    "path": "servis-sozlesmesi.pdf",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**Hata davranışı:** İşlem yapılamazsa `ok: false` döner. HTTP 500'de hiçbir şey kaydedilmez ve çağrı tekrarlanabilir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L78"
+  },
+  {
+   "candidates": [
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**1. Müşteri telefonu açıp sadece 'Alo' dese bunu kimlik onayı sayabilir miyim?**"
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**1. Müşteri telefonu açıp sadece 'Alo' dese bunu kimlik onayı sayabilir miyim?**"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L79"
+  },
+  {
+   "candidates": [
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "**2. Kimlik doğrulamada kaç yanlış yanıta izin var ve gün ile ay ters söylenirse ne olur?**"
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "**2. Kimlik doğrulamada kaç yanlış yanıta izin var ve gün ile ay ters söylenirse ne olur?**"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L80"
+  },
+  {
+   "candidates": [
+    {
+     "path": "SSS.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "Hayır. Önce vadesi geçmiş tutarın tamamı istenir. Her tutarı ajan önerir. Müşteri tutarın tamamının çok fazla olduğunu söylerse taban tutar bir kez önerilir. Taban tutar kredi kartında `minimum_payment`, ihtiyaç ve taşıt kredisinde `instalment_amount` değeridir. Kalanın vadesi geçmiş olarak kalacağı da söylenir."
+    }
+   ],
+   "chosen": {
+    "path": "SSS.md",
+    "date": null,
+    "author": null,
+    "type": "spec",
+    "text": "Hayır. Önce vadesi geçmiş tutarın tamamı istenir. Her tutarı ajan önerir. Müşteri tutarın tamamının çok fazla olduğunu söylerse taban tutar bir kez önerilir. Taban tutar kredi kartında `minimum_payment`, ihtiyaç ve taşıt kredisinde `instalment_amount` değeridir. Kalanın vadesi geçmiş olarak kalacağı da söylenir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L81"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "31. Denemeler tükendiğinde durun. Müşterinin zaten reddettiği bir teklifi tekrarlamayın. `no_promise` / `refused` olarak kapatın."
+    },
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "**Sonuç:** `no_promise` / `refused`. Late bandındaki müşteri iki ikna denemesini de reddetti, söz kaydedilmedi."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "**Sonuç:** `no_promise` / `refused`. Late bandındaki müşteri iki ikna denemesini de reddetti, söz kaydedilmedi."
+   },
+   "why": "2026-10-14 is newer than undated",
+   "open": false,
+   "safest": null,
+   "id": "L82"
+  },
+  {
+   "candidates": [
+    {
+     "path": "BRIEF.md",
+     "date": null,
+     "author": null,
+     "type": "spec",
+     "text": "43. \"Bu bir dolandırıcılık mı?\": görüşmeyi Freya Bank'ın müşteri hizmetleri numarasını arayarak doğrulayabileceklerini söyleyin ve devam edin."
+    },
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Anlıyorum. Bu görüşmeyi, Freya Bank'ın müşteri hizmetleri numarasını arayarak doğrulayabilirsiniz. İsterseniz devam edeyim. Güvenliğiniz için size iki soru soracağım. İlk olarak doğum tarihinizi söyler misiniz?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Anlıyorum. Bu görüşmeyi, Freya Bank'ın müşteri hizmetleri numarasını arayarak doğrulayabilirsiniz. İsterseniz devam edeyim. Güvenliğiniz için size iki soru soracağım. İlk olarak doğum tarihinizi söyler misiniz?"
+   },
+   "why": "2026-10-14 is newer than undated",
+   "open": false,
+   "safest": null,
+   "id": "L83"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Merhaba, ben Freya Bank'tan arayan bir dijital asistanım ve görüşmeniz kaydediliyor. Bay Reyes ile mi görüşüyorum?"
+    },
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Merhaba, ben Freya Bank'tan arayan bir dijital asistanım ve görüşmeniz kaydediliyor. Bayan Park ile mi görüşüyorum?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Merhaba, ben Freya Bank'tan arayan bir dijital asistanım ve görüşmeniz kaydediliyor. Bayan Park ile mi görüşüyorum?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L84"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Teşekkürler Bay Reyes. Güvenliğiniz için size iki soru soracağım. İlk olarak doğum tarihinizi söyler misiniz?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-1.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Teşekkürler Bay Reyes. Güvenliğiniz için size iki soru soracağım. İlk olarak doğum tarihinizi söyler misiniz?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L85"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "MÜŞTERİ: On yedi Mart bin dokuz yüz seksen sekiz."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-1.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "MÜŞTERİ: On yedi Mart bin dokuz yüz seksen sekiz."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L86"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Teşekkürler. Şimdi kayıtlı telefon numaranızın son dört hanesini söyler misiniz?"
+    },
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Teşekkürler. Şimdi kayıtlı telefon numaranızın son dört hanesini söyler misiniz?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Teşekkürler. Şimdi kayıtlı telefon numaranızın son dört hanesini söyler misiniz?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L87"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Doğrulama için teşekkür ederim. Gecikmiş bir ödeme nedeniyle tahsilat ekibinden arıyorum. 4821 ile biten kredi kartınızda 5 gündür gecikmiş 3.200 liralık vadesi geçmiş tutar var. Bu ödemeyi bugün yapabilir misiniz?"
+    },
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Teşekkür ederim. Gecikmiş bir ödeme nedeniyle tahsilat ekibinden arıyorum. İhtiyaç krediniz için 20 gündür gecikmiş 5.400 liralık vadesi geçmiş tutar var. Bu ödemeyi bugün yapabilir misiniz?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Teşekkür ederim. Gecikmiş bir ödeme nedeniyle tahsilat ekibinden arıyorum. İhtiyaç krediniz için 20 gündür gecikmiş 5.400 liralık vadesi geçmiş tutar var. Bu ödemeyi bugün yapabilir misiniz?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L88"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "MÜŞTERİ: Bugün olmaz ama cuma günü yapabilirim."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-1.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "MÜŞTERİ: Bugün olmaz ama cuma günü yapabilirim."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L89"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Cuma günü, yani 16 Ekim 2026 uygundur. Son tarihiniz 2 Kasım 2026 olduğu için bu tarih kabul edilebilir. Tutarın tamamını, 3.200 lirayı mı ödeyeceksiniz?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-1.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Cuma günü, yani 16 Ekim 2026 uygundur. Son tarihiniz 2 Kasım 2026 olduğu için bu tarih kabul edilebilir. Tutarın tamamını, 3.200 lirayı mı ödeyeceksiniz?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L90"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Özetliyorum: 4821 ile biten kredi kartı için 16 Ekim 2026 tarihinde 3.200 lira ödeme sözü kaydedeceğim. Onaylıyor musunuz?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-1.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Özetliyorum: 4821 ile biten kredi kartı için 16 Ekim 2026 tarihinde 3.200 lira ödeme sözü kaydedeceğim. Onaylıyor musunuz?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L91"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Sözünüz kaydedildi. Bu sözü onaylayan bir kısa mesaj alacaksınız. Teşekkür ederim Bay Reyes, iyi günler dilerim."
+    },
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Anlıyorum Bayan Park, başka bir teklifte bulunmayacağım. Zaman ayırdığınız için teşekkür ederim, iyi günler dilerim."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Anlıyorum Bayan Park, başka bir teklifte bulunmayacağım. Zaman ayırdığınız için teşekkür ederim, iyi günler dilerim."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L92"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-1.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "**Sonuç:** `promise`. 4821 ile biten kredi kartı için 3.200 lira, 2026-10-16 tarihli söz kaydedildi."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-1.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "**Sonuç:** `promise`. 4821 ile biten kredi kartı için 3.200 lira, 2026-10-16 tarihli söz kaydedildi."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L93"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "MÜŞTERİ: Evet, benim. Ama bu bir dolandırıcılık mı?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "MÜŞTERİ: Evet, benim. Ama bu bir dolandırıcılık mı?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L94"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "MÜŞTERİ: Tamam. İki Kasım bin dokuz yüz doksan bir."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "MÜŞTERİ: Tamam. İki Kasım bin dokuz yüz doksan bir."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L95"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Anlıyorum. O zaman bu haftanın son iş günü olan 16 Ekim 2026 Cuma günü, 5.400 liranın tamamını ödeyebilir misiniz?"
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Anlıyorum. O zaman bu haftanın son iş günü olan 16 Ekim 2026 Cuma günü, 5.400 liranın tamamını ödeyebilir misiniz?"
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L96"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "AGENT: Peki. Son tarihiniz 23 Ekim 2026. Bu tarihte yalnızca taksit tutarı olan 1.350 lirayı ödeyebilir misiniz? Kalan tutar vadesi geçmiş olarak kalır."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "AGENT: Peki. Son tarihiniz 23 Ekim 2026. Bu tarihte yalnızca taksit tutarı olan 1.350 lirayı ödeyebilir misiniz? Kalan tutar vadesi geçmiş olarak kalır."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L97"
+  },
+  {
+   "candidates": [
+    {
+     "path": "ornek-gorusme-2.md",
+     "date": "2026-10-14",
+     "author": null,
+     "type": "spec",
+     "text": "MÜŞTERİ: Hayır, hiçbirini kabul etmiyorum."
+    }
+   ],
+   "chosen": {
+    "path": "ornek-gorusme-2.md",
+    "date": "2026-10-14",
+    "author": null,
+    "type": "spec",
+    "text": "MÜŞTERİ: Hayır, hiçbirini kabul etmiyorum."
+   },
+   "why": "only authoritative sentence",
+   "open": false,
+   "safest": null,
+   "id": "L98"
+  }
+ ]
+}

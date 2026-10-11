@@ -1,0 +1,68 @@
+[
+ {
+  "id": "T-011-r1",
+  "case_id": "T-011",
+  "rep": 1,
+  "family": "Already paid",
+  "node": "identity",
+  "assertions": [
+   {
+    "type": "tool_call",
+    "tool": "verify_identity",
+    "negate": true
+   }
+  ],
+  "expect_sentence": "Ask for the rest of the answer. Do not call verify_identity yet.",
+  "turns": [
+   {
+    "role": "assistant",
+    "text": "Hello, this is a digital assistant calling from Freya Bank, and this call is recorded. Am I speaking with Ms Mensah?"
+   },
+   {
+    "role": "user",
+    "text": "Yes, this is Leila Mensah speaking."
+   },
+   {
+    "role": "assistant",
+    "text": "To start, could you please tell me your date of birth?"
+   },
+   {
+    "role": "user",
+    "text": "It's the second of January nineteen seventy-two."
+   }
+  ]
+ },
+ {
+  "id": "T-007-r1",
+  "case_id": "T-007",
+  "rep": 1,
+  "family": "Amounts",
+  "node": "identity",
+  "assertions": [
+   {
+    "type": "tool_call",
+    "tool": "end_call",
+    "negate": true
+   }
+  ],
+  "expect_sentence": "Continue this step. Do not end the call.",
+  "turns": [
+   {
+    "role": "assistant",
+    "text": "Hello, this is a digital assistant calling from Freya Bank, and this call is recorded. Am I speaking with Ms Murphy?"
+   },
+   {
+    "role": "user",
+    "text": "Yes, that's me. I'm Zara Murphy."
+   },
+   {
+    "role": "assistant",
+    "text": "To start, could you please tell me your date of birth?"
+   },
+   {
+    "role": "user",
+    "text": "My date of birth is 15 November 1981."
+   }
+  ]
+ }
+]

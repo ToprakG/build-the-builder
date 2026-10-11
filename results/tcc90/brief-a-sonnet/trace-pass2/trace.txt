@@ -1,0 +1,6 @@
+23:02:52 start 2026-10-10T23:02:52+0300
+23:02:52   variant: tcc90-pass2
+23:03:31 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 1: brief -> policy.json | tokens in=9748 out=6993 | 38.2s
+23:04:05 model call openrouter:anthropic/claude-sonnet-5.5: extract pass 2: check every field against the brief | tokens in=15129 out=6891 | 34.8s
+23:04:05 check policy_check after pass 2: ok 0 violation(s)
+23:04:06 end 2026-10-10T23:04:06+0300 status=ok wall=73.0s model_calls=2 tokens_in=24877 tokens_out=13884 cost=$0.0000
